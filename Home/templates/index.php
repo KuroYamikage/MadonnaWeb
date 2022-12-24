@@ -17,7 +17,7 @@
       <!-- bootstrap css -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
       <!-- style css -->
-      <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/style5.css' %}">
       <!-- Responsive-->
       <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
       <!-- fevicon -->
@@ -140,6 +140,42 @@
          </div>
       </div>
       <!-- services section end -->
+      <!-- furnitures section start -->
+      <div class="furnitures_section layout_padding">
+         <div class="container">
+            <h1 class="our_text">OUR beautiful pools</h1>
+            <p class="ipsum_text">There are many variations of passages of Lorem Ipsum </p>
+            <div class="furnitures_section2 layout_padding">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="container_main">
+                        <img src="{%static 'images/pool2.jpg'%}" alt="Avatar" class="image">
+                        <div class="overlay">
+                           <a href="#" class="icon" title="User Profile">
+                           <i class="fa fa-search"></i>
+                           </a>
+                        </div>
+                     </div>
+                     <h3 class="temper_text">Tempor incididunt ut labore et dolore</h3>
+                     <p class="dololr_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </p>
+                  </div>
+                  <div class="col-md-6">
+                     <div class="container_main">
+                        <img src="{%static 'images/pool3.jpg'%}" alt="Avatar" class="image">
+                        <div class="overlay">
+                           <a href="#" class="icon" title="User Profile">
+                           <i class="fa fa-search"></i>
+                           </a>
+                        </div>
+                     </div>
+                     <h3 class="temper_text">Tempor incididunt ut labore et dolore</h3>
+                     <p class="dololr_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- furnitures section end -->
       <!-- about section start -->
       <div class="about_section layout_padding">
          <div class="container">
@@ -156,58 +192,10 @@
          </div>
       </div>
       <!-- about section end -->
-      <!-- furnitures section start -->
-      <div class="furnitures_section layout_padding">
-         <div class="container">
-            <h1 class="our_text">OUR furnitures</h1>
-            <p class="ipsum_text">There are many variations of passages of Lorem Ipsum </p>
-            <div class="furnitures_section2 layout_padding">
-               <div class="row">
-                  <div class="col-md-6">
-                     <div class="container_main">
-                        <img src="{%static 'images/img-2.png'%}" alt="Avatar" class="image">
-                        <div class="overlay">
-                           <a href="#" class="icon" title="User Profile">
-                           <i class="fa fa-search"></i>
-                           </a>
-                        </div>
-                     </div>
-                     <h3 class="temper_text">Tempor incididunt ut labore et dolore</h3>
-                     <p class="dololr_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </p>
-                  </div>
-                  <div class="col-md-6">
-                     <div class="container_main">
-                        <img src="{%static 'images/img-3.png'%}" alt="Avatar" class="image">
-                        <div class="overlay">
-                           <a href="#" class="icon" title="User Profile">
-                           <i class="fa fa-search"></i>
-                           </a>
-                        </div>
-                     </div>
-                     <h3 class="temper_text">Tempor incididunt ut labore et dolore</h3>
-                     <p class="dololr_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- furnitures section end -->
-      <!-- who section start -->
-      <div class="who_section layout_padding">
-         <div class="container">
-            <h1 class="who_taital">who we are ?</h1>
-            <h4 class="designer_text">DESIGNERS & INNOVATORS</h4>
-            <p class="lorem_ipsum_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi utLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</p>
-         </div>
-         <div class="get_bt_main">
-            <div class="get_bt"><a href="#">Get A Quote</a></div>
-         </div>
-      </div>
-      <!-- who section end -->
       <!-- projects section start -->
       <div class="projects_section layout_padding">
          <div class="container">
-            <h1 class="our_text">Our projects</h1>
+            <h1 class="our_text">Our Amenities and Facilities</h1>
             <p class="ipsum_text">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             <div id="main_slider" class="carousel slide" data-ride="carousel">
                <div class="carousel-inner">
@@ -227,7 +215,7 @@
                               <div class="col-sm-4">
                                  <div class="container_main1">
                                     <img src="{%static 'images/img-5.png'%}" alt="Avatar" class="image" style="width:100%">
-                                    <h1 class="modern_text">Modern home designe</h1>
+                                    <h1 class="modern_text">Modern home design</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -327,6 +315,18 @@
          </div>
       </div>
       <!-- projects section end -->
+      <!-- who section start -->
+      <div class="who_section layout_padding">
+         <div class="container">
+            <h1 class="who_taital">who we are ?</h1>
+            <h4 class="designer_text">DESIGNERS & INNOVATORS</h4>
+            <p class="lorem_ipsum_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi utLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</p>
+         </div>
+         <div class="get_bt_main">
+            <div class="get_bt"><a href="#">Get A Quote</a></div>
+         </div>
+      </div>
+      <!-- who section end -->
       <!-- client section start -->
       <div class="clients_section layout_padding">
          <div class="container">
