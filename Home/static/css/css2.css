@@ -233,7 +233,8 @@ button {
     background-color: transparent !important;
 }
 .logo {
-    width: 25%;
+    width: 15%;
+    height: auto;
     float: left;
 }
 .navbar-light .navbar-nav .nav-link {
@@ -307,6 +308,7 @@ button {
 }
 .furniture_text{
     width: 100%;
+    margin-top:125px;        
     float: left;
     font-size: 100px;
     color: #ffe9e9;
@@ -328,7 +330,7 @@ button {
 .contact_bt {
     width: 100%;
     float: left;
-    margin-top: 360px;
+    margin-top: 200px;
 }
 .contact_bt a{
     width: 100%;
