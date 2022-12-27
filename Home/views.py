@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.template import loader
 from .models import Reservations
 
@@ -8,11 +8,18 @@ def index(request):
     template = loader.get_template('index.php')
     return HttpResponse(template.render())
 
+def about(request):
+    template = loader.get_template('about.php')
+    return HttpResponse(template.render())
+
 
 def sample(request):
     reserve = Reservations.objects.all().values()
     template = loader.get_template('test.php')
-    return HttpResponse(template.render())
+    context ={
+        'reserve' : reserve,
+    }
+    return HttpResponse(template.render(context,request))
 
 def add(request):
   template = loader.get_template('add.php')

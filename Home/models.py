@@ -12,5 +12,3 @@ class Reservations(models.Model):
   status = models.CharField(max_length=3)
 
 
-
-  
