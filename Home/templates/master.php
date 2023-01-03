@@ -11,6 +11,7 @@
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
       <title>{% block title %}{% endblock %}</title>
+      {%block head%} {%endblock%}
       <meta name="keywords" content="Resort">
       <meta name="description" content="">
       <meta name="author" content="YouNIX">
@@ -46,7 +47,7 @@
                         <a class="nav-link" href="{%url 'index'%}">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="services.html">Reservations</a>
+                        <a class="nav-link" href="{%url 'reserve' %}">Reservations</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="about.html">Blogs</a>
