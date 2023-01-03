@@ -12,6 +12,9 @@ def about(request):
     template = loader.get_template('about.php')
     return HttpResponse(template.render())
 
+def reservations(request):
+  template = loader.get_template('reservation.php')
+  return HttpResponse(template.render())
 
 def sample(request):
     reserve = Reservations.objects.all().values()
@@ -37,5 +40,6 @@ def addrecord(request):
   newRec.save()
   return HttpResponseRedirect(reverse('sample'))
 # Create your views here.
+
 
 
