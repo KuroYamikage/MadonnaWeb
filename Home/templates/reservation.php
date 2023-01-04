@@ -6,7 +6,7 @@
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
-	<link rel="stylesheet" href="{%static 'css/Cal_style.css'%}">
+	<link rel="stylesheet" href="{%static 'css/Cal_style10.css'%}">
 {%endblock%}
  {% block content %}
  HI this is a test
@@ -86,8 +86,10 @@
 			</div>
 		</div>
 	</section>
-    <script src="{%static 'js/popper.js'%}"></script>  
-      <script src="{%static 'js/main.js'%}"></script>
+	<script>
+		var reserve = {{reserve_html}}
+	</script>
+    
 
   
  {% endblock %}

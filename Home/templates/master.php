@@ -147,6 +147,8 @@
       <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
       <script src="{%static 'js/jquery-3.0.0.min.js'%}"></script>
       <script src="{%static 'js/plugin.js'%}"></script>
+      <script src="{%static 'js/popper.js'%}"></script>  
+      <script src="{%static 'js/main.js'%}"></script>
       <!-- sidebar -->
       <script src="{%static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
       <script src="{%static 'js/custom.js'%}"></script>
