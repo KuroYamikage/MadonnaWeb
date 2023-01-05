@@ -152,6 +152,8 @@
       <script src="{%static 'js/custom.js'%}"></script>
       <!-- javascript --> 
       <script src="{%static 'js/owl.carousel.js'%}"></script>
-      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js'%}"></script>    
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js'%}"></script>
+      <script src="{%static 'js/popper.js'%}"></script>  
+      <script src="{%static 'js/main.js'%}"></script>    
    </body>
 </html>

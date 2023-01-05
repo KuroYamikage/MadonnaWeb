@@ -86,8 +86,7 @@
 			</div>
 		</div>
 	</section>
-    <script src="{%static 'js/popper.js'%}"></script>  
-      <script src="{%static 'js/main.js'%}"></script>
+    
 
   
  {% endblock %}
