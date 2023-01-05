@@ -13,16 +13,23 @@ def about(request):
     return HttpResponse(template.render())
 
 def reservations(request):
+  reserve = Reservations.objects.all().values()
   template = loader.get_template('reservation.php')
-  return HttpResponse(template.render())
+  context ={
+    'reserve' : reserve,
+  }
+  return HttpResponse(template.render(context,request))
 
 def sample(request):
     reserve = Reservations.objects.all().values()
     template = loader.get_template('test.php')
-    context ={
-        'reserve' : reserve,
-    }
-    return HttpResponse(template.render(context,request))
+    reserve_html = []
+    for instance in Reservations.objects.all():  # it's not serialization, but extracting of the useful fields
+        reserve_html.append({'pk': instance.reservationID, 'fname': instance.firstname, 'lname': instance.lastname, 
+        'date': instance.date, 'dp': instance.downpayment, 'total': instance.totalPayment, 'bal': instance.balance
+        , 'stat': instance.status})
+    reserve_dic = {'reserve': reserve, 'ac_tab_n': 'ac_tab', 'reserve_html': reserve_html}
+    return HttpResponse(template.render(request, template, reserve_dic))
 
 def add(request):
   template = loader.get_template('add.php')
