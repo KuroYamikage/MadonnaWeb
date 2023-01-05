@@ -11,7 +11,21 @@
  {% block content %}
  HI this is a test
 
+ <button onclick="window.print()">Print this page</button>
 
+
+<p id="demo">print here:</p>
+
+<script>
+var reserve = "{{reserve_html}}";
+document.getElementById("demo").innerHTML = reserve;
+</script>
+
+						<script>
+window.alert(typeof reserve);
+</script>
+<script src="{%static 'js/main10.js'%}"></script> 
+							
  <section class="ftco-section">
 		<div class="container">
 			<div class="row justify-content-center">
@@ -80,15 +94,14 @@
 				            <input type="button" value="OK" class="button button-white" id="ok-button">
 				          </div>
 				        </form>
+						
+
 				      </div>
 				  </div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<script>
-		var reserve = {{reserve_html}}
-	</script>
-
+	
   
  {% endblock %}

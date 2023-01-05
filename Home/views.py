@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
@@ -13,7 +14,7 @@ def about(request):
     return HttpResponse(template.render())
 
 def reservations(request):
-  reserve = Reservations.objects.all().values()
+  reserve = Reservations.objects.all().order_by('-reservationID')
   template = loader.get_template('reservation.php')
   reserve_html = []
   for instance in Reservations.objects.all():  # it's not serialization, but extracting of the useful fields
@@ -26,11 +27,7 @@ def reservations(request):
 def sample(request):
     reserve = Reservations.objects.all().values()
     template = loader.get_template('test.php')
-    reserve_html = []
-    for instance in Reservations.objects.all():  # it's not serialization, but extracting of the useful fields
-        reserve_html.append({'pk': instance.reservationID, 'fname': instance.firstname, 'lname': instance.lastname, 
-        'date': instance.date, 'dp': instance.downpayment, 'total': instance.totalPayment, 'bal': instance.balance
-        , 'stat': instance.status})
+    reserve_html = serializers.serialize('json', Reservations.objects.all())
     reserve_dic = {'reserve': reserve, 'ac_tab_n': 'ac_tab', 'reserve_html': reserve_html}
     return render(request, 'test.php', reserve_dic)
 

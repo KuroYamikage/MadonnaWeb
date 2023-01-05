@@ -3,6 +3,14 @@
         <title>Sample</title>
     </head>
     <body>
+    <p id="demo">print here:</p>
+
+<script>
+var reserve = {{reserve_html}};
+
+document.getElementById("demo").innerHTML = reserve;
+
+</script>
         <form>
         <h1>Members</h1>
 

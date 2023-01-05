@@ -157,7 +157,7 @@ function new_event(event) {
             date.setDate(day);
             init_calendar(date);
         }
-    });
+     });
 }
 
 // Adds a json event to event_data
@@ -207,12 +207,12 @@ function show_events(events, month, day) {
 // Checks if a specific date has any events
 function check_events(day, month, year) {
     var events = [];
-    for(var i=0; i<event_data["events"].length; i++) {
-        var event = event_data["events"][i];
-        if(event["day"]===day &&
-            event["month"]===month &&
-            event["year"]===year) {
-                events.push(event);
+    for(var i=0; i<reserve["fields"].length; i++) {
+        var event = reserve["fields"][i];
+        if(getDate(event["date"])===day &&
+            getMonth(event["date"])===month &&
+            getFullYear(event["date"])===year) {
+                window.alert('true');
             }
     }
     return events;
