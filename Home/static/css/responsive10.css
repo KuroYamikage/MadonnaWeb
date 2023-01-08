@@ -133,7 +133,7 @@
 
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1350px) {
     
     .titlepage h2::after {width: 58%;}
     .about-box .titlepage h2::after {
@@ -153,7 +153,8 @@ width: 30%;
 .call_text { font-size: 16px; } 
 .search_icon li { padding-left: 8px; font-size: 16px; } 
 .banner_section { padding-top: 15px; } 
-.contact_bt { margin-top: 220px; }
+.furniture_text{ margin-top: 50px;}
+.contact_bt { margin-top: 75px; }
 .banner_section { padding-bottom: 40px; }
 .contact_section { background-size: cover; }
 
@@ -212,10 +213,10 @@ width: 30%;
 .logo { width: 50%; }
 .header_section { background-size: cover; }
 .banner_section { padding-top: 20px; padding-bottom: 28PX; }
-.furniture_text { font-size: 50px; }
+.furniture_text { font-size: 50px; margin-top: 75px; }
 .there_text { width: 100%; font-size: 15px;}
 .contact_bt_main { width: 150px; }
-.contact_bt { margin-top: 200px; }
+.contact_bt { margin-top: 50px; }
 .dummy_text { font-size: 15px; }
 .services_section2 { padding-top: 30px; }
 .icon_1 { padding-top: 30px; }
