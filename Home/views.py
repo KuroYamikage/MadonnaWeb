@@ -3,15 +3,44 @@ from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
+from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
+
 from .models import Reservations
+from .forms import ReservationsForm
 
-def index(request):
-    template = loader.get_template('index.php')
-    return HttpResponse(template.render())
 
-def about(request):
-    template = loader.get_template('about.php')
-    return HttpResponse(template.render())
+
+class newReserve(CreateView):
+  model = Reservations
+  form_class = ReservationsForm
+  success_url = '../sample'
+  template_name = 'reservations_form.php'
+
+
+class indexView(TemplateView):
+  template_name='index.php'
+
+class aboutView(TemplateView):
+  template_name='about.php'
+
+class sampleView(ListView):
+  model = Reservations
+  context_object_name = "reserve"
+  template_name='test.php'
+
+class moreDetailView(DetailView):
+  model = Reservations
+  context_object_name = 'reserve'
+  template_name = 'test_reserve.php'
+  
+class reserveView(ListView):
+  model = Reservations
+  context_object_name = 'reserve'
+  template_name='reservation.php'
+
+class addView(TemplateView):
+  template_name = "add.php"
+
 
 def reservations(request):
   reserve = Reservations.objects.all().order_by('-reservationID')
@@ -24,16 +53,6 @@ def reservations(request):
   reserve_dic = {'reserve': reserve, 'ac_tab_n': 'ac_tab', 'reserve_html': reserve_html}
   return render(request, 'reservation.php', reserve_dic)
 
-def sample(request):
-    reserve = Reservations.objects.all().values()
-    template = loader.get_template('test.php')
-    reserve_html = serializers.serialize('json', Reservations.objects.all())
-    reserve_dic = {'reserve': reserve, 'ac_tab_n': 'ac_tab', 'reserve_html': reserve_html}
-    return render(request, 'test.php', reserve_dic)
-
-def add(request):
-  template = loader.get_template('add.php')
-  return HttpResponse(template.render({}, request))
 
 def addrecord(request):
   fname = request.POST['first']
