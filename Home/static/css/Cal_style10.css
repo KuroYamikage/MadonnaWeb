@@ -1597,9 +1597,9 @@ pre {
   font-weight: 400;
   line-height: 1.5;
   color: #495057;
-  background-color: #fff;
+  background-color: rgb(119, 116, 116);
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid #595e63;
   border-radius: 0.25rem;
   -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
@@ -8485,3 +8485,6 @@ h1, h2, h3, h4, h5,
 
 .error-input {
   border-color: #cd4dcc; }
+
+
+  ul.errorlist {display:none}
