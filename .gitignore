@@ -1,0 +1,5 @@
+requirements.txt
+.direnv/
+**/__pycache__
+*.pyc
+/users/migrations/__pycache__/
