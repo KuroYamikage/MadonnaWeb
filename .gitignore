@@ -1,5 +1,7 @@
 requirements.txt
 .envrc
-.direnv
+.direnv/
 /*/__pycache__
-/users/migrations/__pycache__
+/users/migrations/__pycache__/
+.envrc
+.direnv/
