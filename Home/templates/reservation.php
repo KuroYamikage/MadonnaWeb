@@ -24,7 +24,7 @@ document.getElementById("demo").innerHTML = reserve;
 						<script>
 window.alert(typeof reserve);
 </script>
-<script src="{%static 'js/main10.js'%}"></script> 
+<script src="{%static 'js/main11.js'%}"></script> 
 							
  <section class="ftco-section">
 		<div class="container">
