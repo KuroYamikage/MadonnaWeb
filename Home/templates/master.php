@@ -59,9 +59,7 @@
                         <a class="nav-link" href="{%url 'about'%}">About</a>
                      </li>
                   </ul>
-                  <form class="form-inline my-2 my-lg-0">
-                     <h1 class="call_text">Call Us : +02 ####-####</h1>
-                  </form>
+                  
                </div>
             </nav>
          </div>

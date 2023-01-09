@@ -1,37 +1,20 @@
-<html lang=en>
-    <head>
-        <title>Sample</title>
-    </head>
-    <body>
-    <p id="demo">print here:</p>
+{%extends "master2.php"%}=
+{%load static%}
 
-<script>
-var reserve = "{{reserve_html}}";
+        {%block title%}Sample{%endblock%}
+{%block content%}
 
-document.getElementById("demo").innerHTML = reserve;
-
-</script>
-        <form>
-        <h1>Members</h1>
-
+<div class="container center-content">
+        <h1 class=>Current Reservations</h1>
         <table border="1">
         {% for x in  reserve%}
             <tr>
-                <td>{{ x.reservationID}}</td>
-                <td>{{ x.firstname }}</td>
-                <td>{{ x.lastname }}</td>
-                <td>{{ x.date }}</td>
-                <td>{{ x.downpayment }}</td>
-                <td>{{ x.totalPayment }}</td>
-                <td>{{ x.balance }}</td>  
-                <td>{{ x.status }}</td> 
+                <td> <a href = "{%url 'reservation' pk=x.reservationID%}">{{ x.firstname}} {{x.lastname}}</td>
+                <td> {{x.date}}</td>
+                <td> Edit Reservation</td>
             </tr>
         {% endfor %}
         </table>
-
-<p>
+</div>
+{%endblock%}
 <a href="add/">Add member</a>
-</p>
-        </form>
-    </body>
-</html>

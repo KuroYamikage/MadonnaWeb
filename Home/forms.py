@@ -1,12 +1,22 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from .models import Reservations
 
-class UserRegistrationForm(UserCreationForm):
-    first_name = forms.CharField(max_length=101)
-    last_name = forms.CharField(max_length=101)
-    email = forms.EmailField()
-
+class ReservationsForm(forms.ModelForm):
     class Meta:
-        model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
+        model = Reservations
+        fields = ('firstname', 'lastname', 'date', 'downpayment', 'totalPayment',
+            'balance', 'status')
+        widgets = {
+            'date' : forms.DateInput(attrs={'class': 'form-control'}),
+            'firstname' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'lastname' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'downpayment' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'totalPayment' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'balance' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'status' : forms.TextInput(attrs={'class' : 'form-control'}),
+        }
+        labels = {
+            'firstname' : 'First Name'
+        }
+
+        
