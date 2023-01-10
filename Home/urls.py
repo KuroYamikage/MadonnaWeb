@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
 
-from users import views as user_views
 
 urlpatterns = [
     
@@ -15,4 +14,8 @@ urlpatterns = [
     path('reserve', views.reserveView.as_view(), name='reserve'),
     path('reservation/<int:pk>', views.moreDetailView.as_view(),name = 'reservation'),
     path('reservation/new', views.newReserve.as_view(), name='reservation.new'),
+    path('reservation/edit/<int:pk>', views.updateReserve.as_view(), name="reservation.edit"),
+    path('blog/', views.viewBlogs.as_view(), name='blog'),
+    path('blog/new', views.newBlog.as_view(), name='addblog'),
+
 ]

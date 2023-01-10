@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Home.apps.HomeConfig',
     'debug_toolbar',
+    'Home.apps.HomeConfig',
     'Reservation'
 ]
 

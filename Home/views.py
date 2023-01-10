@@ -6,22 +6,38 @@ from django.template import loader
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 
 from .models import Reservations
+from .models import Blog
 from .forms import ReservationsForm
+from .forms import BlogForms
 
 
+
+#Blog Files
+class newBlog(CreateView):
+  model = Blog
+  form_class = BlogForms
+  success_url ='Home/blog'
+  template_name = 'new_Blog.php'
+
+class viewBlogs(ListView):
+  model = Blog
+  context_object_name = 'blog'
+  template_name = 'blog.php'
+  
+
+
+#Reservation Files
 
 class newReserve(CreateView):
   model = Reservations
   form_class = ReservationsForm
   success_url = '../sample'
   template_name = 'reservations_form.php'
-
-
-class indexView(TemplateView):
-  template_name='index.php'
-
-class aboutView(TemplateView):
-  template_name='about.php'
+class updateReserve(UpdateView):
+  model = Reservations
+  form_class = ReservationsForm
+  success_url = '../../sample'
+  template_name = 'reserve_edit.php'
 
 class sampleView(ListView):
   model = Reservations
@@ -32,7 +48,16 @@ class moreDetailView(DetailView):
   model = Reservations
   context_object_name = 'reserve'
   template_name = 'test_reserve.php'
-  
+
+
+#Home Page Views
+class indexView(TemplateView):
+  template_name='index.php'
+
+class aboutView(TemplateView):
+  template_name='about.php'
+
+
 class reserveView(ListView):
   model = Reservations
   context_object_name = 'reserve'
@@ -67,20 +92,4 @@ def addrecord(request):
   return HttpResponseRedirect(reverse('sample'))
 # Create your views here.
 
-def home(request):
-    return render(request, 'users/home.html')
-
-def register(request):
-    if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
-        if form.is_valid():
-            form.save()
-
-            messages.success(request, f'Your account has been created. You can log in now!')    
-            return redirect('login')
-    else:
-        form = UserRegistrationForm()
-
-    context = {'form': form}
-    return render(request, 'users/register.html', context)
 

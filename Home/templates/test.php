@@ -1,17 +1,17 @@
-{%extends "master2.php"%}=
+{%extends "master2.php"%}
 {%load static%}
 
         {%block title%}Sample{%endblock%}
 {%block content%}
 
-<div class="container center-content">
+<div class="container center-content" style="background-color:#ffb607;">
         <h1 class=>Current Reservations</h1>
-        <table border="1">
+        <table border="1" class="reserve">
         {% for x in  reserve%}
             <tr>
-                <td> <a href = "{%url 'reservation' pk=x.reservationID%}">{{ x.firstname}} {{x.lastname}}</td>
+                <td> {{ x.firstname}} {{x.lastname}}</td>
                 <td> {{x.date}}</td>
-                <td> Edit Reservation</td>
+                <td><a href = "{%url 'reservation.edit' pk=x.reservationID%}"> Edit Reservation</a></td>
             </tr>
         {% endfor %}
         </table>
