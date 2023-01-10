@@ -225,7 +225,7 @@ button {
 .header_section{
     width: 100%;
     float: left;
-    background-image: url(../images/header-bg.png);
+    background-color: #313131;
     height: auto;
     background-size: 100%;
 }
@@ -233,11 +233,12 @@ button {
     background-color: transparent !important;
 }
 .logo {
-    width: 25%;
+    width: 15%;
+    height: auto;
     float: left;
 }
 .navbar-light .navbar-nav .nav-link {
-    color: #111111;
+    color: #f7f7f7;
     font-size: 18px;
     text-transform: uppercase;
 }
@@ -307,9 +308,10 @@ button {
 }
 .furniture_text{
     width: 100%;
+    margin-top:125px;        
     float: left;
     font-size: 100px;
-    color: #090808;
+    color: #ffe9e9;
     text-align: center;
     text-transform: uppercase;
 }
@@ -317,7 +319,7 @@ button {
     width: 50%;
     margin: 0 auto;
     font-size: 16px;
-    color: #090808;
+    color: #ffe9e9;
     text-align: center;
 }
 .contact_bt_main{
@@ -328,7 +330,7 @@ button {
 .contact_bt {
     width: 100%;
     float: left;
-    margin-top: 360px;
+    margin-top: 200px;
 }
 .contact_bt a{
     width: 100%;
@@ -409,8 +411,8 @@ button {
 .furnitures_text {
     width: 100%;
     float: left;
-    font-size: 24px;
-    color: #090808;
+    font-size: 18px;
+    color: #000000;
     text-transform: uppercase;
     text-align: center;
     padding-top: 20px;
@@ -418,7 +420,7 @@ button {
 .dummy_text{
     width: 100%;
     float: left;
-    font-size: 16px;
+    font-size: 14px;
     color: #090808;
     text-align: center;
     margin-left: 0px;
@@ -911,7 +913,7 @@ textarea#comment::placeholder {
     color: #fff;
     background-color: transparent;
     /* background-clip: padding-box; */
-    border-bottom: 1px solid #fff !important;
+    border-bottom: 1px solid rgb(253, 238, 238) !important;
     border-radius: 0px;
     /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
     border: 0px;
@@ -1019,8 +1021,18 @@ textarea#comment::placeholder {
 }
 
 
+.reserve_section {
+    height: auto;
+    padding-bottom: 50px;
+    background-size: 100%;
+}
 
-
-
+.center-content{
+    background-color:#ffb607;
+    padding: 50px;
+    top: 50%;
+    left: 50px;
+    
+}
 
 
