@@ -1028,11 +1028,9 @@ textarea#comment::placeholder {
 }
 
 .center-content{
-    background-color:#ffb607;
-    padding: 50px;
-    top: 50%;
-    left: 50px;
-    
+    background-color: #141313;
+    opacity: 0.85;
 }
+
 
 

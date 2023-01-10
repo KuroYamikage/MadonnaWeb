@@ -18,7 +18,7 @@
       <!-- bootstrap css -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
       <!-- style css -->
-      <link rel="stylesheet" type="text/css" href="{% static 'css/css2.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/css3.css' %}">
       <!-- Responsive-->
       <link rel="stylesheet" href="{% static 'css/responsive10.css' %}">
       <!-- fevicon -->
