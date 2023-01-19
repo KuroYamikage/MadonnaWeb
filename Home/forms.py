@@ -13,11 +13,12 @@ class ReservationsForm(forms.ModelForm):
             'lastname' : forms.TextInput(attrs={'class' : 'form-control'}),
             'downpayment' : forms.TextInput(attrs={'class' : 'form-control'}),
             'totalPayment' : forms.TextInput(attrs={'class' : 'form-control'}),
-            'balance' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'balance' : forms.RadioSelect(attrs={'class' : 'form-control'}),
             'status' : forms.TextInput(attrs={'class' : 'form-control'}),
         }
         labels = {
-            'firstname' : 'First Name'
+            'firstname' : 'First Name',
+
         }
 
 class BlogForms(forms.ModelForm):
