@@ -34,9 +34,27 @@
    </head>
    <body style="background-color: black;">
 
-   {%block content%}
+  
+<div id="mySidenav" class="sidenav">
+  <img src="{% static 'images/logo2.png' %}">
+  <a href="{%url 'main'%}">Reservations</a>
+  <a href="#">Users</a>
+  <a href="{%url 'blog'%}">Blogs</a>
+  <a href="#">Reports</a>
+  <a href="{%url 'logout'%}" class="mb-4 fixed-bottom" style="width:250px;">Logout</a>
+</div>
 
-   {%endblock%}
+<!-- Use any element to open the sidenav -->
+<span onclick="openNav()">open</span>
+
+<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
+<div class="main">
+{%block content%}
+
+{%endblock%}
+</div>
+
+
     <!-- Javascript files-->
       <script src="{%static 'js/jquery.min.js'%}"></script>
       <script src="{%static 'js/popper.min.js'%}"></script>
@@ -55,4 +73,3 @@
       <script src="{%static 'js/main10.js'%}"></script>    
    </body>
 </html>
-   

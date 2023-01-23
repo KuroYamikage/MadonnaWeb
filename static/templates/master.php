@@ -18,7 +18,7 @@
       <!-- bootstrap css -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
       <!-- style css -->
-      <link rel="stylesheet" type="text/css" href="{% static 'css/css3.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/css4.css' %}">
       <!-- Responsive-->
       <link rel="stylesheet" href="{% static 'css/responsive10.css' %}">
       <!-- fevicon -->
@@ -116,29 +116,9 @@
                   </p>
                </div>
             </div>
-            <div class="input-group mb-3">
-               <input type="text" class="form-control" placeholder="Enter your email" aria-label="Enter your email" aria-describedby="basic-addon2">
-               <div class="input-group-append">
-                  <span class="input-group-text" id="basic-addon2"><a href="#">Subscribe</a></span>
-               </div>
-            </div>
          </div>
       </div>
       <!--  footer section end -->
-      <!-- copyright section start -->
-      <div class="copyright_section">
-      <div class="container">
-         <div class="social_icon">
-            <ul>
-               <li><a href="#"><img src="{%static 'images/fb-icon.png'%}"></a></li>
-               <li><a href="#"><img src="{%static 'images/twitter-icon.png'%}"></a></li>
-               <li><a href="#"><img src="{%static 'images/instagram-icon.png'%}"></a></li>
-               <li><a href="#"><img src="{%static 'images/linkedin-icon.png'%}"></a></li>
-            </ul>
-         </div>
-         <p class="copyright_text">2020 All Rights Reserved. Design by <a href="https://html.design">Free html  Templates</a></p>
-      </div>
-      <!-- copyright section end -->
       <!-- Javascript files-->
       <script src="{%static 'js/jquery.min.js'%}"></script>
       <script src="{%static 'js/popper.min.js'%}"></script>

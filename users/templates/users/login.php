@@ -10,14 +10,16 @@
     
 </style>
 <hr></hr>
-<div class="center-content container m-auto d-flex justify-content-center my-auto vertical-center opacity-25" style="max-width: 75%">
+<div class="container center-content m-auto d-flex justify-content-center my-auto vertical-center opacity-25" style="max-width: 75%">
 
-<form action="" method="POST">
+<form method="POST">
     {% csrf_token %}
     {% for field in form %}
         <p>{{ field.label }}: <br> {{ field }}</p>
     {% endfor %}
-    <button type="submit">Login</button>
+    <div class="d-flex justify-content-center mb-3">
+            <button type="submit" class="btn btn-primary"> Login </button>
+        </div>
 </form>
 </div>
 
@@ -27,4 +29,3 @@
 </script>
 {%endif%}
 {%endblock%}
-<p>Don't have an account? <a href="{% url 'register' %}">Signup here</a></p>

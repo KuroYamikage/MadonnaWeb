@@ -18,7 +18,7 @@
       <!-- bootstrap css -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
       <!-- style css -->
-      <link rel="stylesheet" type="text/css" href="{% static 'css/css3.css' %}">
+      <link rel="stylesheet" type="text/css" href="{% static 'css/css4.css' %}">
       <!-- Responsive-->
       <link rel="stylesheet" href="{% static 'css/responsive10.css' %}">
       <!-- fevicon -->
@@ -32,7 +32,7 @@
       <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
    </head>
-   <body style="background-image: url('{%static 'images/about.jpg'%}'); background-position: center;  background-size: length;">
+   <body style="background-image: url('{%static 'images/pool2.jpg'%}'); background-position: center;  background-size: length;">
 
    {%block content%}
 

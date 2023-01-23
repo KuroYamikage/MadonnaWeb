@@ -44,7 +44,9 @@
                   <div class="col-lg-3 col-sm-6">
                      <div class="icon_1"><img src="{%static 'images/icon-1.png'%}"></div>
                      <h2 class="furnitures_text">Multi-Purpose Hall</h2>
-                     <p class="dummy_text">There are many variations of passages of Lorem Ipsum available, but the</p>
+                     <p class="dummy_text">Madonna's Resort has a venue for all events, with our Multi-Purpose
+                        Hall we can ensure that your event can have a place in our lovely Resort.
+                     </p>
                      <div class="read_bt_main">
                         <div class="read_bt"><a href="#">Read More</a></div>
                      </div>
@@ -52,7 +54,9 @@
                   <div class="col-lg-3 col-sm-6">
                      <div class="icon_1"><img src="{%static 'images/icon-2.png'%}"></div>
                      <h2 class="furnitures_text">Rooms and Cottages</h2>
-                     <p class="dummy_text">There are many variations of passages of Lorem Ipsum available, but the</p>
+                     <p class="dummy_text">Plan to stay over the weekend? We got you covered. Our resort
+                        provides rooms and cottages that can be used all day and night.   
+                     </p>
                      <div class="read_bt_main">
                         <div class="read_bt"><a href="#">Read More</a></div>
                      </div>
@@ -60,7 +64,9 @@
                   <div class="col-lg-3 col-sm-6">
                      <div class="icon_1"><img src="{%static 'images/icon-3.png'%}"></div>
                      <h2 class="furnitures_text">Fun Activities</h2>
-                     <p class="dummy_text">There are many variations of passages of Lorem Ipsum available, but the</p>
+                     <p class="dummy_text">Is the Pool not enough? We have you covered as we have amenities that can
+                        help you in planning your fun activities.
+                     </canvas></p>
                      <div class="read_bt_main">
                         <div class="read_bt"><a href="#">Read More</a></div>
                      </div>
@@ -68,7 +74,9 @@
                   <div class="col-lg-3 col-sm-6">
                      <div class="icon_1"><img src="{%static 'images/icon-4.png'%}"></div>
                      <h2 class="furnitures_text">Pools</h2>
-                     <p class="dummy_text">There are many variations of passages of Lorem Ipsum available, but the</p>
+                     <p class="dummy_text">Help yourself to our pools that will help you revitalize your spirit
+                        and have fun with your friends and colleagues. 
+                     </p>
                      <div class="read_bt_main">
                         <div class="read_bt"><a href="#">Read More</a></div>
                      </div>
@@ -81,7 +89,7 @@
       <!-- furnitures section start -->
       <div class="furnitures_section layout_padding">
          <div class="container">
-            <h1 class="our_text">OUR beautiful pools</h1>
+            <h1 class="our_text">Our beautiful pools</h1>
             <p class="ipsum_text">There are many variations of passages of Lorem Ipsum </p>
             <div class="furnitures_section2 layout_padding">
                <div class="row">
@@ -120,11 +128,13 @@
             <div class="row">
                <div class="col-md-6">
                   <h1 class="about_text">About Us</h1>
-                  <p class="lorem_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believableThere are many variations of passages of Lorem Ipsum available, but the majority have able</p>
-                  <div class="read_bt1"><a href="#">Read More</a></div>
+                  <p class="lorem_text">Madonna's Resort and Event Center is a place where
+                     you can relax and enjoy the scenery while having. Located in Malvar Batangas, we provided a place
+                     where everyone can have fun.</p>
+                  <div class="read_bt1"><a href="{%url 'about'%}">Read More</a></div>
                </div>
                <div class="col-md-6">
-                  <div class="image_1"><img src="{%static 'images/about.jpg'%}"></div>
+                  <div class="image_1"><img src="{%static 'images/about2.jpg'%}"></div>
                </div>
             </div>
          </div>
@@ -143,7 +153,7 @@
                            <div class="row">
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="{%static 'images/img-4.png'%}" alt="Avatar" class="image" style="width:100%">
+                                    <img src="{%static 'images/amenities4.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image">
                                     <h1 class="modern_text">Modern home designe</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
@@ -152,7 +162,7 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="{%static 'images/img-5.png'%}" alt="Avatar" class="image" style="width:100%">
+                                    <img src="{%static 'images/amenities1.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image" >
                                     <h1 class="modern_text">Modern home design</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
@@ -161,7 +171,7 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="{%static 'images/img-6.png'%}" alt="Avatar" class="image" style="width:100%">
+                                    <img src="{%static 'images/amenities2.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image">
                                     <h1 class="modern_text">Modern home designe</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
@@ -178,7 +188,7 @@
                            <div class="row">
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="/Home/templates/images/img-4.png" alt="Avatar" class="image" style="width:100%">
+                                    <img src="{%static 'images/amenities3.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image" >
                                     <h1 class="modern_text">Modern home designe</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
@@ -187,7 +197,7 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="/Home/templates/images/img-5.png" alt="Avatar" class="image" style="width:100%">
+                                    <img src="{%static 'images/amenities5.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image" >
                                     <h1 class="modern_text">Modern home designe</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
@@ -196,7 +206,7 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="/Home/templates/images/img-6.png" alt="Avatar" class="image" style="width:100%">
+                                    <img src="{%static 'images/amenities6.jpg'%}" width = "2000 " height = "922" alt="Avatar" class="image" >
                                     <h1 class="modern_text">Modern home designe</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
@@ -401,27 +411,7 @@
          </div>
       </div>
       <!-- client section end -->
-      <!-- contact section start -->
-      <div class="contact_section layout_padding">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-6">
-                  <h1 class="contact_text">CONTACT US</h1>
-                  <div class="mail_sectin">
-                     <input type="text" class="email-bt" placeholder="Name" name="Name">
-                     <input type="text" class="email-bt" placeholder="Email" name="Name">
-                     <input type="text" class="email-bt" placeholder="Phone Number" name="Name">
-                     <textarea class="massage-bt" placeholder="Massage" rows="5" id="comment" name="Massage"></textarea>
-                     <div class="send_bt"><a href="#">SEND</a></div>
-                  </div>
-               </div>
-               <div class="col-md-6">
-                  <div class="image_9"><img src="{%static 'images/img-9.png'%}"></div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- contact section end -->
+
 
       {% endblock %}
     

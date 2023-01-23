@@ -14,6 +14,5 @@ urlpatterns = [
     path('blog/delete/<int:pk>', views.deleteBlogs.as_view(), name='blog.delete'),
     path('blog/update/<int:pk>', views.updateBlogs.as_view(), name='blog.update'),
     path('reservation/new', views.newReserveStaff.as_view(), name='reservation.new.staff'),
-    path('reservation/delete/<int:pk>', views.deleteReservation.as_view(), name='reservation.delete')
-
+    path('reservation/delete/<int:pk>', views.deleteReservation.as_view(), name='reservation.delete'),
 ]

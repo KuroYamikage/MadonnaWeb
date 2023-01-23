@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.template import loader
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
-
+from django.views.generic.edit import DeleteView
 from .models import Reservations
 from .models import Blog
 from .forms import ReservationsForm
@@ -23,20 +23,33 @@ class viewBlogs(ListView):
   model = Blog
   context_object_name = 'blog'
   template_name = 'blog.php'
-  
 
+class deleteBlogs(DeleteView):
+  model= Blog
+  success_url = '../'
+  template_name = 'delete_blog.php'
+class updateBlogs(UpdateView):
+  model = Blog
+  form_class = BlogForms
+  success_url = '../'
+  template_name = 'edit_blog.php'
+
+  class detaliBlog(DetailView):
+    model = Blog
+    context_object_name = 'blog'
+    template_name = 'blog_view.php'
 
 #Reservation Files
 
 class newReserve(CreateView):
   model = Reservations
   form_class = ReservationsForm
-  success_url = '../sample'
+  success_url = '../reserve'
   template_name = 'reservations_form.php'
 class updateReserve(UpdateView):
   model = Reservations
   form_class = ReservationsForm
-  success_url = '../../sample'
+  success_url = '/staff'
   template_name = 'reserve_edit.php'
 
 class sampleView(ListView):

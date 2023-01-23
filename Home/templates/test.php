@@ -15,6 +15,6 @@
             </tr>
         {% endfor %}
         </table>
+        <a href="{%url 'blog.add'%}" class="btn btn-primary">Add new reservation</a>
 </div>
 {%endblock%}
-<a href="add/">Add member</a>

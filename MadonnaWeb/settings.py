@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Home.apps.HomeConfig',
     'Reservation',
     'users.apps.UsersConfig',
+    
 ]
 
 MIDDLEWARE = [
@@ -52,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "debug_toolbar.middleware.DebugToolbarMiddleware",
+    
 ]
 
 INTERNAL_IPS = [
@@ -137,3 +139,5 @@ LOGIN_REDIRECT_URL = 'home'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+LOGIN_REDIRECT_URL = '/staff/'
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'

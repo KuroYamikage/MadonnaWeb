@@ -1,7 +1,7 @@
 {%extends "master2.php"%}
 {%load static}
 
-{%block title%} New Post {%endblock%}
+{%block title%} edit blog: {{Blog.blog_title}}{%endblock%}
 
 {%block content%}
 <style>
@@ -11,7 +11,7 @@
 
 <div class="m-auto container border border-dark rounded reserve-form reserve_section " style="background-color:  #ffb607">
 <h3 class=" layout-padding" style="text-align: center" >Resrevation Form</h3>
-<form  action="{% url 'blog.add'%}" method = "POST">
+<form  method = "POST">
 {%csrf_token%} 
 
 <div class="form-group col-md-6">
@@ -22,10 +22,12 @@
     {{form.blog_content.label}}
     {{form.blog_content}}
 </div>
-<div class="form-group">   
-</div>
- <button type="submit" class="btn btn-primary"> Submit </button>
-
+<div class="form-group mt-5">   
+<div class="container d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary"> Submit </button>
+            <a href="{%url 'blog'%}" class="btn btn-danger"> cancel </a>
+        </div>
+        </div>
 </form>
 
 
@@ -34,5 +36,13 @@
     window.alert("{{form.errors.as_text}}");
 </script>
 {%endif%}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+    {% endfor %}
+</ul>
+{% endif %}
 </div>
 {%endblock%}
