@@ -141,3 +141,5 @@ LOGIN_REDIRECT_URL = 'home'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/staff/'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+SESSION_COOKIE_AGE = 5*60
+SESSION_EXPIRE_AT_BROWSER_CLOSE=True

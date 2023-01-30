@@ -3,20 +3,21 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import UserRegistrationForm
-from django.views.generic import CreateView, TemplateView,ListView,     DetailView, UpdateView
+from django.views.generic import CreateView, TemplateView,ListView,    DetailView, UpdateView
 from Home.models import Reservations, Blog
 from Home.forms import ReservationsForm, BlogForms
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
 # Create your views here.
 
 #Account Management
 class StaffLoginView(LoginView):
-  template_name = 'users/login.php'
+  template_name = 'users/loginTest.php'
   redirect_authenticated_user= True
+
 
 class StaffLogoutView(LoginRequiredMixin,LogoutView):
   template_name = 'users/logout.php'
@@ -45,24 +46,23 @@ class deleteReservation(LoginRequiredMixin,DeleteView):
   login_url = "login"
 
 # Blogs 
-class viewBlogs(LoginRequiredMixin, ListView):
-    model = Blog
-    context_object_name = 'blog'
-    template_name = 'blog.php'
-    login_url = "login"
 
-class newBlog(LoginRequiredMixin, CreateView):
+
+class newBlog(LoginRequiredMixin, CreateView, PermissionRequiredMixin):
   model = Blog
   form_class = BlogForms
   success_url ='/blog'
   template_name = 'new_Blog.php'
   login_url = "login"
+  permission_required = ('blog.can_view')
 
-class viewBlogs(LoginRequiredMixin, ListView):
+class viewBlogs(PermissionRequiredMixin, LoginRequiredMixin, ListView):
+  permission_required = 'Home.view_Blog' 
   model = Blog
   context_object_name = 'blog'
   template_name = 'blog.php'
   login_url = "login"
+  
 
 class deleteBlogs(LoginRequiredMixin, DeleteView):
   model= Blog
