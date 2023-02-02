@@ -3,11 +3,12 @@ from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import UserRegistrationForm
-from django.views.generic import CreateView, TemplateView,ListView,    DetailView, UpdateView
+from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 from Home.models import Reservations, Blog
 from Home.forms import ReservationsForm, BlogForms
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 
