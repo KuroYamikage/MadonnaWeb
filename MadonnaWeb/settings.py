@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'Home.apps.HomeConfig',
     'Reservation',
     'users.apps.UsersConfig',
+    'blog',
     
 ]
 

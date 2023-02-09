@@ -4,13 +4,13 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import UserRegistrationForm
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
-from Home.models import Reservations, Blog
-from Home.forms import ReservationsForm, BlogForms
+from blog.models import Blog
+from blog.forms import  BlogForms
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-
+from Reservation.models import Reservations
 
 # Create your views here.
 
@@ -24,27 +24,12 @@ class StaffLogoutView(LoginRequiredMixin,LogoutView):
   template_name = 'users/logout.php'
   login_url = "login"
 
-
-# Reservation Class
 class reserveListView(LoginRequiredMixin,ListView):
   model = Reservations
   context_object_name = 'reserve'
   template_name = 'users/home.php'
   login_url = "login"
 
-class newReserveStaff(LoginRequiredMixin,CreateView):
-  model = Reservations
-  form_class = ReservationsForm
-  success_url = 'main'
-  template_name = 'users/reservations_form.php'
-  login_url = "login"
-
-class deleteReservation(LoginRequiredMixin,DeleteView):
-  model= Reservations
-  context_object_name = 'reserve'
-  success_url = 'main'
-  template_name = 'users/delete_reservation.php'
-  login_url = "login"
 
 # Blogs 
 

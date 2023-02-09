@@ -5,62 +5,21 @@ from django.urls import reverse
 from django.template import loader
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 from django.views.generic.edit import DeleteView
-from .models import Reservations
-from .models import Blog
-from .forms import ReservationsForm
-from .forms import BlogForms
+from Reservation.models import Reservations
 
 
 
 #Blog Files
-class newBlog(CreateView):
-  model = Blog
-  form_class = BlogForms
-  success_url ='Home/blog'
-  template_name = 'new_Blog.php'
-
-class viewBlogs(ListView):
-  model = Blog
-  context_object_name = 'blog'
-  template_name = 'blog.php'
-
-class deleteBlogs(DeleteView):
-  model= Blog
-  success_url = '../'
-  template_name = 'delete_blog.php'
-class updateBlogs(UpdateView):
-  model = Blog
-  form_class = BlogForms
-  success_url = '../'
-  template_name = 'edit_blog.php'
-
-  class detaliBlog(DetailView):
-    model = Blog
-    context_object_name = 'blog'
-    template_name = 'blog_view.php'
 
 #Reservation Files
 
-class newReserve(CreateView):
-  model = Reservations
-  form_class = ReservationsForm
-  success_url = '../reserve'
-  template_name = 'reservations_form.php'
-class updateReserve(UpdateView):
-  model = Reservations
-  form_class = ReservationsForm
-  success_url = '/staff'
-  template_name = 'reserve_edit.php'
 
 class sampleView(ListView):
   model = Reservations
   context_object_name = "reserve"
   template_name='test.php'
 
-class moreDetailView(DetailView):
-  model = Reservations
-  context_object_name = 'reserve'
-  template_name = 'test_reserve.php'
+
 
 
 #Home Page Views
@@ -70,11 +29,6 @@ class indexView(TemplateView):
 class aboutView(TemplateView):
   template_name='about.php'
 
-
-class reserveView(ListView):
-  model = Reservations
-  context_object_name = 'reserve'
-  template_name='reservation.php'
 
 class addView(TemplateView):
   template_name = "add.php"

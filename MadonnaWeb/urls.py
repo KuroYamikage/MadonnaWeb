@@ -22,10 +22,10 @@ from django.contrib.auth import views as auth_views
 from users import views as user_views
 
 urlpatterns = [
-    path('Home/', include('Home.urls')),
+    path('', include('Home.urls')),
     path('admin/', admin.site.urls),
-    path('reserve/',include('Reservation.urls')),
+    path('',include('Reservation.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
     path('', include('users.urls')),
-    
+    path('blog/',include('blog.urls'))
 ]
