@@ -20,7 +20,7 @@ class StaffLoginView(LoginView):
   redirect_authenticated_user= True
 
 
-class StaffLogoutView(LoginRequiredMixin,LogoutView):
+class StaffLogoutView(LogoutView):
   template_name = 'users/logout.php'
   login_url = "login"
 

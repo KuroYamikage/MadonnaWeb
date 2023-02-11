@@ -14,18 +14,19 @@ Reservation
     
 </style>
 
-<div class="m-auto container border border-dark rounded reserve-form reserve_section " style="background-color:  #ffb607">
-    <h3 class=" layout-padding" style="text-align: center" >Resrevation Form</h3>
-    <form  action="{% url 'reservation.new.staff'%}" method = "POST">
+<div class="container center-content m-auto d-flex justify-content-center my-auto vertical-center opacity-25" style="background-color:  #ffb607; max-width: 75%;">
+    
+    <form  action="{% url 'reserve.staff.new'%}" method = "POST">
+    <p style="text"><h3>Resrevation Form</h3></p>
         {%csrf_token%} 
         <div class="form-row" >
             <div class="form-group col-md-6">
-                {{form.firstname.label}}
-                {{form.firstname}}
+                {{form.checkIn.label}}
+                {{form.checkIn}}
             </div>
         <div class="form-group col-md-6">
-                {{form.lastname.label}}   
-                {{form.lastname}}
+                {{form.checkOut.label}}   
+                {{form.checkOut}}
         </div>
 </div>
 <div class="form-row">

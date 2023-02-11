@@ -16,7 +16,7 @@
             </tr>
         {% endfor %}
         </table>
-        <a href="{%url 'reservation.new'%}" class="btn btn-primary my-3">Add new Reservation</a>
+        <a href="{%url 'reserve.staff.new'%}" class="btn btn-primary my-3">Add new Reservation</a>
 </div>
 {%endblock%}
 

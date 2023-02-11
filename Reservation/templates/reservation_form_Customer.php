@@ -18,12 +18,12 @@
         {%csrf_token%} 
         <div class="form-row" >
             <div class="form-group col-md-6">
-                {{form.firstname.label}}
-                {{form.firstname}}
+                {{form.checkIn.label}}   
+                {{form.checkIn}}
             </div>
             <div class="form-group col-md-6">
-                {{form.lastname.label}}   
-                {{form.lastname}}
+                {{form.checkOut.label}}   
+                {{form.checkOut}}
             </div>
         </div>
         <div class="form-row">

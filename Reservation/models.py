@@ -4,8 +4,8 @@ from django.db import models
 
 class Reservations(models.Model):
   reservationID = models.BigAutoField(primary_key=True)
-  date = models.DateField()
-  time = models.TimeField()
+  date = models.DateField(auto_created=True)
+  time = models.TimeField(auto_created=True)
   discounted = models.BigIntegerField()
   checkIn = models.DateField()
   checkOut=models.DateField()
@@ -18,7 +18,7 @@ class Customer(models.Model):
   firstname = models.CharField(max_length=255)
   lastname = models.CharField(max_length=255)
   contactNumber = models.CharField(max_length=12)
-
+  email = models.EmailField()
 
 class Discount(models.Model):
   discountCode= models.CharField(max_length=15)
@@ -27,7 +27,10 @@ class Discount(models.Model):
 
 class Facility(models.Model):
   facilityName = models.CharField(max_length=255)
+  facilityDescription = models.CharField(max_length=255)
+  #facilityPic = models.ImageField()
   facilityPrice = models.DecimalField(decimal_places=3, max_digits=6)
+  facilitymax = models.IntegerField()
   
 
   
