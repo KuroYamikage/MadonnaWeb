@@ -5,8 +5,8 @@ from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 from django.contrib.auth import login, authenticate
-from Reservation.models import Reservations
-from Reservation.forms import ReservationForm
+from Reservation.models import Reservations, Customer
+from Reservation.forms import ReservationForm, CustomerForm
 from django.contrib.messages.views import SuccessMessageMixin
 # Create your views here.
 def test(request):
@@ -23,6 +23,11 @@ class newReserve(CreateView):
   success_url = '/reserve'
   template_name = 'reservation_form_Customer.php'
 
+class newCustomer(CreateView):
+  model= Customer
+  form_class = CustomerForm
+  success_url = '../reservation/new'
+  template_name = 'customer_form_Customer.php'
 class moreDetailView(DetailView):
   model = Reservations
   context_object_name = 'reserve'

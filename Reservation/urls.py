@@ -10,6 +10,7 @@ urlpatterns = [
     path('reservation/edit/<int:pk>', views.updateReserve.as_view(), name="reservation.edit"),
     path('reservation/delete/<int:pk>', views.deleteReservation.as_view(), name='reservation.delete'),
     path('staff/reserve', views.newReserveStaff.as_view(), name='reserve.staff.new'),
+    path('customer/new', views.newCustomer.as_view(), name='customer.new')
 
 
 ]

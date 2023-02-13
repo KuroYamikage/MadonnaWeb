@@ -30,7 +30,7 @@ src: url("../fonts/BalooChettan-Regular.ttf");
 
 /*--------------------------------------------------------------------- skeleton ---------------------------------------------------------------------*/
 :root{
-    --green: #2d8222;
+    --green: #37a329;
 }
 * {
      box-sizing: border-box !important;
@@ -1067,3 +1067,6 @@ textarea#comment::placeholder {
     margin-left: 250px; /* Same as the width of the sidenav */
   }
 
+  .bg-cards{
+    background-color: var(--green);
+  }

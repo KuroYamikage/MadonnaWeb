@@ -4,8 +4,8 @@ from django.db import models
 
 class Reservations(models.Model):
   reservationID = models.BigAutoField(primary_key=True)
-  date = models.DateField(auto_created=True)
-  time = models.TimeField(auto_created=True)
+  date = models.DateField(auto_created=True, null=True)
+  time = models.TimeField(auto_created=True, null=True)
   discounted = models.BigIntegerField()
   checkIn = models.DateField()
   checkOut=models.DateField()

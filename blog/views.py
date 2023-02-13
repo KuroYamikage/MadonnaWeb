@@ -19,6 +19,11 @@ class detaliBlog(DetailView):
     context_object_name = 'blog'
     template_name = 'blog_view.php'
 
+class blogCustomer(ListView):
+  model = Blog
+  context_object_name = 'blog'
+  template_name = 'blog_Customer.php'
+
 class newBlog(LoginRequiredMixin, CreateView, PermissionRequiredMixin):
   model = Blog
   form_class = BlogForms

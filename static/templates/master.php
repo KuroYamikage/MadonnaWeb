@@ -50,7 +50,7 @@
                         <a class="nav-link" href="{%url 'reserve' %}">Reservations</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="about.html">Blogs</a>
+                        <a class="nav-link" href="{%url 'blog.customer'%}">Blogs</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="shop.html">Check Facilities</a>

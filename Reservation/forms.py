@@ -1,7 +1,24 @@
 from django import forms
-from .models import Reservations, Customer
+from Reservation.models import Reservations, Customer
 
-
+class CustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = {
+            'firstname', 'lastname', 'contactNumber', 'email'
+        }
+        widgets = {
+            'firstname' : forms.TextInput(attrs={'class': 'form-control'}),
+            'lastname' : forms.TextInput(attrs={'class': 'form-control'}),
+            'contactNumber' : forms.TextInput(attrs={'class': 'form-control'}),
+            'email' : forms.EmailInput(attrs={'class': 'form-control'}),
+        }
+        labels = {
+            'firstname' : 'First Name',
+            'lastname' : 'Last Name',
+            'contactNumber' : 'Contact Number',
+            'email' : 'Email'
+        }
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservations
@@ -10,11 +27,11 @@ class ReservationForm(forms.ModelForm):
         widgets = {
             'checkIn' : forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
             'checkOut' : forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
-            'totalPayment' : forms.TextInput(attrs={'class' : 'form-control', 'disabled': 'true'}),
-            'balance' : forms.TextInput(attrs={'class' : 'form-control', 'disabled': 'true'}),
-            'status' : forms.TextInput(attrs={'class' : 'form-control', 'disabled': 'true'}),
+            'totalPayment' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'balance' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'status' : forms.TextInput(attrs={'class' : 'form-control',  'value' : 'Yes'}),
             'downpayment' : forms.TextInput(attrs={'class' : 'form-control'}),
-            'discounted' : forms.NumberInput(attrs={'class' : 'form-control'}),
+            'discounted' : forms.NumberInput(attrs={'class' : 'form-control', 'value' : '1'}),
         }
         labels = {
             'checkIn' : 'Check In Date',
@@ -25,21 +42,3 @@ class ReservationForm(forms.ModelForm):
             'status' : 'Status'
         }
 
-class CustomerForm(forms.ModelForm):
-    class meta:
-        model=Customer
-        fields = {
-            'firstname', 'lastname', 'contactNumber', 'email'
-        }
-        widgets = {
-            'firstname' : forms.TextInput(attrs={'class': 'form-control'}),
-            'lastname' : forms.TextInput(attrs={'class': 'form-control'}),
-            'comtactNumber' : forms.TextInput(attrs={'class': 'form-control'}),
-            'email' : forms.EmailInput(attrs={'class': 'form-control'}),
-        }
-        labels = {
-            'firstname' : 'First Name',
-            'lastname' : 'Last Name',
-            'contactNumber' : 'Contact Number',
-            'email' : 'Email'
-        }

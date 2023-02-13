@@ -340,7 +340,7 @@ const months = [
 			              </tbody> 
 				          </table>
 				        </div> 
-				        <a href="{%url 'reservation.new'%}"><button class="button" id="add-button">Add Event</button></a>
+				        <a href="{%url 'customer.new'%}"><button class="button" id="add-button">Add Event</button></a>
 				      </div>
 				    </div>
 				    <div class="events-container">
