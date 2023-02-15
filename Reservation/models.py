@@ -28,7 +28,7 @@ class Discount(models.Model):
 class Facility(models.Model):
   facilityName = models.CharField(max_length=255)
   facilityDescription = models.CharField(max_length=255)
-  #facilityPic = models.ImageField()
+  facilityPic = models.ImageField(upload_to='facilities', null=True)
   facilityPrice = models.DecimalField(decimal_places=3, max_digits=6)
   facilitymax = models.IntegerField()
   

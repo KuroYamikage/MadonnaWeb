@@ -80,7 +80,8 @@ TEMPLATES = [
         },
     },
 ]
-
+MEDIA_ROOT = BASE_DIR/'Media'
+MEDIA_URL = ''
 WSGI_APPLICATION = 'MadonnaWeb.wsgi.application'
 
 

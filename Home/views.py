@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.template import loader
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 from django.views.generic.edit import DeleteView
-from Reservation.models import Reservations
+from Reservation.models import Reservations, Facility
 
 
 
@@ -32,6 +32,11 @@ class aboutView(TemplateView):
 
 class addView(TemplateView):
   template_name = "add.php"
+
+class facilitiesView(ListView):
+  model = Facility
+  template_name = 'facilities.php'
+  context_object_name = 'facility'
 
 
 def reservations(request):

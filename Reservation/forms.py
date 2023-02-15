@@ -1,5 +1,5 @@
 from django import forms
-from Reservation.models import Reservations, Customer
+from Reservation.models import Reservations, Customer, Facility
 
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -42,3 +42,24 @@ class ReservationForm(forms.ModelForm):
             'status' : 'Status'
         }
 
+
+class FacilityForm(forms.ModelForm):
+    model = Facility
+    class Meta:
+        model = Facility
+        fields = ( 'facilityName', 'facilityDescription', 'facilityPic', 'facilityPrice', 'facilitymax' )
+        widgets = {
+            'facilityName' : forms.TextInput(attrs={'class': 'form-control'}),
+            'facilityDesciption' : forms.Textarea(attrs={'class' : 'form-control'}),
+            'facilityPic' : forms.ImageField(),
+            'facility_Price' : forms.NumberInput(attrs={'class' : 'form-control'}),
+            'facilitymax' : forms.NumberInput(attrs={'class' : 'form-control'}),
+        }
+        labels = {
+            'facilityName' : 'Facility Name',
+            'facilityDescription' : 'Facility Description',
+            'facilityPic' : 'Facility Pic',
+            'facilityPrice' : 'Facility Price',
+            'facilitymax' : 'Facility Maximum Occupancy',
+            
+        }

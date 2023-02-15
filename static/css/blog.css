@@ -156,7 +156,6 @@ ul {
 .tm-social-link:hover .tm-social-icon.fa-twitter { color: #00acee; }
 .tm-social-link:hover .tm-social-icon.fa-instagram { color: #3f729b; }
 .tm-social-link:hover .tm-social-icon.fa-linkedin { color: #0e76a8; }
-.navbar-toggler { display: none; }
 
 .tm-search-form {
     display: flex;
@@ -470,20 +469,8 @@ a:hover figcaption { color: #056767; }
     .tm-header.show { left: 0; }
     .tm-header-wrapper { padding: 15px; }
 
-    .navbar-toggler {
-        display: block;
-        position: fixed;
-        left: 0;
-        top: 0;
-        background-color: rgba(56, 204, 204, 0.75);
-        color: white;
-        padding: 10px 15px;
-        transition: all 0.3s ease;
-        border-radius: 0;
-        top: 5px;
-    }
 
-    .tm-header.show .navbar-toggler { left: 320px; }
+    
 
     .tm-main {
         margin-left: 0;

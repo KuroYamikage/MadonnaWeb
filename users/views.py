@@ -10,7 +10,8 @@ from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from Reservation.models import Reservations
+from Reservation.models import Reservations, Facility
+from Reservation.forms import FacilityForm
 
 # Create your views here.
 
@@ -67,6 +68,17 @@ class detaliBlog(DetailView):
     model = Blog
     context_object_name = 'blog'
     template_name = 'blog_view.php'
+
+#Home Page/Facilities
+
+class newFacility(LoginRequiredMixin,CreateView):
+  model = Facility
+  form_class = FacilityForm
+  success_url='/'
+  login_url = 'login'
+  template_name = 'users/new_facility.php'
+
+
 
 
 
