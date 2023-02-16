@@ -51,7 +51,7 @@ class FacilityForm(forms.ModelForm):
         widgets = {
             'facilityName' : forms.TextInput(attrs={'class': 'form-control'}),
             'facilityDesciption' : forms.Textarea(attrs={'class' : 'form-control'}),
-            'facilityPic' : forms.ImageField(),
+            
             'facility_Price' : forms.NumberInput(attrs={'class' : 'form-control'}),
             'facilitymax' : forms.NumberInput(attrs={'class' : 'form-control'}),
         }

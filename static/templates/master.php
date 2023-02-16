@@ -53,7 +53,7 @@
                         <a class="nav-link" href="{%url 'blog.customer'%}">Blogs</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="{% url 'facility.view'%}">Check Facilities</a>
+                        <a class="nav-link" href="{% url 'facility.view'%}">Facilities</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="{%url 'about'%}">About</a>

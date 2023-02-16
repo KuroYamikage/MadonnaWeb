@@ -14,7 +14,7 @@
                     <hr class="tm-hr-primary">
                     <a href="{% url 'blog.detail' pk=x.blog_id %}" class="effect-lily tm-post-link tm-pt-60">
                         <div class="tm-post-link-inner">
-                            <img src="../../blog/{{x.blog_pic}}" alt="Image" class="img-fluid" width="440" height="220">   
+                            <img src="../../blog/{{x.blog_pic}}" alt="Image" class="img-fluid"style="height: 220px; width=440px; object-fit:cover;">   
                                                   
                         </div>
                         

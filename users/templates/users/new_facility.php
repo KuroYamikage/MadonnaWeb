@@ -1,7 +1,7 @@
 {%extends "master2.php"%}
 {%load static}
 
-{%block title%} New Post {%endblock%}
+{%block title%} New Facility {%endblock%}
 
 {%block content%}
 <style>
@@ -10,7 +10,7 @@
 </style>
 
 <div class="m-auto container border border-dark rounded reserve-form reserve_section " style="background-color:  #ffb607">
-<h3 class=" layout-padding" style="text-align: center" >Resrevation Form</h3>
+<h3 class=" layout-padding" style="text-align: center" >Add New Facilities</h3>
 <form  action="{% url 'facility.new'%}" method = "POST" enctype="multipart/form-data">
 {%csrf_token%} 
 <div class="form-row">
@@ -54,6 +54,7 @@
 <script>
     window.alert("{{form.errors.as_text}}");
 </script>
+{{form.errors.as_text}}
 {%endif%}
 </div>
 {%endblock%}

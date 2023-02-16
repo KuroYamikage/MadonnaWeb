@@ -6,6 +6,7 @@ from django.template import loader
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 from django.views.generic.edit import DeleteView
 from Reservation.models import Reservations, Facility
+from blog.models import Blog
 
 
 
@@ -18,6 +19,7 @@ class sampleView(ListView):
   model = Reservations
   context_object_name = "reserve"
   template_name='test.php'
+  
 
 
 
@@ -25,6 +27,16 @@ class sampleView(ListView):
 #Home Page Views
 class indexView(TemplateView):
   template_name='index.php'
+  context_object_name = 'home'
+  queryset = Facility.objects.all
+
+  def get_context_data(self, **kwargs):
+    context = super(indexView, self).get_context_data(**kwargs)
+    context['blog'] = Blog.objects.all()
+    """ context['venue_list'] = Venue.objects.all()
+    context['festival_list'] = Festival.objects.all()
+    # And so on for more models """
+    return context
 
 class aboutView(TemplateView):
   template_name='about.php'
