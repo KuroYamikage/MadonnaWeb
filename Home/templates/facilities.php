@@ -2,14 +2,20 @@
 {% load static %}
       {% block title %}Welcome to Madonna's {% endblock %}
 
+      {%block head%} 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+    {%endblock%}  
       {% block content %}
-<div class="container">
+<div class="container-fluid">
     <div class="row my-2">
         <h1 class="services_taital"><b>Facilities</b></h3>
     </div>
-    {%for x in facility%}
-<div class="row mb-2">
-        <div class="col-md-6">
+    
+{% comment %} <div class="row mb-2"> {% endcomment %}
+  <div class="row tm-row">
+  {%for x in facility%}
+
+        <article class="col-12 col-md-6 tm-post">
           <div class="card flex-md-row mb-4 box-shadow h-md-250">
             <div class="card-body d-flex flex-column align-items-start">
               <!--<strong class="d-inline-block mb-2 text-primary">World</strong>
@@ -22,8 +28,9 @@
             </div>
             <img src="../{{x.facilityPic}}" class="card-img-right flex-auto d-none d-md-block" data-holder-rendered="true" style="height:200px; width: 300px;">
           </div>
-        </div>
-      </div>
+        </article>
+      {% comment %}</div>  {% endcomment %}
       {%endfor%}
+</div>
 </div>
       {%endblock%}

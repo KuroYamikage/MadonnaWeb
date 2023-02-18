@@ -22,6 +22,7 @@ class CustomerForm(forms.ModelForm):
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservations
+        
         fields = ( 'checkIn', 'checkOut', 'downpayment', 'totalPayment',
             'balance', 'status', 'discounted', )
         widgets = {
@@ -32,6 +33,7 @@ class ReservationForm(forms.ModelForm):
             'status' : forms.TextInput(attrs={'class' : 'form-control',  'value' : 'Yes'}),
             'downpayment' : forms.TextInput(attrs={'class' : 'form-control'}),
             'discounted' : forms.NumberInput(attrs={'class' : 'form-control', 'value' : '1'}),
+
         }
         labels = {
             'checkIn' : 'Check In Date',
@@ -47,13 +49,22 @@ class FacilityForm(forms.ModelForm):
     model = Facility
     class Meta:
         model = Facility
-        fields = ( 'facilityName', 'facilityDescription', 'facilityPic', 'facilityPrice', 'facilitymax' )
+        FacilityCategoriesChoices = (
+            ('pool','Pool'),
+            ('rooms','Rooms'),
+            ('cottages','Cottages'),
+            ('EH','Event Hall'),
+     
+  )
+        fields = ( 'facilityName', 'facilityDescription', 'facilityPic', 'facilityPrice','facilityCategory', 'facilitymax' )
         widgets = {
             'facilityName' : forms.TextInput(attrs={'class': 'form-control'}),
-            'facilityDesciption' : forms.Textarea(attrs={'class' : 'form-control'}),
+            'facilityDescription' : forms.Textarea(attrs={'class': 'form-control'}),
             
-            'facility_Price' : forms.NumberInput(attrs={'class' : 'form-control'}),
-            'facilitymax' : forms.NumberInput(attrs={'class' : 'form-control'}),
+            'facilityPrice' : forms.NumberInput(attrs={'class': 'form-control'}),
+            'facilitymax' : forms.NumberInput(attrs={'class': 'form-control'}),
+            
+            'facilityCategory': forms.RadioSelect(choices=FacilityCategoriesChoices),
         }
         labels = {
             'facilityName' : 'Facility Name',
@@ -61,5 +72,6 @@ class FacilityForm(forms.ModelForm):
             'facilityPic' : 'Facility Pic',
             'facilityPrice' : 'Facility Price',
             'facilitymax' : 'Facility Maximum Occupancy',
+            'facilityCategory' : 'Category'
             
         }

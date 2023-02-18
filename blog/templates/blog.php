@@ -4,8 +4,10 @@
         {%block title%}Blog Admins{%endblock%}
 {%block content%}
 
-<div class="container center-content p-auto" style="background-color:#ffb607;">
-        <h1 class=>Blogs</h1>
+<div class="content">
+    <h1 class="p-5">Blogs</h1>
+<div class="container">
+    <div class="container pt-4 px-4">
         <table border="1" class="reserve">
         {% for x in  blog%}
             <tr>
@@ -17,7 +19,7 @@
         </table>
         <a href="{%url 'blog.add'%}" class="btn btn-primary my-3">Add new Blog</a>
 </div>
-
+</div>
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}

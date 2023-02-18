@@ -28,15 +28,17 @@ class sampleView(ListView):
 class indexView(TemplateView):
   template_name='index.php'
   context_object_name = 'home'
-  queryset = Facility.objects.all
 
   def get_context_data(self, **kwargs):
     context = super(indexView, self).get_context_data(**kwargs)
     context['blog'] = Blog.objects.all()
+    context['pool1'] = Facility.objects.values_list('id','facilityPic')
     """ context['venue_list'] = Venue.objects.all()
     context['festival_list'] = Festival.objects.all()
     # And so on for more models """
     return context
+
+
 
 class aboutView(TemplateView):
   template_name='about.php'
@@ -52,7 +54,7 @@ class facilitiesView(ListView):
 
 
 def reservations(request):
-  reserve = Reservations.objects.all().order_by('-reservationID')
+  reserve = Reservations.objects.all().order_by('reservationID')
   template = loader.get_template('reservation.php')
   reserve_html = []
   for instance in Reservations.objects.all():  # it's not serialization, but extracting of the useful fields

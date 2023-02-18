@@ -37,14 +37,23 @@
 </div>
 </div>
 
-<div class="form-group col-12">
-{{form.facilityDescription.label}}
-    {{form.facilityDescription}}
+<div class="form-row">
+    <div class="form-group col-md-6">
+    {{form.facilityDescription.label}}
+        {{form.facilityDescription}}
+    </div>
+
+    <div class="form-group col-md-6">
+        <div class="form-control">
+        {{form.facilityCategory.label}}
+            {{form.facilityCategory}}
+        </div>
+    </div>
 </div>
 <div class="form-group">   
 <div class="container d-flex justify-content-center">
             <button type="submit" class="btn btn-primary"> Submit </button>
-            <a href="{%url 'blog'%}" class="btn btn-danger"> cancel </a>
+            <a href="{%url 'facility.staff'%}" class="btn btn-danger"> cancel </a>
         </div>
  </div>
 </form>

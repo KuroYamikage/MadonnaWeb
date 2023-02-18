@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from datetime import datetime
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import DeleteView
@@ -16,6 +17,14 @@ class reserveView(ListView):
   model = Reservations
   context_object_name = 'reserve'
   template_name='reservation.php'
+  def get_context_data(self, **kwargs):
+    context = super(reserveView, self).get_context_data(**kwargs)
+    context['checkIn'] = Reservations.objects.values('checkIn')
+    context['checkOut'] = Reservations.objects.values('checkOut')
+    """ context['venue_list'] = Venue.objects.all()
+    context['festival_list'] = Festival.objects.all()
+    # And so on for more models """
+    return context
 
 class newReserve(CreateView):
   model = Reservations

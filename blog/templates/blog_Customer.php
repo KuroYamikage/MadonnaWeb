@@ -25,14 +25,10 @@
                         {{x.blog_content}}
                     </p>
                     <div class="d-flex justify-content-between tm-pt-45">
-                        <span class="tm-color-primary">Travel . Events</span>
-                        <span class="tm-color-primary">June 24, 2020</span>
+                        <span class="tm-color-primary">{{x.blog_owner}}</span>
+                        <span class="tm-color-primary">{{x.blog_created}}</span>
                     </div>
                     <hr>
-                    <div class="d-flex justify-content-between">
-                        <span>36 comments</span>
-                        <span>by Admin Nat</span>
-                    </div>
                 </article>
                 {%endfor%}
 </div>

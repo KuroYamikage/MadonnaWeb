@@ -11,11 +11,20 @@
  {% block content %}
 
  <!-- Script for calendar -->
+
 <script>
 
 (function($) {
 
 "use strict";
+
+
+//Initialization
+
+alert("Hello");
+
+
+
 
 // Setup the calendar with the current date
 $(document).ready(function(){
@@ -25,7 +34,7 @@ var today = date.getDate();
 $(".right-button").click({date: date}, next_year);
 $(".left-button").click({date: date}, prev_year);
 $(".month").click({date: date}, month_click);
-$("#add-button").click({date: date}, new_event);
+{% comment %} //$("#add-button").click({date: date}, new_event); {% endcomment %}
 // Set current month as active
 $(".months-row").children().eq(date.getMonth()).addClass("active-month");
 init_calendar(date);
@@ -165,106 +174,56 @@ else {
 
 // Checks if a specific date has any events
 function check_events(day, month, year) {
-var events = [];
-for(var i=0; i<event_data["events"].length; i++) {
-	var event = event_data["events"][i];
-	if(event["day"]===day &&
-		event["month"]===month &&
-		event["year"]===year) {
-			events.push(event);
-		}
+    var events = [];
+    for(var i=0; i<event_data["events"].length; i++) {
+        var event = event_data["events"][i];
+        if(event["day"]===day &&
+            event["month"]===month &&
+            event["year"]===year) {
+                events.push(event);
+            }
+    }
+    return events;
 }
-return events;
-}
+
 
 // Given data for events in JSON format
 var event_data = {
 "events": [
+
 {
 	"occasion": " Repeated Test Event ",
 	"invited_count": 120,
-	"year": 2020,
-	"month": 5,
-	"day": 10,
-	"cancelled": true
+	"year": 2023,
+	"month": 2,
+	"day": 9,
+	"cancelled": false
 },
-{
-	"occasion": " Repeated Test Event ",
-	"invited_count": 120,
-	"year": 2020,
-	"month": 5,
-	"day": 10,
-	"cancelled": true
-},
-	{
-	"occasion": " Repeated Test Event ",
-	"invited_count": 120,
-	"year": 2020,
-	"month": 5,
-	"day": 10,
-	"cancelled": true
-},
-{
-	"occasion": " Repeated Test Event ",
-	"invited_count": 120,
-	"year": 2020,
-	"month": 5,
-	"day": 10
-},
-	{
-	"occasion": " Repeated Test Event ",
-	"invited_count": 120,
-	"year": 2020,
-	"month": 5,
-	"day": 10,
-	"cancelled": true
-},
-{
-	"occasion": " Repeated Test Event ",
-	"invited_count": 120,
-	"year": 2020,
-	"month": 5,
-	"day": 10
-},
-	{
-	"occasion": " Repeated Test Event ",
-	"invited_count": 120,
-	"year": 2020,
-	"month": 5,
-	"day": 10,
-	"cancelled": true
-},
-{
-	"occasion": " Repeated Test Event ",
-	"invited_count": 120,
-	"year": 2020,
-	"month": 5,
-	"day": 10
-},
-	{
-	"occasion": " Repeated Test Event ",
-	"invited_count": 120,
-	"year": 2020,
-	"month": 5,
-	"day": 10,
-	"cancelled": true
-},
-{
-	"occasion": " Repeated Test Event ",
-	"invited_count": 120,
-	"year": 2020,
-	"month": 5,
-	"day": 10
-},
-{
-	"occasion": " Test Event",
-	"invited_count": 120,
-	"year": 2020,
-	"month": 5,
-	"day": 11
-}
+
+
 ]
 };
+
+{%for x in reserve %}
+var  date = "{{x.checkIn|date:"y-m-d"}}";
+var numdate = date.split('-');
+var strYear = "20";
+var year = parseInt(strYear.concat(numdate[0]));
+var month = parseInt(numdate[1]);
+var day = parseInt(numdate[2]);
+
+event_data["events"].push({
+    occasion:"{{x.customer}}",
+    invited_count: 13,
+    year: year,
+    month: month,
+    day: day,
+    cancelled: false
+
+  });
+
+{%endfor%}
+
 
 const months = [ 
 "January", 

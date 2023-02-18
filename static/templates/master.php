@@ -33,6 +33,22 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
    </head>
    <body>
+      <!-- Javascript files-->
+      <script src="{%static 'js/jquery.min.js'%}"></script>
+      <script src="{%static 'js/popper.min.js'%}"></script>
+      <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
+      <script src="{%static 'js/jquery-3.0.0.min.js'%}"></script>
+      <script src="{%static 'js/plugin.js'%}"></script>
+      <script src="{%static 'js/popper.js'%}"></script>  
+      <script src="{%static 'js/main.js'%}"></script>
+      <!-- sidebar -->
+      <script src="{%static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+      <script src="{%static 'js/custom.js'%}"></script>
+      <!-- javascript --> 
+      <script src="{%static 'js/owl.carousel.js'%}"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js'%}"></script>
+      <script src="{%static 'js/popper.js'%}"></script>  
+      {% comment %} <script src="{%static 'js/main11.js'%}"></script>   {% endcomment %}  
       <!-- header section start -->
       <div class="header_section">
          <div class="container-fluid">
@@ -54,6 +70,9 @@
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'facility.view'%}">Facilities</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="{%url 'about'%}" disable>Gallery</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="{%url 'about'%}">About</a>
@@ -119,21 +138,6 @@
          </div>
       </div>
       <!--  footer section end -->
-      <!-- Javascript files-->
-      <script src="{%static 'js/jquery.min.js'%}"></script>
-      <script src="{%static 'js/popper.min.js'%}"></script>
-      <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
-      <script src="{%static 'js/jquery-3.0.0.min.js'%}"></script>
-      <script src="{%static 'js/plugin.js'%}"></script>
-      <script src="{%static 'js/popper.js'%}"></script>  
-      <script src="{%static 'js/main.js'%}"></script>
-      <!-- sidebar -->
-      <script src="{%static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
-      <script src="{%static 'js/custom.js'%}"></script>
-      <!-- javascript --> 
-      <script src="{%static 'js/owl.carousel.js'%}"></script>
-      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js'%}"></script>
-      <script src="{%static 'js/popper.js'%}"></script>  
-      <script src="{%static 'js/main11.js'%}"></script>    
+      
    </body>
 </html>

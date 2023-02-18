@@ -95,7 +95,7 @@
                <div class="row">
                   <div class="col-md-6">
                      <div class="container_main">
-                        <img src="{%static 'images/pool2.jpg'%}" alt="Avatar" class="image">
+                        <img src="{{pool1.0.1}}" alt="Avatar" class="image">
                         <div class="overlay">
                            <a href="#" class="icon" title="User Profile">
                            <i class="fa fa-search"></i>
@@ -107,7 +107,7 @@
                   </div>
                   <div class="col-md-6">
                      <div class="container_main">
-                        <img src="{%static 'images/pool3.jpg'%}" alt="Avatar" class="image">
+                        <img src="{{pool1.1.1}}" alt="Avatar" class="image">
                         <div class="overlay">
                            <a href="#" class="icon" title="User Profile">
                            <i class="fa fa-search"></i>
