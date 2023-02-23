@@ -87,4 +87,32 @@
     {%endif%}
 </div>
 
+
+<script>
+    $(function () {
+        $('.select-div').on('change', 'select', function (e) {//use on to delegate
+            var v = $(e.target).val(), t = $(e.target).find(':selected').text(), p = $(e.target).closest('.select-div');
+            if (v) {
+                var c = (function(t) {
+                    switch(t) {
+                        case '---------': return 0;
+                        {%for price in prices%}
+                        case 'For {{price.dayTime}} Reservation with Maximum of {{price.maxPax}} Pax': 
+                        console.log("Been Here");
+                        return {{price.price}};
+
+                        {%endfor%}
+                        case 'TN' : return {{prices.0.2}};
+                        case 'TNGA' : return 200;
+                        case 'TNNJ' : return 100;
+                        case 'TNPR' : return 50;
+                    }
+                })(t);
+                p.find('[name="totalPayment"]').val(c);
+            }
+        });
+    });
+    
+</script>
+
 {%endblock%}
