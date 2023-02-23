@@ -186,7 +186,7 @@ img {
 }
 
 .form-control:focus {
-     border-color: #ffffff !important;
+     border-color: #212121 !important;
      box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .25);
 }
 
@@ -273,7 +273,7 @@ button {
     color: #000;
 }
 .search_icon li a:hover{
-    color: #ffb607;
+    color: var(--green);
 }
 .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 20px;
@@ -380,7 +380,7 @@ button {
     border-radius: 100px;
 }
 #costum_slider .carousel-control-prev:hover, #costum_slider .carousel-control-next:hover, #costum_slider .carousel-control-prev:focus, #costum_slider .carousel-control-next:focus {
-    background: #f8ca12;
+    background: var(--green);
     color: #fff;
 }
 
@@ -714,7 +714,7 @@ a:hover {
     top: 0;
     width: 92%;
     height: 90%;
-    background-color: rgb(255,182,7,.6);
+    background-color: rgba(36, 163, 115, 0.6);
     z-index: 11;
     display: none;
 }
@@ -912,7 +912,7 @@ textarea#comment::placeholder {
     padding: 0px 15px 10px 0px;
     font-size: 18px;
     /* line-height: 1.5; */
-    color: #fff;
+    color: #212121;
     background-color: transparent;
     /* background-clip: padding-box; */
     border-bottom: 1px solid rgb(253, 238, 238) !important;
@@ -1019,7 +1019,7 @@ textarea#comment::placeholder {
     color: #000;
 }
 .copyright_text a:hover{
-    color: #fdbe28;
+    color: var(--green);
 }
 
 
@@ -1070,3 +1070,57 @@ textarea#comment::placeholder {
   .bg-cards{
     background-color: var(--green);
   }
+
+
+
+.gallery-title
+{
+    font-size: 36px;
+    color: #42B32F;
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 70px;
+}
+.gallery-title:after {
+    content: "";
+    position: absolute;
+    width: 7.5%;
+    left: 46.5%;
+    height: 45px;
+    border-bottom: 1px solid #5e5e5e;
+}
+.filter-button
+{
+    font-size: 18px;
+    border: 1px solid #42B32F;
+    border-radius: 5px;
+    text-align: center;
+    color: #42B32F;
+    margin-bottom: 30px;
+
+}
+.filter-button:hover
+{
+    font-size: 18px;
+    border: 1px solid #42B32F;
+    border-radius: 5px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #42B32F;
+
+}
+.btn-default:active .filter-button:active
+{
+    background-color: #42B32F;
+    color: white;
+}
+
+.port-image
+{
+    width: 100%;
+}
+
+.gallery_product
+{
+    margin-bottom: 30px;
+}

@@ -8,11 +8,12 @@ from blog.models import Blog
 from blog.forms import  BlogForms
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User 
 from Reservation.models import Reservations, Facility
 from Reservation.forms import FacilityForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -31,6 +32,22 @@ class reserveListView(LoginRequiredMixin,ListView):
   context_object_name = 'reserve'
   template_name = 'users/home.php'
   login_url = "login"
+
+class userList(LoginRequiredMixin, ListView):
+  model=User
+  context_object_name = 'user'
+  template_name = 'users/user_list.php'
+
+
+class registerUser(LoginRequiredMixin, CreateView):
+  form_class = UserRegistrationForm
+  template_name = 'users/register.php'
+  success_url = '/accounts/'
+
+class changepassword(UpdateView, LoginRequiredMixin):
+  form_class = PasswordChangeForm
+  template_name = 'users/changePass.php'
+  success_url = '/staff'
 
 
 # Blogs 
@@ -93,8 +110,9 @@ class editFacility(LoginRequiredMixin, UpdateView):
 
 
 
+  
 
-def register(request):
+""" def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
@@ -106,4 +124,4 @@ def register(request):
         form = UserRegistrationForm()
 
     context = {'form': form}
-    return render(request, 'users/register.php', context)
+    return render(request, 'users/register.php', context) """

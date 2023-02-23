@@ -4,7 +4,7 @@ from .models import Reservations, Customer, Discount, Facility
 # Register your models here.
 @admin.register(Reservations)
 class RequestDemoAdmin(admin.ModelAdmin):
-    list_display=['customer','checkIn', 'checkOut']
+    list_display=['customer','checkIn', 'checkOut', 'prices']
 
 admin.site.register(Customer)
 admin.site.register(Facility)

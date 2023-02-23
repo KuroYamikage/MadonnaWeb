@@ -14,7 +14,7 @@ class Customer(models.Model):
 class Discount(models.Model):
   discountCode= models.CharField(max_length=15)
   discountPercentage = models.DecimalField(decimal_places=2, max_digits=6)
-  discountExpiration = models.DateTimeField()
+  discountActive = models.BooleanField(default=False)
 
   def __str__(self):
     return self.discountCode
@@ -33,7 +33,6 @@ class Facility(models.Model):
   facilityCategory = models.CharField(max_length=20, choices=FacilityCategoriesChoices, blank = False, default='pool')
   facilityPic = models.ImageField(upload_to='facilities', null=True)
   facilityPrice = models.DecimalField(decimal_places=2, max_digits=8)
-  
   #facilityPrice2 = models.DecimalField(decimal_places=2, max_digits=8, null=True)
   #facilityPrice3 = models.DecimalField(decimal_places=2, max_digits=8, null=True)
   
@@ -43,19 +42,44 @@ class Facility(models.Model):
   def __str__(self):
     return self.facilityName
 
+class Prices(models.Model):
+
+  dayTimeChoices = (
+    
+    ('Day','Day'),
+    ('Night','Night'),
+    ('Whole Day','Whole Day')
+     
+  )
+  maxPax = models.IntegerField()
+  price  = models.DecimalField(decimal_places = 2, max_digits = 10)
+  dayTime = models.CharField(max_length=150, choices=dayTimeChoices )
+
+  def __str__(self) -> str:
+    return f'For {self.dayTime} Reservation with Maximum of {self.maxPax} Pax'
+
+  
+
+  
+
 class Reservations(models.Model):
+  reservationChoices=(
+    ('Approved','Approved'),
+    ('Pending','Pending'),
+    ('Cancelled','Cancelled'),
+  )
+
   reservationID = models.BigAutoField(primary_key=True)
   date = models.DateField(auto_created=True, null=True)
   time = models.TimeField(auto_created=True, null=True)
   checkIn = models.DateField()
-  discounted = models.BigIntegerField()
   checkOut=models.DateField()
   downpayment = models.DecimalField(decimal_places=3, max_digits=10)
   totalPayment = models.DecimalField(decimal_places=3, max_digits=10)
   balance = models.DecimalField(decimal_places=3, max_digits=10)
-  status = models.CharField(max_length=3)
-  customer= models.ForeignKey(Customer, on_delete=models.CASCADE)
-  discount = models.ForeignKey(Discount, on_delete=models.CASCADE)
+  status = models.CharField(choices=reservationChoices, max_length=10,default='Pending')
+  customer= models.ForeignKey(Customer, on_delete=models.CASCADE, default = 1)
+  discount = models.ForeignKey(Discount, on_delete=models.CASCADE, default=1)
   facility = models.ManyToManyField(Facility)
+  prices = models.ForeignKey(Prices, on_delete=models.CASCADE)
 
-  

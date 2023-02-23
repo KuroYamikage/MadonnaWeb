@@ -14,6 +14,8 @@ from blog.models import Blog
 
 #Reservation Files
 
+class GalleryView(TemplateView):
+    template_name = "gallery.php"
 
 class sampleView(ListView):
   model = Reservations
@@ -31,8 +33,9 @@ class indexView(TemplateView):
 
   def get_context_data(self, **kwargs):
     context = super(indexView, self).get_context_data(**kwargs)
-    context['blog'] = Blog.objects.all()
-    context['pool1'] = Facility.objects.values_list('id','facilityPic')
+    context['blog'] = Blog.objects.values()
+    context['pool1'] = Facility.objects.values_list('id','facilityPic','facilityName')
+
     """ context['venue_list'] = Venue.objects.all()
     context['festival_list'] = Festival.objects.all()
     # And so on for more models """

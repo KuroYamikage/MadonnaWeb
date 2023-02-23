@@ -1,6 +1,6 @@
 from django import forms
 from django.utils import timezone
-from Reservation.models import Reservations, Customer, Facility
+from Reservation.models import Reservations, Customer, Facility, Prices
 
 
 class CustomerForm(forms.ModelForm):
@@ -22,6 +22,7 @@ class CustomerForm(forms.ModelForm):
 
 
 class ReservationForm(forms.ModelForm):
+    model = Reservations
     class Meta:
         model = Reservations
         fields = (
@@ -30,26 +31,25 @@ class ReservationForm(forms.ModelForm):
             "downpayment",
             "totalPayment",
             "balance",
-            "status",
-            "discounted",
+            'prices',
+            'facility'
         )
         widgets = {
             'checkIn' : forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
             'checkOut' : forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
-            'totalPayment' : forms.TextInput(attrs={'class' : 'form-control'}),
-            'balance' : forms.TextInput(attrs={'class' : 'form-control'}),
-            'status' : forms.TextInput(attrs={'class' : 'form-control',  'value' : 'Yes'}),
-            'downpayment' : forms.TextInput(attrs={'class' : 'form-control'}),
-            'discounted' : forms.NumberInput(attrs={'class' : 'form-control', 'value' : '1'}),
-
+            'totalPayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True',}),
+            'balance' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),
+            'downpayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True',}),
+            'facility' : forms.CheckboxSelectMultiple(attrs={'class' : 'form-control'})
         }
+
         labels = {
             "checkIn": "Check In Date",
             "checkOut": "Check Out Date",
             "totalPayment": "Total",
             "downpayment": "Downpayment Required",
             "balance": "Payment Balance",
-            "status": "Status",
+            'facility': 'Additional Facilities'
         }
 
     def clean_checkIn(self):
@@ -70,7 +70,7 @@ class FacilityForm(forms.ModelForm):
             ('EH','Event Hall'),
      
   )
-        fields = ( 'facilityName', 'facilityDescription', 'facilityPic', 'facilityPrice','facilityCategory', 'facilitymax' )
+        fields = ( 'facilityName', 'facilityDescription', 'facilityPic', 'facilityPrice','facilityCategory', 'facilitymax')
         widgets = {
             'facilityName' : forms.TextInput(attrs={'class': 'form-control'}),
             'facilityDescription' : forms.Textarea(attrs={'class': 'form-control'}),
@@ -89,3 +89,34 @@ class FacilityForm(forms.ModelForm):
             'facilityCategory' : 'Category'
             
         }
+
+class PriceForm(forms.ModelForm):
+    model = Prices
+    class Meta:
+        model = Prices
+        dayTimeChoices = (
+            ('day','Day'),
+            ('night','Night'),
+            ('whole','Whole Day')
+        )
+
+        maxPaxChoices = (
+            (30, '30 pax'),
+            (50, '50 pax'),
+            (100, '100 pax'),
+            (150, '150 pax')
+        )
+        fields = ('price', 'maxPax', 'dayTime')
+        widgets = {
+
+            'price' : forms.NumberInput(attrs={'class' : 'form-control'}),
+            'maxPax': forms.RadioSelect(choices=maxPaxChoices, attrs={'class' : 'form-control'}),
+            'dayTime': forms.RadioSelect(choices=dayTimeChoices, attrs={'class' : 'form-control'})
+        }
+
+        label = {
+            'price': 'Price',
+            'dayTime' : 'Schedule',
+            'maxPax' : 'Maximum Guest'
+        }
+  

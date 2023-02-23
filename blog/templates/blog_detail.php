@@ -7,14 +7,16 @@
     {%endblock%}  
     {% block content %}
     <div class="container-fluid m-5">
+    <div class="row tm-row tm-row m-auto container reserve-form reserve_section"">
     <div class="row tm-row">
-</div>
-    <div class="row tm-row">
+        {%if blog.blog_pic%}
                 <div class="col-12">
+                    
                 <hr class="tm-hr-primary tm-mb-55">
                     <img src = "../../blog/{{blog.blog_pic}}" alt="Image"  width="954" height="535" class="tm-mb-40">
-                    This is a test
                 </div>
+        {%endif%}
+
             </div>
     <div class="row tm-row">
     <div class="col-lg-8 tm-post-col">
@@ -26,6 +28,7 @@
                                 {{blog.blog_content}}
                             </p>
                         </div>
+</div>
 </div>
 </div>
 </div>

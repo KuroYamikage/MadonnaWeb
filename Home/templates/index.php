@@ -153,8 +153,8 @@
                            <div class="row">
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="{%static 'images/amenities4.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image">
-                                    <h1 class="modern_text">Modern home designe</h1>
+                                    <img src="{{pool1.2.1}}" width = "2000" height = "922" alt="Avatar" class="image">
+                                    <h1 class="modern_text">{{pool1.2.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -162,8 +162,8 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="{%static 'images/amenities1.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image" >
-                                    <h1 class="modern_text">Modern home design</h1>
+                                    <img src="{{pool1.3.1}}" width = "2000" height = "922" alt="Avatar" class="image" >
+                                    <h1 class="modern_text">{{pool1.3.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -171,43 +171,8 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="{%static 'images/amenities2.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image">
-                                    <h1 class="modern_text">Modern home designe</h1>
-                                    <div class="middle">
-                                       <div class="text">VIEW MORE</div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="carousel-item">
-                     <div class="projects_section2">
-                        <div class="container_main1">
-                           <div class="row">
-                              <div class="col-sm-4">
-                                 <div class="container_main1">
-                                    <img src="{%static 'images/amenities3.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image" >
-                                    <h1 class="modern_text">Modern home designe</h1>
-                                    <div class="middle">
-                                       <div class="text">VIEW MORE</div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-sm-4">
-                                 <div class="container_main1">
-                                    <img src="{%static 'images/amenities5.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image" >
-                                    <h1 class="modern_text">Modern home designe</h1>
-                                    <div class="middle">
-                                       <div class="text">VIEW MORE</div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-sm-4">
-                                 <div class="container_main1">
-                                    <img src="{%static 'images/amenities6.jpg'%}" width = "2000 " height = "922" alt="Avatar" class="image" >
-                                    <h1 class="modern_text">Modern home designe</h1>
+                                    <img src="{{pool1.4.1}}" width = "2000" height = "922" alt="Avatar" class="image">
+                                    <h1 class="modern_text">{{pool1.4.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -223,8 +188,8 @@
                            <div class="row">
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="/Home/templates/images/img-4.png" alt="Avatar" class="image" style="width:100%">
-                                    <h1 class="modern_text">Modern home designe</h1>
+                                    <img src="{{pool1.5.1}}" width = "2000" height = "922" alt="Avatar" class="image" >
+                                    <h1 class="modern_text">{{pool1.5.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -232,8 +197,8 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="/Home/templates/images/img-5.png" alt="Avatar" class="image" style="width:100%">
-                                    <h1 class="modern_text">Modern home designe</h1>
+                                    <img src="{{pool1.6.1}}" width = "2000" height = "922" alt="Avatar" class="image" >
+                                    <h1 class="modern_text">{{pool1.6.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -241,8 +206,43 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="/Home/templates/images/img-6.png" alt="Avatar" class="image" style="width:100%">
-                                    <h1 class="modern_text">Modern home designe</h1>
+                                    <img src="{{pool1.7.1}}" width = "2000 " height = "922" alt="Avatar" class="image" >
+                                    <h1 class="modern_text">{{pool1.7.2}}</h1>
+                                    <div class="middle">
+                                       <div class="text">VIEW MORE</div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="projects_section2">
+                        <div class="container_main1">
+                           <div class="row">
+                              <div class="col-sm-4">
+                                 <div class="container_main1">
+                                    <img src="{{pool1.8.1}}" alt="Avatar" class="image" style="width:100%">
+                                    <h1 class="modern_text">{{pool1.8.2}}</h1>
+                                    <div class="middle">
+                                       <div class="text">VIEW MORE</div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="container_main1">
+                                    <img src="{{pool1.9.1}}" alt="Avatar" class="image" style="width:100%">
+                                    <h1 class="modern_text">{{pool1.9.2}}</h1>
+                                    <div class="middle">
+                                       <div class="text">VIEW MORE</div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="container_main1">
+                                    <img src="/{{pool1.10.1}}" alt="Avatar" class="image" style="width:100%">
+                                    <h1 class="modern_text">{{pool1.10.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>

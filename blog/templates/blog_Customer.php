@@ -8,7 +8,7 @@
     {% block content %}
 
     <div class="container-fluid">
-<div class="row tm-row">
+<div class="row tm-row m-auto container reserve-form reserve_section">
     {%for x in blog%}
 <article class="col-12 col-md-6 tm-post">
                     <hr class="tm-hr-primary">

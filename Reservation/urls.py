@@ -11,6 +11,9 @@ urlpatterns = [
     path('reservation/delete/<int:pk>', views.deleteReservation.as_view(), name='reservation.delete'),
     path('staff/reserve', views.newReserveStaff.as_view(), name='reserve.staff.new'),
     path('customer/new', views.newCustomer.as_view(), name='customer.new'),
+    path('price/new', views.addPrice.as_view(), name = 'price.new'),
+    path('price/edit/<int:pk>', views.editPrice.as_view(),name='price.edit'),
+    path('test/form', views.reserveNew, name="test1")
 
 
 ]
