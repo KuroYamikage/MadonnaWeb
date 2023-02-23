@@ -371,8 +371,8 @@ button {
     top: 57%;
 }
 #costum_slider .carousel-control-prev, #costum_slider .carousel-control-next {
-    width: 85px;
-    height: 85px;
+    width: 50px;
+    height: 50px;
     background: #000;
     opacity: 1;
     font-size: 30px;
