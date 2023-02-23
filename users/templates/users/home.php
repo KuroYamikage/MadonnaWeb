@@ -10,7 +10,7 @@
         {% for x in  reserve%}
             <tr>
                 <td> {{ x.firstname}} {{x.lastname}}</td>
-                <td> {{x.checkIn`}}</td>
+                {% comment %} <td> {{x.checkIn`}}</td> {% endcomment %}
                 <td><a href = "{%url 'reservation.edit' pk=x.reservationID%}"> Edit Reservation</a></td>
                 <td><a href = "{%url 'reservation.delete' pk=x.reservationID%}"> Delere Reservation</a></td>
             </tr>
