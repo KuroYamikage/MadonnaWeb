@@ -8,9 +8,12 @@ from blog.models import Blog
 from blog.forms import  BlogForms
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from Reservation.models import Reservations
+from django.contrib.auth.models import User 
+from Reservation.models import Reservations, Facility
+from Reservation.forms import FacilityForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -29,6 +32,22 @@ class reserveListView(LoginRequiredMixin,ListView):
   context_object_name = 'reserve'
   template_name = 'users/home.php'
   login_url = "login"
+
+class userList(LoginRequiredMixin, ListView):
+  model=User
+  context_object_name = 'user'
+  template_name = 'users/user_list.php'
+
+
+class registerUser(LoginRequiredMixin, CreateView):
+  form_class = UserRegistrationForm
+  template_name = 'users/register.php'
+  success_url = '/accounts/'
+
+class changepassword(UpdateView, LoginRequiredMixin):
+  form_class = PasswordChangeForm
+  template_name = 'users/changePass.php'
+  success_url = '/staff'
 
 
 # Blogs 
@@ -68,9 +87,32 @@ class detaliBlog(DetailView):
     context_object_name = 'blog'
     template_name = 'blog_view.php'
 
+#Home Page/Facilities
+class viewFacility(LoginRequiredMixin,ListView):
+  model = Facility
+  context_object_name = 'facility'
+  template_name = 'users/facility_staff.php'
+
+class newFacility(LoginRequiredMixin,CreateView):
+  model = Facility
+  form_class = FacilityForm
+  success_url='/staff/facility'
+  login_url = 'login'
+  template_name = 'users/new_facility.php'
+
+class editFacility(LoginRequiredMixin, UpdateView):
+  model = Facility
+  context_object_name = 'facility'
+  form_class = FacilityForm
+  success_url = '/staff/facility'
+  template_name = 'users/edit_facility.php'
 
 
-def register(request):
+
+
+  
+
+""" def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
@@ -82,4 +124,4 @@ def register(request):
         form = UserRegistrationForm()
 
     context = {'form': form}
-    return render(request, 'users/register.php', context)
+    return render(request, 'users/register.php', context) """
