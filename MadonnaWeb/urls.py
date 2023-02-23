@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 import debug_toolbar
+import Reports
 from users import views
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
@@ -22,10 +23,11 @@ from django.contrib.auth import views as auth_views
 from users import views as user_views
 
 urlpatterns = [
-    path('', include('Home.urls')),
-    path('admin/', admin.site.urls),
-    path('',include('Reservation.urls')),
-    path('__debug__/', include(debug_toolbar.urls)),
-    path('', include('users.urls')),
-    path('blog/',include('blog.urls'))
+    path("", include("Home.urls")),
+    path("admin/", admin.site.urls),
+    path("", include("Reservation.urls")),
+    path("__debug__/", include(debug_toolbar.urls)),
+    path("", include("users.urls")),
+    path("blog/", include("blog.urls")),
+    path("", include("Reports.urls")),
 ]
