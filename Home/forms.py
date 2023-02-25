@@ -1,7 +1,15 @@
 from django import forms
-from Home.models import Gallery
+from blog.models import Gallery
 
-""" class GalleryForm(model) """
+class GalleryForm(forms.ModelForm):
+   
+   class Meta:
+    model = Gallery
+    fields = [
+        'galleryTitle',
+        'galleryPic',
+        'galleryTag',
+    ]
 
 
 

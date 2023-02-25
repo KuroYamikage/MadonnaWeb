@@ -16,6 +16,8 @@ class Discount(models.Model):
   discountPercentage = models.DecimalField(decimal_places=2, max_digits=6)
   discountActive = models.BooleanField(default=False)
 
+
+
   def __str__(self):
     return self.discountCode
 

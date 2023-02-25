@@ -9,6 +9,7 @@ from django.contrib.auth import login, authenticate
 from Reservation.models import Reservations, Customer, Discount, Prices
 from Reservation.forms import ReservationForm, CustomerForm, PriceForm
 from django.contrib.messages.views import SuccessMessageMixin
+from Reservation.reservation_function.availability import check_availability
 # Create your views here.
 def test(request):
     return HttpResponse('this is a test')
@@ -55,18 +56,62 @@ def reserveNew(request):
   }
 
   if all([form.is_valid(), form2.is_valid()]):
+    data = form.cleaned_data
+    data2=Prices.objects.all().values()
+    """ check1 = ''
+    checkID=0
+    for price in data2:
+      check1 = 'For '+price['dayTime'] +' Reservation with Maximum of '+str(price['maxPax'])+ ' Pax'
+      if check1 == str(data['prices']):
+        checkID=price['id']
+    prices_list = Prices.objects.filter(id = checkID).values_list('id') """
+    """ print(prices_list)
+    print(checkID) """
     parent=form2.save(commit=False)
     child=form.save(commit=False)
-    child.customer = parent
-    print(form2.cleaned_data)
-    print(form.cleaned_data)
-    """ form2.save()
-    form.save() """
+    
+    """ print(form2.cleaned_data)
+    print(form.cleaned_data) """
+    """ available_price=[]
+    for price in prices_list:
+      print(check_availability(price, data['checkIn'],data['checkOut']))
+      if check_availability(price, data['checkIn'],data['checkOut']):
+        available_price.append(price)
+    if len(available_price)>0:
+      av_price = available_price[0] 
+      print('Available')
+    else:
+      print('no room available')
+      form.cleaned_data['prices'] = 0 
+    print(form.cleaned_data['prices']) 
+
+     """
+    exist = False
     for x in obj:
+      print(form2.cleaned_data['firstname'].lower())
+      print(x['firstname'].lower())
+      print(form2.cleaned_data['firstname'].lower() == x['firstname'].lower())
+      print(form2.cleaned_data['lastname'].lower())
+      print(x['lastname'].lower())
+      print(form2.cleaned_data['lastname'].lower() == x['lastname'].lower())
+      print(form2.cleaned_data['email'].lower()) 
+      print(x['email'].lower())
+      print(form2.cleaned_data['email'].lower() == x['email'].lower())
+      print('')
       if form2.cleaned_data['firstname'].lower() == x['firstname'].lower() and form2.cleaned_data['lastname'].lower() == x['lastname'].lower() and form2.cleaned_data['email'].lower() == x['email'].lower():
         print(x['firstname'])
         form.cleaned_data['customer_id'] = x['id']
-        print(form.cleaned_data)
+        print("exsist")
+        exist=True
+
+    print(exist)
+    if exist==False:
+      child.customer = parent
+      form2.save()
+      print('save')
+    print(form.cleaned_data)
+    
+    form.save()
   return render(request, 'reservation_form_Customer.php', context)
 
 

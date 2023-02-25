@@ -4,16 +4,20 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import UserRegistrationForm
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
-from blog.models import Blog
+from blog.models import Blog, Gallery
 from blog.forms import  BlogForms
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import User 
 from Reservation.models import Reservations, Facility
 from Reservation.forms import FacilityForm
+from Home.forms import GalleryForm
 from django.contrib.auth.models import User
+from .mixins import GroupRequiredMixin
+
 
 # Create your views here.
 
@@ -44,9 +48,9 @@ class registerUser(LoginRequiredMixin, CreateView):
   template_name = 'users/register.php'
   success_url = '/accounts/'
 
-class changepassword(UpdateView, LoginRequiredMixin):
+class changepassword(PasswordChangeView, LoginRequiredMixin):
   form_class = PasswordChangeForm
-  template_name = 'users/changePass.php'
+  template_name = 'users/user_changePass.php'
   success_url = '/staff'
 
 
@@ -108,7 +112,32 @@ class editFacility(LoginRequiredMixin, UpdateView):
   template_name = 'users/edit_facility.php'
 
 
+class addGallery (LoginRequiredMixin, CreateView):
+  model = Gallery
+  form_class = GalleryForm
+  template_name = 'users/gallery_add.php'
+  login_url = 'login'
+  success_url = '/staff/gallery'
 
+class staffGallery (LoginRequiredMixin, ListView):
+  model = Gallery
+  context_object_name = 'gallery'
+  template_name = 'users/gallery_staff.php'
+  login_url='login'
+
+class detailGallery (LoginRequiredMixin, DetailView):
+  model = Gallery
+  context_object_name= 'gallery'
+  template_name = 'users/gallery_detail.php'
+  login_url = 'login' 
+
+class editGallery(LoginRequiredMixin, UpdateView):
+  model = Gallery
+  form_class = GalleryForm
+  context_object_name = 'gallery'
+  template_name = 'users/gallery_edit.php'
+  login_url = 'login'
+  success_url = '../'
 
   
 
