@@ -122,24 +122,20 @@
          </div>
       </div>
       <!-- furnitures section end -->
-      <!-- about section start -->
-      <div class="about_section layout_padding">
+      <!-- who section start -->
+      <div class="who_section layout_padding">
          <div class="container">
-            <div class="row">
-               <div class="col-md-6">
-                  <h1 class="about_text">About Us</h1>
-                  <p class="lorem_text">Madonna's Resort and Event Center is a place where
-                     you can relax and enjoy the scenery while having. Located in Malvar Batangas, we provided a place
-                     where everyone can have fun.</p>
-                  <div class="read_bt1"><a href="{%url 'about'%}">Read More</a></div>
-               </div>
-               <div class="col-md-6">
-                  <div class="image_1"><img src="{%static 'images/about2.jpg'%}"></div>
-               </div>
-            </div>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+         </div>
+         <div class="get_bt_main">
+            <div class="get_bt"><a href="#">About Us</a></div>
          </div>
       </div>
-      <!-- about section end -->
+      <!-- who section end -->
       <!-- projects section start -->
       <div class="projects_section layout_padding">
          <div class="container">
@@ -263,18 +259,6 @@
          </div>
       </div>
       <!-- projects section end -->
-      <!-- who section start -->
-      <div class="who_section layout_padding">
-         <div class="container">
-            <h1 class="who_taital">who we are ?</h1>
-            <h4 class="designer_text">DESIGNERS & INNOVATORS</h4>
-            <p class="lorem_ipsum_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi utLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut</p>
-         </div>
-         <div class="get_bt_main">
-            <div class="get_bt"><a href="#">Get A Quote</a></div>
-         </div>
-      </div>
-      <!-- who section end -->
       <!-- client section start -->
       <div class="clients_section layout_padding">
          <div class="container">
