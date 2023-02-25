@@ -1,7 +1,8 @@
 from django import forms
 from django.utils import timezone
 from Reservation.models import Reservations, Customer, Facility, Prices
-
+from Home.models import Gallery
+from Reservation.reservation_function.availability import check_availability
 
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -32,7 +33,7 @@ class ReservationForm(forms.ModelForm):
             "totalPayment",
             "balance",
             'prices',
-            'facility'
+            'facility',
         )
         widgets = {
             'checkIn' : forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
@@ -52,11 +53,39 @@ class ReservationForm(forms.ModelForm):
             'facility': 'Additional Facilities'
         }
 
-    def clean_checkIn(self):
-        check_in = self.cleaned_data["checkIn"]
-        if check_in < timezone.now().date():
+    def clean(self):
+        cleaned_data=super().clean()
+        prices=cleaned_data.get("prices")
+        checkIn = cleaned_data.get("checkIn")
+        checkOut = cleaned_data.get("checkOut")
+        if checkIn < timezone.now().date():
             raise forms.ValidationError("Check in date cannot be in the past")
-        return check_in
+        if checkOut < timezone.now().date():
+            raise forms.ValidationError("Check Out date cannot be in the past")
+        if checkOut < checkIn:
+            raise forms.ValidationError("Check Out date cannot be earlier than check in")
+        check1 = ''
+        checkID=0
+        data2=Prices.objects.all().values()
+        for price in data2:
+            check1 = 'For '+price['dayTime'] +' Reservation with Maximum of '+str(price['maxPax'])+ ' Pax'
+            if check1 == str(prices):
+                checkID=price['id']
+        prices_list = Prices.objects.filter(id = checkID).values_list('id')
+        available_price=[]
+        for price in prices_list:
+            print(check_availability(price, checkIn,checkOut))
+            if check_availability(price, checkIn,checkOut):
+                available_price.append(price)
+        if len(available_price)>0:
+            av_price = available_price[0] 
+            print('Available')
+        else:
+            print('no room available')
+            raise forms.ValidationError("Date not available") 
+        print(prices) 
+        return cleaned_data
+    
 
 
 class FacilityForm(forms.ModelForm):
@@ -119,4 +148,5 @@ class PriceForm(forms.ModelForm):
             'dayTime' : 'Schedule',
             'maxPax' : 'Maximum Guest'
         }
-  
+
+

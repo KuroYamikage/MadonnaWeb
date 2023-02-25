@@ -31,19 +31,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    "debug_toolbar",
-    "Home.apps.HomeConfig",
-    "Reservation",
-    "users.apps.UsersConfig",
-    "blog",
-    "Reports",
-    'Reservation.reservation_function'
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'debug_toolbar',
+    'Home',
+    'Reservation',
+    'users.apps.UsersConfig',
+    'blog',
+    'Reservation.reservation_function',
+    
 ]
 
 MIDDLEWARE = [
@@ -143,7 +143,7 @@ LOGIN_REDIRECT_URL = "home"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = '/staff/'
+LOGIN_REDIRECT_URL = '/staff'
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 """ SESSION_COOKIE_AGE = 5*60 """
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True

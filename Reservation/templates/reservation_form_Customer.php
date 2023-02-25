@@ -134,10 +134,13 @@
                         {%endfor%}
                     }
                 })(t);
-                var dp = c*.10 
+                var dp = c*.10
+                var current=document.getElementById("id_totalPayment").value;
+                console.log(current);
+                var bal = c-dp
                 p.find('[name="totalPayment"]').val(c);
                 p.find('[name="downpayment"]').val(dp);
-                p.find('[name="balance"]').val(c);
+                p.find('[name="balance"]').val(bal);
             }
         });
     });
