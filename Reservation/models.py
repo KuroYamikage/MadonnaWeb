@@ -22,10 +22,6 @@ class Discount(models.Model):
         return self.discountCode
 
 
-
-  def __str__(self):
-    return self.discountCode
-
 class Facility(models.Model):
     FacilityCategoriesChoices = (
         ("pool", "Pool"),
