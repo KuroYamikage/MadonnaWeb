@@ -15,7 +15,7 @@
 
               <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
             
-
+                {{form.errors}}
                 <form method="POST">
                     {% csrf_token %}
                     {% for field in form %}
@@ -37,7 +37,7 @@
 
   {%if form.errors%}
 <script>
-    window.alert("{{form.errors.as_text}}");
+    alert("{{form.errors.as_text}}");
 </script>
 {%endif%}
 {%endblock%}

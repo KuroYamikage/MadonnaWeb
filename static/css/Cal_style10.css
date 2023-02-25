@@ -927,7 +927,8 @@ pre {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
-    max-width: 100%; }
+    max-width: 100%;
+   }
   .order-md-first {
     -webkit-box-ordinal-group: 0;
     -ms-flex-order: -1;
@@ -3796,7 +3797,8 @@ input[type="button"].btn-block {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  padding: 1.25rem; }
+  padding: 1.25rem;
+}
 
 .card-title {
   margin-bottom: 0.75rem; }
@@ -8192,7 +8194,11 @@ h1, h2, h3, h4, h5,
 /*  Events display */
 .events-container {
   overflow-y: scroll;
-  background-color: #ffb607;
+<<<<<<< HEAD
+  background-color: #1c7430;
+=======
+  background-color: #55d42a;
+>>>>>>> frontend-test
   height: 100%;
   width: 50%;
   float: right;
@@ -8393,7 +8399,7 @@ h1, h2, h3, h4, h5,
   color: #000; }
 
 .month:hover {
-  color: #cd4dcc; }
+  color: #1c7430; }
 
 /*  Dates table */
 .table-date {
@@ -8413,11 +8419,11 @@ h1, h2, h3, h4, h5,
   position: relative; }
 
 .table-date:not(.nil):hover {
-  border-color: #cd4dcc; }
+  border-color: #1c7430; }
 
 .event-date {
-  border-color: #7e0cf5;
-  background: #7e0cf5;
+  border-color: #bd2130;
+  background: #bd2130;
   color: #fff; }
   .event-date:after {
     position: absolute;
@@ -8430,11 +8436,11 @@ h1, h2, h3, h4, h5,
     background: #28a745; }
 
 .active-date {
-  background: #cd4dcc;
+  background: #1c7430;
   color: #fff; }
 
 .event-date.active-date {
-  background: #7e0cf5; }
+  background: #1c7430; }
 
 /* input dialog */
 .dialog {

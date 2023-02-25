@@ -38,7 +38,7 @@
                 {{form.contactNumber.label}}
                 {{form.contactNumber}}
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6"> 
                 {{form.email.label}}
                 {{form.email}}
             </div>
