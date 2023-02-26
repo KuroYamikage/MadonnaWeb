@@ -11,14 +11,14 @@
                <div class="carousel-inner">
                   <div class="carousel-item active">
                      <h1 class="furniture_text">Resort</h1>
-                     <p class="there_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some fo</p>
+                     <p class="there_text">Taking a break from work? Or wanted to have a place to chill? The resort has it all! Relax and engage swimming activities here at Madonna's!</p>
                      <div class="contact_bt_main">
                         <div class="contact_bt"><a href="contact.html">Contact Us</a></div>
                      </div>
                   </div>
                   <div class="carousel-item">
                      <h1 class="furniture_text">Event Place</h1>
-                     <p class="there_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some fo</p>
+                     <p class="there_text">where you can have an occassion with a venue has multiple facilities!</p>
                      <div class="contact_bt_main">
                         <div class="contact_bt"><a href="contact.html">Contact Us</a></div>
                      </div>
@@ -38,7 +38,6 @@
       <div class="services_section layout_padding">
          <div class="container">
             <h1 class="services_taital">our services</h1>
-            <p class="many_taital">There are many variations of passages of Lorem Ipsum </p>
             <div class="services_section2 layout_padding">
                <div class="row">
                   <div class="col-lg-3 col-sm-6">
@@ -90,32 +89,32 @@
       <div class="furnitures_section layout_padding">
          <div class="container">
             <h1 class="our_text">Our beautiful pools</h1>
-            <p class="ipsum_text">There are many variations of passages of Lorem Ipsum </p>
+            <p class="ipsum_text">The resort features a large pool both for public and private!</p>
             <div class="furnitures_section2 layout_padding">
                <div class="row">
                   <div class="col-md-6">
                      <div class="container_main">
-                        <img src="{%static 'images/pool2.jpg'%}" alt="Avatar" class="image">
+                        <img src="{{pool1.0.1}}" alt="Avatar" class="image">
                         <div class="overlay">
                            <a href="#" class="icon" title="User Profile">
                            <i class="fa fa-search"></i>
                            </a>
                         </div>
                      </div>
-                     <h3 class="temper_text">Tempor incididunt ut labore et dolore</h3>
-                     <p class="dololr_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </p>
+                     <h3 class="temper_text">Public Pool</h3>
+                     <p class="dololr_text">Our Public Pool is open for everyone for free with only the need of paying the entrance fee before venturing the pool.</p>
                   </div>
                   <div class="col-md-6">
                      <div class="container_main">
-                        <img src="{%static 'images/pool3.jpg'%}" alt="Avatar" class="image">
+                        <img src="{{pool1.1.1}}" alt="Avatar" class="image">
                         <div class="overlay">
                            <a href="#" class="icon" title="User Profile">
                            <i class="fa fa-search"></i>
                            </a>
                         </div>
                      </div>
-                     <h3 class="temper_text">Tempor incididunt ut labore et dolore</h3>
-                     <p class="dololr_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi </p>
+                     <h3 class="temper_text">Private Pool</h3>
+                     <p class="dololr_text">Private Pool is for people who wants to reserve a large pool for their group business outing, company outing, or outing for large family.</p>
                   </div>
                </div>
             </div>
@@ -132,6 +131,9 @@
             <p>&nbsp;</p>
          </div>
          <div class="get_bt_main">
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
             <div class="get_bt"><a href="#">About Us</a></div>
          </div>
       </div>
@@ -140,7 +142,6 @@
       <div class="projects_section layout_padding">
          <div class="container">
             <h1 class="our_text">Our Amenities and Facilities</h1>
-            <p class="ipsum_text">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
             <div id="main_slider" class="carousel slide" data-ride="carousel">
                <div class="carousel-inner">
                   <div class="carousel-item active">
@@ -149,8 +150,8 @@
                            <div class="row">
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="{%static 'images/amenities4.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image">
-                                    <h1 class="modern_text">Modern home designe</h1>
+                                    <img src="{{pool1.2.1}}" width = "2000" height = "922" alt="Avatar" class="image">
+                                    <h1 class="modern_text">{{pool1.2.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -158,8 +159,8 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="{%static 'images/amenities1.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image" >
-                                    <h1 class="modern_text">Modern home design</h1>
+                                    <img src="{{pool1.3.1}}" width = "2000" height = "922" alt="Avatar" class="image" >
+                                    <h1 class="modern_text">{{pool1.3.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -167,43 +168,8 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="{%static 'images/amenities2.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image">
-                                    <h1 class="modern_text">Modern home designe</h1>
-                                    <div class="middle">
-                                       <div class="text">VIEW MORE</div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="carousel-item">
-                     <div class="projects_section2">
-                        <div class="container_main1">
-                           <div class="row">
-                              <div class="col-sm-4">
-                                 <div class="container_main1">
-                                    <img src="{%static 'images/amenities3.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image" >
-                                    <h1 class="modern_text">Modern home designe</h1>
-                                    <div class="middle">
-                                       <div class="text">VIEW MORE</div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-sm-4">
-                                 <div class="container_main1">
-                                    <img src="{%static 'images/amenities5.jpg'%}" width = "2000" height = "922" alt="Avatar" class="image" >
-                                    <h1 class="modern_text">Modern home designe</h1>
-                                    <div class="middle">
-                                       <div class="text">VIEW MORE</div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="col-sm-4">
-                                 <div class="container_main1">
-                                    <img src="{%static 'images/amenities6.jpg'%}" width = "2000 " height = "922" alt="Avatar" class="image" >
-                                    <h1 class="modern_text">Modern home designe</h1>
+                                    <img src="{{pool1.4.1}}" width = "2000" height = "922" alt="Avatar" class="image">
+                                    <h1 class="modern_text">{{pool1.4.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -219,8 +185,8 @@
                            <div class="row">
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="/Home/templates/images/img-4.png" alt="Avatar" class="image" style="width:100%">
-                                    <h1 class="modern_text">Modern home designe</h1>
+                                    <img src="{{pool1.5.1}}" width = "2000" height = "922" alt="Avatar" class="image" >
+                                    <h1 class="modern_text">{{pool1.5.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -228,8 +194,8 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="/Home/templates/images/img-5.png" alt="Avatar" class="image" style="width:100%">
-                                    <h1 class="modern_text">Modern home designe</h1>
+                                    <img src="{{pool1.6.1}}" width = "2000" height = "922" alt="Avatar" class="image" >
+                                    <h1 class="modern_text">{{pool1.6.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -237,8 +203,43 @@
                               </div>
                               <div class="col-sm-4">
                                  <div class="container_main1">
-                                    <img src="/Home/templates/images/img-6.png" alt="Avatar" class="image" style="width:100%">
-                                    <h1 class="modern_text">Modern home designe</h1>
+                                    <img src="{{pool1.7.1}}" width = "2000 " height = "922" alt="Avatar" class="image" >
+                                    <h1 class="modern_text">{{pool1.7.2}}</h1>
+                                    <div class="middle">
+                                       <div class="text">VIEW MORE</div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="projects_section2">
+                        <div class="container_main1">
+                           <div class="row">
+                              <div class="col-sm-4">
+                                 <div class="container_main1">
+                                    <img src="{{pool1.8.1}}" alt="Avatar" class="image" style="width:100%">
+                                    <h1 class="modern_text">{{pool1.8.2}}</h1>
+                                    <div class="middle">
+                                       <div class="text">VIEW MORE</div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="container_main1">
+                                    <img src="{{pool1.9.1}}" alt="Avatar" class="image" style="width:100%">
+                                    <h1 class="modern_text">{{pool1.9.2}}</h1>
+                                    <div class="middle">
+                                       <div class="text">VIEW MORE</div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="col-sm-4">
+                                 <div class="container_main1">
+                                    <img src="/{{pool1.10.1}}" alt="Avatar" class="image" style="width:100%">
+                                    <h1 class="modern_text">{{pool1.10.2}}</h1>
                                     <div class="middle">
                                        <div class="text">VIEW MORE</div>
                                     </div>
@@ -260,7 +261,7 @@
       </div>
       <!-- projects section end -->
       <!-- client section start -->
-      <div class="clients_section layout_padding">
+      <!-- <div class="clients_section layout_padding">
          <div class="container">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                <ol class="carousel-indicators">
@@ -394,7 +395,7 @@
             </div>
          </div>
       </div>
-      <!-- client section end -->
+      <!-- client section end --> -->
 
 
       {% endblock %}

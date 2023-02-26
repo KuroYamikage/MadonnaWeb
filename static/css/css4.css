@@ -204,7 +204,7 @@ blockquote {
 
 button {
   border: 0;
-  margin: 0;
+  margin: 60px;
   padding: 0;
   cursor: pointer;
 }
@@ -215,8 +215,7 @@ button {
 }
 
 .layout_padding {
-  padding-top: 90px;
-  padding-bottom: 0px;
+  padding-top: 80px;
 }
 
 .padding_0 {
@@ -304,6 +303,8 @@ button {
   background-size: 100%;
   background-repeat: no-repeat;
   box-shadow: inset 0 0 100px #000;
+  border: green;
+  border-style: solid;
 }
 .icon_1 {
   width: 100%;
@@ -322,13 +323,13 @@ button {
 }
 .there_text {
   /*Furniture Description*/
-  width: 50%;
+  width: 75%;
   margin: 0 auto;
-  font-size: 18px;
-  color: #fff;
+  font-size: 26px;
+  color: #ffd04f;
   text-align: center;
-  text-shadow: 0 1px #55d42a, 2px 0 #242424, 0 -1px #242424;
-  font-weight: 500;
+  text-shadow: 0 3px #242424, 3px 0 #242424, 0 -1px #242424;
+  font-weight: 900;
 }
 .contact_bt_main {
   width: 17%;
@@ -468,16 +469,19 @@ button {
 .about_section {
   width: 100%;
   float: left;
-  /*background-color: #55d42a;*/
+  /*
+  background-color: #fff;
   height: auto;
   padding-bottom: 90px;
-  opacity: 1;
+  opacity: 1;*/
+
   background-image: url(../images/aboutusbg.jpg);
-  height: 100%;
+  height: auto;
   background-position: center;
   background-position-y: 25%;
   background-repeat: no-repeat;
   background-size: cover;
+
   
 
 }
@@ -493,24 +497,52 @@ button {
 }
 
 .about_text {
-  width: 100%;
+  width: 200%;
   float: left;
   font-size: 40px;
-  color: #242424;
+  text-align: center;
+  color: #fff;
   text-transform: uppercase;
   font-weight: 500;
+  background-color: #242424;
+  border-style: solid;
+  border-color: #ffd04f;
+  border-width: 10px;
 }
 .lorem_text {
   /*About Us Desc*/
-  width: 150%;
+  width: 220%;
   float: left;
   font-size: 20px;
-  color: #ffffff;
-  text-align: justify;
+  color: #fff;
+  text-align: center;
   margin-left: -50px;
   padding-top: 40px;
-  position: absolute;
+  padding-bottom: 40px;
+  position: auto;
+  background-color: #242424;
+  font-weight: 500;
+  border-style: solid;
+  border-color: #ffd04f;
+  border-width: 10px;
 }
+
+.lorem_text a:link{
+  color: #fff;
+}
+
+.lorem_text a:visited{
+  color: #fff;
+}
+
+.lorem_text a:hover{
+  color: #55d42a;
+}
+
+.lorem_text a:active{
+  color: #55d42a;
+}
+
 .read_bt1 {
   width: 30%;
   float: left;
@@ -580,12 +612,12 @@ a:hover {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60%;
-  width: 42%;
+  height: 40%;
+  width: 35%;
   opacity: 0;
   transition: 0.3s ease;
-  background-color: #fabc26;
-  margin: 0 auto;
+  background-color: #ffd04f;
+  margin: auto;
   border-radius: 100px;
   top: 55px;
 }
@@ -596,7 +628,7 @@ a:hover {
 
 .icon {
   color: white;
-  font-size: 100px;
+  font-size: 75px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -634,6 +666,8 @@ a:hover {
   padding-bottom: 55px;
   background-size: 100%;
   box-shadow: inset 0 0 100px #000;
+  border: green;
+  border-style: solid;
 }
 .who_taital {
   width: 100%;
@@ -757,17 +791,19 @@ a:hover {
   float: left;
   font-size: 20px;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #ffd04f;
   position: relative;
   top: -50px;
   text-align: center;
   z-index: 22;
+  text-shadow: 0 2px #242424, 3px 0 #242424, 0 -1px #242424;
+  font-weight: 750;
 }
 #main_slider a.carousel-control-prev {
   position: absolute;
   left: -94px;
   top: 57%;
-  background-color: #000;
+  background-color: #242424;
   color: #ffffff;
 }
 
@@ -982,7 +1018,7 @@ textarea#comment::placeholder {
 }
 
 .footer_section {
-  width: 100%;
+  width: 145%;
   float: left;
   background-color: #242424;
   height: auto;
@@ -993,20 +1029,22 @@ textarea#comment::placeholder {
   float: left;
   padding-bottom: 40px;
 }
-.customer_text {
+.customer_text { /*footer title*/
   width: 100%;
   float: left;
   font-size: 24px;
   color: #ffffff;
   text-transform: uppercase;
+  text-align: center;
 }
 
-.footer_lorem_text {
-  width: 80%;
+.footer_lorem_text { /* footer text*/
+  width: 100%;
   float: left;
   font-size: 16px;
   color: #fefefe;
   margin-left: 0px;
+  text-align: center;
 }
 .footer_lorem_text1 {
   width: 100%;
@@ -1057,6 +1095,9 @@ textarea#comment::placeholder {
   height: auto;
   padding-bottom: 50px;
   background-size: 100%;
+  background-color: antiquewhite;
+  border-color: burlywood;
+  border-style: solid;
 }
 
 .center-content {

@@ -4257,8 +4257,8 @@ input[type="button"].btn-block {
 
 .alert-success {
   color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb; }
+  background-color: burlywood;
+  border-color: antiquewhite; }
   .alert-success hr {
     border-top-color: #b1dfbb; }
   .alert-success .alert-link {
@@ -8395,7 +8395,7 @@ h1, h2, h3, h4, h5,
   color: #000; }
 
 .month:hover {
-  color: #cd4dcc; }
+  color: #1c7430; }
 
 /*  Dates table */
 .table-date {
@@ -8415,11 +8415,11 @@ h1, h2, h3, h4, h5,
   position: relative; }
 
 .table-date:not(.nil):hover {
-  border-color: #cd4dcc; }
+  border-color: #1c7430; }
 
 .event-date {
-  border-color: #7e0cf5;
-  background: #7e0cf5;
+  border-color: #bd2130;
+  background: #bd2130;
   color: #fff; }
   .event-date:after {
     position: absolute;
@@ -8432,11 +8432,11 @@ h1, h2, h3, h4, h5,
     background: #28a745; }
 
 .active-date {
-  background: #cd4dcc;
+  background: #1c7430;
   color: #fff; }
 
 .event-date.active-date {
-  background: #7e0cf5; }
+  background: #1c7430; }
 
 /* input dialog */
 .dialog {

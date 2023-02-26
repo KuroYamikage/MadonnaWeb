@@ -1,7 +1,8 @@
 {%extends 'sidebar.php'%}
 {%load static%}
 {%block title%} Madonna's Resort Staff Page{%endblock%}
-{%block content%}
+{%block head%}
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
 <div class="container center-content " style="background-color:#ffb607;">
     
