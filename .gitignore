@@ -11,3 +11,4 @@ Home\__pycache__
 **/migrations/__pycache__/
 /MadonnaWeb/__pycache__/
 /users/migrations/__pycache__
+users/migrations/__pycache__/
