@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from datetime import datetime
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -6,8 +6,8 @@ from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 from django.contrib.auth import login, authenticate
-from Reservation.models import Reservations, Customer, Discount, Prices
-from Reservation.forms import ReservationForm, CustomerForm, PriceForm
+from Reservation.models import Reservations, Customer, Discount, Prices, Facility
+from Reservation.forms import ReservationForm, CustomerForm, PriceForm, DiscountForm
 from django.contrib.messages.views import SuccessMessageMixin
 from Reservation.reservation_function.availability import check_availability
 # Create your views here.
@@ -52,7 +52,9 @@ def reserveNew(request):
     "form": form,
     "form_2":form2,
     "object":obj,   
-    "prices":Prices.objects.all().values()
+    "prices":Prices.objects.all().values(),
+    "discount":Discount.objects.all().values().filter(discountActive=True),
+    "facility":Facility.objects.all().values().exclude(facilityCategory='Pool'),
   }
 
   if all([form.is_valid(), form2.is_valid()]):
@@ -112,8 +114,12 @@ def reserveNew(request):
     print(form.cleaned_data)
     
     form.save()
+    return redirect('index')
   return render(request, 'reservation_form_Customer.php', context)
 
+class viewReservation(LoginRequiredMixin, DetailView):
+  model=Reservations
+  template_name='reference.php'
 
 
 class newCustomer(CreateView):
@@ -167,3 +173,22 @@ class editPrice(LoginRequiredMixin, UpdateView):
   model = Discount
   template_name = 'discount_view.php'
    """
+
+
+
+class viewDiscount(LoginRequiredMixin, ListView):
+  model=Discount
+  context_object_name = 'discount'
+  template_name='discount_view.php'
+
+class newDiscount(LoginRequiredMixin, CreateView):
+  model=Discount
+  form_class=DiscountForm
+  template_name='discount_new.php'
+  success_url='/discount'
+
+class editDiscount(LoginRequiredMixin, UpdateView):
+  model=Discount
+  form_class=DiscountForm
+  template_name='discount_new.php'
+  success_url='/discount'

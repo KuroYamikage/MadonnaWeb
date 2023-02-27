@@ -1,5 +1,6 @@
 {%extends "master2.php"%}
 
+{% block title %}Register{% endblock title %}
 
 {% block content%}
 <!--<h3>Register here</h3>

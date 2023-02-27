@@ -1,6 +1,6 @@
 from django import forms
 from django.utils import timezone
-from Reservation.models import Reservations, Customer, Facility, Prices
+from Reservation.models import Reservations, Customer, Facility, Prices, Discount
 from Home.models import Gallery
 from Reservation.reservation_function.availability import check_availability
 
@@ -24,8 +24,10 @@ class CustomerForm(forms.ModelForm):
 
 class ReservationForm(forms.ModelForm):
     model = Reservations
+    discountAmount=forms.CharField(widget=forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}))
     class Meta:
         model = Reservations
+        discountAmount=forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'})
         fields = (
             "checkIn",
             "checkOut",
@@ -34,14 +36,22 @@ class ReservationForm(forms.ModelForm):
             "balance",
             'prices',
             'facility',
+            'discount',
+            'timeIn',
+            'timeOut',
+            'referenceNum'
         )
         widgets = {
             'checkIn' : forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
-            'checkOut' : forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
-            'totalPayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True',}),
+            'checkOut' : forms.DateInput(attrs={'class': 'form-control', 'type':'date', 'readonly':'True'}),
+            'totalPayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),
             'balance' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),
             'downpayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True',}),
-            'facility' : forms.CheckboxSelectMultiple(attrs={'class' : 'form-control'})
+            'facility' : forms.CheckboxSelectMultiple( attrs={'class' : 'form-control', "onclick":"facilitiesFee("")","id":"id_facility"}),
+            'discount' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'timeIn' : forms.TimeInput(attrs={'class': 'form-control', 'type':'time', 'readonly':'True'}),
+            'timeOut' : forms.TimeInput(attrs={'class': 'form-control', 'type':'time', 'readonly':'True'}),
+            'referenceNum' : forms.TextInput(attrs={'class' : 'form-control','type':'hidden'}, ),
         }
 
         labels = {
@@ -147,6 +157,29 @@ class PriceForm(forms.ModelForm):
             'price': 'Price',
             'dayTime' : 'Schedule',
             'maxPax' : 'Maximum Guest'
+        }
+
+
+class DiscountForm(forms.ModelForm):
+    model = Discount
+    class Meta:
+        activeChoice = (
+            (True, 'True'),
+            (False, 'False'),
+        )
+        model = Discount
+        fields = ('discountCode', 'discountPrice', 'discountActive')
+        widgets = {
+
+            'discountCode' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'discountPrice': forms.NumberInput(attrs={'class' : 'form-control'}),
+            'discountActive': forms.RadioSelect(choices=activeChoice,attrs={'class' : 'form-control'})
+        }
+
+        label = {
+            'discountCode': 'Code',
+            'discountPrice' : 'Discount Off',
+            'discountActive' : 'Is discount Active?'
         }
 
 

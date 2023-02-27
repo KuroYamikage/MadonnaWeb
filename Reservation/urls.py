@@ -13,7 +13,10 @@ urlpatterns = [
     path('customer/new', views.newCustomer.as_view(), name='customer.new'),
     path('price/new', views.addPrice.as_view(), name = 'price.new'),
     path('price/edit/<int:pk>', views.editPrice.as_view(),name='price.edit'),
-    path('test/form', views.reserveNew, name="test1")
+    path('test/form', views.reserveNew, name="test1"),
+    path('discount', views.viewDiscount.as_view(), name='discount.view'),
+    path('discount/new', views.newDiscount.as_view(), name='discount.new'),
+    path('discount/edit/<int:pk>', views.editDiscount.as_view(), name='discount.edit'),
 
 
 ]
