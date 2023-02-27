@@ -28,3 +28,8 @@ class UserRegistrationForm(UserCreationForm):
             'last_name' : "Last Name",
             'group' : "Assign as",
         }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> Reservation

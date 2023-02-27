@@ -185,8 +185,13 @@ img {
 }
 
 .form-control:focus {
+<<<<<<< HEAD
   border-color: #ffffff !important;
   box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+=======
+     border-color: #212121 !important;
+     box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .25);
+>>>>>>> Reservation
 }
 
 .navbar-form input {
@@ -271,8 +276,13 @@ button {
 .search_icon li a {
   color: #000;
 }
+<<<<<<< HEAD
 .search_icon li a:hover {
   color: #55d42a;
+=======
+.search_icon li a:hover{
+    color: var(--green);
+>>>>>>> Reservation
 }
 .navbar-expand-lg .navbar-nav .nav-link {
   padding-right: 20px;
@@ -388,12 +398,18 @@ button {
   color: #fff;
   border-radius: 100px;
 }
+<<<<<<< HEAD
 #costum_slider .carousel-control-prev:hover,
 #costum_slider .carousel-control-next:hover,
 #costum_slider .carousel-control-prev:focus,
 #costum_slider .carousel-control-next:focus {
   background: #55d42a;
   color: #fff;
+=======
+#costum_slider .carousel-control-prev:hover, #costum_slider .carousel-control-next:hover, #costum_slider .carousel-control-prev:focus, #costum_slider .carousel-control-next:focus {
+    background: var(--green);
+    color: #fff;
+>>>>>>> Reservation
 }
 
 .services_section {
@@ -774,6 +790,7 @@ a:hover {
   float: left;
 }
 .container_main1::after {
+<<<<<<< HEAD
   content: "";
   position: absolute;
   top: 0;
@@ -782,6 +799,16 @@ a:hover {
   background-color: rgb(255, 182, 7, 0.6);
   z-index: 11;
   display: none;
+=======
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 92%;
+    height: 90%;
+    background-color: rgba(36, 163, 115, 0.6);
+    z-index: 11;
+    display: none;
+>>>>>>> Reservation
 }
 .container_main1:hover::after {
   display: block;
@@ -977,6 +1004,7 @@ textarea#comment::placeholder {
 }
 
 .form-control {
+<<<<<<< HEAD
   display: block;
   /* width: 100%; */
   padding: 0px 15px 10px 0px;
@@ -989,6 +1017,20 @@ textarea#comment::placeholder {
   border-radius: 0px;
   /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
   border: 0px;
+=======
+    display: block;
+    /* width: 100%; */
+    padding: 0px 15px 10px 0px;
+    font-size: 18px;
+    /* line-height: 1.5; */
+    color: #212121;
+    background-color: transparent;
+    /* background-clip: padding-box; */
+    border-bottom: 1px solid rgb(253, 238, 238) !important;
+    border-radius: 0px;
+    /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+    border: 0px;
+>>>>>>> Reservation
 }
 .input-group-text {
   padding: 0px;
@@ -1087,8 +1129,13 @@ textarea#comment::placeholder {
 .copyright_text a {
   color: #000;
 }
+<<<<<<< HEAD
 .copyright_text a:hover {
   color: #55d42a;
+=======
+.copyright_text a:hover{
+    color: var(--green);
+>>>>>>> Reservation
 }
 
 .reserve_section {
@@ -1122,6 +1169,7 @@ textarea#comment::placeholder {
   padding-top: 20px;
 }
 
+<<<<<<< HEAD
 .sidenav a {
   padding: 6px 6px 6px 32px;
   text-decoration: none;
@@ -1141,3 +1189,62 @@ textarea#comment::placeholder {
 .bg-cards {
   background-color: #55d42a;
 }
+=======
+  .bg-cards{
+    background-color: var(--green);
+  }
+
+  
+  .gallery-title
+  {
+      font-size: 36px;
+      color: #42B32F;
+      text-align: center;
+      font-weight: 500;
+      margin-bottom: 70px;
+  }
+  .gallery-title:after {
+      content: "";
+      position: absolute;
+      width: 7.5%;
+      left: 46.5%;
+      height: 45px;
+      border-bottom: 1px solid #5e5e5e;
+  }
+  .filter-button
+  {
+      font-size: 18px;
+      border: 1px solid #42B32F;
+      border-radius: 5px;
+      text-align: center;
+      color: #42B32F;
+      margin-bottom: 30px;
+  
+  }
+  .filter-button:hover
+  {
+      font-size: 18px;
+      border: 1px solid #42B32F;
+      border-radius: 5px;
+      text-align: center;
+      color: #ffffff;
+      background-color: #42B32F;
+  
+  }
+  .btn-default:active .filter-button:active
+  {
+      background-color: #42B32F;
+      color: white;
+  }
+  
+  .port-image
+  {
+      width: 100%;
+  }
+  
+  .gallery_product
+  {
+      margin-bottom: 30px;
+  }
+  
+>>>>>>> Reservation

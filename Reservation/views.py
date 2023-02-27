@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from django.shortcuts import render
+=======
+from django.shortcuts import render, redirect
+>>>>>>> Reservation
 from datetime import datetime
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
@@ -6,9 +10,15 @@ from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 from django.contrib.auth import login, authenticate
+<<<<<<< HEAD
 from Reservation.models import Reservations, Customer, Discount, Prices
 from Reservation.forms import ReservationForm, CustomerForm, PriceForm
+=======
+from Reservation.models import Reservations, Customer, Discount, Prices, Facility
+from Reservation.forms import ReservationForm, CustomerForm, PriceForm, DiscountForm
+>>>>>>> Reservation
 from django.contrib.messages.views import SuccessMessageMixin
+from Reservation.reservation_function.availability import check_availability
 # Create your views here.
 def test(request):
     return HttpResponse('this is a test')
@@ -51,6 +61,7 @@ def reserveNew(request):
     "form": form,
     "form_2":form2,
     "object":obj,   
+<<<<<<< HEAD
     "prices":Prices.objects.all().values()
   }
 
@@ -69,6 +80,76 @@ def reserveNew(request):
         print(form.cleaned_data)
   return render(request, 'reservation_form_Customer.php', context)
 
+=======
+    "prices":Prices.objects.all().values(),
+    "discount":Discount.objects.all().values().filter(discountActive=True),
+    "facility":Facility.objects.all().values().exclude(facilityCategory='Pool'),
+  }
+
+  if all([form.is_valid(), form2.is_valid()]):
+    data = form.cleaned_data
+    data2=Prices.objects.all().values()
+    """ check1 = ''
+    checkID=0
+    for price in data2:
+      check1 = 'For '+price['dayTime'] +' Reservation with Maximum of '+str(price['maxPax'])+ ' Pax'
+      if check1 == str(data['prices']):
+        checkID=price['id']
+    prices_list = Prices.objects.filter(id = checkID).values_list('id') """
+    """ print(prices_list)
+    print(checkID) """
+    parent=form2.save(commit=False)
+    child=form.save(commit=False)
+    
+    """ print(form2.cleaned_data)
+    print(form.cleaned_data) """
+    """ available_price=[]
+    for price in prices_list:
+      print(check_availability(price, data['checkIn'],data['checkOut']))
+      if check_availability(price, data['checkIn'],data['checkOut']):
+        available_price.append(price)
+    if len(available_price)>0:
+      av_price = available_price[0] 
+      print('Available')
+    else:
+      print('no room available')
+      form.cleaned_data['prices'] = 0 
+    print(form.cleaned_data['prices']) 
+
+     """
+    exist = False
+    for x in obj:
+      print(form2.cleaned_data['firstname'].lower())
+      print(x['firstname'].lower())
+      print(form2.cleaned_data['firstname'].lower() == x['firstname'].lower())
+      print(form2.cleaned_data['lastname'].lower())
+      print(x['lastname'].lower())
+      print(form2.cleaned_data['lastname'].lower() == x['lastname'].lower())
+      print(form2.cleaned_data['email'].lower()) 
+      print(x['email'].lower())
+      print(form2.cleaned_data['email'].lower() == x['email'].lower())
+      print('')
+      if form2.cleaned_data['firstname'].lower() == x['firstname'].lower() and form2.cleaned_data['lastname'].lower() == x['lastname'].lower() and form2.cleaned_data['email'].lower() == x['email'].lower():
+        print(x['firstname'])
+        form.cleaned_data['customer_id'] = x['id']
+        print("exsist")
+        exist=True
+
+    print(exist)
+    if exist==False:
+      child.customer = parent
+      form2.save()
+      print('save')
+    print(form.cleaned_data)
+    
+    form.save()
+    return redirect('index')
+  return render(request, 'reservation_form_Customer.php', context)
+
+class viewReservation(LoginRequiredMixin, DetailView):
+  model=Reservations
+  template_name='reference.php'
+>>>>>>> Reservation
 
 
 class newCustomer(CreateView):
@@ -121,4 +202,27 @@ class editPrice(LoginRequiredMixin, UpdateView):
 """ class DiscountView(ListView):
   model = Discount
   template_name = 'discount_view.php'
+<<<<<<< HEAD
    """
+=======
+   """
+
+
+
+class viewDiscount(LoginRequiredMixin, ListView):
+  model=Discount
+  context_object_name = 'discount'
+  template_name='discount_view.php'
+
+class newDiscount(LoginRequiredMixin, CreateView):
+  model=Discount
+  form_class=DiscountForm
+  template_name='discount_new.php'
+  success_url='/discount'
+
+class editDiscount(LoginRequiredMixin, UpdateView):
+  model=Discount
+  form_class=DiscountForm
+  template_name='discount_new.php'
+  success_url='/discount'
+>>>>>>> Reservation
