@@ -1,0 +1,11 @@
+requirements.txt
+.direnv/
+*/__pycache__
+*.pyc
+/users/migrations/__pycache__/
+Reservation\__pycache__
+MadonnaWeb\__pycache__
+MadonnaWeb/__pycache__/
+Reservation\__pycache__
+Home\__pycache__
+users/migrations/__pycache__
