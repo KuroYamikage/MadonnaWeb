@@ -196,7 +196,7 @@ var event_data = {
 	"year": 2023,
 	"month": 2,
 	"day": 9,
-	"cancelled": false
+	"cancelled": True
 },
 
 

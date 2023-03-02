@@ -98,6 +98,96 @@ class ReservationForm(forms.ModelForm):
     
 
 
+class ReservationEditForm(forms.ModelForm):
+    model = Reservations
+    reservationChoices=(
+    ('Approved','Approved'),
+    ('Pending','Pending'),
+    ('Cancelled','Cancelled'),
+  )
+    discountAmount=forms.CharField(widget=forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}))
+    class Meta:
+        reservationChoices=(
+    ('Approved','Approved'),
+    ('Pending','Pending'),
+    ('Cancelled','Cancelled'),
+  )
+        model = Reservations
+        discountAmount=forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'})
+        fields = (
+            "checkIn",
+            "checkOut",
+            "downpayment",
+            "totalPayment",
+            "balance",
+            'prices',
+            'facility',
+            'discount',
+            'timeIn',
+            'timeOut',
+            'referenceNum',
+            'status'
+        )
+        widgets = {
+            'checkIn' : forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
+            'checkOut' : forms.DateInput(attrs={'class': 'form-control', 'type':'date', 'readonly':'True'}),
+            'totalPayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),
+            'balance' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),
+            'downpayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True',}),
+            'facility' : forms.CheckboxSelectMultiple( attrs={'class' : 'form-control', "onclick":"facilitiesFee("")","id":"id_facility"}),
+            'discount' : forms.TextInput(attrs={'class' : 'form-control'}),
+            'timeIn' : forms.TimeInput(attrs={'class': 'form-control', 'type':'time', 'readonly':'True'}),
+            'timeOut' : forms.TimeInput(attrs={'class': 'form-control', 'type':'time', 'readonly':'True'}),
+            'referenceNum' : forms.TextInput(attrs={'class' : 'form-control','type':'hidden'}, ),
+            'status': forms.RadioSelect(choices=reservationChoices,attrs={'class' : 'form-control'})
+        }
+
+        labels = {
+            "checkIn": "Check In Date",
+            "checkOut": "Check Out Date",
+            "totalPayment": "Total",
+            "downpayment": "Downpayment Required",
+            "balance": "Payment Balance",
+            'facility': 'Additional Facilities'
+        }
+
+    def clean(self):
+        cleaned_data=super().clean()
+        prices=cleaned_data.get("prices")
+        checkIn = cleaned_data.get("checkIn")
+        checkOut = cleaned_data.get("checkOut")
+        if checkIn < timezone.now().date():
+            raise forms.ValidationError("Check in date cannot be in the past")
+        if checkOut < timezone.now().date():
+            raise forms.ValidationError("Check Out date cannot be in the past")
+        if checkOut < checkIn:
+            raise forms.ValidationError("Check Out date cannot be earlier than check in")
+        check1 = ''
+        checkID=0
+        data2=Prices.objects.all().values()
+        for price in data2:
+            check1 = 'For '+price['dayTime'] +' Reservation with Maximum of '+str(price['maxPax'])+ ' Pax'
+            if check1 == str(prices):
+                checkID=price['id']
+        prices_list = Prices.objects.filter(id = checkID).values_list('id')
+        available_price=[]
+        for price in prices_list:
+            print(check_availability(price, checkIn,checkOut))
+            if check_availability(price, checkIn,checkOut):
+                available_price.append(price)
+        if len(available_price)>0:
+            av_price = available_price[0] 
+            print('Available')
+        else:
+            print('no room available')
+            raise forms.ValidationError("Date not available") 
+        print(prices) 
+        return cleaned_data
+    
+
+
+
+
 class FacilityForm(forms.ModelForm):
     model = Facility
     class Meta:
