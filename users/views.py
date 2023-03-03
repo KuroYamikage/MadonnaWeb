@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, UserUpdateForm
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 from blog.models import Blog, Gallery
 from blog.forms import  BlogForms
@@ -51,6 +51,11 @@ class registerUser(LoginRequiredMixin, CreateView):
 class changepassword(PasswordChangeView, LoginRequiredMixin):
   form_class = PasswordChangeForm
   template_name = 'users/user_changePass.php'
+  success_url = '/staff'
+class editUser(LoginRequiredMixin,UpdateView):
+  form_class=UserUpdateForm
+  model = User
+  template_name='users/edit_user.php'
   success_url = '/staff'
 
 

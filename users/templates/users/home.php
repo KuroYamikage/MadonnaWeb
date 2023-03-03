@@ -156,10 +156,10 @@ if(events.length===0) {
 else {
 	// Go through and add each event as a card to the events container
 	for(var i=0; i<events.length; i++) {
-		var event_card = $("<div class='event-card'></div>");
+		var event_card = $("<div class='event-card'></div>")
 		var event_name = $("<div class='event-name'>"+events[i]["occasion"]+":</div>");
-		var event_count = $("<div class='event-count'><p>Check out: "+events[i]["invited_count"]+"</p></div>");
-		if(events[i]["cancelled"]===true) {
+		var event_count = $("<div class='event-count'><p>Check in Time: "+events[i]["checkinTime"]+"</p><p>Check out: "+events[i]["invited_count"]+"</p><p>Check out Time: "+events[i]["checkoutTime"]+"</p><a href="+"/reservation/edit/"+events[i]["id"]+" class="+"btn btn-secondary my-3"+">Add more Details</a></div>");
+		if(events[i]["status"]==="Cancelled") {
 			$(event_card).css({
 				"border-left": "10px solid #FF1744"
 			});
@@ -191,12 +191,19 @@ var event_data = {
 "events": [
 
 {
+	id:0,
 	"occasion": "Test Event ",
 	"invited_count": "Feb 27, 2023",
 	"year": 2023,
 	"month": 2,
 	"day": 9,
-	"cancelled": true
+	status: "Cancelled",
+	ReferenceNumber: "123546",
+	Total: 123457,
+	Balance: 12345,
+	checkinTime : "7:00PM",
+	checkoutTime : "7:00AM"
+
 },
 
 
@@ -212,12 +219,19 @@ var month = parseInt(numdate[1]);
 var day = parseInt(numdate[2]);
 
 event_data["events"].push({
+	id:{{x.reservationID}},
     occasion:"{{x.customer}}",
     invited_count:"{{x.checkOut}}",
     year: year,
     month: month,
     day: day,
-    cancelled: false
+	status: "{{x.status}}",
+	ReferenceNumber: "{{x.referenceNum}}",
+	Total: {{x.totalPayment}},
+	Balance: {{x.balance}},
+	checkinTime : "{{x.timeIn}}",
+	checkoutTime : "{{x.timeOut}}",
+
 
   });
 

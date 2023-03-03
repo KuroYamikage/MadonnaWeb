@@ -32,7 +32,7 @@
                             <td><ul>{%for group in user.groups.all%}
                                         <li>{{group.name}}</li>
                                         {%endfor%}</ul></td>
-                            <td><a class="btn btn-sm btn-primary" href="">Edit</a></td>
+                            <td><a class="btn btn-sm btn-primary" href="{% url 'user.edit' pk=user.id %}">Edit</a></td>
                             <td><a class="btn btn-sm btn-primary" href="">Disable</a></td>
                         </tr>
                         {%endfor%}
