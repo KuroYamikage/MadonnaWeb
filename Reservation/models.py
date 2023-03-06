@@ -70,8 +70,8 @@ class Reservations(models.Model):
   )
 
   reservationID = models.BigAutoField(primary_key=True)
-  date = models.DateField(auto_created=True, null=True)
-  time = models.TimeField(auto_created=True,null=True)
+  date = models.DateField(auto_now=True)
+  time = models.TimeField(auto_now=True)
   checkIn = models.DateField()
   checkOut=models.DateField()
   timeIn=models.TimeField()

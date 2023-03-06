@@ -15,11 +15,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="booking-form">
-					<form>
+					<form method="POST">
+						{% csrf_token %}
+						<div class="select-div">
 						<div class="row no-margin">
 							<div class="col-md-3">
 								<div class="form-header">
 									<h2>Book Now</h2>
+									<h3 class="mb-2">{{form.non_field_errors.as_text}}</h3>
 								</div>
 							</div>
 							<div class="col-md-7">
@@ -27,27 +30,23 @@
 									<div class="col-md-6">
 										<div class="form-group">
 											<span class="form-label">Check In</span>
-											<input class="form-control" type="date">
+											{{form.checkIn}}
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<span class="form-label">Check out</span>
-											<input class="form-control" type="date">
+											<span class="form-label">Time and Maximum Pax</span>
+											{{form.prices}}
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Check Out</span>
+											{{form.checkOut}}
 										</div>
 									</div>
 									
-									<div class="col-md-2">
-										<div class="form-group">
-											<span class="form-label">Kids</span>
-											<select class="form-control">
-												<option>0</option>
-												<option>1</option>
-												<option>2</option>
-											</select>
-											<span class="select-arrow"></span>
-										</div>
-									</div>
+									
 								</div>
 							</div>
 							<div class="col-md-2">
@@ -56,6 +55,7 @@
 								</div>
 							</div>
 						</div>
+					</div>
 					</form>
 				</div>
 			</div>
@@ -63,4 +63,75 @@
 	</div>
 </div>
 </div>	
+<script>
+$(function () {
+	$('.select-div').on('change', 'select', function (e) {//use on to delegate
+		var v = $(e.target).val(), t = $(e.target).find(':selected').text(), p = $(e.target).closest('.select-div');
+		if (v) {
+			var c = (function(t) {
+				switch(t) {
+					case '---------': return 0;
+					{%for price in prices%}
+					case 'For {{price.dayTime}} Reservation with Maximum of {{price.maxPax}} Pax': 
+					var day = "{{price.dayTime}}"
+					switch(day){
+						case "Day":
+						console.log('day: ' + day )
+						var now=document.getElementById("id_checkIn").value
+						document.getElementById("id_checkOut").value = now
+						break;
+
+						case "Night":
+						console.log('Night: ' + day )
+						var now=document.getElementById("id_checkIn").value
+						var numdate = now.split('-');
+						console.log(now)
+						var year = parseInt(numdate[0]);
+						var month = parseInt(numdate[1]);
+						if(month < 10){
+							month = "0" + month;
+						}
+						var day = parseInt(numdate[2])+1;
+						if(day < 10){
+							day = "0" + day;
+						}
+						numdate = year+"-"+month+"-"+day;
+						console.log(numdate)
+
+						
+						document.getElementById("id_checkOut").value = numdate
+						break;
+
+
+						case "Whole Day":
+						console.log('Whole Day: ' + day )
+						var now=document.getElementById("id_checkIn").value
+						var numdate = now.split('-');
+						console.log(now)
+						var year = parseInt(numdate[0]);
+						var month = parseInt(numdate[1]);
+						if(month < 10){
+							month = "0" + month;
+						}
+						var day = parseInt(numdate[2])+1;
+						if(day < 10){
+							day = "0" + day;
+						}
+						console.log(day)
+						numdate = year+"-"+month+"-"+day;
+						console.log(numdate)
+
+						document.getElementById("id_checkOut").value = numdate
+						break;
+					}
+					return {{price.price}};
+
+					{%endfor%}
+				}
+			})(t);
+		}
+	});
+});
+
+</script>
  {% endblock %}

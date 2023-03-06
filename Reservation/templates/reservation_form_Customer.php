@@ -248,39 +248,58 @@
                         var day = "{{price.dayTime}}"
                         switch(day){
                             case "Day":
+                            console.log('day: ' + day )
                             var now=document.getElementById("id_checkIn").value
                             document.getElementById("id_timeIn").value = "07:00"
                             document.getElementById("id_timeOut").value = "19:00"
                             document.getElementById("id_checkOut").value = now
+                            break;
 
                             case "Night":
-
+                            console.log('Night: ' + day )
                             var now=document.getElementById("id_checkIn").value
                             var numdate = now.split('-');
                             console.log(now)
                             var year = parseInt(numdate[0]);
                             var month = parseInt(numdate[1]);
+                            if(month < 10){
+                                month = "0" + month;
+                            }
                             var day = parseInt(numdate[2])+1;
+                            if(day < 10){
+                                day = "0" + day;
+                            }
                             numdate = year+"-"+month+"-"+day;
                             console.log(numdate)
 
                             document.getElementById("id_timeIn").value = "19:00"
                             document.getElementById("id_timeOut").value = "07:00"
-                            document.getElementById("id_checkOut").value = now
+                            document.getElementById("id_checkOut").value = numdate
+                            break;
+
 
                             case "Whole Day":
+                            console.log('Whole Day: ' + day )
                             var now=document.getElementById("id_checkIn").value
                             var numdate = now.split('-');
                             console.log(now)
                             var year = parseInt(numdate[0]);
                             var month = parseInt(numdate[1]);
+                            if(month < 10){
+                                month = "0" + month;
+                            }
                             var day = parseInt(numdate[2])+1;
+                            if(day < 10){
+                                day = "0" + day;
+                            }
+                            console.log(day)
                             numdate = year+"-"+month+"-"+day;
                             console.log(numdate)
 
                             document.getElementById("id_timeIn").value = "07:00"
                             document.getElementById("id_timeOut").value = "07:00"
-                            document.getElementById("id_checkOut").value = now
+                            document.getElementById("id_checkOut").value = numdate
+                            break;
                         }
                         return {{price.price}};
 
