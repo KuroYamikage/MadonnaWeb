@@ -31,19 +31,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'debug_toolbar',
-    'Home',
-    'Reservation',
-    'users.apps.UsersConfig',
-    'blog',
-    'Reservation.reservation_function',
-    
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "debug_toolbar",
+    "Home",
+    "Reservation",
+    "users.apps.UsersConfig",
+    "blog",
+    "Reservation.reservation_function",
+    "Reports",
+    "Reports.scripts",
 ]
 
 MIDDLEWARE = [
@@ -82,9 +83,9 @@ TEMPLATES = [
         },
     },
 ]
-MEDIA_ROOT = BASE_DIR/'Media'
-MEDIA_URL = ''
-WSGI_APPLICATION = 'MadonnaWeb.wsgi.application'
+MEDIA_ROOT = BASE_DIR / "Media"
+MEDIA_URL = ""
+WSGI_APPLICATION = "MadonnaWeb.wsgi.application"
 
 
 # Database
@@ -142,8 +143,8 @@ LOGIN_REDIRECT_URL = "home"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = '/staff'
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+LOGIN_REDIRECT_URL = "/staff"
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 """ SESSION_COOKIE_AGE = 5*60 """
-SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
