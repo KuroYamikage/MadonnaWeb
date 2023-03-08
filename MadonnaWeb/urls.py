@@ -19,6 +19,7 @@ from users import views
 from django.urls import include, path
 from django.contrib.auth import views as auth_views
 from django.conf import settings
+<<<<<<< HEAD
 from django.conf.urls.static import static 
 from users import views as user_views
 
@@ -30,3 +31,17 @@ urlpatterns = [
     path('', include('users.urls')),
     path('blog/',include('blog.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+=======
+from django.conf.urls.static import static
+from users import views as user_views
+
+urlpatterns = [
+    path("", include("Home.urls")),
+    path("admin/", admin.site.urls),
+    path("", include("Reservation.urls")),
+    path("__debug__/", include(debug_toolbar.urls)),
+    path("", include("users.urls")),
+    path("blog/", include("blog.urls")),
+    path("", include("Reports.urls")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> Reservation

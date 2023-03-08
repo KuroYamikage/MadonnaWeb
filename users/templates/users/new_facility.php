@@ -1,5 +1,9 @@
 {%extends "master2.php"%}
+<<<<<<< HEAD
 {%load static}
+=======
+{%load static%}
+>>>>>>> Reservation
 
 {%block title%} New Facility {%endblock%}
 

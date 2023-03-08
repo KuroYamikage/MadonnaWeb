@@ -1,4 +1,4 @@
-{%extends 'loginTemp.php'%}
+{%extends 'sidebar.php'%}
 {%load static%}
 
 
@@ -15,84 +15,16 @@
 <div class="container py-5 h-50">
     <div class="row d-flex justify-content-center align-items-center h-20  ">
       <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card bg-cards text-white" style="border-radius: 1rem;">
+        <div class="card bg-cards" style="border-radius: 1rem;">
           <div class="card-body text-center">
 
             <div class="mb-md-2 mt-md-3 pb-2">
 
-              <h2 class="fw-bold mb-2 text-uppercase">Reservation</h2>
-
-    <form  action="{% url 'test1'%}" method = "POST">
+    <form  method = "POST">
         {%csrf_token%} 
         
         {{form.errors.as_text}}
         <div class="select-div">
-<<<<<<< HEAD
-
-            <div class="form-row" >
-                <div class="form-group col-md-6">
-                    {{form_2.firstname.label}}   
-                    {{form_2.firstname}}
-                </div>
-                <div class="form-group col-md-6">
-                    {{form_2.lastname.label}}   
-                    {{form_2.lastname}}
-                </div>
-            </div>
-            <div class="form-row" >
-                <div class="form-group col-md-6">
-                    {{form_2.contactNumber.label}}   
-                    {{form_2.contactNumber}}
-                </div>
-                <div class="form-group col-md-6">
-                    {{form_2.email.label}}   
-                    {{form_2.email}}
-                </div>
-            </div>
-
-            <div class="form-row" >
-                <div class="form-group col-md-6">
-                    {{form.checkIn.label}}   
-                    {{form.checkIn}}
-                </div>
-                <div class="form-group col-md-6">
-                    {{form.checkOut.label}}   
-                    {{form.checkOut}}
-                </div>
-            </div>
-        
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    {{form.prices.label}}
-                    {{form.prices}}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    {{form.totalPayment.label}}  
-                    {{form.totalPayment}}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    {{form.downpayment.label}}
-                    {{form.downpayment}}
-                
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-sm-6">
-                    {{form.facility.label}}
-                    {{form.facility}}
-                </div> 
-                <div class="form-group col-sm-6">
-                    {{form.balance.label}}
-                    {{form.balance}}
-                </div> 
-            </div>
-        </div>
-        
-=======
 
             <div class="form-row" >
                 <div class="form-group col-md-6">
@@ -148,10 +80,8 @@
             
             <div class="form-row">
                 <div class="form-group col-sm-12">
-                    <div class="form-check">
                     {{form.facility.label}}
                     {{form.facility}}
-                    </div>
                 </div> 
             </div>
 
@@ -193,21 +123,19 @@
                 <div class="form-group col-sm-12">
                     {{form.referenceNum}}
                 </div> 
+                <div class="form-group col-sm-12">
+                    {{form.status}}
+                </div> 
             </div>
         </div>
 
->>>>>>> Reservation
     
 
        
         <div class="container d-flex justify-content-center">
 
 
-<<<<<<< HEAD
-            <button type="submit" class="btn btn-primary"> Submit </button>
-=======
             <button type="submit" onClick="submit1()" class="btn btn-primary"> Submit </button>
->>>>>>> Reservation
             <a href="{%url 'reserve'%}" class="btn btn-danger"> cancel </a>
         </div>
     </form>
@@ -226,8 +154,6 @@
     {%endif%}
 </div>
 
-<<<<<<< HEAD
-=======
 <script>
     function submit1(){
         switch (document.getElementById("id_discount").value){
@@ -278,7 +204,7 @@
         }
     }
 
-    {% for facility in facility %}
+    
     function faciitiesFee(){
         // Get the checkbox
         var checkBox = document.getElementById("id_facility_{{facility.id}}");
@@ -304,11 +230,9 @@
     }
 
     
-    {% endfor %}
 </script>
 
 
->>>>>>> Reservation
 <!-- Javascript files-->
       <script src="{%static 'js/jquery.min.js'%}"></script>
 <script>
@@ -321,18 +245,15 @@
                         case '---------': return 0;
                         {%for price in prices%}
                         case 'For {{price.dayTime}} Reservation with Maximum of {{price.maxPax}} Pax': 
-<<<<<<< HEAD
-                        console.log("Been Here");
-=======
                         var day = "{{price.dayTime}}"
                         switch(day){
                             case "Day":
                             console.log('day: ' + day )
-                            var now=document.getElementById("id_checkIn").value
-                            document.getElementById("id_timeIn").value = "07:00"
-                            document.getElementById("id_timeOut").value = "19:00"
-                            document.getElementById("id_checkOut").value = now
-                            break;
+                            var now=document.getElementById("id_checkIn").value;
+                            document.getElementById("id_timeIn").value = "07:00";
+                            document.getElementById("id_timeOut").value = "19:00";
+                            console.log( document.getElementById("id_timeOut").value);
+                            document.getElementById("id_checkOut").value = now;
 
                             case "Night":
                             console.log('Night: ' + day )
@@ -341,57 +262,34 @@
                             console.log(now)
                             var year = parseInt(numdate[0]);
                             var month = parseInt(numdate[1]);
-                            if(month < 10){
-                                month = "0" + month;
-                            }
                             var day = parseInt(numdate[2])+1;
-                            if(day < 10){
-                                day = "0" + day;
-                            }
                             numdate = year+"-"+month+"-"+day;
-                            console.log(numdate)
+                            console.log(numdate);
 
-                            document.getElementById("id_timeIn").value = "19:00"
-                            document.getElementById("id_timeOut").value = "07:00"
-                            document.getElementById("id_checkOut").value = numdate
-                            break;
-
+                            document.getElementById("id_timeIn").value = "19:00";
+                            document.getElementById("id_timeOut").value = "07:00";
+                            document.getElementById("id_checkOut").value = now;
 
                             case "Whole Day":
                             console.log('Whole Day: ' + day )
-                            var now=document.getElementById("id_checkIn").value
+                            var now=document.getElementById("id_checkIn").value;
                             var numdate = now.split('-');
                             console.log(now)
                             var year = parseInt(numdate[0]);
                             var month = parseInt(numdate[1]);
-                            if(month < 10){
-                                month = "0" + month;
-                            }
                             var day = parseInt(numdate[2])+1;
-                            if(day < 10){
-                                day = "0" + day;
-                            }
-                            console.log(day)
                             numdate = year+"-"+month+"-"+day;
                             console.log(numdate)
 
-                            document.getElementById("id_timeIn").value = "07:00"
-                            document.getElementById("id_timeOut").value = "07:00"
-                            document.getElementById("id_checkOut").value = numdate
-                            break;
+                            document.getElementById("id_timeIn").value = "07:00";
+                            document.getElementById("id_timeOut").value = "07:00";
+                            document.getElementById("id_checkOut").value = now;
                         }
->>>>>>> Reservation
                         return {{price.price}};
 
                         {%endfor%}
                     }
                 })(t);
-<<<<<<< HEAD
-                var dp = c*.10 
-                p.find('[name="totalPayment"]').val(c);
-                p.find('[name="downpayment"]').val(dp);
-                p.find('[name="balance"]').val(c);
-=======
                 var dp = c*.50
                 var current=document.getElementById("id_totalPayment").value;
                 console.log(current);
@@ -403,7 +301,6 @@
                 p.find('[name="discount"]').val("");
                 p.find('[name="discount"]').removeAttr("readonly");
                 p.find('[name="btn"]').removeAttr("disabled");
->>>>>>> Reservation
             }
         });
     });

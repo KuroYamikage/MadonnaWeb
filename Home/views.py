@@ -6,7 +6,11 @@ from django.template import loader
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 from django.views.generic.edit import DeleteView
 from Reservation.models import Reservations, Facility
+<<<<<<< HEAD
 from blog.models import Blog
+=======
+from blog.models import Blog, Gallery
+>>>>>>> Reservation
 
 
 
@@ -14,9 +18,19 @@ from blog.models import Blog
 
 #Reservation Files
 
+<<<<<<< HEAD
 class GalleryView(TemplateView):
+=======
+class GalleryView(ListView):
+    model = Gallery
+    context_object_name = 'gallery'
+>>>>>>> Reservation
     template_name = "gallery.php"
 
+class detailGallery (DetailView):
+  model = Gallery
+  context_object_name= 'gallery'
+  template_name = 'gallery_detail.php'
 class sampleView(ListView):
   model = Reservations
   context_object_name = "reserve"

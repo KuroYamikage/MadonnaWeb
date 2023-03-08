@@ -125,7 +125,11 @@
 /*** Navbar ***/
 .sidebar .navbar .navbar-nav .nav-link {
     padding: 7px 20px;
+<<<<<<< HEAD
     color: #242424;
+=======
+    color: var(--dark);
+>>>>>>> Reservation
     font-weight: 500;
     border-left: 3px solid var(--light);
     border-radius: 0 30px 30px 0;

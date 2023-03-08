@@ -73,7 +73,11 @@
                         <a class="nav-link" href="{% url 'facility.view'%}">Facilities</a>
                      </li>
                      <li class="nav-item">
+<<<<<<< HEAD
                         <a class="nav-link" href="{%url 'about'%}" disable>Gallery</a>
+=======
+                        <a class="nav-link" href="{%url 'gallery'%}">Gallery</a>
+>>>>>>> Reservation
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="{%url 'about'%}">About</a>

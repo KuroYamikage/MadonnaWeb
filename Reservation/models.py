@@ -15,7 +15,7 @@ class Customer(models.Model):
 
 class Discount(models.Model):
     discountCode = models.CharField(max_length=15)
-    discountPercentage = models.DecimalField(decimal_places=2, max_digits=6)
+    discountPrice = models.DecimalField(decimal_places=2, max_digits=10)
     discountActive = models.BooleanField(default=False)
 
     def __str__(self):
@@ -65,10 +65,12 @@ class Reservations(models.Model):
     )
 
     reservationID = models.BigAutoField(primary_key=True)
-    date = models.DateField(auto_created=True, null=True)
-    time = models.TimeField(auto_created=True, null=True)
+    date = models.DateField(auto_now=True)
+    time = models.TimeField(auto_now=True)
     checkIn = models.DateField()
     checkOut = models.DateField()
+    timeIn = models.TimeField()
+    timeOut = models.TimeField()
     downpayment = models.DecimalField(decimal_places=3, max_digits=10)
     totalPayment = models.DecimalField(decimal_places=3, max_digits=10)
     balance = models.DecimalField(decimal_places=3, max_digits=10)
@@ -79,3 +81,4 @@ class Reservations(models.Model):
     discount = models.ForeignKey(Discount, on_delete=models.CASCADE, default=1)
     facility = models.ManyToManyField(Facility)
     prices = models.ForeignKey(Prices, on_delete=models.CASCADE)
+    referenceNum = models.CharField(max_length=247, unique=True, null=True)
