@@ -45,15 +45,68 @@
 											{{form.checkOut}}
 										</div>
 									</div>
+
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Check In Time</span>
+											{{form.timeIn}}
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Check Out Time</span>
+											{{form.timeOut}}
+										</div>
+									</div>
+									
 									
 									
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-btn">
-									<button class="submit-btn">Check availability</button>
-									already have a Reference Code?
-									<button class="submit-btn">Check status of Reservaion</button>
+									<button class="submit-btn" name="new">Check availability</button>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="section-center2">
+		<div class="container">
+			<div class="row">
+				<div class="booking-form">
+					<form method="POST">
+						{% csrf_token %}
+						<div class="select-div">
+						<div class="row no-margin">
+							<div class="col-md-3">
+								<div class="form-header">
+									<h3>Already have a Reservaion?</h3>
+									<h4 class="mb-2">{{form2.non_sfield_errors.as_text}}</h4>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="row no-margin">
+									<div class="col-md-12">
+										<div class="form-group">
+											<span class="form-label">Reference Code</span>
+											{{form_2.reference}}
+										</div>
+									</div>
+									
+									
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-btn">
+									<button class="submit-btn" name="check">Check status</button>
 								</div>
 							</div>
 						</div>
@@ -82,6 +135,8 @@ $(function () {
 						case "Day":
 						console.log('day: ' + day )
 						var now=document.getElementById("id_checkIn").value
+						document.getElementById("id_timeIn").value = "07:00"
+						document.getElementById("id_timeOut").value = "19:00"
 						document.getElementById("id_checkOut").value = now
 						break;
 
@@ -102,7 +157,8 @@ $(function () {
 						numdate = year+"-"+month+"-"+day;
 						console.log(numdate)
 
-						
+						document.getElementById("id_timeIn").value = "19:00"
+						document.getElementById("id_timeOut").value = "07:00"
 						document.getElementById("id_checkOut").value = numdate
 						break;
 
@@ -125,7 +181,10 @@ $(function () {
 						numdate = year+"-"+month+"-"+day;
 						console.log(numdate)
 
+						document.getElementById("id_timeIn").value = "07:00"
+						document.getElementById("id_timeOut").value = "07:00"
 						document.getElementById("id_checkOut").value = numdate
+						break;	getElementById("id_checkOut").value = numdate
 						break;
 					}
 					return {{price.price}};

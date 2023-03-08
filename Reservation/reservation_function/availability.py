@@ -17,11 +17,14 @@ def check_availability(Prices, checkIn, checkOut):
 
 def check_availability2(Prices, checkIn, checkOut, timeIn, timeOut):
     avail_list=[]
-    reservationList = Reservations.objects.filter(prices=Prices)
+    reservationList = Reservations.objects.filter(checkIn=checkIn)
     print(reservationList)
     for reservation in reservationList:
         if reservation.checkIn > checkOut or reservation.checkOut<checkIn:
-            avail_list.append(True)
+            if reservation.timeIn != timeIn:
+                print(reservation.timeIn)
+                print(timeIn)
+                avail_list.append(True)
         else:
             avail_list.append(False)
 

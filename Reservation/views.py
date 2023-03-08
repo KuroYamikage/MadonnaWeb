@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import FormView, CreateView, TemplateView,ListView, DetailView, UpdateView
 from django.contrib.auth import login, authenticate
 from Reservation.models import Reservations, Customer, Discount, Prices, Facility
-from Reservation.forms import ReservationChecker, ReservationForm, CustomerForm, PriceForm, DiscountForm, ReservationEditForm
+from Reservation.forms import ReferenceChecker, ReservationChecker, ReservationForm, CustomerForm, PriceForm, DiscountForm, ReservationEditForm
 from django.contrib.messages.views import SuccessMessageMixin
 from Reservation.reservation_function.availability import check_availability
 from django.contrib.auth.decorators import login_required
@@ -15,21 +15,37 @@ from django.contrib.auth.decorators import login_required
 def test(request):
     return HttpResponse('this is a test')
 
-class reserveView(FormView):
+""" class reserveView(FormView):
   model = Reservations
   form_class = ReservationChecker
   context_object_name = 'reserve'
   template_name='reservation.php'
-  success_url='/test/form'
+  success_url='/test/form' """
 
-  def get_context_data(self, **kwargs):
-    context = super(reserveView, self).get_context_data(**kwargs)
-    context['prices'] = Prices.objects.all().values()
-    context['checkOut'] = Reservations.objects.values('checkOut')
-    """ context['venue_list'] = Venue.objects.all()
-    context['festival_list'] = Festival.objects.all()
-    # And so on for more models """
-    return context
+
+def reserveView(request):
+  obj = Prices.objects.all().values()
+  form = ReservationChecker(None)
+  form2 = ReferenceChecker(None)
+  
+  if request.method=='POST' and 'new' in request.POST:
+    form = ReservationChecker(request.POST)
+    if (form.is_valid()):
+      print('valid')
+      return redirect('reservation.new')
+  if request.method=='POST' and 'check' in request.POST:
+    form2 = ReferenceChecker(request.POST)
+    if form2.is_valid():
+      pk = form2.cleaned_data['reference']
+      return redirect('reserve.receipt',referenceNum=pk)
+  context={
+    "form": form,
+    "form_2":form2,
+    "prices":obj,   
+  }
+  return render(request, 'reservation.php', context)
+
+
 
 
 class newReserve(CreateView):
@@ -79,12 +95,12 @@ def reserveNew(request):
     print(exist)
     if exist==False:
       child.customer = parent
-      """ form2.save() """
+        
     print(form.cleaned_data)
     pk = form.cleaned_data['referenceNum']
     
-    """ form.save()  """
-    return redirect('reserve.receipt',ref=pk)
+    form.save() 
+    return redirect('reserve.receipt',referenceNum=pk)
   return render(request, 'reservation_form_Customer.php', context)
 
 @login_required
@@ -127,7 +143,7 @@ def reserveEdit(request,pk):
     print(form.cleaned_data)
     
     form.save() 
-    return redirect('reserve.receipt',pk=pk)
+    return redirect('reserve.receipt',referenceNum=pk)
   return render(request, 'reservation_edit_form.php', context)
 
 
@@ -135,6 +151,7 @@ class viewReservation(DetailView):
   model=Reservations
   context_object_name = 'reserve'
   template_name='reference.php'
+  
 
   def get_object(self, queryset=None):
         return Reservations.objects.get(referenceNum=self.kwargs.get("referenceNum"))
@@ -156,6 +173,9 @@ class reserveListView(LoginRequiredMixin,ListView):
   template_name = 'users/templates/users/home.php'
   login_url = "login"
 
+""" class checkReceipt(FormView):
+
+ """
 class newReserveStaff(LoginRequiredMixin,CreateView):
   model = Reservations
   form_class = ReservationForm
