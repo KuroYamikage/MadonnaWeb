@@ -8181,7 +8181,7 @@ h1, h2, h3, h4, h5,
   background-repeat: no-repeat;
   background-position: center center; }
 
-.content {
+.content-cal {
   overflow: none;
   width: 100%;
   max-width: 790px;
@@ -8194,7 +8194,11 @@ h1, h2, h3, h4, h5,
 /*  Events display */
 .events-container {
   overflow-y: scroll;
+<<<<<<< HEAD
   background-color: #55d42a;
+=======
+  background-color: #1c7430;
+>>>>>>> Reservation
   height: 100%;
   width: 50%;
   float: right;
