@@ -30,7 +30,8 @@ from Reservation.reservation_function.availability import check_availability
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 def test(request):
-    return HttpResponse('this is a test')
+    return HttpResponse("this is a test")
+
 
 """ class reserveView(FormView):
   model = Reservations
@@ -66,20 +67,21 @@ def reserveView(request):
 
 
 class newReserve(CreateView):
-  model = Reservations
-  form_class = ReservationForm
-  form2 = CustomerForm
-  success_url = '/reserve'
-  template_name = 'reservation_form_Customer.php'
+    model = Reservations
+    form_class = ReservationForm
+    form2 = CustomerForm
+    success_url = "/reserve"
+    template_name = "reservation_form_Customer.php"
 
-  def get_context_data(self, **kwargs):
-    context = super(newReserve, self).get_context_data(**kwargs)
-    context['prices'] = Prices.objects.all().values()
-    context['checkOut'] = Reservations.objects.values('checkOut')
-    """ context['venue_list'] = Venue.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super(newReserve, self).get_context_data(**kwargs)
+        context["prices"] = Prices.objects.all().values()
+        context["checkOut"] = Reservations.objects.values("checkOut")
+        """ context['venue_list'] = Venue.objects.all()
     context['festival_list'] = Festival.objects.all()
     # And so on for more models """
-    return context
+        return context
+
 
 def reserveNew(request):
   obj = Customer.objects.values()
@@ -183,6 +185,8 @@ def reserveEdit(request,pk):
     return redirect('reserve.receipt',referenceNum=pk)
   return render(request, 'reservation_edit_form.php', context)
 
+            form.save()
+    return render(request, "reservation_form_Customer.php", context)
 
 class viewReservation(DetailView):
   model=Reservations
@@ -199,20 +203,17 @@ class viewReservation(DetailView):
 
 
 class newCustomer(CreateView):
-  model= Customer
-  form_class = CustomerForm
-  success_url = '../reservation/new'
-  template_name = 'customer_form_Customer.php'
-class moreDetailView(DetailView):
-  model = Reservations
-  context_object_name = 'reserve'
-  template_name = 'test_reserve.php'
+    model = Customer
+    form_class = CustomerForm
+    success_url = "../reservation/new"
+    template_name = "customer_form_Customer.php"
 
-class reserveListView(LoginRequiredMixin,ListView):
-  model = Reservations
-  context_object_name = 'reserve'
-  template_name = 'users/templates/users/home.php'
-  login_url = "login"
+
+class moreDetailView(DetailView):
+    model = Reservations
+    context_object_name = "reserve"
+    template_name = "test_reserve.php"
+
 
 """ class checkReceipt(FormView):
 
@@ -223,30 +224,29 @@ class newReserveStaff(LoginRequiredMixin,CreateView):
   success_url = 'main'
   template_name = 'reservations_form.php'
   login_url = "login"
+>>>>>>> Reservation
 
-class deleteReservation(LoginRequiredMixin,DeleteView):
-  model= Reservations
-  context_object_name = 'reserve'
-  success_url = 'main'
-  template_name = 'delete_reservation.php'
-  login_url = "login"
 
 class updateReserve(LoginRequiredMixin, UpdateView):
-  model = Reservations
-  form_class = ReservationForm
-  success_url = '/staff'
-  template_name = 'reserve_edit.php'
+    model = Reservations
+    form_class = ReservationForm
+    success_url = "/staff"
+    template_name = "reserve_edit.php"
+
 
 class addPrice(LoginRequiredMixin, CreateView):
-  model = Prices
-  form_class = PriceForm
-  success_url = '/staff/'
-  template_name = 'prices_new.php'
+    model = Prices
+    form_class = PriceForm
+    success_url = "/staff/"
+    template_name = "prices_new.php"
+
+
 class editPrice(LoginRequiredMixin, UpdateView):
-  model = Prices
-  form_class = PriceForm
-  success_url = '/staff/'
-  template_name = 'prices_new.php'
+    model = Prices
+    form_class = PriceForm
+    success_url = "/staff/"
+    template_name = "prices_new.php"
+
 
 <<<<<<< HEAD
 """ class DiscountView(ListView):
