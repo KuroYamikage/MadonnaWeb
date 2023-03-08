@@ -185,8 +185,6 @@ def reserveEdit(request,pk):
     return redirect('reserve.receipt',referenceNum=pk)
   return render(request, 'reservation_edit_form.php', context)
 
-            form.save()
-    return render(request, "reservation_form_Customer.php", context)
 
 class viewReservation(DetailView):
   model=Reservations
@@ -224,8 +222,13 @@ class newReserveStaff(LoginRequiredMixin,CreateView):
   success_url = 'main'
   template_name = 'reservations_form.php'
   login_url = "login"
->>>>>>> Reservation
 
+class deleteReservation(LoginRequiredMixin,DeleteView):
+  model= Reservations
+  context_object_name = 'reserve'
+  success_url = 'main'
+  template_name = 'delete_reservation.php'
+  login_url = "login"
 
 class updateReserve(LoginRequiredMixin, UpdateView):
     model = Reservations

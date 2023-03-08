@@ -8,10 +8,7 @@ urlpatterns = [
     path("reservation/<int:pk>", views.moreDetailView.as_view(), name="reservation"),
     path("reservation/new", views.reserveNew, name="reservation.new"),
     path("reservation/edit/<int:pk>", views.reserveEdit, name="reservation.edit"),
-    path(
-        "reservation/delete/<int:pk>",
-        views.deleteReservation.as_view(),
-        name="reservation.delete",
+    path("reservation/delete/<int:pk>",views.deleteReservation.as_view(),name="reservation.delete",
     ),
     path("staff/reserve", views.newReserveStaff.as_view(), name="reserve.staff.new"),
     path("customer/new", views.newCustomer.as_view(), name="customer.new"),
