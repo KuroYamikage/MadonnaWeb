@@ -9,7 +9,7 @@ class BlogForms(forms.ModelForm):
         widgets = {
             'blog_title': forms.TextInput(attrs={'class' : 'form-control'}),
             'blog_content':forms.Textarea(attrs={'class' : 'form-control'}),
-            'blog_pic' : forms.ImageField(),
+            
         }
         labels = {
             'blog_title':'Title',

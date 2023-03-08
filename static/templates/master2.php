@@ -50,6 +50,26 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js">
       <script src="{%static 'js/popper.js'%}"></script>  
       <script src="{%static 'js/main11.js'%}"></script>    
+      
+      
+      <!-- Javascript files-->
+      <script src="{%static 'js/jquery.min.js'%}"></script>
+      <script src="{%static 'js/popper.min.js'%}"></script>
+      <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
+      <script src="{%static 'js/jquery-3.0.0.min.js'%}"></script>
+      <script src="{%static 'js/plugin.js'%}"></script>
+      <script src="{%static 'js/popper.js'%}"></script>  
+      <script src="{%static 'js/main11.js'%}"></script>
+      <!-- sidebar -->
+      <script src="{%static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+      <script src="{%static 'js/custom.js'%}"></script>
+      <!-- javascript --> 
+      <script src="{%static 'js/owl.carousel.js'%}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js">
+      <script src="{%static 'js/popper.js'%}"></script>  
+      <script src="{%static 'js/main11.js'%}"></script>    
+      
+      
       <!-- header section start -->  
 
       <div class="container py-5 h-100">

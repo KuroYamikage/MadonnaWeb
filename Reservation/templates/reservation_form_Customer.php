@@ -20,7 +20,7 @@
 
             <div class="mb-md-2 mt-md-3 pb-2">
 
-              <h2 class="fw-bold mb-2 text-uppercase">Reservation</h2>
+              <h2 class="fw-bold mb-2 text-uppercase">Edit Blog</h2>
 
     <form  action="{% url 'reservation.new'%}" method = "POST">
         {%csrf_token%} 
