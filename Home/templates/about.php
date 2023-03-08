@@ -18,13 +18,14 @@
                   <p class="lorem_text">Contact Information:</br>
                   Mobile number: +63 945 600 5435</br>
                   Email Address: madonnaresort@gmail.com</br>
-                  Facebook Page: https://web.facebook.com/madonnasresort</p>
+                  Facebook Page: <a href="https://web.facebook.com/madonnasresort">Madonna's Resort and Event Center</a></p>
+                  
  
  
-               </div>
-               <div class="col-md-6">
+                  </div>
+               <!--<div class="col-md-6">
                   <div class="image_1"><img src="{%static '/images/about2.jpg'%}"></div>
-               </div>
+               </div>-->
             </div>
          </div>
       </div>

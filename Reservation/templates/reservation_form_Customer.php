@@ -22,7 +22,7 @@
 
               <h2 class="fw-bold mb-2 text-uppercase">Reservation</h2>
 
-    <form  action="{% url 'test1'%}" method = "POST">
+    <form  action="{% url 'reservation.new'%}" method = "POST">
         {%csrf_token%} 
         
         {{form.errors.as_text}}

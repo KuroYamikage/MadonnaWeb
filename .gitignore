@@ -6,11 +6,14 @@ requirements.txt
 Reservation\__pycache__
 MadonnaWeb\__pycache__
 <<<<<<< HEAD
+<<<<<<< HEAD
 MadonnaWeb/__pycache__/
 Reservation\__pycache__
 Home\__pycache__
 users/migrations/__pycache__
 =======
+=======
+>>>>>>> Reservation
 MadonnaWeb/__pycache__
 Reservation\__pycache__
 Home\__pycache__
@@ -18,4 +21,7 @@ Home\__pycache__
 /MadonnaWeb/__pycache__/
 /users/migrations/__pycache__
 users/migrations/__pycache__/
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
 >>>>>>> Reservation

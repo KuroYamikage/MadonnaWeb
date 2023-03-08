@@ -186,8 +186,18 @@ img {
 }
 
 .form-control:focus {
+<<<<<<< HEAD
+<<<<<<< HEAD
+  border-color: #ffffff !important;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+=======
      border-color: #212121 !important;
      box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .25);
+>>>>>>> Reservation
+=======
+     border-color: #212121 !important;
+     box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .25);
+>>>>>>> Reservation
 }
 
 .navbar-form input {
@@ -283,8 +293,18 @@ button {
 .search_icon li a{
     color: #000;
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+.search_icon li a:hover {
+  color: #55d42a;
+=======
 .search_icon li a:hover{
     color: var(--green);
+>>>>>>> Reservation
+=======
+.search_icon li a:hover{
+    color: var(--green);
+>>>>>>> Reservation
 }
 .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 20px;
@@ -414,9 +434,24 @@ button {
     color: #fff;
     border-radius: 100px;
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+#costum_slider .carousel-control-prev:hover,
+#costum_slider .carousel-control-next:hover,
+#costum_slider .carousel-control-prev:focus,
+#costum_slider .carousel-control-next:focus {
+  background: #55d42a;
+  color: #fff;
+=======
 #costum_slider .carousel-control-prev:hover, #costum_slider .carousel-control-next:hover, #costum_slider .carousel-control-prev:focus, #costum_slider .carousel-control-next:focus {
     background: var(--green);
     color: #fff;
+>>>>>>> Reservation
+=======
+#costum_slider .carousel-control-prev:hover, #costum_slider .carousel-control-next:hover, #costum_slider .carousel-control-prev:focus, #costum_slider .carousel-control-next:focus {
+    background: var(--green);
+    color: #fff;
+>>>>>>> Reservation
 }
 
 .services_section{
@@ -843,6 +878,19 @@ a:hover {
     float: left;
 }
 .container_main1::after {
+<<<<<<< HEAD
+<<<<<<< HEAD
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 92%;
+  height: 90%;
+  background-color: rgb(255, 182, 7, 0.6);
+  z-index: 11;
+  display: none;
+=======
+=======
+>>>>>>> Reservation
     content: "";
     position: absolute;
     top: 0;
@@ -851,6 +899,10 @@ a:hover {
     background-color: rgba(36, 163, 115, 0.6);
     z-index: 11;
     display: none;
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
+>>>>>>> Reservation
 }
 .container_main1:hover::after{
     display: block;
@@ -1062,6 +1114,23 @@ textarea#comment::placeholder {
 }
 
 .form-control {
+<<<<<<< HEAD
+<<<<<<< HEAD
+  display: block;
+  /* width: 100%; */
+  padding: 0px 15px 10px 0px;
+  font-size: 18px;
+  /* line-height: 1.5; */
+  color: #fff;
+  background-color: transparent;
+  /* background-clip: padding-box; */
+  border-bottom: 1px solid rgb(253, 238, 238) !important;
+  border-radius: 0px;
+  /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
+  border: 0px;
+=======
+=======
+>>>>>>> Reservation
     display: block;
     /* width: 100%; */
     padding: 0px 15px 10px 0px;
@@ -1074,6 +1143,10 @@ textarea#comment::placeholder {
     border-radius: 0px;
     /* transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; */
     border: 0px;
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
+>>>>>>> Reservation
 }
 .input-group-text {
     padding: 0px;
@@ -1201,8 +1274,18 @@ textarea#comment::placeholder {
 .copyright_text a{
     color: #000;
 }
+<<<<<<< HEAD
+<<<<<<< HEAD
+.copyright_text a:hover {
+  color: #55d42a;
+=======
 .copyright_text a:hover{
     color: var(--green);
+>>>>>>> Reservation
+=======
+.copyright_text a:hover{
+    color: var(--green);
+>>>>>>> Reservation
 }
 
 
@@ -1259,6 +1342,30 @@ textarea#comment::placeholder {
     margin-left: 250px; /* Same as the width of the sidenav */
   }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+.sidenav a {
+  padding: 6px 6px 6px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 250px; /* Same as the width of the sidenav */
+}
+
+.bg-cards {
+  background-color: #55d42a;
+}
+=======
+=======
+>>>>>>> Reservation
   .bg-cards{
     background-color: var(--green);
   }
@@ -1315,4 +1422,9 @@ textarea#comment::placeholder {
   {
       margin-bottom: 30px;
   }
+<<<<<<< HEAD
   
+>>>>>>> Reservation
+=======
+  
+>>>>>>> Reservation

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",
     "debug_toolbar",
     "Home",
     "Reservation",
@@ -45,7 +46,10 @@ INSTALLED_APPS = [
     "Reservation.reservation_function",
     "Reports",
     "Reports.scripts",
+<<<<<<< HEAD
     "django.contrib.humanize",
+=======
+>>>>>>> Reservation
 ]
 
 MIDDLEWARE = [

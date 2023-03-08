@@ -74,7 +74,11 @@
                      </li>
                      <li class="nav-item">
 <<<<<<< HEAD
+<<<<<<< HEAD
                         <a class="nav-link" href="{%url 'about'%}" disable>Gallery</a>
+=======
+                        <a class="nav-link" href="{%url 'gallery'%}">Gallery</a>
+>>>>>>> Reservation
 =======
                         <a class="nav-link" href="{%url 'gallery'%}">Gallery</a>
 >>>>>>> Reservation

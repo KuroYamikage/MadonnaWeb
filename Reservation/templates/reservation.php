@@ -16,7 +16,13 @@
 			<div class="row">
 				<div class="booking-form">
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<form>
+=======
+					<form method="POST">
+						{% csrf_token %}
+						<div class="select-div">
+>>>>>>> Reservation
 =======
 					<form method="POST">
 						{% csrf_token %}
@@ -27,6 +33,10 @@
 								<div class="form-header">
 									<h2>Book Now</h2>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+									<h3 class="mb-2">{{form.non_field_errors.as_text}}</h3>
+>>>>>>> Reservation
 =======
 									<h3 class="mb-2">{{form.non_field_errors.as_text}}</h3>
 >>>>>>> Reservation
@@ -38,7 +48,11 @@
 										<div class="form-group">
 											<span class="form-label">Check In</span>
 <<<<<<< HEAD
+<<<<<<< HEAD
 											<input class="form-control" type="date">
+=======
+											{{form.checkIn}}
+>>>>>>> Reservation
 =======
 											{{form.checkIn}}
 >>>>>>> Reservation
@@ -46,6 +60,7 @@
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
+<<<<<<< HEAD
 <<<<<<< HEAD
 											<span class="form-label">Check out</span>
 											<input class="form-control" type="date">
@@ -64,6 +79,8 @@
 										</div>
 									</div>
 =======
+=======
+>>>>>>> Reservation
 											<span class="form-label">Time and Maximum Pax</span>
 											{{form.prices}}
 										</div>
@@ -90,23 +107,32 @@
 									
 									
 									
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
 >>>>>>> Reservation
 								</div>
 							</div>
 							<div class="col-md-2">
 								<div class="form-btn">
 <<<<<<< HEAD
+<<<<<<< HEAD
 									<button class="submit-btn">Check availability</button>
 								</div>
 							</div>
 						</div>
 =======
+=======
+>>>>>>> Reservation
 									<button class="submit-btn" name="new">Check availability</button>
 									
 								</div>
 							</div>
 						</div>
 					</div>
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
 >>>>>>> Reservation
 					</form>
 				</div>
@@ -114,9 +140,12 @@
 		</div>
 	</div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 </div>
 </div>	
 =======
+=======
+>>>>>>> Reservation
 
 
 	<div class="section-center2">
@@ -238,5 +267,8 @@ $(function () {
 });
 
 </script>
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
 >>>>>>> Reservation
  {% endblock %}

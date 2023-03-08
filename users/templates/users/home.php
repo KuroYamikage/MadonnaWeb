@@ -4,6 +4,26 @@
 {%block head%}
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+<div class="container center-content " style="background-color:#ffb607;">
+    
+<h1 class=>Current Reservations</h1>
+        <table border="1" class="reserve">
+        {% for x in  reserve%}
+            <tr>
+                <td> {{ x.firstname}} {{x.lastname}}</td>
+                {% comment %} <td> {{x.checkIn`}}</td> {% endcomment %}
+                <td><a href = "{%url 'reservation.edit' pk=x.reservationID%}"> Edit Reservation</a></td>
+                <td><a href = "{%url 'reservation.delete' pk=x.reservationID%}"> Delere Reservation</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+        <a href="{%url 'reserve.staff.new'%}" class="btn btn-primary my-3">Add new Reservation</a>
+</div>
+=======
+=======
+>>>>>>> Reservation
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<link rel="stylesheet" href="{%static 'css/Cal_style10.css'%}">
@@ -320,5 +340,9 @@ const months = [
 				</div>
 			</div>
 		</div>
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
+>>>>>>> Reservation
 {%endblock%}
 

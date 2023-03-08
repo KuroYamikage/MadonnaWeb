@@ -1,5 +1,5 @@
 {%extends "master2.php"%}
-{%load static%}
+{%load static}
 
 {%block title%} Edit Facility{{facility.facilityName}} {%endblock%}
 

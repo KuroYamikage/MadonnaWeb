@@ -1,13 +1,12 @@
 import datetime
-from Reservation.models import Facility, Reservations, Prices
+from Reservation.models import Facility, Reservations
 
 
-def check_availability(Prices, checkIn, checkOut):
+def check_availability(facility, checkIn, checkOut):
     avail_list = []
-    reservationList = Reservations.objects.filter(prices=Prices)
-    print(reservationList)
+    reservationList = Reservations.objects.filter(facility=facility)
     for reservation in reservationList:
-        if reservation.checkIn > checkOut or reservation.checkOut < checkIn:
+        if reservation.checkIn > checkOut or reservation.checkOut < checkOut:
             avail_list.append(True)
         else:
             avail_list.append(False)

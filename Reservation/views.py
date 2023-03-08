@@ -62,15 +62,6 @@ def reserveView(request):
     }
     return render(request, "reservation.php", context)
 
-    def get_context_data(self, **kwargs):
-        context = super(reserveView, self).get_context_data(**kwargs)
-        context["checkIn"] = Reservations.objects.values("checkIn")
-        context["checkOut"] = Reservations.objects.values("checkOut")
-        """ context['venue_list'] = Venue.objects.all()
-    context['festival_list'] = Festival.objects.all()
-    # And so on for more models """
-        return context
-
 
 class newReserve(CreateView):
     model = Reservations
@@ -198,36 +189,41 @@ class viewReservation(DetailView):
     # And so on for more models """
         return context
 
-
-def reserveNew(request):
-    obj = Customer.objects.values()
-    form = ReservationForm(request.POST or None)
-    form2 = CustomerForm(request.POST or None)
-    context = {
-        "form": form,
-        "form_2": form2,
-        "object": obj,
-        "prices": Prices.objects.all().values(),
-    }
-
-    if all([form.is_valid(), form2.is_valid()]):
-        parent = form2.save(commit=False)
-        child = form.save(commit=False)
-        child.customer = parent
-        print(form2.cleaned_data)
-        print(form.cleaned_data)
-        """ form2.save()
+    def reserveNew(request):
+        obj = Customer.objects.values()
+        form = ReservationForm(request.POST or None)
+        form2 = CustomerForm(request.POST or None)
+        context = {
+            "form": form,
+            "form_2": form2,
+            "object": obj,
+            "prices": Prices.objects.all().values(),
+        }
+        if all([form.is_valid(), form2.is_valid()]):
+            parent = form2.save(commit=False)
+            child = form.save(commit=False)
+            child.customer = parent
+            print(form2.cleaned_data)
+            print(form.cleaned_data)
+            """ form2.save()
     form.save() """
-        for x in obj:
-            if (
-                form2.cleaned_data["firstname"].lower() == x["firstname"].lower()
-                and form2.cleaned_data["lastname"].lower() == x["lastname"].lower()
-                and form2.cleaned_data["email"].lower() == x["email"].lower()
-            ):
-                print(x["firstname"])
-                form.cleaned_data["customer_id"] = x["id"]
-                print(form.cleaned_data)
-    return render(request, "reservation_form_Customer.php", context)
+            for x in obj:
+                if (
+                    form2.cleaned_data["firstname"].lower() == x["firstname"].lower()
+                    and form2.cleaned_data["lastname"].lower() == x["lastname"].lower()
+                    and form2.cleaned_data["email"].lower() == x["email"].lower()
+                ):
+                    print(exist)
+                    if exist == False:
+                        child.customer = parent
+                        form2.save()
+                        print(form.cleaned_data)
+
+                    form.save()
+                return redirect("reserve.receipt", pk=pk)
+            return render(request, "reservation_edit_form.php", context)
+
+        return render(request, "reservation_form_Customer.php", context)
 
 
 class newCustomer(CreateView):
@@ -283,6 +279,12 @@ class editPrice(LoginRequiredMixin, UpdateView):
     form_class = PriceForm
     success_url = "/staff/"
     template_name = "prices_new.php"
+
+
+""" class DiscountView(ListView):
+  model = Discount
+  template_name = 'discount_view.php'
+   """
 
 
 class viewDiscount(LoginRequiredMixin, ListView):

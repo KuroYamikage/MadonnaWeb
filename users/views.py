@@ -10,6 +10,10 @@ from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import PasswordChangeForm
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+from django.contrib.auth.views import PasswordChangeView
+>>>>>>> Reservation
 =======
 from django.contrib.auth.views import PasswordChangeView
 >>>>>>> Reservation
@@ -18,12 +22,18 @@ from django.contrib.auth.models import User
 from Reservation.models import Reservations, Facility
 from Reservation.forms import FacilityForm
 <<<<<<< HEAD
+<<<<<<< HEAD
 from django.contrib.auth.models import User
 =======
+=======
+>>>>>>> Reservation
 from Home.forms import GalleryForm
 from django.contrib.auth.models import User
 from .mixins import GroupRequiredMixin
 
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
 >>>>>>> Reservation
 
 # Create your views here.
@@ -56,10 +66,13 @@ class registerUser(LoginRequiredMixin, CreateView):
   success_url = '/accounts/'
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 class changepassword(UpdateView, LoginRequiredMixin):
   form_class = PasswordChangeForm
   template_name = 'users/changePass.php'
 =======
+=======
+>>>>>>> Reservation
 class changepassword(PasswordChangeView, LoginRequiredMixin):
   form_class = PasswordChangeForm
   template_name = 'users/user_changePass.php'
@@ -68,6 +81,9 @@ class editUser(LoginRequiredMixin,UpdateView):
   form_class=UserUpdateForm
   model = User
   template_name='users/edit_user.php'
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
 >>>>>>> Reservation
   success_url = '/staff'
 
@@ -131,8 +147,11 @@ class editFacility(LoginRequiredMixin, UpdateView):
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> Reservation
 class addGallery (LoginRequiredMixin, CreateView):
   model = Gallery
   form_class = GalleryForm
@@ -159,6 +178,9 @@ class editGallery(LoginRequiredMixin, UpdateView):
   template_name = 'users/gallery_edit.php'
   login_url = 'login'
   success_url = '../'
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
 >>>>>>> Reservation
 
   

@@ -4,6 +4,7 @@ from django.urls import include, path
 
 urlpatterns = [
 <<<<<<< HEAD
+<<<<<<< HEAD
     path('test/', views.test,name='test'),
     path('reserve/', views.reserveView.as_view(), name='reserve'),
     path('reservation/<int:pk>', views.moreDetailView.as_view(),name = 'reservation'),
@@ -19,6 +20,8 @@ urlpatterns = [
 
 ]
 =======
+=======
+>>>>>>> Reservation
     path("test/", views.test, name="test"),
     path("reserve/", views.reserveView, name="reserve"),
     path("reservation/<int:pk>", views.moreDetailView.as_view(), name="reservation"),
@@ -30,6 +33,7 @@ urlpatterns = [
     path("customer/new", views.newCustomer.as_view(), name="customer.new"),
     path("price/new", views.addPrice.as_view(), name="price.new"),
     path("price/edit/<int:pk>", views.editPrice.as_view(), name="price.edit"),
+    path("test/form", views.reserveNew, name="test1"),
     path("discount", views.viewDiscount.as_view(), name="discount.view"),
     path("discount/new", views.newDiscount.as_view(), name="discount.new"),
     path("discount/edit/<int:pk>", views.editDiscount.as_view(), name="discount.edit"),
@@ -39,4 +43,7 @@ urlpatterns = [
         name="reserve.receipt",
     ),
 ]
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
 >>>>>>> Reservation

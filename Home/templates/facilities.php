@@ -12,7 +12,7 @@
     </div>
     
 {% comment %} <div class="row mb-2"> {% endcomment %}
-  <div class="row tm-row m-auto container border border-dark rounded reserve-form reserve_section">
+  <div class="row tm-row m-auto container rounded reserve-form reserve_section">
   {%for x in facility%}
 
         <article class="col-12 col-md-6 tm-post">

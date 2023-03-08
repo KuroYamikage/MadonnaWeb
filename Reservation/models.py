@@ -18,9 +18,6 @@ class Discount(models.Model):
     discountPrice = models.DecimalField(decimal_places=2, max_digits=10)
     discountActive = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.discountCode
-
 
 class Facility(models.Model):
     FacilityCategoriesChoices = (
@@ -63,7 +60,6 @@ class Reservations(models.Model):
         ("Pending", "Pending"),
         ("Cancelled", "Cancelled"),
     )
-
     reservationID = models.BigAutoField(primary_key=True)
     date = models.DateField(auto_now=True)
     time = models.TimeField(auto_now=True)
