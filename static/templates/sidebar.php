@@ -90,7 +90,7 @@
                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Reservation</a>
                            <div class="dropdown-menu bg-transparent border-0">
                                <a href="{% url 'main'%}" class="dropdown-item">Reservations</a>
-                               <a href="typography.html" class="dropdown-item">Discounts</a>
+                               <a href=" {% url 'discount.view' %} " class="dropdown-item">Discounts</a>
                            </div>
                        </div>
                        <a href="{%url 'user.view'%}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Users</a>

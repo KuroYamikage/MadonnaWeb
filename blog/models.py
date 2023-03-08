@@ -15,4 +15,5 @@ class Gallery(models.Model):
     galleryTitle = models.CharField(max_length=255)
     galleryPic = models.ImageField(upload_to='gallery')
     galleryTag = models.CharField(max_length=100)
+    galleryUploader = models.ForeignKey(User, on_delete=models.CASCADE, related_name='gallery')
     

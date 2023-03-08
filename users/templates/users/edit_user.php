@@ -1,9 +1,9 @@
 {%extends "master2.php"%}
 
-{% block title %}Register{% endblock title %}
+{% block title %}Edit User {{request.user.username}}{% endblock title %}
 
 {% block content%}
-<!--<h3>Register here</h3>
+{% comment %} <!--<h3>Register here</h3>
 <hr>
 
 <form action="" method="POST">
@@ -19,8 +19,8 @@
         </div>
     {% endfor %}
     <button type="submit">Register</button>
-</form>-->
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+</form>--> {% endcomment %}
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">{{request.user.username}}'s Account</h3>
             <form method="POST">
               {%csrf_token%}
               
@@ -103,6 +103,17 @@
                   </div>
 
                 </div>
+
+                <div class="col-md-6 mb-4">
+
+                    <div class="form-outline">
+                      {{form.is_active.label_tag}}
+                      {{form.is_active.errors}}
+                      {{form.is_active}}
+                      {{form.is_active.help_text}}
+                    </div>
+  
+                  </div>
               </div>
               
 
