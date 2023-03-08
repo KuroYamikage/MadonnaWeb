@@ -31,21 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-<<<<<<< HEAD
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'debug_toolbar',
-    'Home.apps.HomeConfig',
-    'Reservation',
-    'users.apps.UsersConfig',
-    'blog',
-    'Reservation.reservation_function'
-    
-=======
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -61,7 +46,6 @@ INSTALLED_APPS = [
     "Reports",
     "Reports.scripts",
     "django.contrib.humanize",
->>>>>>> Reservation
 ]
 
 MIDDLEWARE = [
@@ -100,15 +84,9 @@ TEMPLATES = [
         },
     },
 ]
-<<<<<<< HEAD
-MEDIA_ROOT = BASE_DIR/'Media'
-MEDIA_URL = ''
-WSGI_APPLICATION = 'MadonnaWeb.wsgi.application'
-=======
 MEDIA_ROOT = BASE_DIR / "Media"
 MEDIA_URL = ""
 WSGI_APPLICATION = "MadonnaWeb.wsgi.application"
->>>>>>> Reservation
 
 
 # Database
@@ -166,16 +144,8 @@ LOGIN_REDIRECT_URL = "home"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-<<<<<<< HEAD
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_REDIRECT_URL = '/staff/'
-MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-""" SESSION_COOKIE_AGE = 5*60 """
-SESSION_EXPIRE_AT_BROWSER_CLOSE=True
-=======
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "/staff"
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
 """ SESSION_COOKIE_AGE = 5*60 """
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
->>>>>>> Reservation
