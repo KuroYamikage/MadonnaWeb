@@ -85,7 +85,6 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                       <a href="" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                        <div class="nav-item dropdown">
                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Reservation</a>
                            <div class="dropdown-menu bg-transparent border-0">
@@ -93,6 +92,7 @@
                                <a href=" {% url 'discount.view' %} " class="dropdown-item">Discounts</a>
                            </div>
                        </div>
+                       <a href="{% url 'reports' %}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                        <a href="{%url 'user.view'%}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Users</a>
                        <div class="nav-item dropdown">
                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Home Page Management</a>

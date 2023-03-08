@@ -138,7 +138,7 @@ class ReservationEditForm(forms.ModelForm):
             'totalPayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),
             'balance' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),
             'downpayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True',}),
-            'facility' : forms.CheckboxSelectMultiple( attrs={'class' : 'form-control', "onclick":"facilitiesFee("")","id":"id_facility"}),
+            'facility' : CustomCheckboxSelectMultiple( attrs={'class' : 'form-control', "onclick":"facilitiesFee("")","id":"id_facility"}),
             'discount' : forms.TextInput(attrs={'class' : 'form-control'}),
             'timeIn' : forms.TimeInput(attrs={'class': 'form-control', 'type':'time', 'readonly':'True'}),
             'timeOut' : forms.TimeInput(attrs={'class': 'form-control', 'type':'time', 'readonly':'True'}),
