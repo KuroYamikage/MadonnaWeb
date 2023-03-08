@@ -74,6 +74,7 @@ class Reservations(models.Model):
   )
 
   reservationID = models.BigAutoField(primary_key=True)
+<<<<<<< HEAD
   date = models.DateField(auto_created=True, null=True)
 <<<<<<< HEAD
   time = models.TimeField(auto_created=True, null=True)
@@ -81,6 +82,10 @@ class Reservations(models.Model):
   checkOut=models.DateField()
 =======
   time = models.TimeField(auto_created=True,null=True)
+=======
+  date = models.DateField(auto_now=True)
+  time = models.TimeField(auto_now=True)
+>>>>>>> Reservation
   checkIn = models.DateField()
   checkOut=models.DateField()
   timeIn=models.TimeField()

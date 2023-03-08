@@ -1,41 +1,69 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 from django.shortcuts import render
 =======
 from django.shortcuts import render, redirect
 >>>>>>> Reservation
+=======
+from django.shortcuts import render, redirect, get_object_or_404
+>>>>>>> Reservation
 from datetime import datetime
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
+from django.views.generic import FormView, CreateView, TemplateView,ListView, DetailView, UpdateView
 from django.contrib.auth import login, authenticate
 <<<<<<< HEAD
 from Reservation.models import Reservations, Customer, Discount, Prices
 from Reservation.forms import ReservationForm, CustomerForm, PriceForm
 =======
 from Reservation.models import Reservations, Customer, Discount, Prices, Facility
+<<<<<<< HEAD
 from Reservation.forms import ReservationForm, CustomerForm, PriceForm, DiscountForm
+>>>>>>> Reservation
+=======
+from Reservation.forms import ReferenceChecker, ReservationChecker, ReservationForm, CustomerForm, PriceForm, DiscountForm, ReservationEditForm
 >>>>>>> Reservation
 from django.contrib.messages.views import SuccessMessageMixin
 from Reservation.reservation_function.availability import check_availability
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def test(request):
     return HttpResponse('this is a test')
 
-class reserveView(ListView):
+""" class reserveView(FormView):
   model = Reservations
+  form_class = ReservationChecker
   context_object_name = 'reserve'
   template_name='reservation.php'
+  success_url='/test/form' """
 
-  def get_context_data(self, **kwargs):
-    context = super(reserveView, self).get_context_data(**kwargs)
-    context['checkIn'] = Reservations.objects.values('checkIn')
-    context['checkOut'] = Reservations.objects.values('checkOut')
-    """ context['venue_list'] = Venue.objects.all()
-    context['festival_list'] = Festival.objects.all()
-    # And so on for more models """
-    return context
+
+def reserveView(request):
+  obj = Prices.objects.all().values()
+  form = ReservationChecker(None)
+  form2 = ReferenceChecker(None)
+  
+  if request.method=='POST' and 'new' in request.POST:
+    form = ReservationChecker(request.POST)
+    if (form.is_valid()):
+      print('valid')
+      return redirect('reservation.new')
+  if request.method=='POST' and 'check' in request.POST:
+    form2 = ReferenceChecker(request.POST)
+    if form2.is_valid():
+      pk = form2.cleaned_data['reference']
+      return redirect('reserve.receipt',referenceNum=pk)
+  context={
+    "form": form,
+    "form_2":form2,
+    "prices":obj,   
+  }
+  return render(request, 'reservation.php', context)
+
+
+
 
 class newReserve(CreateView):
   model = Reservations
@@ -89,46 +117,56 @@ def reserveNew(request):
   if all([form.is_valid(), form2.is_valid()]):
     data = form.cleaned_data
     data2=Prices.objects.all().values()
-    """ check1 = ''
-    checkID=0
-    for price in data2:
-      check1 = 'For '+price['dayTime'] +' Reservation with Maximum of '+str(price['maxPax'])+ ' Pax'
-      if check1 == str(data['prices']):
-        checkID=price['id']
-    prices_list = Prices.objects.filter(id = checkID).values_list('id') """
-    """ print(prices_list)
-    print(checkID) """
+  
     parent=form2.save(commit=False)
     child=form.save(commit=False)
     
-    """ print(form2.cleaned_data)
-    print(form.cleaned_data) """
-    """ available_price=[]
-    for price in prices_list:
-      print(check_availability(price, data['checkIn'],data['checkOut']))
-      if check_availability(price, data['checkIn'],data['checkOut']):
-        available_price.append(price)
-    if len(available_price)>0:
-      av_price = available_price[0] 
-      print('Available')
-    else:
-      print('no room available')
-      form.cleaned_data['prices'] = 0 
-    print(form.cleaned_data['prices']) 
-
-     """
     exist = False
     for x in obj:
-      print(form2.cleaned_data['firstname'].lower())
-      print(x['firstname'].lower())
-      print(form2.cleaned_data['firstname'].lower() == x['firstname'].lower())
-      print(form2.cleaned_data['lastname'].lower())
-      print(x['lastname'].lower())
-      print(form2.cleaned_data['lastname'].lower() == x['lastname'].lower())
-      print(form2.cleaned_data['email'].lower()) 
-      print(x['email'].lower())
-      print(form2.cleaned_data['email'].lower() == x['email'].lower())
-      print('')
+      if form2.cleaned_data['firstname'].lower() == x['firstname'].lower() and form2.cleaned_data['lastname'].lower() == x['lastname'].lower() and form2.cleaned_data['email'].lower() == x['email'].lower():
+        print(x['firstname'])
+        form.cleaned_data['customer_id'] = x['id']
+        print("exsist")
+        exist=True
+
+    print(exist)
+    if exist==False:
+      child.customer = parent
+        
+    print(form.cleaned_data)
+    pk = form.cleaned_data['referenceNum']
+    
+    form.save() 
+    return redirect('reserve.receipt',referenceNum=pk)
+  return render(request, 'reservation_form_Customer.php', context)
+
+@login_required
+def reserveEdit(request,pk):
+  obj = Customer.objects.values()
+  fields = get_object_or_404(Reservations, reservationID=pk)
+  pk2 = Reservations.objects.all().values_list('customer').filter(reservationID=pk)
+  fields2 = get_object_or_404(Customer, id=pk2[0][0])
+  print(fields)
+  form = ReservationEditForm(request.POST or None, instance=fields)
+  form2 = CustomerForm(request.POST or None, instance=fields2)
+  context={
+    "form": form,
+    "form_2":form2,
+    "object":obj,   
+    "prices":Prices.objects.all().values(),
+    "discount":Discount.objects.all().values().filter(discountActive=True),
+    "facility":Facility.objects.all().values().exclude(facilityCategory='Pool'),
+  }
+
+  if all([form.is_valid(), form2.is_valid()]):
+    data = form.cleaned_data
+    data2=Prices.objects.all().values()
+  
+    parent=form2.save(commit=False)
+    child=form.save(commit=False)
+    
+    exist = False
+    for x in obj:
       if form2.cleaned_data['firstname'].lower() == x['firstname'].lower() and form2.cleaned_data['lastname'].lower() == x['lastname'].lower() and form2.cleaned_data['email'].lower() == x['email'].lower():
         print(x['firstname'])
         form.cleaned_data['customer_id'] = x['id']
@@ -139,16 +177,24 @@ def reserveNew(request):
     if exist==False:
       child.customer = parent
       form2.save()
-      print('save')
     print(form.cleaned_data)
     
-    form.save()
-    return redirect('index')
-  return render(request, 'reservation_form_Customer.php', context)
+    form.save() 
+    return redirect('reserve.receipt',referenceNum=pk)
+  return render(request, 'reservation_edit_form.php', context)
 
-class viewReservation(LoginRequiredMixin, DetailView):
+
+class viewReservation(DetailView):
   model=Reservations
+  context_object_name = 'reserve'
   template_name='reference.php'
+<<<<<<< HEAD
+>>>>>>> Reservation
+=======
+  
+
+  def get_object(self, queryset=None):
+        return Reservations.objects.get(referenceNum=self.kwargs.get("referenceNum"))
 >>>>>>> Reservation
 
 
@@ -168,6 +214,9 @@ class reserveListView(LoginRequiredMixin,ListView):
   template_name = 'users/templates/users/home.php'
   login_url = "login"
 
+""" class checkReceipt(FormView):
+
+ """
 class newReserveStaff(LoginRequiredMixin,CreateView):
   model = Reservations
   form_class = ReservationForm
@@ -199,6 +248,7 @@ class editPrice(LoginRequiredMixin, UpdateView):
   success_url = '/staff/'
   template_name = 'prices_new.php'
 
+<<<<<<< HEAD
 """ class DiscountView(ListView):
   model = Discount
   template_name = 'discount_view.php'
@@ -206,6 +256,8 @@ class editPrice(LoginRequiredMixin, UpdateView):
    """
 =======
    """
+=======
+>>>>>>> Reservation
 
 
 

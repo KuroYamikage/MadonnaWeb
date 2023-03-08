@@ -5,7 +5,17 @@
 
 .section .section-center {
 	position: absolute;
-	top: 50%;
+	top: 40%;
+	left: 0;
+	right: 0;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+
+.section .section-center2 {
+	position: absolute;
+	top: 80%;
 	left: 0;
 	right: 0;
 	-webkit-transform: translateY(-50%);
