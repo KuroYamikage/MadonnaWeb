@@ -5,7 +5,8 @@ from django.urls import reverse
 from django.template import loader
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 from django.views.generic.edit import DeleteView
-from Reservation.models import Reservations
+from Reservation.models import Reservations, Facility
+from blog.models import Blog, Gallery
 
 
 
@@ -13,11 +14,20 @@ from Reservation.models import Reservations
 
 #Reservation Files
 
+class GalleryView(ListView):
+    model = Gallery
+    context_object_name = 'gallery'
+    template_name = "gallery.php"
 
+class detailGallery (DetailView):
+  model = Gallery
+  context_object_name= 'gallery'
+  template_name = 'gallery_detail.php'
 class sampleView(ListView):
   model = Reservations
   context_object_name = "reserve"
   template_name='test.php'
+  
 
 
 
@@ -25,6 +35,19 @@ class sampleView(ListView):
 #Home Page Views
 class indexView(TemplateView):
   template_name='index.php'
+  context_object_name = 'home'
+
+  def get_context_data(self, **kwargs):
+    context = super(indexView, self).get_context_data(**kwargs)
+    context['blog'] = Blog.objects.values()
+    context['pool1'] = Facility.objects.values_list('id','facilityPic','facilityName')
+
+    """ context['venue_list'] = Venue.objects.all()
+    context['festival_list'] = Festival.objects.all()
+    # And so on for more models """
+    return context
+
+
 
 class aboutView(TemplateView):
   template_name='about.php'
@@ -33,9 +56,14 @@ class aboutView(TemplateView):
 class addView(TemplateView):
   template_name = "add.php"
 
+class facilitiesView(ListView):
+  model = Facility
+  template_name = 'facilities.php'
+  context_object_name = 'facility'
+
 
 def reservations(request):
-  reserve = Reservations.objects.all().order_by('-reservationID')
+  reserve = Reservations.objects.all().order_by('reservationID')
   template = loader.get_template('reservation.php')
   reserve_html = []
   for instance in Reservations.objects.all():  # it's not serialization, but extracting of the useful fields

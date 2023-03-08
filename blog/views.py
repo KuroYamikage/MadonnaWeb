@@ -14,10 +14,10 @@ from django.contrib.auth import login, authenticate
 # Create your views here.
 #Blogs
 
-class detaliBlog(DetailView):
+class detailBlog(DetailView):
     model = Blog
     context_object_name = 'blog'
-    template_name = 'blog_view.php'
+    template_name = 'blog_detail.php'
 
 class blogCustomer(ListView):
   model = Blog
@@ -27,7 +27,7 @@ class blogCustomer(ListView):
 class newBlog(LoginRequiredMixin, CreateView, PermissionRequiredMixin):
   model = Blog
   form_class = BlogForms
-  success_url ='/staff/blog'
+  success_url ='/blog/staff/'
   template_name = 'new_Blog.php'
   login_url = "login"
   permission_required = ('blog.can_view')
@@ -41,15 +41,16 @@ class viewBlogs(PermissionRequiredMixin, LoginRequiredMixin, ListView):
   
 class deleteBlogs(LoginRequiredMixin, DeleteView):
   model= Blog
-  success_url = '/staff/blog'
+  success_url = '/blog/staff/'
   template_name = 'delete_blog.php'
   login_url = "login"
 class updateBlogs(LoginRequiredMixin, UpdateView, SuccessMessageMixin):
   model = Blog
   form_class = BlogForms
   success_message = 'List succcesfully edited'
-  success_url = '/staff/blog'
+  success_url = '/blog/staff/'
   template_name = 'edit_blog.php'
   login_url = "login"
+
 
 

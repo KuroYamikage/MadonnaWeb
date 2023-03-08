@@ -5,13 +5,10 @@
 {%block title%}login{%endblock%}
 
 {%block content%}
-<style>
-    ul.errorlist {display:none}
-    
-</style>
+
 <hr></hr>
 <div class="container center-content m-auto d-flex justify-content-center my-auto vertical-center opacity-25" style="max-width: 75%">
-
+    {{form.errors}}
 <form method="POST">
     {% csrf_token %}
     {% for field in form %}
@@ -25,7 +22,7 @@
 
 {%if form.errors%}
 <script>
-    window.alert("{{form.errors.as_text}}");
+    alert("{{form.errors.as_text}}");
 </script>
 {%endif%}
 {%endblock%}
