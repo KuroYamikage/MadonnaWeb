@@ -17,7 +17,8 @@ urlpatterns = [
     path('discount', views.viewDiscount.as_view(), name='discount.view'),
     path('discount/new', views.newDiscount.as_view(), name='discount.new'),
     path('discount/edit/<int:pk>', views.editDiscount.as_view(), name='discount.edit'),
-    path('reserve/receipt/<str:referenceNum>', views.viewReservation.as_view(), name='reserve.receipt')
+    path('reserve/receipt/<str:referenceNum>', views.viewReservation.as_view(), name='reserve.receipt'),
+    path('reserve/receipt', views.viewReservation.as_view(), name='receipt.check')
 
 
 ]

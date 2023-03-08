@@ -52,6 +52,8 @@
 							<div class="col-md-2">
 								<div class="form-btn">
 									<button class="submit-btn">Check availability</button>
+									already have a Reference Code?
+									<button class="submit-btn">Check status of Reservaion</button>
 								</div>
 							</div>
 						</div>
@@ -61,8 +63,10 @@
 			</div>
 		</div>
 	</div>
+	
 </div>
-</div>	
+</div>
+	
 <script>
 $(function () {
 	$('.select-div').on('change', 'select', function (e) {//use on to delegate
