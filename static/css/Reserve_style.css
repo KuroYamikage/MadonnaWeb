@@ -37,13 +37,8 @@
 }
 
 .booking-form>form .row.no-margin {
-<<<<<<< HEAD
 	margin-right: 110px;
 	margin-left: 20px;
-=======
-	margin-right: 0px;
-	margin-left: 0px;
->>>>>>> 1d031408bdfa2bbcacb8c470a65c967872f80461
 }
 
 .booking-form>form .row.no-margin>[class*="col-"] {
