@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     "Reservation.reservation_function",
     "Reports",
     "Reports.scripts",
-    "django.contrib.humanize",
 ]
 
 MIDDLEWARE = [
