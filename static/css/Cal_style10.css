@@ -8194,11 +8194,7 @@ h1, h2, h3, h4, h5,
 /*  Events display */
 .events-container {
   overflow-y: scroll;
-<<<<<<< HEAD
   background-color: #55d42a;
-=======
-  background-color: #1c7430;
->>>>>>> Reservation
   height: 100%;
   width: 50%;
   float: right;
