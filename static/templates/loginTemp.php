@@ -16,6 +16,7 @@
       <meta name="keywords" content="Resort">
       <meta name="description" content="">
       <meta name="author" content="YouNIX">
+
       <!-- bootstrap css -->
       <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
       <!-- style css -->
@@ -40,7 +41,7 @@
 
    {%endblock%}
     <!-- Javascript files-->
-      {% comment %} <script src="{%static 'js/jquery.min.js'%}"></script> {% endcomment %}
+      <script src="{%static 'js/jquery.min.js'%}"></script>
       <script src="{%static 'js/popper.min.js'%}"></script>
       <script src="{%static 'js/bootstrap.bundle.min.js'%}"></script>
       <script src="{%static 'js/jquery-3.0.0.min.js'%}"></script>

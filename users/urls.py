@@ -17,5 +17,6 @@ urlpatterns = [
     path('staff/gallery/<int:pk>', views.detailGallery.as_view(),name='gallery.staff.detail'),
     path('staff/gallery/edit/<int:pk>', views.editGallery.as_view(), name='gallery.staff.edit'),
     path('staff/password/change', views.changepassword.as_view(), name='password.change'),
-    path('accounts/edit/<int:pk>', views.editUser.as_view(), name='user.edit')
+    path('accounts/edit/<int:pk>', views.editUser.as_view(), name='user.edit'),
+    path('accounts/delete/<int:pk>', views.deleteGallery.as_view(), name='gallery.delete'),
 ]

@@ -17,7 +17,7 @@
                             <th scope="col">Discount Code</th>
                             <th scope="col">Discount Worth</th>
                             <th scope="col">Active</th>
-                            <th scope="col">Eedit</th>
+                            <th scope="col">Edit</th>
                         </tr>
                     </thead>
                     <tbody>

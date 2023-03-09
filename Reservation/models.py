@@ -79,19 +79,3 @@ class Reservations(models.Model):
   facility = models.ManyToManyField(Facility)
   prices = models.ForeignKey(Prices, on_delete=models.CASCADE)
   referenceNum = models.CharField(max_length=247, unique=True, null=True)
-
-    reservationID = models.BigAutoField(primary_key=True)
-    date = models.DateField(auto_created=True, null=True)
-    time = models.TimeField(auto_created=True, null=True)
-    checkIn = models.DateField()
-    checkOut = models.DateField()
-    downpayment = models.DecimalField(decimal_places=3, max_digits=10)
-    totalPayment = models.DecimalField(decimal_places=3, max_digits=10)
-    balance = models.DecimalField(decimal_places=3, max_digits=10)
-    status = models.CharField(
-        choices=reservationChoices, max_length=10, default="Pending"
-    )
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, default=1)
-    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, default=1)
-    facility = models.ManyToManyField(Facility)
-    prices = models.ForeignKey(Prices, on_delete=models.CASCADE)

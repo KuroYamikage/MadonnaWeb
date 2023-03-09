@@ -40,7 +40,13 @@
    </head>
    <body>
     <script src="{%static 'js/jquery.min.js'%}"></script>
-    <script src="{%static 'js/bootstrap.min.js'%}"></script>
+    <script src="{%static 'js/jquery-3.0.0.min.js'%}"></script>  
+      <!-- sidebar -->
+      <script src="{%static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+      <script src="{%static 'js/custom.js'%}"></script>
+      <!-- javascript --> 
+      <script src="{%static 'js/owl.carousel.js'%}"></script
+      <script src="{%static 'js/popper.js'%}"></script>   
   {% comment %} 
 <div id="mySidenav" class="sidenav">
   <img src="{% static 'images/logo2.png' %}">
@@ -85,17 +91,17 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
-                       <a href="" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                        <div class="nav-item dropdown">
-                           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Reservation</a>
+                           <a href="url" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Reservation</a>
                            <div class="dropdown-menu bg-transparent border-0">
                                <a href="{% url 'main'%}" class="dropdown-item">Reservations</a>
                                <a href=" {% url 'discount.view' %} " class="dropdown-item">Discounts</a>
                            </div>
                        </div>
+                       <a href="{% url 'reports' %}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                        <a href="{%url 'user.view'%}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Users</a>
                        <div class="nav-item dropdown">
-                           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Home Page Management</a>
+                           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Home Page</a>
                            <div class="dropdown-menu bg-transparent border-0">
                                <a href="{% url 'facility.staff' %}" class="dropdown-item">Facilities</a>
                                <a href="{% url 'blog' %}" class="dropdown-item">Blogs</a>
@@ -121,7 +127,7 @@
                 
                 <div class="nav navbar-nav ms-auto navbar-right">
                    
-                    <a href=" {% url 'password.change'%}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Chang Password</a>
+                    <a href=" {% url 'password.change'%}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Change Password</a>
                     <a href="{% url 'logout' %}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Signout</a>
                     
                 </div>
@@ -163,13 +169,11 @@
       <script src="{%static 'js/jquery-3.0.0.min.js'%}"></script>
       <script src="{%static 'js/plugin.js'%}"></script>
       <script src="{%static 'js/popper.js'%}"></script>  
-      <script src="{%static 'js/main.js'%}"></script>
       <!-- sidebar -->
       <script src="{%static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
       <script src="{%static 'js/custom.js'%}"></script>
       <!-- javascript --> 
       <script src="{%static 'js/owl.carousel.js'%}"></script>
-      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js'%}"></script>
       <script src="{%static 'js/popper.js'%}"></script>      
    </body>
 </html>

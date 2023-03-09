@@ -24,55 +24,6 @@
 
 
 
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter Promos">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter irrigation">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter hdpe">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter spray">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-        <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter sprinkle">
-            <img src="http://fakeimg.pl/365x365/" class="img-responsive">
-        </div>
-
-
         {% for pics in gallery %}
         <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter {{pics.galleryTag}}">
             <a href="{%url 'gallery.staff.detail' pk=pics.id%}"><img src="../{{pics.galleryPic}}" class="img-responsive"></a>

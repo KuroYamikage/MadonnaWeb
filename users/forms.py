@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, Group
 
 
 class UserRegistrationForm(UserCreationForm):
-    group = forms.ModelMultipleChoiceField(queryset=Group.objects.all(), required=True)
+    group = forms.ModelChoiceField(queryset=Group.objects.all(), required=True)
     email = forms.EmailField()
 
     class Meta:
@@ -15,10 +15,9 @@ class UserRegistrationForm(UserCreationForm):
             'username' : forms.TextInput( attrs={'class' : 'form-control form-control-lg'}),
             'password1' : forms.PasswordInput( attrs={'class' : 'form-control form-control-lg'}),
             'password2' : forms.PasswordInput( attrs={'class' : 'form-control form-control-lg'}),
-            'email' : forms.TextInput(attrs={'class' : 'form-control form-control-lg'}),
+            'email' : forms.EmailInput(attrs={'class' : 'form-control form-control-lg'}),
             'first_name' : forms.TextInput( attrs={'class' : 'form-control form-control-lg'}),
             'last_name' : forms.TextInput( attrs={'class' : 'form-control form-control-lg'}),
-            'group' : forms.CheckboxSelectMultiple( attrs={'class' : 'form-control form-control-lg'}),
         }
 
         labels = {

@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
@@ -124,6 +125,12 @@ class addGallery (LoginRequiredMixin, CreateView):
   login_url = 'login'
   success_url = '/staff/gallery'
 
+  def form_valid(self, form):
+    self.object=form.save(commit=False)
+    self.object.galleryUploader = self.request.user
+    self.object.save()
+    return redirect(self.get_success_url())
+  
 class staffGallery (LoginRequiredMixin, ListView):
   model = Gallery
   context_object_name = 'gallery'
@@ -159,3 +166,9 @@ class editGallery(LoginRequiredMixin, UpdateView):
 
     context = {'form': form}
     return render(request, 'users/register.php', context) """
+
+class deleteGallery(LoginRequiredMixin, DeleteView):
+  model= Gallery
+  success_url='/staff/gallery'
+  template_name = 'users/delete_gallery.php'
+  login_url = 'login'

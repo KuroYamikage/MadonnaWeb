@@ -36,6 +36,7 @@
 
 .btn.btn-primary {
     color: #FFFFFF;
+    background-color: #242424;
 }
 
 .btn-square {
@@ -124,7 +125,7 @@
 /*** Navbar ***/
 .sidebar .navbar .navbar-nav .nav-link {
     padding: 7px 20px;
-    color: var(--dark);
+    color:#242424;
     font-weight: 500;
     border-left: 3px solid var(--light);
     border-radius: 0 30px 30px 0;
@@ -133,9 +134,9 @@
 
 .sidebar .navbar .navbar-nav .nav-link:hover,
 .sidebar .navbar .navbar-nav .nav-link.active {
-    color: var(--primary);
-    background: #FFFFFF;
-    border-color: var(--primary);
+    color: #55d42a;
+    background: #242424;
+    border-color: #55d42a;
 }
 
 .sidebar .navbar .navbar-nav .nav-link i {

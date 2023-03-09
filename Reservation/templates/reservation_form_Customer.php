@@ -13,8 +13,7 @@
 
 
 <div class="container py-5 h-50">
-    <div class="row d-flex justify-content-center align-items-center h-20  ">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+      <div class="col-12">
         <div class="card bg-cards text-white" style="border-radius: 1rem;">
           <div class="card-body text-center">
 
@@ -22,10 +21,11 @@
 
               <h2 class="fw-bold mb-2 text-uppercase">Reservation</h2>
 
-    <form  action="{% url 'reservation.new'%}" method = "POST">
+    <form  method = "POST">
         {%csrf_token%} 
         
         {{form.errors.as_text}}
+        {{form.errors}}
         <div class="select-div">
 
             <div class="form-row" >
@@ -61,21 +61,20 @@
                 </div>
             </div>
 
-            <div class="form-row" >
-                <div class="form-group col-md-12">
-                    {{form.checkOut.label}}   
-                    {{form.checkOut}}
-                </div>
-            </div>
+           
 
             <div class="form-row" >
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     {{form.timeIn.label}}   
                     {{form.timeIn}}
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     {{form.timeOut.label}}   
                     {{form.timeOut}}
+                </div>
+                <div class="form-group col-md-4">
+                    {{form.checkOut.label}}   
+                    {{form.checkOut}}
                 </div>
             </div>
 
@@ -102,32 +101,30 @@
     
         
             <div class="form-row">
-                <div class="form-group col-sm-12">
+                <div class="form-group col-sm-3">
                     {{form.discountAmount.label}}
                     {{form.discountAmount}}
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-12">
+            
+                <div class="form-group col-md-3">
                     {{form.totalPayment.label}}  
                     {{form.totalPayment}}
                 </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
+            
+                <div class="form-group col-md-3">
                     {{form.downpayment.label}}
                     {{form.downpayment}}
                 
                 </div>
-                <div class="form-group col-sm-12">
+                <div class="form-group col-sm-3">
                     {{form.balance.label}}
                     {{form.balance}}
                 </div> 
-                <div class="form-group col-sm-12">
+                <div class="form-group col-sm-4">
                     {{form.referenceNum}}
                 </div> 
-            </div>
+            
         </div>
 
     
@@ -137,7 +134,9 @@
 
 
             <button type="submit" onClick="submit1()" class="btn btn-primary"> Submit </button>
-            <a href="{%url 'reserve'%}" class="btn btn-danger"> cancel </a>
+            
+            <a href="
+            {% if request.user.is_authenticated %}{%url 'main'%}{% else %}{% url 'reserve' %}{% endif %}" class="btn btn-danger"> cancel </a>
         </div>
     </form>
 

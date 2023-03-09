@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core import serializers
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -31,6 +31,12 @@ class newBlog(LoginRequiredMixin, CreateView, PermissionRequiredMixin):
   template_name = 'new_Blog.php'
   login_url = "login"
   permission_required = ('blog.can_view')
+
+  def form_valid(self, form):
+    self.object=form.save(commit=False)
+    self.object.blog_owner = self.request.user
+    self.object.save()
+    return redirect(self.get_success_url())
 
 class viewBlogs(PermissionRequiredMixin, LoginRequiredMixin, ListView):
   permission_required = 'Home.view_Blog' 

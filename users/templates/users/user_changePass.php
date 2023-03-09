@@ -5,7 +5,7 @@
 
 {% block content%}
 
-<form method="POST">
+<form method="POST" method="password.change">
     <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Change Password</h3>
 
     {% csrf_token %}

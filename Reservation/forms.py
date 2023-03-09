@@ -2,7 +2,7 @@ from django import forms
 from django.utils import timezone
 from Reservation.models import Reservations, Customer, Facility, Prices, Discount
 from Home.models import Gallery
-from Reservation.reservation_function.availability import check_availability2 ,check_availability
+from Reservation.reservation_function.availability import check_availability2 ,check_availability, check_availability3
 
 
 class CustomCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
@@ -51,7 +51,7 @@ class ReservationForm(forms.ModelForm):
             'totalPayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),
             'balance' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),
             'downpayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True',}),
-            'facility' : CustomCheckboxSelectMultiple( attrs={'class' : 'form-row d-flex justify-content-center align-items-center h-20  ', "onclick":"facilitiesFee("")","id":"id_facility"}),
+            'facility' : CustomCheckboxSelectMultiple( attrs={'class' : 'form-control form-row d-flex justify-content-center align-items-center h-20  ', "onclick":"facilitiesFee("")","id":"id_facility"}),
             'discount' : forms.TextInput(attrs={'class' : 'form-control'}),
             'timeIn' : forms.TimeInput(attrs={'class': 'form-control', 'type':'time', 'readonly':'True'}),
             'timeOut' : forms.TimeInput(attrs={'class': 'form-control', 'type':'time', 'readonly':'True'}),
@@ -72,6 +72,8 @@ class ReservationForm(forms.ModelForm):
         prices=cleaned_data.get("prices")
         checkIn = cleaned_data.get("checkIn")
         checkOut = cleaned_data.get("checkOut")
+        timeIn = cleaned_data.get("timeIn")
+        timeOut = cleaned_data.get("timeOut")
         if checkIn < timezone.now().date():
             raise forms.ValidationError("Check in date cannot be in the past")
         if checkOut < timezone.now().date():
@@ -89,7 +91,7 @@ class ReservationForm(forms.ModelForm):
         available_price=[]
         for price in prices_list:
             print(check_availability(price, checkIn,checkOut))
-            if check_availability(price, checkIn,checkOut):
+            if check_availability2(price, checkIn,checkOut,timeIn, timeOut):
                 available_price.append(price)
         if len(available_price)>0:
             av_price = available_price[0] 
@@ -109,7 +111,7 @@ class ReservationEditForm(forms.ModelForm):
     ('Pending','Pending'),
     ('Cancelled','Cancelled'),
     )
-    discountAmount=forms.CharField(widget=forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}))
+    discountAmount=forms.CharField(widget=forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),initial=0)
     class Meta:
         reservationChoices=(
         ('Approved','Approved'),
@@ -117,7 +119,7 @@ class ReservationEditForm(forms.ModelForm):
         ('Cancelled','Cancelled'),
         )
         model = Reservations
-        discountAmount=forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'})
+        discountAmount=forms.IntegerField(widget=forms.NumberInput(attrs={'class' : 'form-control', 'readonly':'True'},))
         fields = (
             "checkIn",
             "checkOut",
@@ -138,12 +140,12 @@ class ReservationEditForm(forms.ModelForm):
             'totalPayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),
             'balance' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'}),
             'downpayment' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True',}),
-            'facility' : forms.CheckboxSelectMultiple( attrs={'class' : 'form-control', "onclick":"facilitiesFee("")","id":"id_facility"}),
+            'facility' : CustomCheckboxSelectMultiple( attrs={'class' : 'form-control form-row d-flex justify-content-center align-items-center h-20  '}),
             'discount' : forms.TextInput(attrs={'class' : 'form-control'}),
             'timeIn' : forms.TimeInput(attrs={'class': 'form-control', 'type':'time', 'readonly':'True'}),
             'timeOut' : forms.TimeInput(attrs={'class': 'form-control', 'type':'time', 'readonly':'True'}),
-            'referenceNum' : forms.TextInput(attrs={'class' : 'form-control','type':'hidden'}, ),
-            'status': forms.RadioSelect(choices=reservationChoices,attrs={'class' : 'form-control'})
+            'referenceNum' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'True'} ),
+            'status': forms.RadioSelect(choices=reservationChoices,attrs={'class' : 'd-flex form-control justify-content-center align-items-center h-20  '})
         }
 
         labels = {
@@ -152,18 +154,21 @@ class ReservationEditForm(forms.ModelForm):
             "totalPayment": "Total",
             "downpayment": "Downpayment Required",
             "balance": "Payment Balance",
-            'facility': 'Additional Facilities'
+            'facility': 'Additional Facilities',
+            'discountAmount': 'Amount of Discount'
         }
+
+    def __init__(self, *args, **kwargs):
+      self.user = kwargs.pop('user')  # cache the user object you pass in
+      super(ReservationEditForm, self).__init__(*args, **kwargs)  # and carry on to init the form
 
     def clean(self):
         cleaned_data=super().clean()
         prices=cleaned_data.get("prices")
         checkIn = cleaned_data.get("checkIn")
         checkOut = cleaned_data.get("checkOut")
-        if checkIn < timezone.now().date():
-            raise forms.ValidationError("Check in date cannot be in the past")
-        if checkOut < timezone.now().date():
-            raise forms.ValidationError("Check Out date cannot be in the past")
+        timeIn = cleaned_data.get("timeIn")
+        timeOut = cleaned_data.get("timeOut")
         if checkOut < checkIn:
             raise forms.ValidationError("Check Out date cannot be earlier than check in")
         check1 = ''
@@ -177,7 +182,7 @@ class ReservationEditForm(forms.ModelForm):
         available_price=[]
         for price in prices_list:
             print(check_availability(price, checkIn,checkOut))
-            if check_availability(price, checkIn,checkOut):
+            if check_availability3(price, checkIn,checkOut,timeIn,timeOut,self.user):
                 available_price.append(price)
         if len(available_price)>0:
             av_price = available_price[0] 

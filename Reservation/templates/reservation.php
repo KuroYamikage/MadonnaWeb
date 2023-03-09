@@ -11,7 +11,52 @@
  {% block content %}
 <div class="container tm-row m-auto container reserve-form reserve_section"">
  <div id="booking" class="section">
+
+
+
+
 	<div class="section-center">
+		<div class="container">
+			<div class="row">
+				<div class="booking-form">
+					<form method="POST">
+						{% csrf_token %}
+						<div class="select-div">
+						<div class="row no-margin">
+							<div class="col-md-3">
+								<div class="form-header">
+									<h3>Already have a Reservaion?</h3>
+									<h4 class="mb-2">{{form2.non_sfield_errors.as_text}}</h4>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="row no-margin">
+									<div class="col-md-6">
+										<div class="form-group">
+											<span class="form-label">Reference Code</span>
+											{{form_2.reference}}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-btn">
+									<button class="submit-btn" name="check">Check status</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<div class="section-center2">
 		<div class="container">
 			<div class="row">
 				<div class="booking-form">
@@ -25,7 +70,7 @@
 									<h3 class="mb-2">{{form.non_field_errors.as_text}}</h3>
 								</div>
 							</div>
-							<div class="col-md-7">
+							<div class="col-md-6">
 								<div class="row no-margin">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -78,44 +123,7 @@
 	</div>
 
 
-	<div class="section-center2">
-		<div class="container">
-			<div class="row">
-				<div class="booking-form">
-					<form method="POST">
-						{% csrf_token %}
-						<div class="select-div">
-						<div class="row no-margin">
-							<div class="col-md-3">
-								<div class="form-header">
-									<h3>Already have a Reservaion?</h3>
-									<h4 class="mb-2">{{form2.non_sfield_errors.as_text}}</h4>
-								</div>
-							</div>
-							<div class="col-md-7">
-								<div class="row no-margin">
-									<div class="col-md-12">
-										<div class="form-group">
-											<span class="form-label">Reference Code</span>
-											{{form_2.reference}}
-										</div>
-									</div>
-									
-									
-								</div>
-							</div>
-							<div class="col-md-2">
-								<div class="form-btn">
-									<button class="submit-btn" name="check">Check status</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	
 </div>
 </div>

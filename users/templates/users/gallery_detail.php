@@ -14,7 +14,7 @@
                 <p class="card-title">Tag:{{gallery.galleryTag}}</p>
                 <a href="{%url 'gallery.staff.edit' pk=gallery.id%}" class="btn btn-primary my-3">Edit</a>
                 <a href="{%url 'gallery.staff'%}" class="btn btn-primary my-3">Go Back to Gallery</a>
-                <a href="{%url 'gallery.staff'%}" class="btn btn-primary my-3">Delete</a>
+                <a href="{%url 'gallery.delete' pk=gallery.id%}" class="btn btn-primary my-3">Delete</a>
             </div>
         </div>
 </div>

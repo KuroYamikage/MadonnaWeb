@@ -96,11 +96,12 @@ def reserveNew(request):
 
     print(exist)
     if exist==False:
-      child.customer = parent
+        child.customer = parent
+        form2.save()
+    
         
     print(form.cleaned_data)
     pk = form.cleaned_data['referenceNum']
-    
     form.save() 
     return redirect('reserve.receipt',referenceNum=pk)
   return render(request, 'reservation_form_Customer.php', context)
@@ -112,7 +113,7 @@ def reserveEdit(request,pk):
   pk2 = Reservations.objects.all().values_list('customer').filter(reservationID=pk)
   fields2 = get_object_or_404(Customer, id=pk2[0][0])
   print(fields)
-  form = ReservationEditForm(request.POST or None, instance=fields)
+  form = ReservationEditForm(request.POST or None, user=pk, instance=fields)
   form2 = CustomerForm(request.POST or None, instance=fields2)
   context={
     "form": form,
@@ -145,11 +146,9 @@ def reserveEdit(request,pk):
     print(form.cleaned_data)
     
     form.save() 
-    return redirect('reserve.receipt',referenceNum=pk)
+    return redirect('main')
   return render(request, 'reservation_edit_form.php', context)
 
-            form.save()
-    return render(request, "reservation_form_Customer.php", context)
 
 class viewReservation(DetailView):
   model=Reservations
@@ -183,7 +182,7 @@ class newReserveStaff(LoginRequiredMixin,CreateView):
   success_url = 'main'
   template_name = 'reservations_form.php'
   login_url = "login"
->>>>>>> Reservation
+
 
 
 class updateReserve(LoginRequiredMixin, UpdateView):
@@ -226,3 +225,11 @@ class editDiscount(LoginRequiredMixin, UpdateView):
   form_class=DiscountForm
   template_name='discount_new.php'
   success_url='/discount'
+
+
+class deleteReservation(LoginRequiredMixin,DeleteView):
+  model= Reservations
+  context_object_name = 'reserve'
+  success_url = 'main'
+  template_name = 'delete_reservation.php'
+  login_url = "login"

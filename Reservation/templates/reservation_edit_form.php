@@ -1,4 +1,4 @@
-{%extends 'sidebar.php'%}
+{%extends 'loginTemp.php'%}
 {%load static%}
 
 
@@ -6,128 +6,135 @@
 
 
  {%block content%}
-<style>
-    ul.errorlist {display:none}
-    
-</style>
 
 
-<div class="container py-5 h-50">
-    <div class="row d-flex justify-content-center align-items-center h-20  ">
-      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-        <div class="card bg-cards" style="border-radius: 1rem;">
-          <div class="card-body text-center">
 
-            <div class="mb-md-2 mt-md-3 pb-2">
+ <div class="container py-5 h-50">
+    <div class="col-12">
+      <div class="card bg-cards text-white" style="border-radius: 1rem;">
+        <div class="card-body text-center">
 
-    <form  method = "POST">
-        {%csrf_token%} 
-        
-        {{form.errors.as_text}}
-        <div class="select-div">
+          <div class="mb-md-2 mt-md-3 pb-2">
 
-            <div class="form-row" >
-                <div class="form-group col-md-6">
-                    {{form_2.firstname.label}}   
-                    {{form_2.firstname}}
-                </div>
-                <div class="form-group col-md-6">
-                    {{form_2.lastname.label}}   
-                    {{form_2.lastname}}
-                </div>
-            </div>
-            <div class="form-row" >
-                <div class="form-group col-md-6">
-                    {{form_2.contactNumber.label}}   
-                    {{form_2.contactNumber}}
-                </div>
-                <div class="form-group col-md-6">
-                    {{form_2.email.label}}   
-                    {{form_2.email}}
-                </div>
-            </div>
-            
-        
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    {{form.checkIn.label}}   
-                    {{form.checkIn}}
-                </div>
-                <div class="form-group col-md-12">
-                    {{form.prices.label}}
-                    {{form.prices}}
-                </div>
-            </div>
+            <h2 class="fw-bold mb-2 text-uppercase">Reservation</h2>
 
-            <div class="form-row" >
-                <div class="form-group col-md-12">
-                    {{form.checkOut.label}}   
-                    {{form.checkOut}}
-                </div>
-            </div>
+  <form  method = "POST">
+      {%csrf_token%} 
+      
+      {{form.errors.as_text}}
+      {{form.errors}}
+      <div class="select-div">
 
-            <div class="form-row" >
-                <div class="form-group col-md-6">
-                    {{form.timeIn.label}}   
-                    {{form.timeIn}}
-                </div>
-                <div class="form-group col-md-6">
-                    {{form.timeOut.label}}   
-                    {{form.timeOut}}
-                </div>
-            </div>
+          <div class="form-row" >
+              <div class="form-group col-md-6">
+                  {{form_2.firstname.label}}   
+                  {{form_2.firstname}}
+              </div>
+              <div class="form-group col-md-6">
+                  {{form_2.lastname.label}}   
+                  {{form_2.lastname}}
+              </div>
+          </div>
+          <div class="form-row" >
+              <div class="form-group col-md-6">
+                  {{form_2.contactNumber.label}}   
+                  {{form_2.contactNumber}}
+              </div>
+              <div class="form-group col-md-6">
+                  {{form_2.email.label}}   
+                  {{form_2.email}}
+              </div>
+          </div>
+          
+      
+          <div class="form-row">
+              <div class="form-group col-md-12">
+                  {{form.checkIn.label}}   
+                  {{form.checkIn}}
+              </div>
+              <div class="form-group col-md-12">
+                  {{form.prices.label}}
+                  {{form.prices}}
+              </div>
+          </div>
 
-            
-            <div class="form-row">
+         
+
+          <div class="form-row" >
+              <div class="form-group col-md-4">
+                  {{form.timeIn.label}}   
+                  {{form.timeIn}}
+              </div>
+              <div class="form-group col-md-4">
+                  {{form.timeOut.label}}   
+                  {{form.timeOut}}
+              </div>
+              <div class="form-group col-md-4">
+                  {{form.checkOut.label}}   
+                  {{form.checkOut}}
+              </div>
+          </div>
+
+          
+          <div class="form-row">
+              <div class="form-group col-sm-12">
+                  <div class="form-check">
+                  {{form.facility.label}}
+                  {{form.facility}}
+                  </div>
+              </div> 
+          </div>
+
+          <div class="form-row">
+              <div class="form-group col-sm-12">
+                  {{form.discount.label}}</br>
+                  <i><span id="message"></span></i>
+                  {{form.discount}}
+              </div>
+              <div class="form-group col-sm-12">
+                  <input type="button" name="btn" id="btn" value="Check Discount Code" onClick="applyDiscount(document.getElementById('id_totalPayment').value)">
+              </div>
+          </div>
+  
+      
+          <div class="form-row">
+              <div class="form-group col-sm-3">
+                  {{form.discountAmount.label}}
+                  {{form.discountAmount}}
+              </div>
+
+          
+              <div class="form-group col-md-3">
+                  {{form.totalPayment.label}}  
+                  {{form.totalPayment}}
+              </div>
+          
+              <div class="form-group col-md-3">
+                  {{form.downpayment.label}}
+                  {{form.downpayment}}
+              
+              </div>
+              <div class="form-group col-sm-3">
+                  {{form.balance.label}}
+                  {{form.balance}} 
+          
+      </div>
+    </div>
+      <div class="form-row">
                 <div class="form-group col-sm-12">
-                    {{form.facility.label}}
-                    {{form.facility}}
-                </div> 
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-sm-12">
-                    {{form.discount.label}}</br>
-                    <i><span id="message"></span></i>
-                    {{form.discount}}
-                </div>
-                <div class="form-group col-sm-12">
-                    <input type="button" name="btn" id="btn" value="Check Discount Code" onClick="applyDiscount(document.getElementById('id_totalPayment').value)">
-                </div>
-            </div>
-    
-        
-            <div class="form-row">
-                <div class="form-group col-sm-12">
-                    {{form.discountAmount.label}}
-                    {{form.discountAmount}}
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    {{form.totalPayment.label}}  
-                    {{form.totalPayment}}
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    {{form.downpayment.label}}
-                    {{form.downpayment}}
-                
-                </div>
-                <div class="form-group col-sm-12">
-                    {{form.balance.label}}
-                    {{form.balance}}
-                </div> 
-                <div class="form-group col-sm-12">
-                    {{form.referenceNum}}
-                </div> 
-                <div class="form-group col-sm-12">
+                    {{form.status.label}}
                     {{form.status}}
                 </div> 
+            </div> 
+            <div class="form-row">
+            <div class="form-group col-md-12">
+                {{form.referenceNum.label}}
+                {{form.referenceNum}}
+            </div>
+
             </div>
         </div>
+    </div>
 
     
 
@@ -135,8 +142,8 @@
         <div class="container d-flex justify-content-center">
 
 
-            <button type="submit" onClick="submit1()" class="btn btn-primary"> Submit </button>
-            <a href="{%url 'reserve'%}" class="btn btn-danger"> cancel </a>
+            <button type="submit" class="btn btn-primary"> Submit </button>
+            <a href="{%url 'main'%}" class="btn btn-danger"> cancel </a>
         </div>
     </form>
 
@@ -155,27 +162,7 @@
 </div>
 
 <script>
-    function submit1(){
-        switch (document.getElementById("id_discount").value){
-            {% for x in discount %}
-            case "{{x.discountCode}}":
-            document.getElementById("id_discount").value={{x.id}}
-            {% endfor %}
-            default:
-            document.getElementById("id_discount").value=1
-        }
-
-
-        const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let result = '';
-        const charactersLength = characters.length;
-        for ( let i = 0; i < 12; i++ ) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        var refNum = "MGREP" +"-" +result
-        console.log("MGREP" + result)
-        document.getElementById("id_referenceNum").value = refNum;
-    }
+   
 
     function applyDiscount(amount){
         var disAmt=0;
