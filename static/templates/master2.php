@@ -52,9 +52,20 @@
       <script src="{%static 'js/main11.js'%}"></script>    
       <!-- header section start -->  
 
+      <div class="container py-5 h-100">
+         <div class="row justify-content-center align-items-center h-100">
+           <div class="col-12 col-lg-9 col-xl-7">
+             <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+               <div class="card-body p-4 p-md-5">
+
    {%block content%}
 
    {%endblock%}
+</div>
+</div>
+</div>
+</div>
+</div>
     <!-- Javascript files-->
       <script src="{%static 'js/jquery.min.js'%}"></script>
       <script src="{%static 'js/popper.min.js'%}"></script>
@@ -62,15 +73,14 @@
       <script src="{%static 'js/jquery-3.0.0.min.js'%}"></script>
       <script src="{%static 'js/plugin.js'%}"></script>
       <script src="{%static 'js/popper.js'%}"></script>  
-      <script src="{%static 'js/main.js'%}"></script>
+     
       <!-- sidebar -->
       <script src="{%static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
       <script src="{%static 'js/custom.js'%}"></script>
       <!-- javascript --> 
       <script src="{%static 'js/owl.carousel.js'%}"></script>
-      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js'%}"></script>
+      
       <script src="{%static 'js/popper.js'%}"></script>  
-      <script src="{%static 'js/main10.js'%}"></script>    
-   </body>
+      </body>
 </html>
    

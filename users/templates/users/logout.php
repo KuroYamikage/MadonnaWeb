@@ -10,7 +10,4 @@
     <a href="{% url 'index' %}"><--- Or go back to home.</a>
     </div>
 
-    <h3>Login again?</h3>
-    <a href="{% url 'login' %}">---> Login</a> <br>
-    <a href="{% url 'index' %}"><--- Or go back to home.</a>
 {% endblock content %}

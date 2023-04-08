@@ -2,6 +2,7 @@
 {%load static%}
 {%block title%} Facility Editing Page{%endblock%}
 {%block content%}
+{% load humanize %}
 
 <div class="content">
 <div class="container">
@@ -19,7 +20,6 @@
                 <th scope="col">Category</th>
                 <th scope="col">Price</th>
                 <th scope="col">Edit</th>
-                <th scope="col">Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -29,9 +29,8 @@
                 <td>{{x.facilityName}}</td>
                 <td>{{x.facilityDescription}}</td>
                 <td>{{x.facilityCategory}}</td>
-                <td>{{x.facilityPrice}}</td>
+                <td>₱{{x.facilityPrice| intcomma}}</td>
                 <td><a class="btn btn-sm btn-primary" href="{%url 'facility.edit' pk=x.id%}">Edit</a></td>
-                <td><a class="btn btn-sm btn-primary" href="">Disable</a></td>
             </tr>
             {%endfor%}
         </tbody>

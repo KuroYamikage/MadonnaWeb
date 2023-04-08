@@ -19,8 +19,6 @@
                             <th scope="col">Email</th>
                             <th scope="col">Groups</th>
                             <th scope="col">Edit</th>
-                            <th scope="col">Delete</th>
-                        </tr>
                     </thead>
                     <tbody>
                         {% for user in  user%}
@@ -32,8 +30,7 @@
                             <td><ul>{%for group in user.groups.all%}
                                         <li>{{group.name}}</li>
                                         {%endfor%}</ul></td>
-                            <td><a class="btn btn-sm btn-primary" href="">Edit</a></td>
-                            <td><a class="btn btn-sm btn-primary" href="">Disable</a></td>
+                            <td><a class="btn btn-sm btn-primary" href="{% url 'user.edit' pk=user.id %}">Edit</a></td>
                         </tr>
                         {%endfor%}
                     </tbody>

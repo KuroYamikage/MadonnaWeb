@@ -10,7 +10,7 @@
 </style>
 
 <div class="m-auto container border border-dark rounded reserve-form reserve_section " style="background-color:  #ffb607">
-<h3 class=" layout-padding" style="text-align: center">Add new Facility</h3>
+<h3 class=" layout-padding" style="text-align: center">Add new Blog</h3>
 <form  action="{% url 'blog.add'%}" method = "POST" enctype="multipart/form-data">
 {%csrf_token%} 
 <div class="form-row">
@@ -24,9 +24,17 @@
     
 </div>
 </div>
-<div class="form-group col-md-6">
+<div class="form-row">
+<div class="form-group col-md-12">
 {{form.blog_content.label}}
     {{form.blog_content}}
+</div>
+</div>
+<div class="form-row">
+    <div class="form-group col-md-12">
+        {{form.blog_status.label}}
+            {{form.blog_status}}
+        </div>
 </div>
 <div class="form-group">   
 <div class="container d-flex justify-content-center">
