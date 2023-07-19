@@ -12,3 +12,48 @@ Home\__pycache__
 /MadonnaWeb/__pycache__/
 /users/migrations/__pycache__
 users/migrations/__pycache__/
+
+# Compiled Python files
+*.pyc
+__pycache__/
+
+# Database files
+*.sqlite3
+*.db
+
+# Static files (usually collected with "collectstatic")
+/staticfiles/
+
+# Media files (user-uploaded content)
+/media/
+
+# Secret settings and sensitive data (usually stored in a separate file)
+*.env
+
+# Environment-specific settings (you might need to adjust this based on your setup)
+/.env
+
+# IDE and editor specific files
+/.vscode/
+.idea/
+*.pyc
+
+# Dependency directories (e.g., virtualenv, pipenv, poetry)
+/.venv/
+/venv/
+/poetry.lock
+/poetry.toml
+
+# Log files
+*.log
+
+# Compiled JavaScript files (usually stored in "static" directory)
+*.js
+*.js.map
+
+# Compiled CSS files (usually stored in "static" directory)
+*.css
+*.css.map
+
+# Cached files
+*.cache

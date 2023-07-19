@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.generic import TemplateView
-from Reports.scripts.reports import week, month
+from Reports.scripts.reports import month
 
 # Create your views here.
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
+import sqlite3
+import base64
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import sqlite3
 from io import BytesIO
-import base64
 from django.db import connection
 
 
@@ -19,10 +19,12 @@ def month():
     df = pd.DataFrame(results, columns=["checkIn", "totalPayment"])
     df.sort_values(by="checkIn", inplace=True)
 
+    df_grouped = df.groupby('checkIn')['totalPayment'].sum().reset_index()
+
     fig, ax = plt.subplots()
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d/%Y"))
     ax.xaxis.set_major_locator(mdates.DayLocator())
-    ax.plot(df["checkIn"], df["totalPayment"])
+    ax.plot(df_grouped["checkIn"], df_grouped["totalPayment"])
     fig.autofmt_xdate()
 
     buffer = BytesIO()
@@ -35,7 +37,7 @@ def month():
 
     return graphic, total_earnings, total_reservations
 
-
+"""
 def week():
     db = sqlite3.connect("../../db.sqlite3")
     query = "SELECT checkIn, totalPayment FROM Reservation_reservations WHERE strftime('%W', checkIn) = strftime('%W', 'now')"
@@ -59,3 +61,4 @@ def week():
     context["graphic"] = graphic
 
     return context
+"""
