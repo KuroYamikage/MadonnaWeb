@@ -276,3 +276,20 @@
     background: var(--dark);
     border-color: var(--primary);
 }
+
+/* Style the close button */
+.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.75rem 1.25rem;
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Style the success message */
+.alert-success {
+    position: relative; /* Ensure relative positioning for the close button */
+}

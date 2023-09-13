@@ -1,24 +1,27 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-from .forms import UserRegistrationForm, UserUpdateForm
+from .forms import UserRegistrationForm, UserUpdateForm, ResetPasswordForm
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
 from blog.models import Blog, Gallery
 from blog.forms import  BlogForms
-from django.views.generic.edit import DeleteView
+from django.views.generic.edit import DeleteView, FormView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import PasswordChangeView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User 
 from Reservation.models import Reservations, Facility
 from Reservation.forms import FacilityForm
 from Home.forms import GalleryForm
 from django.contrib.auth.models import User
 from .mixins import GroupRequiredMixin
-
+from django.contrib.auth.models import Group
+from django.utils.decorators import method_decorator
+from .decorators import groups_required
 
 # Create your views here.
 
@@ -26,24 +29,32 @@ from .mixins import GroupRequiredMixin
 class StaffLoginView(LoginView):
   template_name = 'users/loginTest.php'
   redirect_authenticated_user= True
-
+  def form_valid(self, form):
+    response = super().form_valid(form)  
+    if self.request.user.groups.filter(name='Social Media Manager').exists():
+      return redirect('/staff/gallery')
+    else:
+      #redirect_authenticated_user= True
+      return redirect('/staff')
 
 class StaffLogoutView(LogoutView):
   template_name = 'users/logout.php'
   login_url = "login"
 
+@method_decorator(groups_required(['Admin', 'Staff']), name='dispatch')
 class reserveListView(LoginRequiredMixin,ListView):
   model = Reservations
   context_object_name = 'reserve'
   template_name = 'users/home.php'
   login_url = "login"
 
+@method_decorator(groups_required(['Admin']), name='dispatch')
 class userList(LoginRequiredMixin, ListView):
   model=User
-  context_object_name = 'user'
+  context_object_name = 'user1'
   template_name = 'users/user_list.php'
 
-
+@method_decorator(groups_required(['Admin']), name='dispatch')
 class registerUser(LoginRequiredMixin, CreateView):
   form_class = UserRegistrationForm
   template_name = 'users/register.php'
@@ -53,11 +64,40 @@ class changepassword(PasswordChangeView, LoginRequiredMixin):
   form_class = PasswordChangeForm
   template_name = 'users/user_changePass.php'
   success_url = '/staff'
+
+@method_decorator(groups_required(['Admin']), name='dispatch')
 class editUser(LoginRequiredMixin,UpdateView):
   form_class=UserUpdateForm
   model = User
   template_name='users/edit_user.php'
-  success_url = '/staff'
+  success_url = '/accounts/'
+
+def is_admin(user):
+    return user.groups.filter(name='Admin').exists()
+@method_decorator(groups_required(['Admin']), name='dispatch')
+
+class resetPasswordView(UserPassesTestMixin, FormView):
+   template_name = 'users/reset_password.php'
+   form_class = ResetPasswordForm
+   success_url = '/accounts/'
+   
+   def test_func(self):
+      return is_admin(self.request.user)
+   
+   def get_form_kwargs(self):
+    kwargs = super().get_form_kwargs()
+    kwargs['user'] = self.get_user()
+    return kwargs
+   
+   def get_user(self):
+    user_id = self.kwargs.get('user_id')
+    return get_object_or_404(User, pk=user_id)
+   
+   def form_valid(self, form):
+    form.save()
+    messages.success(self.request, 'Password changed successfully.') 
+    return super().form_valid(form)
+  
 
 
 # Blogs 

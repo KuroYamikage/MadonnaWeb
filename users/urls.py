@@ -19,4 +19,5 @@ urlpatterns = [
     path('staff/password/change', views.changepassword.as_view(), name='password.change'),
     path('accounts/edit/<int:pk>', views.editUser.as_view(), name='user.edit'),
     path('accounts/delete/<int:pk>', views.deleteGallery.as_view(), name='gallery.delete'),
+    path('change_password/<int:user_id>', views.resetPasswordView.as_view(), name='reset.password'),
 ]

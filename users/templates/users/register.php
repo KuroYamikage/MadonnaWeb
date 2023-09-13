@@ -74,7 +74,9 @@
                     {{form.password1.label_tag}}
                     {{form.password1.errors}}
                     {{form.password1}}
+                    {% comment %}
                     {{form.password1.help_text}}
+                    {% endcomment %}
                     {% comment %} <input type="text" id="firstName" class="form-control form-control-lg" />
                     <label class="form-label" for="firstName">First Name</label> {% endcomment %}
                   </div>
@@ -86,7 +88,9 @@
                     {{form.password2.label_tag}}
                     {{form.password2.errors}}
                     {{form.password2}}
+                    {% comment %}
                     {{form.password2.help_text}}
+                    {% endcomment %}
                   </div>
 
                 </div>
@@ -96,10 +100,11 @@
                 <div class="col-md-6 mb-4">
 
                   <div class="form-outline">
-                    {{form.group.label_tag}}
-                    {{form.group.errors}}
-                    {{form.group}}
-                    {{form.group.help_text}}
+                    {{form.groups.label_tag}}
+                    {{form.groups.errors}}
+
+                    {{form.groups}}
+                    {{form.groups.help_text}}
                   </div>
 
                 </div>

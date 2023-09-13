@@ -1,4 +1,5 @@
 {% load static %}
+{% load customFilters %}
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -66,6 +67,8 @@
 
 <!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->
 <div class="main"> {% endcomment %}
+
+
     <div class="container-xxl position-relative bg-white d-flex p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -91,6 +94,7 @@
                         </div>
                     </div>
                     <div class="navbar-nav w-100">
+                        {% if user|is_member_of_group:'Admin'%} 
                        <div class="nav-item dropdown">
                            <a href="url" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Reservation</a>
                            <div class="dropdown-menu bg-transparent border-0">
@@ -98,8 +102,25 @@
                                <a href=" {% url 'discount.view' %} " class="dropdown-item">Discounts</a>
                            </div>
                        </div>
+                       {% endif %}
+
+                       {% if user|is_member_of_group:'Staff'%}
+                       <div class="nav-item dropdown">
+                           <a href="url" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Reservation</a>
+                           <div class="dropdown-menu bg-transparent border-0">
+                               <a href="{% url 'main'%}" class="dropdown-item">Reservations</a>
+                               <a href=" {% url 'discount.view' %} " class="dropdown-item">Discounts</a>
+                           </div>
+                       </div>
+                       {% endif %}
+
+                       {% if user|is_member_of_group:'Admin'%}
                        <a href="{% url 'reports' %}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                        <a href="{%url 'user.view'%}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Users</a>
+                       {% endif %}
+
+
+                       {% if user|is_member_of_group:'Admin'%}
                        <div class="nav-item dropdown">
                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Home Page</a>
                            <div class="dropdown-menu bg-transparent border-0">
@@ -108,7 +129,21 @@
                                <a href="{%url 'gallery.staff'%}" class="dropdown-item">Gallery</a>
                            </div>
                          
-                    </div>
+                        </div>
+                        {% endif %}
+
+                        {% if user|is_member_of_group:'Social Media Manager'%}
+                       <div class="nav-item dropdown">
+                           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Home Page</a>
+                           <div class="dropdown-menu bg-transparent border-0">
+                               <a href="{% url 'facility.staff' %}" class="dropdown-item">Facilities</a>
+                               <a href="{% url 'blog' %}" class="dropdown-item">Blogs</a>
+                               <a href="{%url 'gallery.staff'%}" class="dropdown-item">Gallery</a>
+                           </div>
+                         
+                        </div>
+                        {% endif %}
+
                 </nav>
             </div>
             <!-- Sidebar End -->
@@ -134,11 +169,18 @@
             </nav>
             <!-- Navbar End -->
 
-
-           
-
-
-           
+            {% if messages %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
         
   
 {%block content%}

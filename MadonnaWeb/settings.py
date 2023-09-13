@@ -65,6 +65,21 @@ INTERNAL_IPS = [
     # ...
 ]
 
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimila‌​rityValidator', 
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValida‌​tor',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValid‌​ator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordVali‌​dator',
+    }
+]
+
 ROOT_URLCONF = "MadonnaWeb.urls"
 
 TEMPLATES = [

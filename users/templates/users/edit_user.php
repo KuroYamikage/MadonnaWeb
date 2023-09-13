@@ -1,4 +1,4 @@
-{%extends "master2.php"%}
+  {%extends "master2.php"%}
 
 {% block title %}Edit User {{request.user.username}}{% endblock title %}
 
@@ -96,10 +96,10 @@
                 <div class="col-md-6 mb-4">
 
                   <div class="form-outline">
-                    {{form.group.label_tag}}
-                    {{form.group.errors}}
-                    {{form.group}}
-                    {{form.group.help_text}}
+                    {{form.groups.label_tag}}
+                    {{form.groups.errors}}
+                    {{form.groups}}
+                    {{form.groups.help_text}}
                   </div>
 
                 </div>

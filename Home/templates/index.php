@@ -11,7 +11,8 @@
                <div class="carousel-inner">
                   <div class="carousel-item active">
                      <h1 class="furniture_text">Resort</h1>
-                     <p class="there_text">Taking a break from work? Or wanted to have a place to chill? The resort has it all! Relax and engage swimming activities here at Madonna's!</p>
+                     <p class="there_text">Taking a break from work? Or wanted to have a place to chill? The resort has it all!
+                        Relax and engage swimming activities here at Madonna's!</p>
                      <div class="contact_bt_main">
                         <div class="contact_bt"><a href="{% url 'about' %}">Contact Us</a></div>
                      </div>
@@ -19,6 +20,8 @@
                   <div class="carousel-item">
                      <h1 class="furniture_text">Event Place</h1>
                      <p class="there_text">where you can have an occassion with a venue has multiple facilities!</p>
+                     <p></p>
+                     
                      <div class="contact_bt_main">
                         <div class="contact_bt"><a href="{% url 'about' %}">Contact Us</a></div>
                      </div>

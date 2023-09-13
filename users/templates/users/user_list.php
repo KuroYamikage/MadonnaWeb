@@ -19,9 +19,10 @@
                             <th scope="col">Email</th>
                             <th scope="col">Groups</th>
                             <th scope="col">Edit</th>
+                            <th scope="col">Reset Password</th>
                     </thead>
                     <tbody>
-                        {% for user in  user%}
+                        {% for user in  user1%}
                         <tr>
                             <td>{{user.id}}</td>
                             <td>{{user.first_name}} {{user.last_name}}</td>
@@ -31,6 +32,7 @@
                                         <li>{{group.name}}</li>
                                         {%endfor%}</ul></td>
                             <td><a class="btn btn-sm btn-primary" href="{% url 'user.edit' pk=user.id %}">Edit</a></td>
+                            <td><a class="btn btn-sm btn-primary" href="{% url 'reset.password' user_id=user.id %}">Reset Password</a></td>
                         </tr>
                         {%endfor%}
                     </tbody>
