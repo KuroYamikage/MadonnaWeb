@@ -233,3 +233,50 @@ class deleteReservation(LoginRequiredMixin,DeleteView):
   success_url = 'main'
   template_name = 'delete_reservation.php'
   login_url = "login"
+
+
+
+
+
+
+
+  #test
+# def testReserve(request):
+#   obj = Customer.objects.values()
+#   form = ReservationForm(request.POST or None)
+#   form2 = CustomerForm(request.POST or None)
+#   context={
+#     "form": form,
+#     "form_2":form2,
+#     "object":obj,   
+#     "prices":Prices.objects.all().values(),
+#     "discount":Discount.objects.all().values().filter(discountActive=True),
+#     "facility":Facility.objects.all().values().exclude(facilityCategory='Pool'),
+#   }
+
+#   if all([form.is_valid(), form2.is_valid()]):
+#     data = form.cleaned_data
+#     data2=Prices.objects.all().values()
+  
+#     parent=form2.save(commit=False)
+#     child=form.save(commit=False)
+    
+#     exist = False
+#     for x in obj:
+#       if form2.cleaned_data['firstname'].lower() == x['firstname'].lower() and form2.cleaned_data['lastname'].lower() == x['lastname'].lower() and form2.cleaned_data['email'].lower() == x['email'].lower():
+#         print(x['firstname'])
+#         form.cleaned_data['customer_id'] = x['id']
+#         print("exsist")
+#         exist=True
+
+#     print(exist)
+#     if exist==False:
+#         child.customer = parent
+#         form2.save()
+    
+        
+#     print(form.cleaned_data)
+#     pk = form.cleaned_data['referenceNum']
+#     form.save() 
+#     return redirect('reserve.receipt',referenceNum=pk)
+#   return render(request, 'sample3.html', context)

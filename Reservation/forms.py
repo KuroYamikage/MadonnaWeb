@@ -174,6 +174,7 @@ class ReservationEditForm(forms.ModelForm):
         check1 = ''
         checkID=0
         data2=Prices.objects.all().values()
+        print (data2)
         for price in data2:
             check1 = 'For '+price['dayTime'] +' Reservation with Maximum of '+str(price['maxPax'])+ ' Pax'
             if check1 == str(prices):

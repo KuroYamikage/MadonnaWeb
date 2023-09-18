@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "Reports",
     "Reports.scripts",
     "django.contrib.humanize",
+    "test",
 ]
 
 MIDDLEWARE = [

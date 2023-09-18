@@ -3,7 +3,6 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path("test/", views.test, name="test"),
     path("reserve/", views.reserveView, name="reserve"),
     path("reservation/<int:pk>", views.moreDetailView.as_view(), name="reservation"),
     path("reservation/new", views.reserveNew, name="reservation.new"),
