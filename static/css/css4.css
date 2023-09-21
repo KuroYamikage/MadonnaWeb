@@ -496,26 +496,33 @@ button {
   float: left;
 }
 
+.about_us{
+  background-color: #242424;
+  border-style: solid;
+  border-width: 10px;
+  border-color: #55d42a;
+  text-align: center;
+}
+
 .about_text {
-  width: 200%;
-  float: left;
+  /** width: 200%;
+  float: left; **/
   font-size: 40px;
   text-align: center;
   color: #fff;
   text-transform: uppercase;
   font-weight: 500;
   background-color: #242424;
-  border-style: solid;
-  border-color: #ffd04f;
-  border-width: 10px;
+  /** border-style: solid;
+  border-width: 10px; **/
 }
 .lorem_text {
   /*About Us Desc*/
-  width: 220%;
-  float: left;
+  /** width: 220%;
+  float: left; **/
   font-size: 20px;
   color: #fff;
-  text-align: center;
+  /** text-align: center;
   margin-left: -50px;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -523,8 +530,7 @@ button {
   background-color: #242424;
   font-weight: 500;
   border-style: solid;
-  border-color: #ffd04f;
-  border-width: 10px;
+  border-width: 10px; **/
 }
 
 .lorem_text a:link{
