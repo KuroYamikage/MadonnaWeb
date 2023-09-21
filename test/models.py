@@ -1,4 +1,5 @@
 from django.db import models
+from Reservation.models import Discount
 
 # Create your models here.
 
@@ -28,9 +29,31 @@ class Reservation(models.Model):
     room = models.ManyToManyField(Room,  default=1)
     check_in_date = models.DateField()
     check_out_date = models.DateField()
+    check_in_time = models.TimeField()  # New field for check-in time
+    check_out_time = models.TimeField()  # New field for check-out time
     guest_name = models.CharField(max_length=100)
     guest_email = models.EmailField()
     guest_phone = models.CharField(max_length=20)
     num_guests = models.PositiveIntegerField(default=1)
+    discount_code = models.ForeignKey(Discount, on_delete=models.SET_NULL, null= True, blank= True)
+    reservation_time = models.CharField(max_length=10, choices=[('Morning', 'Morning'), ('Night', 'Night')])
+    RESERVATION_TYPE_CHOICES = (
+        ('private', 'Private'),
+        ('public', 'Public'),
+    )
 
-  
+    reservation_type = models.CharField(max_length=10, choices=RESERVATION_TYPE_CHOICES)
+    reference_number = models.CharField(max_length=10, unique=True, null=True)
+    reservationChoices=(
+    ('Approved','Approved'),
+    ('Pending','Pending'),
+    ('Cancelled','Cancelled'),
+  )
+    status = models.CharField(choices=reservationChoices, max_length=10,default='Pending')
+
+
+class UnavailableDate(models.Model):
+    date = models.DateField()
+
+    def __str__(self) -> str:
+        return str(self.date)
