@@ -24,4 +24,6 @@ urlpatterns = [
         views.viewReservation.as_view(),
         name="reserve.receipt",
     ),
+    path("reward/", views.rewardView, name="reward"),
+    path("reward/new", views.rewardNew, name="reward.new"),
 ]
