@@ -209,6 +209,13 @@ button {
   cursor: pointer;
 }
 
+.changepassbutton {
+  background-color: black;
+  color: white;
+  border: 0;
+  cursor: pointer;
+}
+
 .full {
   float: left;
   width: 100%;
