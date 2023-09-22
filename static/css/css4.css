@@ -86,6 +86,7 @@ h2 {
 
 h3 {
   font-size: 18px;
+  text-align: center;
 }
 
 h4 {
@@ -119,7 +120,19 @@ h6 a {
   opacity: 1;
 }
 
-button:focus {
+.logoutcenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-btn {
+  border: none;
+  padding: 7px 15px;
+  background-color: rgb(35, 173, 69);
+}
+
+button:focus {s
   outline: none;
 }
 
