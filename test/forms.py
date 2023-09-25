@@ -1,19 +1,23 @@
 from django import forms
 from .models import Room, Reservation, RoomAvailability, RoomType
-from Reservation.models import Discount
+from Reservation.models import Discount, Facility
 import requests
 from django.urls import reverse
+from captcha.fields import ReCaptchaField
+from django.conf import settings
 
 
 class ReservationForm(forms.ModelForm):
+    captcha  =ReCaptchaField()
     room_type = forms.ModelChoiceField(
         queryset=RoomType.objects.all(),
         required=True,
         empty_label=None,  # To force users to select a room type
     )
     reservation_type = forms.ChoiceField(choices=Reservation.RESERVATION_TYPE_CHOICES)
+    
     num_rooms = forms.IntegerField(
-        required=True,
+        required=False,
         min_value=1,  # Require at least 1 room
     )
     discount_code = forms.CharField(
@@ -42,6 +46,18 @@ class ReservationForm(forms.ModelForm):
         required=True,
         label='Reservation Time'
     )
+    num_guests_select = forms.ChoiceField(
+        label='Number of Guests (Dropdown)',
+        required=False,  # Make it optional since you have a text field
+        choices=[(30,"30"),(50,"50"),(100,"100"),(150,"150")],  # You can adjust the range as needed
+        widget=forms.Select(),
+    )
+
+    active_facilities = Facility.objects.filter(facilityActive=True)
+    # Create the choice tuple from the active facilities
+    facility_choices = [(facility.pk, facility.facilityName) for facility in active_facilities]
+    facility_choices.insert(0,(None, 'No Thanks'))
+    room_type = forms.ChoiceField(choices= facility_choices)
 
     class Meta:
         model = Reservation

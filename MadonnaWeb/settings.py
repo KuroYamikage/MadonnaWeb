@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "Reports.scripts",
     "django.contrib.humanize",
     "test",
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -174,3 +175,8 @@ EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'dmanedward1110@gmail.com'  # Your Gmail email address
 EMAIL_HOST_PASSWORD = 'mvxp nfkd leqz auez'
+
+RECAPTCHA_SSL_VERIFICATION = False
+RECAPTCHA_PUBLIC_KEY = '6Lf4l0koAAAAAATJKiQvaGcslQKOVXl438opgZcP'
+RECAPTCHA_PRIVATE_KEY = '6Lf4l0koAAAAAKF_xyoPOCTvijyScPNEJD1ABs38'
+

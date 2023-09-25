@@ -28,6 +28,7 @@ class Facility(models.Model):
         ("rooms", "Rooms"),
         ("cottages", "Cottages"),
         ("EH", "Event Hall"),
+        ('GA', 'General Admissions'),
     )
     facilityName = models.CharField(max_length=255)
     facilityDescription = models.CharField(max_length=255)

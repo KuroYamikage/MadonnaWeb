@@ -1,5 +1,6 @@
 {% load static %}
 {% load humanize %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -102,7 +103,9 @@
           font-size: 16px; /* Adjust the font size for options if needed */
         }
       </style>
-  </head>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <body>
     <header>
@@ -130,14 +133,14 @@
             {{ form.check_in_date }}
             {{ form.check_in_date.errors }}
             <button id="clearCheckIn" type="button" style="display: none;">Clear</button> <!-- Add a Clear button -->
+            <label for="{{ form.reservation_time.id_for_label }}">Reservation Time:</label>
+          {{ form.reservation_time }}
+          {{ form.reservation_time.errors }}
             <label for="{{ form.check_out_date.id_for_label }}">Check out:</label>
             {{ form.check_out_date }}
             {{ form.check_out_date.errors }}
           </div>
 
-          <label for="{{ form.reservation_time.id_for_label }}">Reservation Time:</label>
-          {{ form.reservation_time }}
-          {{ form.reservation_time.errors }}
           <label for="{{ form.check_in_time.id_for_label }}">Check-in Time:</label>
           {{ form.check_in_time }}
           {{ form.check_in_time.errors }}
@@ -147,12 +150,25 @@
           <label for="{{ form.reservation_type.id_for_label }}">Reservation Type:</label>
           {{ form.reservation_type }}
           {{ form.reservation_type.errors }}
-          <label for="{{ form.num_guests.id_for_label }}">Number of Guests:</label>
-          {{ form.num_guests }}
-          {{ form.num_guests.errors }}
+          
+          <div id="num_guests_text_div">
+            <label for="{{ form.num_guests.id_for_label }}">Number of Guests:</label>
+            {{ form.num_guests }}
+            {{ form.num_guests.errors }}
+          </div>
+          
+          <!-- Add a new div for the dropdown with an ID (hidden by default) -->
+          <div id="num_guests_select_div" style="display: none;">
+           <label for="{{ form.num_guests_select.id_for_label }}">Number of Guests:</label>
+           {{ form.num_guests_select }}
+           {{ form.num_guests_select.errors }}
+          </div>
+
+
           <label for="{{ form.guest_name.id_for_label }}">Name:</label>
           {{ form.guest_name }}
           {{ form.guest_name.errors }}
+
         </div>
 
         <!-- Step 2: Customer Information -->
@@ -171,6 +187,28 @@
         <div id="step3" class="hidden step">
           <!-- Add content for Step 3 if needed -->
           <!-- Room Type Selection -->
+
+          <div id="facilityCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              {% for facility in active_facilities %}
+                <div class="item {% if forloop.first %}active{% endif %}">
+                  <img src="{{ facility.facilityPic.url }}" style="max-width: 400%; max-height: 600px; align:center;" class="d-block w-100" alt="{{ facility.facilityName }}" >
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ facility.facilityName }}</h5>
+                    <p>{{ facility.facilityDescription }}</p>
+                    <p>Price: ₱{{ facility.facilityPrice }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+            <!-- Left and right controls for Bootstrap 3 -->
+            <a class="left carousel-control" href="#facilityCarousel" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#facilityCarousel" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+          </div>
           <label for="{{ form.room_type.id_for_label }}">Room Type:</label>
           {{ form.room_type }}
           <label for="{{ form.num_rooms.id_for_label }}">Number of Rooms:</label>
@@ -180,6 +218,8 @@
           <label for="{{ form.discount_code.id_for_label }}">Discount Code:</label>
           {{ form.discount_code }}
           <div id="discount-code-validation-message"></div>
+          {{form.captcha}}
+          {{form.captcha.errors}}
         </div>
 
         <div>
@@ -191,7 +231,12 @@
     </div>
     <script>
       var unavailableDates = [{% for date in unavailable_dates %}"{{ date }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
+      
+
+
+
     </script>
+
     <script src="{% static 'js/reserve.js' %}" /></script>
   </body>
 </html>

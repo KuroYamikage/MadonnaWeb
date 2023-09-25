@@ -89,32 +89,46 @@
               <thead style="background-color:#84B0CA ;" class="text-white">
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Discount</th>
-                  <th scope="col">Downpayment</th>
-                  <th scope="col">Balance After Downpayment</th>
+                  <th scope="col">Services</th>
+                  {% comment %} <th scope="col">Discount</th> {% endcomment %}
+                  <th scope="col">Room number/Pax</th>
+                  <th scope="col">Cost</th>
                 </tr>
+                
               </thead>
-              <tbody>
+               <tbody>
                 <tr>
                   <th scope="row">1</th>
-                  <td>{{reserve.prices}}</td>
-                  <td>{{reserve.discount}}</td>
-                  <td>₱ {{reserve.downpayment| intcomma}}</td>
-                  <td>₱ {{reserve.balance| intcomma}}</td>
+                  <td>{{reserve.type}} Reservation ({{reserve.time}}) </td>
+                  <td>{{reserve.num_guest}} pax</td>
+                  <td>₱{{reserve.total_pax}}</td>
                 </tr>
-              </tbody>
-  
+                <tr>
+                  {% for rooms in reserve.room  %}
+                  <th scope="col">{{forloop.counter|add:1}}
+                  <th scope="col">{{rooms.room_type}}
+                  <th scope="col">{{rooms.room_number}}
+                  <th scope="col">₱{{rooms.price}}
+                  </tr>
+                  {% endfor %}
+              </tbody> 
+              
             </table>
           </div>
           <div class="row">
             <div class="col-xl-8">
-              <p class="ms-3">Add additional notes and payment information</p>
-  
+              {% comment %} <p class="ms-3">Add additional notes and payment information</p>
+              {% endcomment %}
+              
             </div>
+  
+            <p class="text-black float-start"><span class="text-black me-3"> Discount:</span><span
+              style="font-size: 25px;"></br> ₱ {{reserve.discount| intcomma }}</span></p>
+
             <div class="col-xl-3">
-              <p class="text-black float-start"><span class="text-black me-3"> Total Amount:</span><span
-                  style="font-size: 25px;"></br> ₱ {{reserve.totalPayment| intcomma }}</span></p>
+               <p class="text-black float-start"><span class="text-black me-3"> Total Amount:</span><span
+                  style="font-size: 25px;"></br> ₱ {{reserve.total| intcomma }}</span></p>
+                
             </div>
           </div>
           <hr>
