@@ -30,6 +30,7 @@ from Reservation.forms import (
     DiscountForm,
     ReservationEditForm,
     RewardForm,
+    RewardEditForm,
 )
 from django.contrib.messages.views import SuccessMessageMixin
 from Reservation.reservation_function.availability import check_availability
@@ -52,6 +53,19 @@ def test(request):
 def rewardView(request):
     rewards = Reward.objects.all()
     return render(request, "rewards.html", {"rewards": rewards})
+
+
+def rewardEdit(request, pk):
+    rewards = get_object_or_404(Reward, pk=pk)
+
+    if request.method == "POST":
+        form = RewardEditForm(request.POST, instance=rewards)
+        if form.is_valid():
+            form.save()
+            return redirect("reward")
+    else:
+        form = RewardEditForm(instance=rewards)
+    return render(request, "edit_reward.html", {"form": form, "reward": rewards})
 
 
 def rewardNew(request):
@@ -136,6 +150,10 @@ def reserveNew(request):
                 form.cleaned_data["customer_id"] = x["id"]
                 print("exsist")
                 exist = True
+
+                existing_customer = get_object_or_404(Customer, id=x["id"])
+                existing_customer.visit += 1
+                existing_customer.save()
 
         print(exist)
         if exist == False:

@@ -26,4 +26,5 @@ urlpatterns = [
     ),
     path("reward/", views.rewardView, name="reward"),
     path("reward/new", views.rewardNew, name="reward.new"),
+    path("reward/edit/<int:pk>", views.rewardEdit, name="reward.edit"),
 ]

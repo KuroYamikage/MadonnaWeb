@@ -19,9 +19,13 @@
                 <td>{{ reward.name }}</td>
                 <td>{{ reward.description }}</td>
                 <td>{{ reward.minimumVisits }}</td>
+                <td>
+                    <a href="{% url 'reward.edit' reward.id %}" class="btn btn-primary">Edit</a>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <a href="{% url 'reward.new' %}"> Create Reward </a>
 </body>
 </html>

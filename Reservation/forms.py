@@ -41,6 +41,23 @@ class CustomerForm(forms.ModelForm):
 class RewardForm(forms.ModelForm):
     class Meta:
         model = Reward
+        fields = {"id", "name", "description", "minimumVisits"}
+        widgets = {
+            "id": forms.HiddenInput(),
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+            "description": forms.TextInput(attrs={"class": "form-control"}),
+            "minimumVisits": forms.NumberInput(attrs={"class": "form-control"}),
+        }
+        labels = {
+            "name": "Reward Name",
+            "description": "Description",
+            "minimumVisits": "Minimum number of visits",
+        }
+
+
+class RewardEditForm(forms.ModelForm):
+    class Meta:
+        model = Reward
         fields = {"name", "description", "minimumVisits"}
         widgets = {
             "name": forms.TextInput(attrs={"class": "form-control"}),
