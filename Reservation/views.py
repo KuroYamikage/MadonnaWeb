@@ -60,6 +60,11 @@ def rewardEdit(request, pk):
 
     if request.method == "POST":
         form = RewardEditForm(request.POST, instance=rewards)
+
+        if "delete" in request.POST:
+            rewards.delete()
+            return redirect("reward")
+
         if form.is_valid():
             form.save()
             return redirect("reward")
