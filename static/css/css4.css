@@ -132,6 +132,13 @@ h6 a {
   background-color: rgb(35, 173, 69);
 }
 
+.login-btn {
+  border: none;
+  padding: 7px 15px;
+  border-radius: 4px;
+  background-color: rgb(35, 173, 69);
+}
+
 button:focus {s
   outline: none;
 }
@@ -223,10 +230,11 @@ button {
 }
 
 .changepassbutton {
-  background-color: black;
-  color: white;
-  border: 0;
+  color: black;
+  border: 1px solid green;
   cursor: pointer;
+  background-color: transparent;
+  padding: 10px 24px;
 }
 
 .full {

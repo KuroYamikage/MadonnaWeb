@@ -31,7 +31,7 @@
                     <p>{{ field.label }}: <br> {{ field }}</p>
                     {% endfor %}
                     <div class="d-flex justify-content-center mb-3">
-                    <button type="submit" class="logout-btn"> Login </button>
+                    <button type="submit" class="login-btn"> Login </button>
                     </div>
                     </form> 
 
