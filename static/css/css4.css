@@ -1363,3 +1363,9 @@ iframe {
   height: 100%;
   /* Make the iframe take the full height of the popup */
 }
+
+
+/* Find the largest article width and set it as the fixed width for all facility articles */
+.facility-article {
+  padding: 25px;
+}

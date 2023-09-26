@@ -6,8 +6,8 @@ from django.db import models
 class Customer(models.Model):
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
-    contactNumber = models.CharField(max_length=12)
-    email = models.EmailField()
+    contactNumber = models.CharField(max_length=12, null=False)
+    email = models.EmailField(null=False)
     visit = models.IntegerField(default=1)
 
     def __str__(self):

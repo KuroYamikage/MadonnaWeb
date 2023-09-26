@@ -20,13 +20,7 @@ class Room(models.Model):
     def __str__(self):
         return self.room_number  # You can change this to display room type and number
 
-class RoomAvailability(models.Model):
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    date = models.DateField()
-    is_available = models.BooleanField(default=True)
 
-    def __str__(self):
-        return f"{self.room} on {self.date}"
     
 class Reservation(models.Model):
     room = models.ManyToManyField(Room,  default=1, blank=True, null=True)

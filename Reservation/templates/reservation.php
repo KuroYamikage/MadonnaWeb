@@ -15,10 +15,10 @@
 
 
 
-	<div class="section-center">
+	<div class="section-center d-flex align-items-center justify-content-center">
 		<div class="container">
 			<div class="row">
-				<div class="booking-form">
+				<div class="booking-form mx-auto">
 					<form method="POST">
 						{% csrf_token %}
 						<div class="select-div">
@@ -31,7 +31,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="row no-margin">
-									<div class="col-md-6">
+									<div class="col-md-12">
 										<div class="form-group">
 											<span class="form-label">Reference Code</span>
 											{{form_2.reference}}
