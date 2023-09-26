@@ -20,6 +20,9 @@ class Reward(models.Model):
     minimumVisits = models.IntegerField(default=0)
     customers = models.ManyToManyField(Customer)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Discount(models.Model):
     discountCode = models.CharField(max_length=15)
