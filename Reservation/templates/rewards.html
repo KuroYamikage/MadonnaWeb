@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reward List</title>
+</head>
+<body>
+    <h1>Reward List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Reward Name</th>
+                <th>Description</th>
+                <th>Minimum Visits</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reward in rewards %}
+            <tr>
+                <td>{{ reward.name }}</td>
+                <td>{{ reward.description }}</td>
+                <td>{{ reward.minimumVisits }}</td>
+                <td>
+                    <a href="{% url 'reward.edit' reward.id %}" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'reward.new' %}"> Create Reward </a>
+</body>
+</html>

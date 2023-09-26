@@ -89,6 +89,7 @@ h2 {
 
 h3 {
   font-size: 18px;
+  text-align: center;
 }
 
 h4 {
@@ -122,7 +123,26 @@ h6 a {
   opacity: 1;
 }
 
-button:focus {
+.logoutcenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout-btn {
+  border: none;
+  padding: 7px 15px;
+  background-color: rgb(35, 173, 69);
+}
+
+.login-btn {
+  border: none;
+  padding: 7px 15px;
+  border-radius: 4px;
+  background-color: rgb(35, 173, 69);
+}
+
+button:focus {s
   outline: none;
 }
 
@@ -212,6 +232,14 @@ button {
   cursor: pointer;
 }
 
+.changepassbutton {
+  color: black;
+  border: 1px solid green;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 10px 24px;
+}
+
 .full {
   float: left;
   width: 100%;
@@ -290,6 +318,10 @@ button {
 .navbar-expand-lg .navbar-nav .nav-link {
   padding-right: 20px;
   padding-left: 20px;
+}
+
+.dashboardsidebar {
+  background-color: #fff1b7 !important;
 }
 
 .nav-item {
@@ -530,27 +562,34 @@ button {
   float: left;
 }
 
+.about_us{
+  background-color: #242424;
+  border-style: solid;
+  border-width: 10px;
+  border-color: #55d42a;
+  text-align: center;
+}
+
 .about_text {
-  width: 200%;
-  float: left;
+  /** width: 200%;
+  float: left; **/
   font-size: 40px;
   text-align: center;
   color: #fff;
   text-transform: uppercase;
   font-weight: 500;
   background-color: #242424;
-  border-style: solid;
-  border-color: #ffd04f;
-  border-width: 10px;
+  /** border-style: solid;
+  border-width: 10px; **/
 }
 
 .lorem_text {
   /*About Us Desc*/
-  width: 220%;
-  float: left;
+  /** width: 220%;
+  float: left; **/
   font-size: 20px;
   color: #fff;
-  text-align: center;
+  /** text-align: center;
   margin-left: -50px;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -558,8 +597,7 @@ button {
   background-color: #242424;
   font-weight: 500;
   border-style: solid;
-  border-color: #ffd04f;
-  border-width: 10px;
+  border-width: 10px; **/
 }
 
 .lorem_text a:link {
