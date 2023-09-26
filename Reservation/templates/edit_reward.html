@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Reward</title>
+    <!-- Add your CSS stylesheets and JavaScript scripts here, if needed -->
+</head>
+<body>
+    <h1>Edit Reward</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Save Changes</button>
+        <button type="submit" name="delete" value="delete">Delete</button>
+    </form>
+
+    <a href="{% url 'reward' %}">Back to Reward List</a>
+</body>
+</html>
