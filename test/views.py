@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.views import View
 from django.views.generic.edit import FormView
-from .models import Reservation, Room, RoomAvailability, UnavailableDate
+from .models import Reservation, Room, UnavailableDate
 from .forms import ReservationForm
 import random
 from django.http import JsonResponse
@@ -14,7 +14,6 @@ from Reservation.models import Discount, Facility
 from datetime import datetime
 from decimal import Decimal
 from captcha.fields import ReCaptchaField
-
 
 
 # Create your views here.
@@ -178,13 +177,6 @@ class ReservationCreateView(FormView):
         context["check_in_date"] = self.request.POST.get("check_in_date")
         context["check_out_date"] = self.request.POST.get("check_out_date")
 
-        # Add any additional context data you need for the reservation form
-        context["available_rooms"] = Room.objects.filter(
-            id__in=RoomAvailability.objects.filter(
-                date__range=[context["check_in_date"], context["check_out_date"]],
-                is_available=True,
-            ).values("room_id")
-        )
         context['active_facilities'] = Facility.objects.filter(facilityActive=True)
 
         unavailable_dates = UnavailableDate.objects.values_list('date', flat=True)
@@ -192,7 +184,6 @@ class ReservationCreateView(FormView):
         print(unavailable_dates)
         print(context["active_facilities"])
         return context
-
 
 
 

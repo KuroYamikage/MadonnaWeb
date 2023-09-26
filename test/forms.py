@@ -1,5 +1,5 @@
 from django import forms
-from .models import Room, Reservation, RoomAvailability, RoomType
+from .models import Room, Reservation, RoomType
 from Reservation.models import Discount, Facility
 import requests
 from django.urls import reverse
