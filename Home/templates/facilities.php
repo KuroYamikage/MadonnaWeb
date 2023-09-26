@@ -14,7 +14,7 @@
 {% comment %} <div class="row mb-2"> {% endcomment %}
   <div class="row tm-row m-auto container border border-dark rounded reserve-form reserve_section">
   {%for x in facility%}
-
+      {% if x.facilityPic != NULL %}
         <article class="col-12 col-md-6 tm-post">
           <div class="card flex-md-row mb-4 box-shadow h-md-250">
             <div class="card-body d-flex flex-column align-items-start">
@@ -29,6 +29,8 @@
             <img src="../{{x.facilityPic}}" class="card-img-right flex-auto d-none d-md-block" data-holder-rendered="true" style="height:200px; width: 300px;">
           </div>
         </article>
+
+        {% endif %}
       {% comment %}</div>  {% endcomment %}
       {%endfor%}
 </div>
