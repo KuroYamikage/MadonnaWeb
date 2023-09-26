@@ -18,7 +18,7 @@ class Reward(models.Model):
     name = models.CharField(max_length=24)
     description = models.CharField(max_length=255)
     minimumVisits = models.IntegerField(default=0)
-    customers = models.ManyToManyField(Customer)
+    customers = models.ManyToManyField(Customer, related_name="rewards")
 
 
 class Discount(models.Model):
