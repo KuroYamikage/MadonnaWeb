@@ -57,7 +57,7 @@
 
 
 	<div class="section-center2">
-		{% comment %} <div class="container">
+		<div class="container">
 			<div class="row">
 				<div class="booking-form">
 					<form method="POST">
@@ -119,10 +119,10 @@
 					</form>
 				</div>
 			</div>
-		</div> {% endcomment %}
+		</div>
 
 
-		<h1>Make a Reservation</h1>
+		{% comment %} <h1>Make a Reservation</h1>
     </header>
     <div class="container">
       <form id="multi-step-form" action="{% url 'create_reservation' %}" method="post">
@@ -177,7 +177,7 @@
           {{ form.guest_phone }}
           {{ form.guest_phone.errors }}
           {% comment %} <label for="comments">Comments:</label>
-          <textarea id="comments" name="comments" rows="4" cols="50"></textarea> {% endcomment %}
+          <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
         </div>
 
         <!-- Step 3: Reservation Information -->
@@ -202,11 +202,11 @@
         </div>
       </form>
     </div>
+
     <script>
       var unavailableDates = [{% for date in unavailable_dates %}"{{ date }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
     </script>
-    <script src="{% static 'js/reserve.js' %}"/>
-
+    <script src="{% static 'js/reserve.js' %}"/> {% endcomment %}
 		
 	</div>
 

@@ -142,8 +142,8 @@ h6 a {
   background-color: rgb(35, 173, 69);
 }
 
-button:focus {s
-  outline: none;
+button:focus {
+  s outline: none;
 }
 
 ul,
@@ -547,9 +547,7 @@ button {
   background-position-y: 25%;
   background-repeat: no-repeat;
   background-size: cover;
-
-
-
+  padding-bottom: 16.5%;
 }
 
 .bgblur {
@@ -562,7 +560,7 @@ button {
   float: left;
 }
 
-.about_us{
+.about_us {
   background-color: #242424;
   border-style: solid;
   border-width: 10px;
@@ -1149,6 +1147,16 @@ textarea#comment::placeholder {
   padding-bottom: 5px;
 }
 
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+
 .fooer_logo {
   width: 100%;
   float: left;
@@ -1343,13 +1351,15 @@ textarea#comment::placeholder {
   bottom: 20px;
   right: 20px;
   z-index: 1000;
-  height:80px; 
-  width:80px;
+  height: 80px;
+  width: 80px;
   border-radius: 50%;
 
 }
+
 iframe {
-  width: 100%; /* Make the iframe take the full width of the popup */
-  height: 100%; /* Make the iframe take the full height of the popup */
+  width: 100%;
+  /* Make the iframe take the full width of the popup */
+  height: 100%;
+  /* Make the iframe take the full height of the popup */
 }
- 
