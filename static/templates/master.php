@@ -93,8 +93,8 @@
       <button id="openChatButton"><img src="{%static 'images/chat-icon.svg'%}" ></button>
     <div id="chatPopup" class="chat-popup">
         <div id="closeChatButton" class="close-button"><button class="close-button">X</button></div>
-        <iframe src="https://web.powerva.microsoft.com/environments/Default-aeb745e6-8166-4f8f-9233-179e8109c49e/bots/crd3e_bot1aMmPXv/webchat?__version__=2" frameborder="0"></iframe>
-    </div>
+         <iframe src="https://web.powerva.microsoft.com/environments/Default-aeb745e6-8166-4f8f-9233-179e8109c49e/bots/crd3e_bot1aMmPXv/webchat?__version__=2" frameborder="0"></iframe>
+      </div>
   
 
 
