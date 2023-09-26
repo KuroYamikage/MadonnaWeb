@@ -33,7 +33,9 @@ def reserveView(request):
     form = ReservationChecker(request.POST)
     if (form.is_valid()):
       print('valid')
-      return redirect('reservation.new')
+      return redirect('reservation.new') 
+
+      
   if request.method=='POST' and 'check' in request.POST:
     form2 = ReferenceChecker(request.POST)
     if form2.is_valid():

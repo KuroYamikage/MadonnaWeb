@@ -134,3 +134,54 @@
 	height: 80px;
 	width: 100%;
 }
+
+
+      
+      
+      
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      
+      form {
+        margin-top: 20px;
+      }
+      
+      label {
+        display: block;
+        font-weight: bold;
+      }
+      
+      input {
+        width: 80%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      
+      input[type='submit'] {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+      }
+      
+      input[type='submit']:hover {
+        background-color: #555;
+      }
+      
+      .calendar {
+        width: 70%;
+        margin: 0 auto;
+      }
+      
+      .hidden {
+        display: none;
+      }
+      
+      .step {
+        align-items: center;
+      }

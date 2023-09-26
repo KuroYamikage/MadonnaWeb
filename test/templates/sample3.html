@@ -1,3 +1,6 @@
+{% load static %}
+{% load humanize %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,79 +12,100 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
+    {% comment %}
+    <link rel="stylesheet" href="{% static 'css/reserve_style.css' %}" />
+    {% endcomment %}
+
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-        margin: 0;
-        padding: 0;
-      }
-      
-      header {
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        padding: 20px;
-      }
-      
-      .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        overflow-x: auto;
-        /* Enable horizontal scrolling */
-      }
-      
-      h1 {
-        text-align: center;
-        color: #333;
-      }
-      
-      form {
-        margin-top: 20px;
-      }
-      
-      label {
-        display: block;
-        font-weight: bold;
-      }
-      
-      input {
-        width: 80%;
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-      
-      input[type='submit'] {
-        background-color: #333;
-        color: #fff;
-        padding: 10px 20px;
-        border: none;
-        cursor: pointer;
-      }
-      
-      input[type='submit']:hover {
-        background-color: #555;
-      }
-      
-      .calendar {
-        width: 70%;
-        margin: 0 auto;
-      }
-      
-      .hidden {
-        display: none;
-      }
-      
-      .step {
-        align-items: center;
-      }
-    </style>
-  </head>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f5f5f5;
+          margin: 0;
+          padding: 0;
+        }
+        
+        header {
+          background-color: #333;
+          color: #fff;
+          text-align: center;
+          padding: 20px;
+        }
+        
+        .container {
+          max-width: 800px;
+          margin: 20px auto;
+          padding: 20px;
+          background-color: #fff;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          overflow-x: auto;
+          /* Enable horizontal scrolling */
+        }
+        
+        h1 {
+          text-align: center;
+          color: #333;
+        }
+        
+        form {
+          margin-top: 20px;
+        }
+        
+        label {
+          display: block;
+          font-weight: bold;
+        }
+        
+        input {
+          width: 80%;
+          padding: 10px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+        
+        input[type='submit'] {
+          background-color: #333;
+          color: #fff;
+          padding: 10px 20px;
+          border: none;
+          cursor: pointer;
+        }
+        
+        input[type='submit']:hover {
+          background-color: #555;
+        }
+        
+        .calendar {
+          width: 70%;
+          margin: 0 auto;
+        }
+        
+        .hidden {
+          display: none;
+        }
+        
+        .step {
+          align-items: center;
+        }select {
+          width: 83%; /* Make the dropdowns expand to the full width of their container */
+          padding: 10px; /* Add padding for better appearance */
+          font-size: 16px; /* Adjust the font size to match the form's text */
+          border: 1px solid #ccc; /* Add a border for a clean look */
+          border-radius: 5px; /* Add rounded corners */
+          background-color: #fff; /* Background color for the dropdown */
+          color: #333; /* Text color */
+        }
+        
+        /* Style for the options within the dropdown */
+        select option {
+          font-size: 16px; /* Adjust the font size for options if needed */
+        }
+      </style>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
   <body>
     <header>
@@ -92,14 +116,14 @@
         {% csrf_token %}
 
         {% if form.errors %}
-        <div class="alert alert-danger">
+          <div class="alert alert-danger">
             <strong>Error:</strong>
             {% for field, error_list in form.errors.items %}
-                {% for error in error_list %}
-                    {{ error }}
-                {% endfor %}
+              {% for error in error_list %}
+                {{ error }}
+              {% endfor %}
             {% endfor %}
-        </div>
+          </div>
         {% endif %}
         <!-- Step 1: Availability Check -->
         <div id="step1" class="step">
@@ -109,26 +133,52 @@
             {{ form.check_in_date }}
             {{ form.check_in_date.errors }}
             <button id="clearCheckIn" type="button" style="display: none;">Clear</button> <!-- Add a Clear button -->
+            <label for="{{ form.reservation_time.id_for_label }}">Reservation Time:</label>
+          {{ form.reservation_time }}
+          {{ form.reservation_time.errors }}
             <label for="{{ form.check_out_date.id_for_label }}">Check out:</label>
             {{ form.check_out_date }}
             {{ form.check_out_date.errors }}
           </div>
-          <label for="{{ form.num_guests.id_for_label }}">Number of Guests:</label>
-          {{ form.num_guests }}
-          {{ form.num_guests.errors}}
+
+          <label for="{{ form.check_in_time.id_for_label }}">Check-in Time:</label>
+          {{ form.check_in_time }}
+          {{ form.check_in_time.errors }}
+          <label for="{{ form.check_out_time.id_for_label }}">Check-out Time:</label>
+          {{ form.check_out_time }}
+          {{ form.check_out_time.errors }}
+          <label for="{{ form.reservation_type.id_for_label }}">Reservation Type:</label>
+          {{ form.reservation_type }}
+          {{ form.reservation_type.errors }}
+          
+          <div id="num_guests_text_div">
+            <label for="{{ form.num_guests.id_for_label }}">Number of Guests:</label>
+            {{ form.num_guests }}
+            {{ form.num_guests.errors }}
+          </div>
+          
+          <!-- Add a new div for the dropdown with an ID (hidden by default) -->
+          <div id="num_guests_select_div" style="display: none;">
+           <label for="{{ form.num_guests_select.id_for_label }}">Number of Guests:</label>
+           {{ form.num_guests_select }}
+           {{ form.num_guests_select.errors }}
+          </div>
+
+
           <label for="{{ form.guest_name.id_for_label }}">Name:</label>
           {{ form.guest_name }}
-          {{ form.guest_name.errors}}
+          {{ form.guest_name.errors }}
+
         </div>
 
         <!-- Step 2: Customer Information -->
         <div id="step2" class="step hidden">
           <label for="{{ form.guest_email.id_for_label }}">Email:</label>
           {{ form.guest_email }}
-          {{ form.guest_email.errors}}
+          {{ form.guest_email.errors }}
           <label for="{{ form.guest_phone.id_for_label }}">Phone Number:</label>
           {{ form.guest_phone }}
-          {{ form.guest_phone.errors}}
+          {{ form.guest_phone.errors }}
           {% comment %} <label for="comments">Comments:</label>
           <textarea id="comments" name="comments" rows="4" cols="50"></textarea> {% endcomment %}
         </div>
@@ -137,13 +187,41 @@
         <div id="step3" class="hidden step">
           <!-- Add content for Step 3 if needed -->
           <!-- Room Type Selection -->
+
+          <div id="facilityCarousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              {% for facility in active_facilities %}
+                <div class="item {% if forloop.first %}active{% endif %}">
+                  <img src="{{ facility.facilityPic.url }}" style="max-width: 400%; max-height: 600px; align:center;" class="d-block w-100" alt="{{ facility.facilityName }}" >
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>{{ facility.facilityName }}</h5>
+                    <p>{{ facility.facilityDescription }}</p>
+                    <p>Price: ₱{{ facility.facilityPrice }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+            <!-- Left and right controls for Bootstrap 3 -->
+            <a class="left carousel-control" href="#facilityCarousel" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#facilityCarousel" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+          </div>
           <label for="{{ form.room_type.id_for_label }}">Room Type:</label>
           {{ form.room_type }}
           <label for="{{ form.num_rooms.id_for_label }}">Number of Rooms:</label>
           {{ form.num_rooms }}
-          {{ form.room_type.errors}}
-          {{ form.room.errors}}
+          {{ form.room_type.errors }}
+          {{ form.room.errors }}
+          <label for="{{ form.discount_code.id_for_label }}">Discount Code:</label>
+          {{ form.discount_code }}
+          <div id="discount-code-validation-message"></div>
+          {{form.captcha}}
+          {{form.captcha.errors}}
         </div>
+
         <div>
           <button id="prev-step" type="button">Previous</button>
           <button id="next-step" type="button">Next</button>
@@ -151,330 +229,14 @@
         </div>
       </form>
     </div>
-
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        var calendarEl = document.getElementById('calendar')
-        var selectedCheckInDate = null
-        var selectedCheckOutDate = null
-        var form = document.getElementById('multi-step-form')
-        function isToday(dateStr) {
-          var today = new Date()
-          var selectedDate = new Date(dateStr)
-          return today.getDate() === selectedDate.getDate() && today.getMonth() === selectedDate.getMonth() && today.getFullYear() === selectedDate.getFullYear()
-        }
-        // Handle the click event for the "Clear" button
-        const clearCheckInButton = document.getElementById('clearCheckIn')
-        clearCheckInButton.addEventListener('click', function () {
-          // Clear the check-in and check-out dates
-          selectedCheckInDate = null
-          selectedCheckOutDate = null
-          document.getElementById('id_check_in_date').value = ''
-          document.getElementById('id_check_out_date').value = ''
+      var unavailableDates = [{% for date in unavailable_dates %}"{{ date }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
       
-          // Remove the "Check-in" and "Check-out" events from the calendar
-          const checkInEvent = calendar.getEvents().find((event) => event.title === 'Check-in')
-          if (checkInEvent) {
-            checkInEvent.remove()
-          }
-          const checkOutEvent = calendar.getEvents().find((event) => event.title === 'Check-out')
-          if (checkOutEvent) {
-            checkOutEvent.remove()
-          }
-      
-          // Disable the Clear button
-          clearCheckInButton.style.display = 'none'
-        })
-      
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth', // Change the view as needed
-          selectable: true, // Enable date selection
-      
-          select: function (info) {
-            var selectedDate = new Date(info.startStr)
-      
-            // Check if the selected date is in the past
-            if (selectedDate < new Date() && !isToday(info.startStr)) {
-              alert("You can't select past dates.")
-              calendar.unselect()
-              return
-            }
-      
-            // Check if the selected check-in date is after the check-out date
-            if (selectedCheckOutDate && selectedDate > new Date(selectedCheckOutDate)) {
-              alert('Check-in date cannot be after the check-out date.')
-              calendar.unselect()
-              return
-            }
-      
-            // Handle date selection
-            if (!selectedCheckInDate) {
-              // Handle the click event for the "Clear" button
-              const clearCheckInButton = document.getElementById('clearCheckIn')
-              clearCheckInButton.addEventListener('click', function () {
-                // Clear the check-in date
-                selectedCheckInDate = null
-                document.getElementById('id_check_in_date').value = ''
-      
-                // Remove the "Check-in" event from the calendar
-                const checkInEvent = calendar.getEventById('checkInEvent')
-                if (checkInEvent) {
-                  checkInEvent.remove()
-                }
-              })
-      
-              // Set the check-in date if it's not already set
-              selectedCheckInDate = info.startStr
-      
-              document.getElementById('id_check_in_date').value = selectedCheckInDate
-      
-              // Add a "Check-in" event on the selected date
-              calendar.addEvent({
-                title: 'Check-in',
-                start: selectedCheckInDate,
-                color: 'blue' // Customize the color for check-in date
-              })
-      
-              // Show the "Clear" button when setting the check-in date
-              document.getElementById('clearCheckIn').style.display = 'inline-block'
-            } else if (!selectedCheckOutDate) {
-              // Check if the selected check-out date is before the check-in date
-              if (selectedDate < new Date(selectedCheckInDate)) {
-                alert('Check-out date cannot be before or on the same day as the check-in date.')
-                calendar.unselect()
-                return
-              }
-      
-              //
-      
-              // Check for unavailable dates between check-in and check-out
-              var currentDate = new Date(selectedCheckInDate)
-              var endDate = new Date(info.startStr)
-              var hasUnavailableDate = false
-      
-              // Iterate through the calendar events to check for unavailable dates
-              var events = calendar.getEvents()
-              while (currentDate <= endDate) {
-                var formattedDate = currentDate.toISOString().split('T')[0]
-      
-                // Check if the current date is an unavailable date (exists in events)
-                var isUnavailable = events.some(function (event) {
-                  return event.start && event.end && new Date(event.start).getTime() <= currentDate.getTime() && new Date(event.end).getTime() >= currentDate.getTime()
-                })
-      
-                if (isUnavailable) {
-                  hasUnavailableDate = true
-                  break
-                }
-      
-                // Move to the next day
-                currentDate.setDate(currentDate.getDate() + 1)
-              }
-      
-              if (hasUnavailableDate) {
-                alert('There are unavailable dates between check-in and check-out.')
-                calendar.unselect()
-                return
-              }
-      
-              // Set the check-out date
-              selectedCheckOutDate = info.startStr
-      
-              document.getElementById('id_check_out_date').value = selectedCheckOutDate
-      
-              // You can now use selectedCheckInDate and selectedCheckOutDate as needed.
-              console.log('Check-in Date: ' + selectedCheckInDate)
-              console.log('Check-out Date: ' + selectedCheckOutDate)
-            }
-            renderSelection()
-          },
-          selectAllow: function (selectInfo) {
-            // Allow selection only if both check-in and check-out dates are not set
-            return !(selectedCheckInDate && selectedCheckOutDate)
-          },
-          events: [
-            {
-              title: 'Unavailable',
-              start: '2023-09-15',
-              end: '2023-09-17',
-              color: 'red'
-            },
-            {
-              title: 'Unavailable',
-              start: '2023-09-20',
-              end: '2023-09-22',
-              color: 'red'
-            }
-            // Add more unavailable date entries
-          ],
-          selectOverlap: function (event) {
-            // Prevent selection overlap with unavailable dates
-            return !event.backgroundColor || event.backgroundColor !== 'red'
-          }
-        })
-      
-        function renderSelection() {
-          // Clear existing selections
-          calendar.removeAllEventSources()
-      
-          // Add unavailable dates as events
-          calendar.addEventSource({
-            events: [
-              {
-                title: 'Unavailable',
-                start: '2023-09-15',
-                end: '2023-09-17',
-                color: 'red'
-              },
-              {
-                title: 'Unavailable',
-                start: '2023-09-20',
-                end: '2023-09-22',
-                color: 'red'
-              }
-              // Add more unavailable date entries
-            ],
-            rendering: 'background'
-          })
-      
-          // Add selected check-in and check-out dates as events
-          if (selectedCheckInDate && selectedCheckOutDate) {
-            calendar.addEvent({
-              title: 'Check-out',
-              start: selectedCheckOutDate,
-              color: 'blue' // Customize the color for check-out date
-            })
-            var currentDate = new Date(selectedCheckInDate)
-          }
-        }
-      
-        calendar.render()
-      
-        // Your JavaScript code here to control form navigation and validation
-        const stepContainer = document.querySelector('.container')
-        const steps = document.querySelectorAll('.step')
-        const prevStepButton = document.getElementById('prev-step')
-        const nextStepButton = document.getElementById('next-step')
-        const submitReservationButton = document.getElementById('submit-reservation')
-        let currentStep = 0
-      
-        function updateStepVisibility() {
-          steps.forEach((step, index) => {
-            if (index === currentStep) {
-              step.classList.remove('hidden')
-            } else {
-              step.classList.add('hidden')
-            }
-          })
-      
-          const translateX = -currentStep * 100 // 100% for each step
-          prevStepButton.disabled = currentStep === 0
-          submitReservationButton.style.display = currentStep === steps.length - 1 ? 'block' : 'none'
-      
-          // Show Step 2 fields when transitioning to Step 2
-          if (currentStep === 1) {
-            document.getElementById('step2').classList.remove('hidden')
-          } else {
-            document.getElementById('step2').classList.add('hidden')
-          }
-      
-          // Enable or disable the "Next" button based on form validation
-          if (currentStep < steps.length - 1) {
-            nextStepButton.disabled = !isCurrentStepValid()
-          } else {
-            nextStepButton.disabled = true
-          }
-          // Show/hide buttons based on the current step
-          if (currentStep === 0) {
-            prevStepButton.style.display = 'none' // Hide "Previous" on the first step
-          } else {
-            prevStepButton.style.display = 'block' // Show "Previous" on other steps
-          }
-      
-          if (currentStep === steps.length - 1) {
-            nextStepButton.style.display = 'none' // Hide "Next" on the last step
-            submitReservationButton.style.display = 'block' // Show "Submit Reservation" on the last step
-          } else {
-            nextStepButton.style.display = 'block' // Show "Next" on other steps
-            submitReservationButton.style.display = 'none' // Hide "Submit Reservation" on other steps
-          }
-        }
-      
-        function isCurrentStepValid() {
-          // Implement validation logic for each step
-          if (currentStep === 0) {
-            // Check if fields in Step 1 are filled
-            const numGuests = document.getElementById('id_num_guests').value
-            const name = document.getElementById('id_guest_name').value
-            return numGuests !== '' && name !== ''
-          } else if (currentStep === 1) {
-            // Check if fields in Step 2 are filled
-            const email = document.getElementById('id_guest_email').value
-            const phone = document.getElementById('id_guest_phone').value
-            return email !== '' && phone !== ''
-          }
-          // Add more validation for other steps if needed
-          return true
-        }
-      
-        prevStepButton.addEventListener('click', () => {
-          if (currentStep > 0) {
-            currentStep--
-            updateStepVisibility()
-          }
-        })
-      
-        nextStepButton.addEventListener('click', () => {
-          if (currentStep < steps.length - 1 && isCurrentStepValid()) {
-            currentStep++
-            updateStepVisibility()
-          }
-        })
-      
-        function isFormValid() {
-          const currentStepFields = steps[currentStep].querySelectorAll('input[required], textarea[required]')
-          for (const field of currentStepFields) {
-            if (!field.value.trim()) {
-              return false
-            }
-          }
-          return true
-        }
-      
-        // Update button states based on form validity
-        function updateButtonState() {
-          const currentStepFields = steps[currentStep].querySelectorAll('input[required], textarea[required]')
-          for (const field of currentStepFields) {
-            if (!field.value.trim()) {
-              nextStepButton.disabled = true
-              return // Exit the loop if any required field is empty
-            }
-          }
-          nextStepButton.disabled = false // Enable the button if all required fields are filled
-        }
-      
-        // Listen for input changes on all input fields and textareas within each step
-        steps.forEach((step) => {
-          const inputFields = step.querySelectorAll('input[required], textarea[required]')
-          inputFields.forEach((field) => {
-            field.addEventListener('input', updateButtonState)
-          })
-        })
-        // Listen for input changes on the current step
-        steps[currentStep].addEventListener('input', updateButtonState)
-      
-        // Initial button state
-        updateButtonState()
-      
-        // Example: To submit the form when the final step is completed
-        submitReservationButton.addEventListener('click', (e) => {
-          e.preventDefault()
-          form.submit(); // Trigger the form submission
-        })
-      
-        // Initial visibility setup
-        updateStepVisibility()
-      })
+
+
+
     </script>
+
+    <script src="{% static 'js/reserve.js' %}" /></script>
   </body>
 </html>
