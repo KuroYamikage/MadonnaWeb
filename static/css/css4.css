@@ -307,6 +307,10 @@ button {
   padding-left: 20px;
 }
 
+.dashboardsidebar {
+  background-color: #fecab7 !important;
+}
+
 .nav-item {
   position: relative;
 }
