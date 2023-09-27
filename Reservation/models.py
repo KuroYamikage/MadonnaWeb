@@ -89,3 +89,5 @@ class Reservations(models.Model):
     facility = models.ManyToManyField(Facility)
     prices = models.ForeignKey(Prices, on_delete=models.CASCADE)
     referenceNum = models.CharField(max_length=247, unique=True, null=True)
+
+

@@ -105,7 +105,7 @@ class ReservationCreateView(FormView):
             else:
                 reservation.discount_code = None
             
-            
+            room_details = []
             # reservation.save()
             if room_type != None:
                 room_details = []
@@ -118,45 +118,45 @@ class ReservationCreateView(FormView):
 
             reference_number = reservation.reference_number
             #   # Send an email notification
-            # strSubject = 'Reservation Confirmation ' + str(reference_number)
-            # subject = strSubject
-            # from_email = settings.DEFAULT_FROM_EMAIL  # Use the default sender email from settings
-            # recipient_list = [form.cleaned_data['guest_email']]  # Assuming 'guest_email' is the field in your form
-            # # Render the email content using the template
-            # context = {
-            #     'reserve': {
-            #         'referenceNum': reservation.reference_number,
-            #         'customer': reservation.guest_name,
-            #         'checkIn': reservation.check_in_date,
-            #         'timeIn': reservation.check_in_time,
-            #         'checkOut': reservation.check_out_date,
-            #         'timeOut': reservation.check_out_time,
-            #         'date': reservation.date,
-            #         'status': reservation.status,
-            #         #'prices': reservation.room.price,
-            #         'discount': discount,
-            #         #'downpayment': reservation.downpayment,
-            #         #'balance': reservation.balance,
-            #         'total': reservation.total,
-            #         'num_guest' : reservation.num_guests,
-            #         #'totalPax':
-            #         'room' : room_details, 
-            #         'type' : reservation_type,
-            #         'time' :reservation_time,
-            #         'total_pax':decTotal,
-            # }
-            #  }
-            # html_message = render_to_string('reference.html', context)
-            # plain_message = strip_tags(html_message)  # Create a plain text message for non-HTML email clients
+            strSubject = 'Reservation Confirmation ' + str(reference_number)
+            subject = strSubject
+            from_email = settings.DEFAULT_FROM_EMAIL  # Use the default sender email from settings
+            recipient_list = [form.cleaned_data['guest_email']]  # Assuming 'guest_email' is the field in your form
+            # Render the email content using the template
+            context = {
+                'reserve': {
+                    'referenceNum': reservation.reference_number,
+                    'customer': reservation.guest_name,
+                    'checkIn': reservation.check_in_date,
+                    'timeIn': reservation.check_in_time,
+                    'checkOut': reservation.check_out_date,
+                    'timeOut': reservation.check_out_time,
+                    'date': reservation.date,
+                    'status': reservation.status,
+                    #'prices': reservation.room.price,
+                    'discount': discount,
+                    #'downpayment': reservation.downpayment,
+                    #'balance': reservation.balance,
+                    'total': reservation.total,
+                    'num_guest' : reservation.num_guests,
+                    #'totalPax':
+                    'room' : room_details, 
+                    'type' : reservation_type,
+                    'time' :reservation_time,
+                    'total_pax':decTotal,
+            }
+             }
+            html_message = render_to_string('reference.html', context)
+            plain_message = strip_tags(html_message)  # Create a plain text message for non-HTML email clients
 
-            # email = EmailMultiAlternatives(subject, plain_message, from_email, recipient_list)
-            # email.attach_alternative(html_message, "text/html")  # Attach the HTML content
+            email = EmailMultiAlternatives(subject, plain_message, from_email, recipient_list)
+            email.attach_alternative(html_message, "text/html")  # Attach the HTML content
 
-            # email.send()
+            email.send()
 
-            # Construct the URL for the summary page, passing the reference number as a parameter
-            # summary_url = reverse('reservation_summary', args=[reference_number])
-            # return redirect(summary_url)
+            #Construct the URL for the summary page, passing the reference number as a parameter
+            summary_url = reverse('reservation_summary', args=[reference_number])
+            return redirect(summary_url)
 
             return(redirect('index'))
         else:

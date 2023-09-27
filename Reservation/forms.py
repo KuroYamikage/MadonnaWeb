@@ -147,14 +147,15 @@ class ReservationForm(forms.ModelForm):
         checkOut = cleaned_data.get("checkOut")
         timeIn = cleaned_data.get("timeIn")
         timeOut = cleaned_data.get("timeOut")
-        if checkIn < timezone.now().date():
-            raise forms.ValidationError("Check in date cannot be in the past")
-        if checkOut < timezone.now().date():
-            raise forms.ValidationError("Check Out date cannot be in the past")
-        if checkOut < checkIn:
-            raise forms.ValidationError(
-                "Check Out date cannot be earlier than check in"
-            )
+        if checkIn and checkOut:
+            if checkIn < timezone.now().date():
+                raise forms.ValidationError("Check in date cannot be in the past")
+            if checkOut < timezone.now().date():
+                raise forms.ValidationError("Check Out date cannot be in the past")
+            if checkOut < checkIn:
+                raise forms.ValidationError(
+                    "Check Out date cannot be earlier than check in"
+                )
         check1 = ""
         checkID = 0
         data2 = Prices.objects.all().values()
@@ -285,10 +286,11 @@ class ReservationEditForm(forms.ModelForm):
         checkOut = cleaned_data.get("checkOut")
         timeIn = cleaned_data.get("timeIn")
         timeOut = cleaned_data.get("timeOut")
-        if checkOut < checkIn:
-            raise forms.ValidationError(
-                "Check Out date cannot be earlier than check in"
-            )
+        if checkOut and checkIn:
+            if checkOut < checkIn:
+                raise forms.ValidationError(
+                    "Check Out date cannot be earlier than check in"
+                )
         check1 = ""
         checkID = 0
         data2 = Prices.objects.all().values()
@@ -437,14 +439,15 @@ class ReservationChecker(forms.Form):
         checkOut = cleaned_data.get("checkOut")
         timeIn = cleaned_data.get("timeIn")
         timeOut = cleaned_data.get("timeOut")
-        if checkIn < timezone.now().date():
-            raise forms.ValidationError("Check in date cannot be in the past")
-        if checkOut < timezone.now().date():
-            raise forms.ValidationError("Check Out date cannot be in the past")
-        if checkOut < checkIn:
-            raise forms.ValidationError(
-                "Check Out date cannot be earlier than check in"
-            )
+        if checkIn and checkOut:
+            if checkIn < timezone.now().date():
+                raise forms.ValidationError("Check in date cannot be in the past")
+            if checkOut < timezone.now().date():
+                raise forms.ValidationError("Check Out date cannot be in the past")
+            if checkOut < checkIn:
+                raise forms.ValidationError(
+                    "Check Out date cannot be earlier than check in"
+                )
         check1 = ""
         checkID = 0
         data2 = Prices.objects.all().values()

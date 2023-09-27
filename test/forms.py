@@ -97,11 +97,7 @@ class ReservationForm(forms.ModelForm):
         # Make check-in and check-out fields read-only
         self.fields["check_in_date"].widget.attrs["readonly"] = True
         self.fields["check_out_date"].widget.attrs["readonly"] = True
-
-        # Example: Limit room choices to available rooms
-        self.fields["room"].queryset = Room.objects.filter(
-            id__in=RoomAvailability.objects.filter(is_available=True).values("room_id")
-        )
+        
         super().__init__(*args, **kwargs)
         # Set the 'required' attribute of the 'room' field to False
         self.fields["room"].required = False
