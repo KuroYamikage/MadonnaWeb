@@ -44,7 +44,7 @@ class StaffLogoutView(LogoutView):
 
 @method_decorator(groups_required(['Admin', 'Staff']), name='dispatch')
 class reserveListView(LoginRequiredMixin,ListView):
-  model = Reservation
+  model = Reservations
   context_object_name = 'reserve'
   template_name = 'users/home.php'
   login_url = "login"

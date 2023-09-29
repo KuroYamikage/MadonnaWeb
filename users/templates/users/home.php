@@ -225,19 +225,19 @@ var month = parseInt(numdate[1]);
 var day = parseInt(numdate[2]);
 
 event_data["events"].push({
-	id:{{x.id}},
-    occasion:"{{x.guest_name}}",
-    invited_count:"{{x.num_guests}}",
+	id:{{x.reservationID}},
+    occasion:"{{x.customer}}",
+    {% comment %} invited_count:"{{x.num_guests}}", {% endcomment %}
     year: year,
     month: month,
     day: day,
 	status: "{{x.status}}",
-	ReferenceNumber: "{{x.reference_number}}",
-	Total: {{x.total}},
+	ReferenceNumber: "{{x.referenceNum}}",
+	Total: {{x.totalPayment}},
 	{% comment %} Balance: {{x.balance}}, {% endcomment %}
-	checkinTime : "{{x.check_in_time}}",
-	checkoutTime : "{{x.check_out_time}}",
-	checkout:"{{x.check_out_date}}"
+	checkinTime : "{{x.TimeIn}}",
+	checkoutTime : "{{x.timeOut}}",
+	checkout:"{{x.checkOut}}"
 
 
   });
