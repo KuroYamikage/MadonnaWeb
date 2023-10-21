@@ -6,12 +6,16 @@ authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.11, <3.13"
 Django = "^4.2.5"
 django-debug-toolbar = "^4.2.0"
 Pillow = "^10.0.1"
 pandas = "^2.1.1"
 matplotlib = "^3.8.0"
+django-session-timeout = "^0.1.0"
+django-recaptcha = "^3.0.0"
+requests = "^2.31.0"
+celery = {extras = ["redis"], version = "^5.3.4"}
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.9.1"

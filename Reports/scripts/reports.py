@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-import sqlite3
 import base64
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -9,8 +8,7 @@ from django.db import connection
 
 
 def month():
-    query = "SELECT checkIn, totalPayment FROM Reservation_reservations WHERE strftime('%m', checkIn) = strftime('%m', 'now')"
-
+    query = "SELECT date, totalPayment FROM Reservation_reservations WHERE DATE(date) BETWEEN DATE('now', 'start of month') AND DATE('now')"
     with connection.cursor() as cursor:
         cursor.execute(query)
         results = cursor.fetchall()
@@ -19,7 +17,7 @@ def month():
     df = pd.DataFrame(results, columns=["checkIn", "totalPayment"])
     df.sort_values(by="checkIn", inplace=True)
 
-    df_grouped = df.groupby('checkIn')['totalPayment'].sum().reset_index()
+    df_grouped = df.groupby("checkIn")["totalPayment"].sum().reset_index()
 
     fig, ax = plt.subplots()
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d/%Y"))
@@ -36,6 +34,7 @@ def month():
     total_reservations = len(df)
 
     return graphic, total_earnings, total_reservations
+
 
 """
 def week():
