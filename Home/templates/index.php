@@ -96,25 +96,19 @@
             <div class="furnitures_section2 layout_padding">
                <div class="row">
                   <div class="col-md-6">
-                     <div class="container_main">
-                        <img src="{{pool1.0.1}}" alt="Avatar" class="image">
-                        <div class="overlay">
-                           <a href={% url 'facility.view' %} class="icon" title="User Profile">
-                           <i class="fa fa-search"></i>
-                           </a>
-                        </div>
+                     <div class="container_main image-container">
+                        <a href={% url 'facility.view' %} title="User Profile">
+                           <img src="{{pool1.0.1}}" alt="Avatar" class="image enlarge-image-main">
+                        </a>
                      </div>
                      <h3 class="temper_text">Public Pool</h3>
                      <p class="dololr_text">Our Public Pool is open for everyone for free with only the need of paying the entrance fee before venturing the pool.</p>
                   </div>
                   <div class="col-md-6">
-                     <div class="container_main">
-                        <img src="{{pool1.1.1}}" alt="Avatar" class="image">
-                        <div class="overlay">
-                           <a href={% url 'facility.view' %} class="icon" title="User Profile">
-                           <i class="fa fa-search"></i>
-                           </a>
-                        </div>
+                     <div class="container_main image-container">
+                        <a href={% url 'facility.view' %} title="User Profile">
+                           <img src="{{pool1.1.1}}" alt="Avatar" class="image enlarge-image-main">
+                        </a>
                      </div>
                      <h3 class="temper_text">Private Pool</h3>
                      <p class="dololr_text">Private Pool is for people who wants to reserve a large pool for their group business outing, company outing, or outing for large family.</p>

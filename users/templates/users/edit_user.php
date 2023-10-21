@@ -119,7 +119,7 @@
 
               <div class="mt-4 pt-2">
                 <input class="btn btn-primary" type="submit" value="Submit" />
-                <a href="{%url 'user.view'%}" class="btn btn-primary my-3">Cancel</a>
+                <a href="{%url 'user.view'%}" class="btn btn-danger my-3">Cancel</a>
               </div>
 
             </form>

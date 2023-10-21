@@ -1,45 +1,47 @@
-
-
 {% extends "master.php" %}
 {% load static %}
       {% block title %}Madonna's Gallery {% endblock %}
+{% block head %}
+      <style>
+        .fixed-ratio-img {
+          width: 300px;  /* Set your preferred width */
+          height: 200px; /* Set your preferred height */
+          object-fit: cover; /* This property ensures the image covers the entire container while maintaining its aspect ratio */
+          margin: 10px;
+        }
 
+        
+      </style>
+      {% endblock head %}
       {% block content %}
 
-
-      <div class="container">
-        <div class="row">
-        <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h1 class="gallery-title">Gallery</h1>
+      <div class="container my-5">
+        <h1 class="gallery-title text-center">Gallery</h1>
+      
+        <div class="text-center">
+          <button class="btn btn-default filter-button" data-filter="all">All</button>
+          <button class="btn btn-default filter-button" data-filter="Facilities">Facilities</button>
+          <button class="btn btn-default filter-button" data-filter="Events">Events</button>
+          <button class="btn btn-default filter-button" data-filter="Promos">Promos</button>
+          <button class="btn btn-default filter-button" data-filter="Guests">Guests</button>
         </div>
-    
-        
-        <div align="center" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <button class="btn btn-default filter-button" data-filter="all">All</button>
-            <button class="btn btn-default filter-button" data-filter="Facilities">Facilities</button>
-            <button class="btn btn-default filter-button" data-filter="Events">Events</button>
-            <button class="btn btn-default filter-button" data-filter="Promos">Promos</button>
-            <button class="btn btn-default filter-button" data-filter="Guests">Guests</button>
-            </div>
         <br/>
-        
-    
-    
-    
-            
-    
-    
-            {% for pics in gallery %}
-            <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter {{pics.galleryTag}}">
-                <a href="{%url 'gallery.detail' pk=pics.id%}"><img src="../{{pics.galleryPic}}" class="img-responsive"></a>
-            </div>
-            {% endfor %}
-    
+      
+        <div class="row">
+          {% for pics in gallery %}
+          <div class="gallery_product image-container col-lg-3 col-md-3 col-sm-6 col-xs-12 filter {{pics.galleryTag}}">
+            <a href="{% url 'gallery.detail' pk=pics.id %}">
+              <img src="../{{pics.galleryPic}}" class="img-responsive fixed-ratio-img enlarge-image" alt="Gallery Image">
+            </a>
+            {% comment %} <div class="image-overlay">
+              <p>Your Overlay Content</p>
+          </div> {% endcomment %}
+          </div>
+          {% endfor %}
         </div>
-    </div>
-    </section>
-    
-    <script>
+      </div>
+      
+      <script>
     $(document).ready(function(){
     
         $(".filter-button").click(function(){

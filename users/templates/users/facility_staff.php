@@ -10,6 +10,7 @@
 <h1 class=>Facilities</h1>
 
 
+<a href="{%url 'facility.new'%}" class="btn btn-primary my-3">Add new Facility</a>
 <div class="table-responsive">
     <table class="table text-start align-middle table-bordered table-hover mb-0">
         <thead>
@@ -53,7 +54,7 @@
             </tr>
         {% endfor %}
         </table> {% endcomment %}
-        <a href="{%url 'facility.new'%}" class="btn btn-primary my-3">Add new Facility</a>
+       
 </div>
 </div>
 </div>

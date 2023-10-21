@@ -24,6 +24,6 @@
     </div>
     
     <button type="submit" class="btn btn-primary">Change Password</button>
-    <a href="{% url 'user.view' %}" class="btn btn-secondary">Cancel</a> 
+    <a href="{% url 'user.view' %}" class="btn btn-danger">Cancel</a> 
 </form>
 {% endblock %}

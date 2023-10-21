@@ -10,6 +10,7 @@ urlpatterns = [
     path('staff', views.reserveListView.as_view(), name='main'),
     path('staff/facility/new', views.newFacility.as_view(), name='facility.new'),
     path('staff/facility', views.viewFacility.as_view(), name='facility.staff'),
+    path('staff/rooms', views.RoomsList.as_view(), name='rooms.view'),
     path('staff/facility/edit/<int:pk>', views.editFacility.as_view(), name='facility.edit'),
     path('accounts/', views.userList.as_view(), name='user.view'),
     path('staff/gallery/add', views.addGallery.as_view(), name='gallery.add'),

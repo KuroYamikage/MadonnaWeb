@@ -1369,3 +1369,21 @@ iframe {
 .facility-article {
   padding: 25px;
 }
+
+.image-container {
+  position: relative;
+  /* width: 300px; Adjust the width as needed */
+  overflow: hidden;
+  
+}
+
+.image-container:hover .enlarge-image .enlarge-image-main {
+  transform: scale(1.2); /* Adjust the scale factor for the desired enlargement */
+}
+
+.enlarge-image-main {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease-in-out;
+}

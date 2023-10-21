@@ -39,8 +39,8 @@
 
 <div class="form-row">
     <div class="form-group col-md-6">
-    {{form.facilityDescription.label}}
-        {{form.facilityDescription}}
+    {{form.facility_free.label}}
+        {{form.facility_free}}
     </div>
 
     <div class="form-group col-md-6">
@@ -48,6 +48,13 @@
         {{form.facilityCategory.label}}
             {{form.facilityCategory}}
         </div>
+    </div>
+</div>
+
+<div class="form-row">
+<div class="form-group col-md-6">
+    {{form.facilityDescription.label}}
+        {{form.facilityDescription}}
     </div>
 </div>
 <div class="form-group">   

@@ -70,88 +70,77 @@
 
 
     <div class="container-xxl position-relative bg-white d-flex p-0">
-        <!-- Spinner Start -->
+        <!-- Spinner -->
         <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
         <!-- Spinner End -->
-
-
-            <!-- Sidebar Start -->
-            <div class="sidebar pe-4 pb-3">
-                <nav class="navbar dashboardsidebar navbar-light">
-                    <a href="index.html" class="navbar-brand mx-4 mb-3">
-                        <h3 class="text-primary"></i>Madonna's Web</h3>
-                    </a>
-                    <div class="d-flex align-items-center ms-4 mb-4">
-                        <div class="ms-3">
-                            <h3 class="mb-0">{{request.user.get_full_name}}</h3>
-                            <h5>{{request.user.username}}</>
-                            </br>
-                            <span>{{request.user.groups.all.0}}</span>
+    
+        <!-- Sidebar -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar dashboardsidebar navbar-light">
+                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"></i>Madonna's Web</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="ms-3">
+                        <h3 class="mb-0">{{request.user.get_full_name}}</h3>
+                        <h5>{{request.user.username}}</h5>
+                        <span>{{request.user.groups.all.0}}</span>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+                    <!-- Admin -->
+                    {% if user|is_member_of_group:'Admin'%} 
+                    <div class="nav-item dropdown">
+                        <a href="url" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Reservation</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{% url 'main'%}" class="dropdown-item">Reservations</a>
+                            <a href="{% url 'rooms.view' %}" class="dropdown-item">Rooms</a>
+                            <a href="{% url 'discount.view' %}" class="dropdown-item">Discounts</a>
                         </div>
                     </div>
-                    <div class="navbar-nav w-100">
-                        {% if user|is_member_of_group:'Admin'%} 
-                       <div class="nav-item dropdown">
-                           <a href="url" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Reservation</a>
-                           <div class="dropdown-menu bg-transparent border-0">
-                               <a href="{% url 'main'%}" class="dropdown-item">Reservations</a>
-                               <a href=" {% url 'discount.view' %} " class="dropdown-item">Discounts</a>
-                           </div>
-                       </div>
-                       {% endif %}
-
-                       {% if user|is_member_of_group:'Staff'%}
-                       <div class="nav-item dropdown">
-                           <a href="url" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Reservation</a>
-                           <div class="dropdown-menu bg-transparent border-0">
-                               <a href="{% url 'main'%}" class="dropdown-item">Reservations</a>
-                               <a href=" {% url 'discount.view' %} " class="dropdown-item">Discounts</a>
-                           </div>
-                       </div>
-                       {% endif %}
-
-                       {% if user|is_member_of_group:'Admin'%}
-                       <a href="{% url 'reports' %}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-                       <a href="{%url 'user.view'%}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Users</a>
-                       {% endif %}
-
-
-                       {% if user|is_member_of_group:'Admin'%}
-                       <div class="nav-item dropdown">
-                           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Home Page</a>
-                           <div class="dropdown-menu bg-transparent border-0">
-                               <a href="{% url 'facility.staff' %}" class="dropdown-item">Facilities</a>
-                               <a href="{% url 'blog' %}" class="dropdown-item">Blogs</a>
-                               <a href="{%url 'gallery.staff'%}" class="dropdown-item">Gallery</a>
-                           </div>
-                         
+                    {% endif %}
+    
+                    <!-- Staff -->
+                    {% if user|is_member_of_group:'Staff'%}
+                    <div class="nav-item dropdown">
+                        <a href="url" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Reservation</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{% url 'main'%}" class="dropdown-item">Reservations</a>
+                            <a href="{% url 'rooms.view' %}" class="dropdown-item">Rooms</a>
+                            <a href="{% url 'discount.view' %}" class="dropdown-item">Discounts</a>
                         </div>
-                        {% endif %}
-
-                        {% if user|is_member_of_group:'Social Media Manager'%}
-                       <div class="nav-item dropdown">
-                           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Home Page</a>
-                           <div class="dropdown-menu bg-transparent border-0">
-                               <a href="{% url 'facility.staff' %}" class="dropdown-item">Facilities</a>
-                               <a href="{% url 'blog' %}" class="dropdown-item">Blogs</a>
-                               <a href="{%url 'gallery.staff'%}" class="dropdown-item">Gallery</a>
-                           </div>
-                         
+                    </div>
+                    {% endif %}
+    
+                    <!-- Admin -->
+                    {% if user|is_member_of_group:'Admin'%}
+                    <a href="{% url 'reports' %}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="{%url 'user.view'%}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Users</a>
+                    {% endif %}
+    
+                    <!-- Admin and Social Media Manager -->
+                    {% if user|is_member_of_group:'Admin' or user|is_member_of_group:'Social Media Manager'%}
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>Home Page</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{% url 'facility.staff' %}" class="dropdown-item">Facilities</a>
+                            <a href="{% url 'blog' %}" class="dropdown-item">Blogs</a>
+                            <a href="{%url 'gallery.staff'%}" class="dropdown-item">Gallery</a>
                         </div>
-                        {% endif %}
-
-                </nav>
-            </div>
-            <!-- Sidebar End -->
-
-
-        <!-- Content Start -->
+                    </div>
+                    {% endif %}
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+    
+        <!-- Content -->
         <div class="content">
-            <!-- Navbar Start -->
+            <!-- Navbar -->
             <nav class="navbar navbar-expand dashboardsidebar navbar-light sticky-top px-4 py-0">
                 <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
                     <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
@@ -159,40 +148,37 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
-                
+    
                 <div class="nav navbar-nav ms-auto navbar-right">
-                   
-                    <a href=" {% url 'password.change'%}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Change Password</a>
+                    <a href="{% url 'password.change'%}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Change Password</a>
                     <a href="{% url 'logout' %}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Signout</a>
-                    
                 </div>
             </nav>
-            <!-- Navbar End -->
-
+    
+            <!-- Messages -->
             {% if messages %}
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
-</div>
-{% endif %}
-        
-  
-{%block content%}
-
-{%endblock%}
-</div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <ul>
+                    {% for message in messages %}
+                    <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+    
+            {% block content %}{% endblock %}
+        </div>
         <!-- Content End -->
-</div>
-
-<!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-</div>
+    
+    </div>
+    
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+    
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

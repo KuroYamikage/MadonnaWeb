@@ -66,7 +66,7 @@
               <ul class="list-unstyled">
                 <li class="text-muted">To: <span style="color:#5d9fc5 ;">{{reserve.customer}}</span></li>
                 <li class="text-muted">Check In: {{reserve.checkIn}} {{reserve.timeIn}}</li>
-                <li class="text-muted">check Out: {{reserve.checkIn}} {{reserve.timeIn}}</li>
+                <li class="text-muted">check Out: {{reserve.checkOut}} {{reserve.timeOut}}</li>
               </ul>
             </div>
             <div class="col-xl-4">
@@ -109,6 +109,12 @@
                   <th scope="col">{{rooms.room_type}}
                   <th scope="col">{{rooms.room_number}}
                   <th scope="col">₱{{rooms.price}}
+                  </tr>
+                  <tr>
+                    <th scope="col">
+                    <th scope="col">Free Guests for {{rooms.room_type}}
+                    <th scope="col">{{rooms.free}}
+                    <th scope="col">- ₱{{rooms.free_price}}
                   </tr>
                   {% endfor %}
               </tbody> 

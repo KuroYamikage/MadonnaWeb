@@ -156,13 +156,13 @@ if(events.length===0) {
 else {
 	// Go through and add each event as a card to the events container
 	for(var i=0; i<events.length; i++) {
-		var event_card = $("<div class='event-card'></div>")
+		var event_card = $("<div class='event-card col-6'></div>")
 		var event_name = $("<div class='event-name'>"+events[i]["occasion"]+":</div>");
 		var event_count = $("<div class='event-count'><p>Check in Time: "+events[i]["checkinTime"]+
 			"</p><p>Check out: "+events[i]["checkout"]+
 				"</p><p>Number of Guest: "+events[i]["invited_count"]+
 				"</p><p>Check out Time: "+events[i]["checkoutTime"]+
-					"</p><a href="+"/reservation/edit/"+events[i]["id"]+
+					"</p><a href="+"reservation/edit/"+events[i]["id"]+"/"+
 					" class="+"btn btn-secondary my-3"+
 					">Add more Details</a></div>");
 		if(events[i]["status"]==="Cancelled") {
@@ -225,19 +225,21 @@ var month = parseInt(numdate[1]);
 var day = parseInt(numdate[2]);
 
 event_data["events"].push({
-	id:{{x.reservationID}},
-    occasion:"{{x.customer}}",
-    {% comment %} invited_count:"{{x.num_guests}}", {% endcomment %}
+	id:{{x.id}},
+
+    Name:"{{x.guest_name}}",
+	occasion:"{{x.reservation_type}}",
+    invited_count:"{{x.num_guests}}",
     year: year,
     month: month,
     day: day,
 	status: "{{x.status}}",
-	ReferenceNumber: "{{x.referenceNum}}",
-	Total: {{x.totalPayment}},
+	ReferenceNumber: "{{x.reference_number}}",
+	Total: {{x.total}},
 	{% comment %} Balance: {{x.balance}}, {% endcomment %}
-	checkinTime : "{{x.TimeIn}}",
-	checkoutTime : "{{x.timeOut}}",
-	checkout:"{{x.checkOut}}"
+	checkinTime : "{{x.check_in_time}}",
+	checkoutTime : "{{x.check_out_time}}",
+	checkout:"{{x.check_out_date}}",
 
 
   });
@@ -271,8 +273,8 @@ const months = [
 
 		<div class="container mt-5">
 			<div class="row">
-				<div class="col-md-12">
-					<div class="content-cal w-100">
+				<div class="col">
+					<div class="content-cal">
 				    <div class="calendar-container">
 				      <div class="calendar"> 
 				        <div class="year-header"> 
@@ -317,11 +319,18 @@ const months = [
 				        <a href="{%url 'reservation.new'%}"><button class="button" id="add-button">Add Reservation</button></a>
 				      </div>
 				    </div>
+				</div>
+			</div>
+		</div>
+			<div class="row">
+				<div class="col">
+
 				    <div class="events-container">
+						<div class="row">
+						</div>
 				    </div>
 				    <div class="dialog" id="dialog">	        
-					
-
+		
 				      </div>
 				  </div>
 				</div>

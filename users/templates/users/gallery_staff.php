@@ -1,9 +1,22 @@
 {%extends 'sidebar.php'%}
 {%load static%}
 {% block title %}Staff Gallery{% endblock title %}
-{% block head %} <link rel="stylesheet" type="text/css" href="{% static 'css/css4.css' %}">{% endblock head %}
-{% block content %}
-<div class="container">
+{% block head %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/css4.css' %}">
+
+<style>
+    .fixed-ratio-img {
+      width: 300px;  /* Set your preferred width */
+      height: 200px; /* Set your preferred height */
+      object-fit: cover; /* This property ensures the image covers the entire container while maintaining its aspect ratio */
+      margin: 10px;
+    }
+  </style>
+  {% endblock head %}
+  
+  {% block content %}
+<div class="container my-5">
     <div class="row">
     <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <h1 class="gallery-title">Gallery</h1>
@@ -26,7 +39,9 @@
 
         {% for pics in gallery %}
         <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter {{pics.galleryTag}}">
-            <a href="{%url 'gallery.staff.detail' pk=pics.id%}"><img src="../{{pics.galleryPic}}" class="img-responsive"></a>
+            <a href="{%url 'gallery.staff.detail' pk=pics.id%}">
+                <img src="../{{pics.galleryPic}}" class="img-responsive fixed-ratio-img" alt="Gallery Image">
+            </a>
         </div>
         {% endfor %}
 

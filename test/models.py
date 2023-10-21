@@ -1,21 +1,16 @@
 from django.db import models
-from Reservation.models import Discount
+from Reservation.models import Discount, Facility
 import random
 import string
 from decimal import Decimal
 
 # Create your models here.
 
-class RoomType(models.Model):
-    room_type = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.room_type
-
 class Room(models.Model):
     room_number = models.CharField(max_length=10)
-    room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
+    room_type = models.ForeignKey(Facility, on_delete=models.CASCADE)
     price_per_night = models.DecimalField(max_digits=10, decimal_places=2)
+    free_guests = models.IntegerField(default=0)
 
     def __str__(self):
         return self.room_number  # You can change this to display room type and number

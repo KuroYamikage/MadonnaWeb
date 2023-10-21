@@ -87,4 +87,5 @@ def addrecord(request):
   return HttpResponseRedirect(reverse('sample'))
 # Create your views here.
 
-
+class Game(TemplateView):
+  template_name = 'game.html'

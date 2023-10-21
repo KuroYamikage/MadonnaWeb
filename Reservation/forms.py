@@ -334,6 +334,12 @@ class FacilityForm(forms.ModelForm):
             ("cottages", "Cottages"),
             ("EH", "Event Hall"),
         )
+
+        FacilityActiveChoices=(
+            (1,"Yes"),
+            (2,"No",)
+        )
+
         fields = (
             "facilityName",
             "facilityDescription",
@@ -341,13 +347,17 @@ class FacilityForm(forms.ModelForm):
             "facilityPrice",
             "facilityCategory",
             "facilitymax",
+            "facilityActive",
+            'facility_free',
         )
         widgets = {
             "facilityName": forms.TextInput(attrs={"class": "form-control"}),
             "facilityDescription": forms.Textarea(attrs={"class": "form-control"}),
             "facilityPrice": forms.NumberInput(attrs={"class": "form-control"}),
             "facilitymax": forms.NumberInput(attrs={"class": "form-control"}),
-            "facilityCategory": forms.RadioSelect(choices=FacilityCategoriesChoices),
+            "facilityCategory": forms.RadioSelect(choices=FacilityCategoriesChoices,attrs={"class": "form-control"}),
+            "facility_free": forms.NumberInput(attrs={"class": "form-control"}),
+            
         }
         labels = {
             "facilityName": "Facility Name",
@@ -356,6 +366,8 @@ class FacilityForm(forms.ModelForm):
             "facilityPrice": "Facility Price",
             "facilitymax": "Facility Maximum Occupancy",
             "facilityCategory": "Category",
+            "facilityActive": "Show?",
+            "facility_free":"How many free Guests?"
         }
 
 

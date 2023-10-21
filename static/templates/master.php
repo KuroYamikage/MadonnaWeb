@@ -77,6 +77,9 @@
                         <a class="nav-link" href="{%url 'gallery'%}">Gallery</a>
                      </li>
                      <li class="nav-item">
+                        <a class="nav-link" href="{%url 'game'%}">Design the Event Hall</a>
+                     </li>
+                     <li class="nav-item">
                         <a class="nav-link" href="{%url 'about'%}">About</a>
                      </li>
                   </ul>

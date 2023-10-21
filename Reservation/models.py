@@ -22,7 +22,7 @@ class Reward(models.Model):
 
 
 class Discount(models.Model):
-    discountCode = models.CharField(max_length=15)
+    discountCode = models.CharField(max_length=15, unique=True)
     discountPrice = models.DecimalField(decimal_places=2, max_digits=10)
     discountActive = models.BooleanField(default=False)
 
@@ -37,7 +37,7 @@ class Facility(models.Model):
         ("cottages", "Cottages"),
         ("EH", "Event Hall"),
     )
-    facilityName = models.CharField(max_length=255)
+    facilityName = models.CharField(max_length=255, unique=True)
     facilityDescription = models.CharField(max_length=255)
     facilityCategory = models.CharField(
         max_length=20, choices=FacilityCategoriesChoices, blank=False, default="pool"
@@ -46,7 +46,7 @@ class Facility(models.Model):
     facilityPrice = models.DecimalField(decimal_places=2, max_digits=8)
     # facilityPrice2 = models.DecimalField(decimal_places=2, max_digits=8, null=True)
     # facilityPrice3 = models.DecimalField(decimal_places=2, max_digits=8, null=True)
-
+    facility_free = models.IntegerField( default=0)
     facilitymax = models.IntegerField()
     facilityActive = models.BooleanField(default=False)
 
@@ -84,8 +84,8 @@ class Reservations(models.Model):
     status = models.CharField(
         choices=reservationChoices, max_length=10, default="Pending"
     )
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, default=1)
-    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, default=1)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, default=1) # type: ignore
+    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, default=1) # type: ignore
     facility = models.ManyToManyField(Facility)
     prices = models.ForeignKey(Prices, on_delete=models.CASCADE)
     referenceNum = models.CharField(max_length=247, unique=True, null=True)

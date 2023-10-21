@@ -29,17 +29,20 @@ class UserRegistrationForm(UserCreationForm):
         }
     def save(self, commit=True):
         user = super().save(commit=False)
-        group = self.cleaned_data.get('groups')
 
-        if group:
-            user.groups.set([group])
-        else:
-            user.groups.clear()
+        # Save the user without committing
+        if not commit:
+            user.save()
 
+        # Add user to selected groups
+        groups = self.cleaned_data.get('groups')
+        user.groups.set(groups)
+
+        # Save the user again with the groups
         if commit:
             user.save()
 
-        return user 
+        return user
 
 
 

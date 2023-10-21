@@ -12,8 +12,8 @@
 {{form.as_p}}
 
 <div class="mt-4 pt-2 container d-flex justify-content-center">
-    <button class="changepassbutton"><input class="btn btn-primary" type="submit" value="Submit" /></button>
-    <button class="changepassbutton"><a href="{%url 'main'%}" class="btn btn-primary my-3">Cancel</a></button>
+    <button><input class="btn btn-primary" type="submit" value="Submit" /></button>
+    <button><a href="{%url 'main'%}" class="btn btn-danger my-3">Cancel</a></button>
   </div>
 </form>
 {% endblock %}

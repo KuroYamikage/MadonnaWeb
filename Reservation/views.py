@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
+from test.models import Reservation
 from django.views.generic import (
     FormView,
     CreateView,

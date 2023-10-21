@@ -22,7 +22,7 @@ from .mixins import GroupRequiredMixin
 from django.contrib.auth.models import Group
 from django.utils.decorators import method_decorator
 from .decorators import groups_required
-from test.models import Reservation
+from test.models import Reservation, Room
 
 # Create your views here.
 
@@ -44,10 +44,18 @@ class StaffLogoutView(LogoutView):
 
 @method_decorator(groups_required(['Admin', 'Staff']), name='dispatch')
 class reserveListView(LoginRequiredMixin,ListView):
-  model = Reservations
+  model = Reservation
   context_object_name = 'reserve'
   template_name = 'users/home.php'
   login_url = "login"
+
+
+@method_decorator(groups_required(['Admin']), name='dispatch')
+class RoomsList(LoginRequiredMixin, ListView):
+  model= Room
+  context_object_name = 'room'
+  template_name = 'users/room_list.php'
+
 
 @method_decorator(groups_required(['Admin']), name='dispatch')
 class userList(LoginRequiredMixin, ListView):
@@ -55,11 +63,14 @@ class userList(LoginRequiredMixin, ListView):
   context_object_name = 'user1'
   template_name = 'users/user_list.php'
 
+
+
 @method_decorator(groups_required(['Admin']), name='dispatch')
 class registerUser(LoginRequiredMixin, CreateView):
   form_class = UserRegistrationForm
   template_name = 'users/register.php'
   success_url = '/accounts/'
+  
 
 class changepassword(PasswordChangeView, LoginRequiredMixin):
   form_class = PasswordChangeForm
@@ -122,7 +133,7 @@ class viewBlogs(PermissionRequiredMixin, LoginRequiredMixin, ListView):
 
 class deleteBlogs(LoginRequiredMixin, DeleteView):
   model= Blog
-  success_url = '/blog'
+  success_url = 'blog'
   template_name = 'delete_blog.php'
   login_url = "login"
 class updateBlogs(LoginRequiredMixin, UpdateView, SuccessMessageMixin):

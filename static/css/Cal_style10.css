@@ -8185,7 +8185,7 @@ h1, h2, h3, h4, h5,
 .content-cal {
   overflow: none;
   width: 100%;
-  max-width: 790px;
+  max-width: 500px;
   padding: 0px 0;
   height: 500px;
   position: relative;
@@ -8196,7 +8196,7 @@ h1, h2, h3, h4, h5,
 .events-container {
   overflow-y: scroll;
   height: 100%;
-  width: 50%;
+  width: 100%;
   border: solid 4px;
   border-color: greenyellow;
   float: right;
@@ -8205,7 +8205,8 @@ h1, h2, h3, h4, h5,
   padding: 0px;
   border-bottom-right-radius: 3px;
   border-top-right-radius: 3px;
-  padding: 0; }
+  padding: 0;
+  background: #7e0cf5; }
   @media (max-width: 767.98px) {
     .events-container {
       width: 100%;
@@ -8252,7 +8253,7 @@ h1, h2, h3, h4, h5,
   position: relative;
   margin: 0 auto;
   height: 100%;
-  width: 50%;
+  width: 100%;
   background: white;
   border: solid 4px;
   border-color: greenyellow;

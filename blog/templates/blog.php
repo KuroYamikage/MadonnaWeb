@@ -19,6 +19,7 @@
                             <th scope="col">Created By</th>
                             <th scope="col">Posted?</th>
                             <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,8 +29,9 @@
                             <td>{{x.blog_title}}</td>
                             <td>{{x.blog_content|truncatewords:5}}</td>
                             <td>{{x.blog_owner}}</td>
-                            <td>{{x.blog_status}}</td>
+                            <td>{{ x.blog_status|yesno:"Yes,No" }}</td>
                             <td><a href = "{%url 'blog.update' pk=x.blog_id%}"> Edit Blog</a></td>
+                            <td><a href = "{%url 'blog.delete' pk=x.blog_id%}"> Delete Blog</a></td>
                         </tr>
                         {%endfor%}
                     </tbody>
