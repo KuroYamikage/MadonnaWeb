@@ -9,24 +9,29 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email',
-                  'password1', 'password2', 'groups']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'groups']
         widgets = {
-            'username' : forms.TextInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off','autocomplete':'off'}),
-            'password1' : forms.PasswordInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
-            'password2' : forms.PasswordInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
-            'email' : forms.EmailInput(attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
-            'first_name' : forms.TextInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
-            'last_name' : forms.TextInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
+            'username': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
+            'password1': forms.PasswordInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
+            'password2': forms.PasswordInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
+            'first_name': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
+            'groups': forms.Select(attrs={'class': 'form-control form-control-lg'}),
         }
 
         labels = {
-            'username' : "Username",
-            'email' : "Email",
-            'first_name' : "First Name",
-            'last_name' : "Last Name",
-            'groups' : "Assign as",
+            'username': "Username",
+            'email': "Email",
+            'first_name': "First Name",
+            'last_name': "Last Name",
+            'groups': "Assign as",
         }
+
+    def clean_group(self):
+        group = self.cleaned_data['groups']
+        return group
+
     def save(self, commit=True):
         user = super().save(commit=False)
 
@@ -34,16 +39,15 @@ class UserRegistrationForm(UserCreationForm):
         if not commit:
             user.save()
 
-        # Add user to selected groups
-        groups = self.cleaned_data.get('groups')
-        user.groups.set(groups)
-
-        # Save the user again with the groups
+        # Add user to selected group
+        group = self.cleaned_data.get('groups')
+        
+        # Save the user again with the group only if user has been saved
         if commit:
             user.save()
+            user.groups.set([group])
 
         return user
-
 
 
 

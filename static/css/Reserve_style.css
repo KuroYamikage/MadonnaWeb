@@ -176,3 +176,7 @@
       .step {
         align-items: center;
       }
+	  .calendar {
+		width: 70%;
+		margin: 0 auto;
+	  }

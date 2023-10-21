@@ -7,6 +7,20 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	<link rel="stylesheet" href="{%static 'css/Reserve_style.css'%}">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
+	<style>
+		.calendar {
+			width: 100%;
+			height: 100%;
+			margin: 0 auto;
+		  }
+	</style>
 {%endblock%}
  {% block content %}
 <div class="container tm-row m-auto container reserve-form reserve_section"">
@@ -56,67 +70,39 @@
 
 
 
-	<div class="section-center2">
+	<div class="section-center2 d-flex align-items-center justify-content-center">
 		<div class="container">
 			<div class="row">
 				<div class="booking-form">
-					<form method="POST">
-						{% csrf_token %}
+					
 						<div class="select-div">
-						<div class="row no-margin">
-							<div class="col-md-3">
+						<div class="row">
+							<div class="col">
 								<div class="form-header">
-									<h2>Book Now</h2>
-									<h3 class="mb-2">{{form.non_field_errors.as_text}}</h3>
+										<h2>Book Now</h2>
 								</div>
+									
 							</div>
-							<div class="col-md-6">
-								<div class="row no-margin">
-									<div class="col-md-6">
-										<div class="form-group">
-											<span class="form-label">Check In</span>
-											{{form.checkIn}}
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<span class="form-label">Time and Maximum Pax</span>
-											{{form.prices}}
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<span class="form-label">Check Out</span>
-											{{form.checkOut}}
-										</div>
-									</div>
-
-									<div class="col-md-6">
-										<div class="form-group">
-											<span class="form-label">Check In Time</span>
-											{{form.timeIn}}
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<span class="form-label">Check Out Time</span>
-											{{form.timeOut}}
-										</div>
-									</div>
+						</div>
+							
+						<div class="row">
+							<div class="col">
+								<div class="calendar" id="calendar"></div>
+							</div>	
 									
-									
-									
-								</div>
-							</div>
-							<div class="col-md-2">
+								
+						</div>
+						<div class="row">
+							<div class="col">
 								<div class="form-btn">
 									<button class="submit-btn" name="new">Check availability</button>
 									
 								</div>
 							</div>
 						</div>
+						
 					</div>
-					</form>
+					
 				</div>
 			</div>
 		</div>
@@ -217,80 +203,113 @@
 </div>
 	
 <script>
-$(function () {
-	$('.select-div').on('change', 'select', function (e) {//use on to delegate
-		var v = $(e.target).val(), t = $(e.target).find(':selected').text(), p = $(e.target).closest('.select-div');
-		if (v) {
-			var c = (function(t) {
-				switch(t) {
-					case '---------': return 0;
-					{%for price in prices%}
-					case 'For {{price.dayTime}} Reservation with Maximum of {{price.maxPax}} Pax': 
-					var day = "{{price.dayTime}}"
-					switch(day){
-						case "Day":
-						console.log('day: ' + day )
-						var now=document.getElementById("id_checkIn").value
-						document.getElementById("id_timeIn").value = "07:00"
-						document.getElementById("id_timeOut").value = "19:00"
-						document.getElementById("id_checkOut").value = now
-						break;
+	var unavailableDates = [{% for date in unavailable_dates %}"{{ date }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
+</script>
+<script>
 
-						case "Night":
-						console.log('Night: ' + day )
-						var now=document.getElementById("id_checkIn").value
-						var numdate = now.split('-');
-						console.log(now)
-						var year = parseInt(numdate[0]);
-						var month = parseInt(numdate[1]);
-						if(month < 10){
-							month = "0" + month;
-						}
-						var day = parseInt(numdate[2])+1;
-						if(day < 10){
-							day = "0" + day;
-						}
-						numdate = year+"-"+month+"-"+day;
-						console.log(numdate)
-
-						document.getElementById("id_timeIn").value = "19:00"
-						document.getElementById("id_timeOut").value = "07:00"
-						document.getElementById("id_checkOut").value = numdate
-						break;
-
-
-						case "Whole Day":
-						console.log('Whole Day: ' + day )
-						var now=document.getElementById("id_checkIn").value
-						var numdate = now.split('-');
-						console.log(now)
-						var year = parseInt(numdate[0]);
-						var month = parseInt(numdate[1]);
-						if(month < 10){
-							month = "0" + month;
-						}
-						var day = parseInt(numdate[2])+1;
-						if(day < 10){
-							day = "0" + day;
-						}
-						console.log(day)
-						numdate = year+"-"+month+"-"+day;
-						console.log(numdate)
-
-						document.getElementById("id_timeIn").value = "07:00"
-						document.getElementById("id_timeOut").value = "07:00"
-						document.getElementById("id_checkOut").value = numdate
-						break;	getElementById("id_checkOut").value = numdate
-						break;
-					}
-					return {{price.price}};
-
-					{%endfor%}
-				}
-			})(t);
+	document.addEventListener('DOMContentLoaded', function () {
+		var calendarEl = document.getElementById('calendar')
+		var selectedCheckInDate = null
+		var selectedCheckOutDate = null
+		var form = document.getElementById('multi-step-form')
+	
+		// Define the unavailableDates array with date strings in "Sept 21, 2023" format
+	
+	
+		// Create an array to store the converted unavailable events
+		const unavailableEvents = [];
+	
+		// Function to convert date string to ISO format
+		function convertToDateISO(dateStr) {
+			const dateParts = dateStr.split(' ');
+			if (dateParts.length === 3) {
+				const month = dateParts[0];
+				const day = dateParts[1].replace(',', '');
+				const year = dateParts[2];
+				const isoDate = new Date(`${month} ${day}, ${year} 00:00:00 UTC`);
+				return isoDate.toISOString().split('T')[0];
+			}
+			return null; // Handle invalid date format
 		}
-	});
-});
+	
+		// Convert and create unavailableEvents
+		unavailableDates.forEach(function (dateStr) {
+			const isoDate = convertToDateISO(dateStr);
+			if (isoDate) {
+				unavailableEvents.push({
+					title: 'Unavailable',
+					start: isoDate,
+					rendering: 'background',
+					color: 'red'
+				});
+			}
+		});
+	
+		const stepContainer = document.querySelector('.container')
+		const steps = document.querySelectorAll('.step')
+		const prevStepButton = document.getElementById('prev-step')
+		const nextStepButton = document.getElementById('next-step')
+		const submitReservationButton = document.getElementById('submit-reservation')
+		const reservationTimeDropdown = document.getElementById('id_reservation_time')
+		const checkInDateField = document.getElementById('id_check_in_date')
+		const checkOutDateField = document.getElementById('id_check_out_date')
+		const checkInTimeField = document.getElementById('id_check_in_time')
+		const checkOutTimeField = document.getElementById('id_check_out_time')
+		const reservationTypeSelect = document.getElementById("id_reservation_type");
+	   
+	
+		console.log(unavailableEvents)
+
+	
+	
+
+	
+	
+		function isToday(dateStr) {
+			var today = new Date()
+			var selectedDate = new Date(dateStr)
+			return today.getDate() === selectedDate.getDate() && today.getMonth() === selectedDate.getMonth() && today.getFullYear() === selectedDate.getFullYear()
+		}
+	
+		var calendar = new FullCalendar.Calendar(calendarEl, {
+			initialView: 'dayGridMonth', // Change the view as needed
+			
+	
+			events: unavailableEvents,
+	
+			selectOverlap: function (event) {
+				// Prevent selection overlap with unavailable dates
+				return !event.backgroundColor || event.backgroundColor !== 'red'
+			}
+		})
+	
+		function renderSelection() {
+			// Clear existing selections
+			calendar.removeAllEventSources()
+	
+			// Add unavailable dates as events
+			calendar.addEventSource({
+				events: unavailableEvents,
+				rendering: 'background'
+			})
+	
+			// Add selected check-in and check-out dates as events
+			if (selectedCheckInDate && selectedCheckOutDate) {
+				calendar.addEvent({
+					title: 'Check-out',
+					start: selectedCheckOutDate,
+					color: 'blue' // Customize the color for check-out date
+				})
+				var currentDate = new Date(selectedCheckInDate)
+			}
+		}
+	
+		calendar.render()
+	
+	})
+	
+
+
 
 </script>
  {% endblock %}

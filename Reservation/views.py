@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.views import LoginView, LogoutView
-from test.models import Reservation
+from test.models import Reservation, UnavailableDate
 from django.views.generic import (
     FormView,
     CreateView,
@@ -89,7 +89,7 @@ def reserveView(request):
     obj = Prices.objects.all().values()
     form = ReservationChecker(None)
     form2 = ReferenceChecker(None)
-
+    unavailable_dates = UnavailableDate.objects.values_list("date", flat=True)
     if request.method == "POST" and "new" in request.POST:
         form = ReservationChecker(request.POST)
         if form.is_valid():
@@ -104,6 +104,7 @@ def reserveView(request):
         "form": form,
         "form_2": form2,
         "prices": obj,
+        "unavailable_dates": unavailable_dates
     }
     return render(request, "reservation.php", context)
 
