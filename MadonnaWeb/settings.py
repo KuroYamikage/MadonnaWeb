@@ -47,13 +47,13 @@ INSTALLED_APPS = [
     "Reports.scripts",
     "django.contrib.humanize",
     "test",
-    'captcha',
+    "captcha",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    'django_session_timeout.middleware.SessionTimeoutMiddleware',
+    "django_session_timeout.middleware.SessionTimeoutMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -70,17 +70,17 @@ INTERNAL_IPS = [
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimila‌​rityValidator', 
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimila‌​rityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValida‌​tor',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValida‌​tor",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValid‌​ator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValid‌​ator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordVali‌​dator',
-    }
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordVali‌​dator",
+    },
 ]
 
 ROOT_URLCONF = "MadonnaWeb.urls"
@@ -165,24 +165,27 @@ LOGIN_REDIRECT_URL = "home"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "/staff"
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
-SESSION_COOKIE_AGE = 30*60 
+SESSION_COOKIE_AGE = 30 * 60
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_EXPIRE_SECONDS = 1800  # Expire after 30 minutes
-SESSION_TIMEOUT_REDIRECT = 'login'
+SESSION_TIMEOUT_REDIRECT = "login"
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587  # Use port 587 for TLS
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'dmanedward1110@gmail.com'  # Your Gmail email address
-EMAIL_HOST_PASSWORD = 'mvxp nfkd leqz auez'
+EMAIL_HOST_USER = "dmanedward1110@gmail.com"  # Your Gmail email address
+EMAIL_HOST_PASSWORD = "mvxp nfkd leqz auez"
 
 RECAPTCHA_SSL_VERIFICATION = False
-RECAPTCHA_PUBLIC_KEY = '6Lf4l0koAAAAAATJKiQvaGcslQKOVXl438opgZcP'
-RECAPTCHA_PRIVATE_KEY = '6Lf4l0koAAAAAKF_xyoPOCTvijyScPNEJD1ABs38'
+RECAPTCHA_PUBLIC_KEY = "6Lf4l0koAAAAAATJKiQvaGcslQKOVXl438opgZcP"
+RECAPTCHA_PRIVATE_KEY = "6Lf4l0koAAAAAKF_xyoPOCTvijyScPNEJD1ABs38"
 
-PAYMONGO_PUBLIC_KEY = 'pk_test_V35HwBEoyZRya4WP5jhYj9rY'
-PAYMONGO_SECRET_KEY = 'sk_test_ttWkBkczoDgX6dJ2T5fJndVm'
+PAYMONGO_PUBLIC_KEY = "pk_test_V35HwBEoyZRya4WP5jhYj9rY"
+PAYMONGO_SECRET_KEY = "sk_test_ttWkBkczoDgX6dJ2T5fJndVm"
 
+# Celery settings
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
