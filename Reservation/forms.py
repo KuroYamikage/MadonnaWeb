@@ -403,15 +403,15 @@ class DiscountForm(forms.ModelForm):
 
     class Meta:
         activeChoice = (
-            (True, "True"),
-            (False, "False"),
+            (True, "Yes"),
+            (False, "No"),
         )
         model = Discount
         fields = ("discountCode", "discountPrice", "discountActive")
         widgets = {
             "discountCode": forms.TextInput(attrs={"class": "form-control"}),
             "discountPrice": forms.NumberInput(attrs={"class": "form-control"}),
-            "discountActive": forms.RadioSelect(
+            "discountActive": forms.Select(
                 choices=activeChoice, attrs={"class": "form-control"}
             ),
         }

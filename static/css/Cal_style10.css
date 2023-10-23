@@ -8238,11 +8238,18 @@ h1, h2, h3, h4, h5,
 
 .event-count {
   color: #7e0cf5;
-  text-align: right; }
+  margin-left: 20px;
+  /* text-align: right; */
+ }
+ .right {
+  text-align: right;
+ }
 
 .event-name {
   padding-right: 0;
-  text-align: left; }
+  margin-bottom: 30px;
+  text-align: left;
+  font-weight: 500; }
 
 .event-cancelled {
   color: #cd4dcc;

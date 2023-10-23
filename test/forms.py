@@ -119,7 +119,7 @@ class ReservationForm(forms.ModelForm):
                 )
             except Discount.DoesNotExist:
                 # If the discount doesn't exist or is not active, raise a ValidationError
-                raise forms.ValidationError("Invalid or inactive discount code.")
+                print("Invalid or inactive discount code:", discount_code)
         return discount_code
 
     def clean_reservation_time(self):
@@ -241,6 +241,10 @@ class ReservationEditForm(forms.ModelForm):
         # Make check-in and check-out fields read-only
         self.fields["check_in_date"].widget.attrs["readonly"] = True
         self.fields["check_out_date"].widget.attrs["readonly"] = True
+        self.fields['reservation_time'].widget.choices[0]['attrs'] = {'disabled': True}
+        self.fields['reservation_time'].widget.choices[0] = ('', {'disabled': True, 'value': 'Select Reservation Time'})
+
+
         
         super().__init__(*args, **kwargs)
         # Set the 'required' attribute of the 'room' field to False

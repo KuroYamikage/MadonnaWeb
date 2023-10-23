@@ -26,7 +26,7 @@
                             <td>{{info.id}}</td>
                             <td>{{info.discountCode}}</td>
                             <td>{{info.discountPrice}}</td>
-                            <td>{{info.discountActive}}</td>
+                            <td>{{info.discountActive |yesno:"Yes,No" }}</td>
                             <td><a class="btn btn-sm btn-primary" href="{% url 'discount.edit' pk=info.id %}">Edit</a></td>
                             
                         </tr>
@@ -34,7 +34,7 @@
                     </tbody>
                 </table>
             </div>
-            <a href="{%url 'discount.new'%}" class="btn btn-primary my-3">Add Account</a>
+            <a href="{%url 'discount.new'%}" class="btn btn-primary my-3">Add New Discount Code</a>
         </div>
     </div>
 </div>

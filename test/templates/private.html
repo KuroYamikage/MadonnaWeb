@@ -274,7 +274,6 @@
           </div>          
           
 
-
           <div class="row">
             <div class="col-25">
               <label for="{{ form.room_type.id_for_label }}">Additional Room:</label>
@@ -315,6 +314,12 @@
           <button id="next-step" type="button" class="btn btn-primary">Next</button>
           <button id="submit-reservation" class="btn btn-success" type="submit">Submit Reservation</button>
         </div>
+
+        <div class="center-buttons">
+          <a href="{% url 'reserve' %}">
+            <button type="button" class="btn btn-secondary">Return to Reservation Main Menu</button>
+          </a>
+        </div>
       </form>
     </div>
     <script>
@@ -336,7 +341,28 @@
         //facilityCarousel.to(0); // Go to the first slide
       });
 
+      // Add an event listener to the form
+      document.getElementById('multi-step-form').addEventListener('submit', function (event) {
+        // Prevent the form from submitting
+        event.preventDefault();
+        
+        // Your form submission logic goes here
+        // For example, you can use AJAX to submit the form data
+        // After submitting, you can allow the page to be unloaded
+        // or remove the event listener
+      });
 
+      // Add an event listener for the beforeunload event
+      window.addEventListener('beforeunload', function (event) {
+        // Cancel the event (modern browsers)
+        event.preventDefault();
+
+        // Prompt the user with a confirmation dialog
+        event.returnValue = ''; // For older browsers
+
+        // Return the message to be displayed in the confirmation dialog
+        return 'Are you sure you want to leave? Your changes may not be saved.';
+      });
 
     </script>
 

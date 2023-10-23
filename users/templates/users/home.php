@@ -156,12 +156,14 @@ if(events.length===0) {
 else {
 	// Go through and add each event as a card to the events container
 	for(var i=0; i<events.length; i++) {
-		var event_card = $("<div class='event-card col-6'></div>")
-		var event_name = $("<div class='event-name'>"+events[i]["occasion"]+":</div>");
-		var event_count = $("<div class='event-count'><p>Check in Time: "+events[i]["checkinTime"]+
+		var event_card = $("<div class='event-card col-6'></div>");
+		var event_name = $("<div class='event-name mb-5'>"+events[i]["Name"]+":</div>");
+		var event_count = $("<div class='event-count mt-3'><p class='mt-3'>Check in Time: "+events[i]["checkinTime"]+
 			"</p><p>Check out: "+events[i]["checkout"]+
-				"</p><p>Number of Guest: "+events[i]["invited_count"]+
 				"</p><p>Check out Time: "+events[i]["checkoutTime"]+
+				"</p><p>Number of Guest: "+events[i]["invited_count"]+
+					"</p><p class='right'>Reservation Type: "+events[i]["occasion"]+
+					"</p><p class='right'>Status: "+events[i]["status"]+
 					"</p><a href="+"reservation/edit/"+events[i]["id"]+"/"+
 					" class="+"btn btn-secondary my-3"+
 					">Add more Details</a></div>");
@@ -171,8 +173,19 @@ else {
 			});
 			event_count = $("<div class='event-cancelled'>Cancelled</div>");
 		}
+		{% comment %} if (i === 0 || i % 2 === 0 ){
+			var row = $("<div class='row'>");
+			$(event_card).append(event_name).append(event_count);
+			$(row).append(event_card);
+			$(".events-container").append(row);
+		}else{
+			var endRow = $("</div>");
+			$(event_card).append(event_name).append(event_count).append(endRow);
+			$(".events-container").append(event_card);
+		} {% endcomment %}
 		$(event_card).append(event_name).append(event_count);
-		$(".events-container").append(event_card);
+			$(".events-container").append(event_card);
+		
 	}
 }
 }
@@ -325,8 +338,9 @@ const months = [
 			<div class="row">
 				<div class="col">
 
-				    <div class="events-container">
+				    <div class="events-container container">
 						<div class="row">
+							
 						</div>
 				    </div>
 				    <div class="dialog" id="dialog">	        

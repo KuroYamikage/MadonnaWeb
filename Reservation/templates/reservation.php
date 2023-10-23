@@ -15,11 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
 	<style>
-		.calendar {
-			width: 100%;
-			height: 100%;
-			margin: 0 auto;
-		  }
+		
 	</style>
 {%endblock%}
  {% block content %}
@@ -70,13 +66,13 @@
 
 
 
-	<div class="section-center2 d-flex align-items-center justify-content-center">
+	<div class="section-center d-flex align-items-center justify-content-center">
 		<div class="container">
 			<div class="row">
 				<div class="booking-form">
 					
 						<div class="select-div">
-						<div class="row">
+						<div class="row no-margin">
 							<div class="col">
 								<div class="form-header">
 										<h2>Book Now</h2>
@@ -85,18 +81,28 @@
 							</div>
 						</div>
 							
-						<div class="row">
+						<div class="row no-margin row-calendar">
 							<div class="col">
 								<div class="calendar" id="calendar"></div>
 							</div>	
 									
 								
 						</div>
-						<div class="row">
-							<div class="col">
-								<div class="form-btn">
-									<button class="submit-btn" name="new">Check availability</button>
+						<div class="row no-margin">
+							<div class ="container">
+								<div class="row">
 									
+										<div class="col m-3">
+											<a href="{% url 'private_reservation' %}">
+												<button class="submit-btn2" name="new">Make Private Reservation</button>
+											</a>
+										</div>	
+										<div class="col m-3">
+											<a href="{% url 'create_reservation' %}">
+												<button class="submit-btn2" name="new">Make Private Reservation</button>
+											</a>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -272,6 +278,9 @@
 		}
 	
 		var calendar = new FullCalendar.Calendar(calendarEl, {
+			height:'auto',
+			width:'auto',
+			{% comment %} weekMode: 'variable', {% endcomment %}
 			initialView: 'dayGridMonth', // Change the view as needed
 			
 	

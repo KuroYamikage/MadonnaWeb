@@ -126,7 +126,17 @@
 	width: 100%;
 }
 
-
+.booking-form .submit-btn2 {
+	background: #9a8067;
+	color: #fff;
+	border: none;
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size: 14px;
+	display: block;
+	height: 80px;
+	width: 100%;
+}
       
       
       
@@ -166,7 +176,9 @@
       
       .calendar {
         width: 70%;
+		height: 85%;
         margin: 0 auto;
+		overflow:hidden;
       }
       
       .hidden {
@@ -176,7 +188,8 @@
       .step {
         align-items: center;
       }
-	  .calendar {
-		width: 70%;
-		margin: 0 auto;
+
+
+	  .row-calendar{
+		box-sizing: border-box;
 	  }
