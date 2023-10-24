@@ -58,3 +58,7 @@ __pycache__/
 
 # Migrations
 **/migrations/
+
+bin/
+lib/
+lib64
