@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import base64
-import pandas as pd
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 from io import BytesIO
+import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
+import pandas as pd
 from django.db import connection
 
 
