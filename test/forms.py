@@ -5,18 +5,41 @@ import requests
 from django.urls import reverse
 from captcha.fields import ReCaptchaField
 from django.conf import settings
+from django.db.models.fields import BLANK_CHOICE_DASH
+from django.forms.widgets import TimeInput
+from django.utils.dateparse import parse_datetime
 
+class CustomTimeField(forms.TimeField):
+    def to_python(self, value):
+        # Parse the input value
+        value = super().to_python(value)
+
+        # Change the time format before saving to the database
+        if value:
+            value = value.strftime('%I:%M %p')
+
+        return value
 
 class ReservationForm(forms.ModelForm):
     captcha  =ReCaptchaField()
-    room_type = forms.ModelChoiceField(
-        queryset=Facility.objects.all(),
+    cottage_type = forms.ModelChoiceField(
+        queryset=Facility.objects.filter(facilityCategory ='cottages'),
         required=True,
         empty_label=None, 
+        label="Cottages" # To force users to select a room type
+    )
+
+    room_type = forms.ModelChoiceField(
+        queryset=Facility.objects.filter(facilityCategory ='rooms'),
+        required=False,
+        empty_label="No Thanks", 
         label="Additional Rooms" # To force users to select a room type
     )
 
     
+    num_cottage = forms.IntegerField(
+        required=False
+    )
     num_rooms = forms.IntegerField(
         required=False
     )
@@ -39,23 +62,27 @@ class ReservationForm(forms.ModelForm):
         ),
     )
     RESERVATION_TIME_CHOICES = [
-        ("", "Select Reservation Time"),  # Add this empty choice
+        ('--Select Reservation Time--', 
+      ( 
         ("Morning", "Morning"),
         ("Night", "Night"),
+      )
+   ),
+
     ]
 
     reservation_time = forms.ChoiceField(
-        choices=RESERVATION_TIME_CHOICES,
+        choices=BLANK_CHOICE_DASH + RESERVATION_TIME_CHOICES,
         required=True,
-        label='Reservation Time'
+        label='Reservation Time',
     )
     
 
-    active_facilities = Facility.objects.filter(facilityActive=True)
+    active_facilities = Facility.objects.filter(facilityActive=True, facilityCategory ='cottages')
     # Create the choice tuple from the active facilities
     facility_choices = [(facility.pk, facility.facilityName) for facility in active_facilities]
     facility_choices.insert(0,(None, 'No Thanks'))
-    room_type = forms.ChoiceField(choices= facility_choices)
+    cottage_type = forms.ChoiceField(choices= facility_choices)
 
     class Meta:
         model = Reservation
@@ -67,8 +94,8 @@ class ReservationForm(forms.ModelForm):
             "guest_email",
             "guest_phone",
             "num_guests",
-            "room_type",
-            "num_rooms",
+            "cottage_type",
+            "num_cottage",
             "check_in_time",
             "check_out_time",
         ]
@@ -131,16 +158,19 @@ class ReservationForm(forms.ModelForm):
 
     def clean_check_in_time(self):
         check_in_time = self.cleaned_data.get("check_in_time")
-        print(f"check_in_time: {check_in_time}")
+        
         # Rest of your validation code
         return check_in_time
 
 
     def clean_check_out_time(self):
         check_out_time = self.cleaned_data.get("check_out_time")
-        print(f"check_out_time: {check_out_time}")
+        
         # Rest of your validation code
         return check_out_time
+
+
+
 
 
 class ExtendedForm(ReservationForm):
@@ -151,13 +181,21 @@ class ExtendedForm(ReservationForm):
         widget=forms.Select(),
     )
         
+
+
+
+class CustomCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
+    template_name = "custom_checkbox_select.html"
+
+
+        
 class ReservationEditForm(forms.ModelForm):
-    room = forms.ModelChoiceField(
-        queryset=Room.objects.all(),
-        required=True,
-        empty_label=None, 
-        label="Additional Rooms" # To force users to select a room type
-    )
+    # room = forms.ModelChoiceField(
+    #     queryset=Room.objects.all(),
+    #     required=True,
+    #     empty_label=None, 
+    #     label="Additional Rooms" # To force users to select a room type
+    # )
 
     RESERVATION_STATUS_CHOICES = [
         ('Approved','Approved'),
@@ -170,29 +208,32 @@ class ReservationEditForm(forms.ModelForm):
         label="Status",
     )
     
-    num_guests = forms.IntegerField(
-        required=False
-    )
     discount_code = forms.CharField(
         max_length=50, required=False, label="Discount Code"
     )
-    check_in_time = forms.TimeField(
+    check_in_time = CustomTimeField(
         required=True,
         widget=forms.TimeInput(
-            attrs={"placeholder": "HH:MM AM/PM", "readonly": "True"}
+            attrs={"placeholder": "HH:MM AM/PM", "readonly": "True"},
+            format='%I:%M %p'
         ),
     )
-    check_out_time = forms.TimeField(
+    check_out_time = CustomTimeField(
         required=True,
         widget=forms.TimeInput(
-            attrs={"placeholder": "HH:MM AM/PM", "readonly": "True"}
+            attrs={"placeholder": "HH:MM AM/PM", "readonly": "True"},
+            format='%I:%M %p'
         ),
     )
-    RESERVATION_TIME_CHOICES = [
-        ("", "Select Reservation Time"),  # Add this empty choice
+    RESERVATION_TIME_CHOICES = (
+        ('--Select Reservation Time--', 
+      (
         ("Morning", "Morning"),
         ("Night", "Night"),
-    ]
+      )
+   ),
+
+    )
 
     reservation_time = forms.ChoiceField(
         choices=RESERVATION_TIME_CHOICES,
@@ -200,12 +241,18 @@ class ReservationEditForm(forms.ModelForm):
         label='Reservation Time'
     )
     
+    num_guests_select = forms.ChoiceField(
+        label='Number of Guests (Dropdown)',
+        required=False,  # Make it optional since you have a text field
+        choices=[(30,"30"),(50,"50"),(100,"100"),(150,"150")],  # You can adjust the range as needed
+        widget=forms.Select(),
+    )
 
     active_facilities = Facility.objects.filter(facilityActive=True)
     # Create the choice tuple from the active facilities
-    facility_choices = [(facility.pk, facility.facilityName) for facility in active_facilities]
-    facility_choices.insert(0,(None, 'No Thanks'))
-    room_type = forms.ChoiceField(choices= facility_choices)
+    # facility_choices = [(facility.pk, facility.facilityName) for facility in active_facilities]
+    # facility_choices.insert(0,(None, 'No Thanks'))
+    # room_type = forms.ChoiceField(choices= facility_choices)
 
     class Meta:
         model = Reservation
@@ -219,12 +266,14 @@ class ReservationEditForm(forms.ModelForm):
             "num_guests",
             "check_in_time",
             "check_out_time",
-            "status"
+            "status",
+            'reservation_type'
         ]
 
         widgets = {
             "check_in_date": forms.TextInput(attrs={"readonly": "True"}),
             "check_out_date": forms.TextInput(attrs={"readonly": "True"}),
+            "room":CustomCheckboxSelectMultiple()
         }
 
         input_formats = {
@@ -235,20 +284,35 @@ class ReservationEditForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ReservationEditForm, self).__init__(*args, **kwargs)
-
         # You can customize the form fields here if needed
-
         # Make check-in and check-out fields read-only
         self.fields["check_in_date"].widget.attrs["readonly"] = True
         self.fields["check_out_date"].widget.attrs["readonly"] = True
-        self.fields['reservation_time'].widget.choices[0]['attrs'] = {'disabled': True}
-        self.fields['reservation_time'].widget.choices[0] = ('', {'disabled': True, 'value': 'Select Reservation Time'})
-
-
         
         super().__init__(*args, **kwargs)
         # Set the 'required' attribute of the 'room' field to False
         self.fields["room"].required = False
+        self.fields['num_guests'].widget.attrs['class'] = 'conditional-field'
+        self.fields['num_guests_select'].widget.attrs['class'] = 'conditional-field'
+        self.fields['num_guests'].required = False
+        self.fields['num_guests_select'].required = False
+
+          # Access the instance being edited
+        instance = kwargs.get('instance')
+        if instance:
+            # Set initial value based on a condition
+            if str(instance.check_in_time) == "07:00:00":
+                self.fields['reservation_time'].initial = "Morning"
+            else:
+                self.fields['reservation_time'].initial = "Night"
+
+            self.fields['num_guests'].widget.attrs['style'] = '' if instance.reservation_type == 'Public' else 'display:none;'
+            if instance.reservation_type == 'private':
+                print(instance.num_guests)
+                self.fields['num_guests_select'].initial = instance.num_guests
+            self.fields['num_guests_select'].widget.attrs['style'] = '' if instance.reservation_type == 'Private' else 'display:none;'
+           
+
 
     # def clean_discount_code(self):
     #     discount_code = self.cleaned_data.get('discount_code')
@@ -283,13 +347,13 @@ class ReservationEditForm(forms.ModelForm):
 
     def clean_check_in_time(self):
         check_in_time = self.cleaned_data.get("check_in_time")
-        print(f"check_in_time: {check_in_time}")
+        
         # Rest of your validation code
         return check_in_time
 
 
     def clean_check_out_time(self):
         check_out_time = self.cleaned_data.get("check_out_time")
-        print(f"check_out_time: {check_out_time}")
+        
         # Rest of your validation code
         return check_out_time

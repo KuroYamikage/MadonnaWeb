@@ -99,7 +99,7 @@
 										</div>	
 										<div class="col m-3">
 											<a href="{% url 'create_reservation' %}">
-												<button class="submit-btn2" name="new">Make Private Reservation</button>
+												<button class="submit-btn2" name="new">Make Public Reservation</button>
 											</a>
 										</div>
 									</div>

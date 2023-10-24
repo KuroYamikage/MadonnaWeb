@@ -165,9 +165,9 @@ LOGIN_REDIRECT_URL = "home"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "/staff"
 MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"
-SESSION_COOKIE_AGE = 30 * 60
+# SESSION_COOKIE_AGE = 30 * 60
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_EXPIRE_SECONDS = 1800  # Expire after 30 minutes
+# SESSION_EXPIRE_SECONDS = 1800  # Expire after 30 minutes
 SESSION_TIMEOUT_REDIRECT = "login"
 
 
@@ -189,3 +189,5 @@ PAYMONGO_SECRET_KEY = "sk_test_ttWkBkczoDgX6dJ2T5fJndVm"
 # Celery settings
 CELERY_BROKER_URL = "redis://localhost:6379"
 CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+TIME_INPUT_FORMATS = ('%I:%M %p',)
