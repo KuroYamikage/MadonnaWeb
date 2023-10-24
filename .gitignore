@@ -20,7 +20,7 @@ __pycache__/
 # Database files
 
 # Static files (usually collected with "collectstatic")
-/staticfiles/
+#/staticfiles/
 
 # Media files (user-uploaded content)
 /media/
