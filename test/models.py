@@ -34,7 +34,7 @@ class Reservation(models.Model):
         ('private', 'Private'),
     )
 
-    reservation_type = models.CharField(max_length=10, choices=RESERVATION_TYPE_CHOICES)
+    reservation_type = models.CharField(max_length=10, choices=RESERVATION_TYPE_CHOICES, null=False)
     reference_number = models.CharField(max_length=16, unique=True, null=True)
     reservationChoices=(
     ('Approved','Approved'),

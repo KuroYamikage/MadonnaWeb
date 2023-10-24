@@ -250,6 +250,7 @@
           <!-- Add content for Step 3 if needed -->
           <!-- Room Type Selection -->
 
+         
           <div id="facilityCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               {% for facility in active_facilities %}
@@ -272,16 +273,39 @@
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
-          </div>          
+          </div>              
           
 
 
           <div class="row">
             <div class="col-25">
-              <label for="{{ form.room_type.id_for_label }}">Room Type:</label>
+              <label for="{{ form.cottage_type.id_for_label }}">Cottages:</label>
+            </div>
+            <div class="col-75">
+              {{ form.cottage_type }}
+              {{ form.cottage_type.errors }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="{{ form.num_cottage.id_for_label }}">Number of Cottages:</label>
+            </div>
+            <div class="col-75">
+              {{ form.num_cottage }}
+              {{ form.num_cottage.errors }}
+              {{ form.room.errors }}
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-25">
+              <label for="{{ form.room_type.id_for_label }}">Additional Room:</label>
             </div>
             <div class="col-75">
               {{ form.room_type }}
+              {{ form.room_type.errors }}
             </div>
           </div>
 
@@ -291,10 +315,11 @@
             </div>
             <div class="col-75">
               {{ form.num_rooms }}
-              {{ form.room_type.errors }}
+              {{ form.num_rooms.errors }}
               {{ form.room.errors }}
             </div>
           </div>
+
 
           <div class="row">
             <div class="col-25">
@@ -326,20 +351,41 @@
     <script>
       var unavailableDates = [{% for date in unavailable_dates %}"{{ date }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
       document.getElementById('id_room_type').addEventListener('change', function() {
-        var selectedFacilityId = this.value+2;
+        var selectedFacilityId = this.value;
         var carouselItems = document.querySelectorAll('.carousel-item');
-        
+        console.log(selectedFacilityId)
         // Loop through carousel items to find the one with the matching facility ID
         carouselItems.forEach(function(item) {
           item.classList.remove('active');
           if (item.dataset.facilityId == selectedFacilityId) {
+            console.log(item)
             item.classList.add('active');
           }
         });
+
+        
     
         // Manually trigger the carousel slide to update the display
         //var facilityCarousel = new bootstrap.Carousel(document.getElementById('facilityCarousel'));
         //facilityCarousel.to(0); // Go to the first slide
+      });
+
+
+      
+      document.getElementById('id_cottage_type').addEventListener('change', function() {
+        var selectedFacilityId = this.value;
+        var carouselItems = document.querySelectorAll('.carousel-item');
+        console.log(selectedFacilityId)
+        // Loop through carousel items to find the one with the matching facility ID
+        carouselItems.forEach(function(item) {
+          item.classList.remove('active');
+          if (item.dataset.facilityId == selectedFacilityId) {
+            console.log(item)
+            item.classList.add('active');
+          }
+        });
+  
+     
       });
 
       // Add an event listener to the form
@@ -364,6 +410,12 @@
         // Return the message to be displayed in the confirmation dialog
         return 'Are you sure you want to leave? Your changes may not be saved.';
       });
+
+      $(document).ready(function() {
+        // Disable field2 initially
+        $('#id_reservation_time').prop('disabled', true);
+    
+    });
 
     </script>
 

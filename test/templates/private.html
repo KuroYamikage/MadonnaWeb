@@ -273,6 +273,27 @@
             </button>
           </div>          
           
+          
+          <div class="row">
+            <div class="col-25">
+              <label for="{{ form.cottage_type.id_for_label }}">Cottages:</label>
+            </div>
+            <div class="col-75">
+              {{ form.cottage_type }}
+              {{ form.cottage_type.errors }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-25">
+              <label for="{{ form.num_cottage.id_for_label }}">Number of Cottages:</label>
+            </div>
+            <div class="col-75">
+              {{ form.num_cottage }}
+              {{ form.num_cottage.errors }}
+              {{ form.room.errors }}
+            </div>
+          </div>
 
           <div class="row">
             <div class="col-25">
@@ -280,6 +301,7 @@
             </div>
             <div class="col-75">
               {{ form.room_type }}
+              {{ form.room_type.errors }}
             </div>
           </div>
 
@@ -289,7 +311,7 @@
             </div>
             <div class="col-75">
               {{ form.num_rooms }}
-              {{ form.room_type.errors }}
+              {{ form.num_rooms.errors }}
               {{ form.room.errors }}
             </div>
           </div>
@@ -341,6 +363,22 @@
         //facilityCarousel.to(0); // Go to the first slide
       });
 
+      document.getElementById('id_cottage_type').addEventListener('change', function() {
+        var selectedFacilityId = this.value;
+        var carouselItems = document.querySelectorAll('.carousel-item');
+        console.log(selectedFacilityId)
+        // Loop through carousel items to find the one with the matching facility ID
+        carouselItems.forEach(function(item) {
+          item.classList.remove('active');
+          if (item.dataset.facilityId == selectedFacilityId) {
+            console.log(item)
+            item.classList.add('active');
+          }
+        });
+  
+     
+      });
+
       // Add an event listener to the form
       document.getElementById('multi-step-form').addEventListener('submit', function (event) {
         // Prevent the form from submitting
@@ -363,6 +401,8 @@
         // Return the message to be displayed in the confirmation dialog
         return 'Are you sure you want to leave? Your changes may not be saved.';
       });
+
+      
 
     </script>
 

@@ -2,7 +2,7 @@
    {% comment %}  {{ widget.input_type }}
     {{ widget.name }}
     {{widget}} {% endcomment %}
-    
+
 {% comment %} {% for checkbox in widget %}
     <div class="form-group col-md-3">
         <label for="{{ widget.id_for_label }}_{{ forloop.counter0 }}">{{ checkbox.choice_label }}</label>
@@ -10,12 +10,23 @@
 </div>
 {% endfor %} {% endcomment %}
 
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyL+dByFIM5SYpXq1hxb5B9F92P2EolJ5S" crossorigin="anonymous">
 
-
-{% with id=widget.attrs.id %}<div{% if id %} id="{{ id }}"{% endif %}{% if widget.attrs.class %} class="{{ widget.attrs.class }}"{% endif %}>{% for group, options, index in widget.optgroups %}{% if group %}
-  <div><label>{{ group }}</label>{% endif %}{% for option in options %}<div class="form-group col-md-3 d-flex justify-content-center align-items-center h-20 " style="text-align:center">
-    {% include option.template_name with widget=option %}</div>{% endfor %}{% if group %}
-  </div>{% endif %}{% endfor %}
-</div>{% endwith %}
+{% with id=widget.attrs.id %}
+  <div{% if id %} id="{{ id }}"{% endif %}{% if widget.attrs.class %} class="{{ widget.attrs.class }}"{% endif %}>
+    <div class="row">
+      {% for group, options, index in widget.optgroups %}
+        {% if group %}
+          <div class="col-12"><label>{{ group }}</label></div>
+        {% endif %}
+        {% for option in options %}
+          <div class="form-group col-md-4 d-flex justify-content-center align-items-center h-20" style="text-align: center">
+            {% include option.template_name with widget=option %}
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+{% endwith %}
 
 {% comment %} </div> {% endcomment %}

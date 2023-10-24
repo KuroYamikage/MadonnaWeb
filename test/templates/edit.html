@@ -172,6 +172,8 @@
               </div>
             </div>
           </div>
+
+
           <div class="row">
             <div class="col-25">
               <label for="{{ form.check_in_time.id_for_label }}">Check-in Time:</label>
@@ -193,6 +195,17 @@
           </div>
 
           
+          <div class="row">
+            <div class="col-25">
+              <label for="{{ form.reservation_type.id_for_label }}">Reservation Type:</label>
+            </div>
+            <div class="col-75">
+              {{ form.reservation_type }}
+              {{ form.reservation_type.errors }}
+            </div>
+          </div>
+
+
           <div id="num_guests_text_div">
             <div class="row">
               <div class="col-25">
@@ -200,10 +213,12 @@
               </div>
               <div class="col-75">
                 {{ form.num_guests }}
+                {{ form.num_guests_select }}
                 {{ form.num_guests.errors }}
               </div>
             </div>
           </div>
+
           
          
 
@@ -276,7 +291,7 @@
           
 
 
-          <div class="row">
+          <div class="row mt-3">
             <div class="col-25">
               <label for="{{ form.room.id_for_label }}">Room:</label>
             </div>
@@ -320,6 +335,37 @@
       </form>
     </div>
     <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Initial visibility based on the selected option
+        toggleFields();
+
+        // Show or hide fields based on the selected option
+        document.getElementById("id_reservation_type").addEventListener("change", function () {
+            toggleFields();
+        });
+
+        function toggleFields() {
+            var selectedOption = document.getElementById("id_reservation_type").value;
+
+            // Hide all conditional fields
+            var conditionalFields = document.getElementsByClassName("conditional-field");
+            for (var i = 0; i < conditionalFields.length; i++) {
+                conditionalFields[i].style.display = 'none';
+            }
+
+            // Show the appropriate conditional field based on the selected option
+            if (selectedOption === "public") {
+                document.getElementById("id_num_guests").style.display = '';
+            } else if (selectedOption === "private") {
+                document.getElementById("id_num_guests_select").style.display = '';
+            }
+        }
+    });
+
+
+
+
+
       var unavailableDates = [{% for date in unavailable_dates %}"{{ date }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
       document.getElementById('id_room_type').addEventListener('change', function() {
         var selectedFacilityId = this.value+2;
