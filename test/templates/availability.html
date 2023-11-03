@@ -1,0 +1,16 @@
+<!-- templates/room_availability.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room Availability</title>
+</head>
+<body>
+    <h1>Room Availability</h1>
+    <ul>
+        {% for room, is_available in room_availability_status.items %}
+            <li>{{ room.room_number }} - {% if is_available %}Available{% else %}Reserved{% endif %}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

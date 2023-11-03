@@ -19,6 +19,11 @@ class Room(models.Model):
     
 class Reservation(models.Model):
     room = models.ManyToManyField(Room,  default=1, blank=True, null=True)
+    POOL_CHOICES = (
+        ('Pool 1','Pool 1'),
+        ('Pool 2','Pool 2'),
+    )
+    pool = models.CharField(max_length=20, choices=POOL_CHOICES)
     check_in_date = models.DateField()
     check_out_date = models.DateField()
     check_in_time = models.TimeField()  # New field for check-in time
@@ -27,6 +32,8 @@ class Reservation(models.Model):
     guest_email = models.EmailField()
     guest_phone = models.CharField(max_length=20)
     num_guests = models.PositiveIntegerField(default=1)
+    num_child = models.PositiveIntegerField(default=0, null=True, blank=True)
+    withRoom = models.BooleanField(null=True, blank=True)
     discount_code = models.ForeignKey(Discount, on_delete=models.SET_NULL, null= True, blank= True)
     reservation_time = models.CharField(max_length=10, choices=[('Morning', 'Morning'), ('Night', 'Night')])
     RESERVATION_TYPE_CHOICES = (
@@ -44,6 +51,7 @@ class Reservation(models.Model):
     status = models.CharField(choices=reservationChoices, max_length=10,default='Pending')
     date = models.DateField(auto_now=True)
     total = models.DecimalField(max_digits=10, decimal_places=2)
+    payments = models.DecimalField(max_digits=10, decimal_places=2, default=0.00) # type: ignore
 
     def generate_unique_reference_number(self):
         while True:
@@ -59,7 +67,33 @@ class Reservation(models.Model):
 
 
 class UnavailableDate(models.Model):
-    date = models.DateField()
+    dates = models.DateField()
+    pool1 = models.BooleanField(default=False)
+    pool2 = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        return str(self.date)
+        return str(self.dates)
+
+class Prices(models.Model):
+    dayTimeChoices = (('', '---------'),("Day", "Day"), ("Night", "Night"), ("22 Hours", "22 Hours"))
+    reservationTypeChoices = (("Public","Public"),("Private","Private"))
+    guestTypeChoices = (('', '---------'),("Adult","Adult"),("Child","Child"))
+    maxPaxChoices = ((0, '---------'),(25,"25"),(50,"50"))
+    dateChoices = (('', '---------'),("Weekday","Monday to Thursday"), ("Weekend","Friday to Sunday, and Holiday"))
+    maxPax = models.IntegerField(blank=True, null=True, choices=maxPaxChoices)
+    guest = models.CharField(choices=guestTypeChoices, blank=True, null=True, max_length=20)
+    price = models.DecimalField(decimal_places=2, max_digits=10)
+    type = models.CharField(choices=reservationTypeChoices, default="Private",max_length=10)
+    time = models.CharField(max_length=150, choices=dayTimeChoices)
+    withRoom = models.BooleanField(blank=True, null=True)
+    date = models.CharField(blank=True, null=True, max_length=50, choices=dateChoices)
+
+    # def __str__(self) -> str:
+    #     return f"For {self.dayTime} Reservation with Maximum of {self.maxPax} Pax"
+
+
+
+class Payment(models.Model):
+    amount = models.IntegerField()
+    status = models.CharField(max_length=20, default='pending')
+    payment_method_id = models.CharField(max_length=50)

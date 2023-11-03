@@ -1,0 +1,54 @@
+{% extends 'sidebar.php' %}
+{%load static%}
+{% load humanize %}
+
+{%block title%} Account Management {%endblock%}
+
+{% block content %}
+
+<div class="content">
+    <div class="container">
+        <div class="container pt-4 px-4">
+            <h1 class=>Admission Prices</h1>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-dark">
+                            <th scope="col">Id</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">price</th>
+                            <th scope="col">Additional Info</th>
+                            <th scope="col">Edit</th>
+                    </thead>
+                    <tbody>
+                        {% for prices in  price%}
+                        <tr>
+                            <td>{{prices.id}}</td>
+                            <td>{{prices.time}}</td>
+                            <td>{{prices.type}}</td>
+                            <td>₱{{prices.price|intcomma}}</td>
+                            <td>
+                                {% if prices.type == "Private" %}
+                                    {{ prices.maxPax }} Pax<br>
+                                    With Rooms: {{ prices.withRoom|yesno:"Yes,No" }}
+                                {% elif prices.type == "Public" %}
+                                    {{ prices.date }}<br>
+                                    {{ prices.guest }}
+                                {% endif %}
+                            </td>
+                            <td><a class="btn btn-sm btn-primary" href="{% url 'price_update' pk=prices.id %}">Edit</a></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <a href="{%url 'create_price'%}" class="btn btn-primary my-3">Add Prices</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+{%endblock%}

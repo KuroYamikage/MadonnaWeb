@@ -192,6 +192,16 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-25">
+              <label for="{{ form.pool.id_for_label }}">Choice of Pool</label>
+            </div>
+            <div class="col-75">
+              {{ form.pool }}
+              {{ form.pool.errors }}
+            </div>
+          </div>
+
 
           <!-- Add a new div for the dropdown with an ID (hidden by default) -->
           <div id="num_guests_select_div">
@@ -249,7 +259,7 @@
           <!-- Add content for Step 3 if needed -->
           <!-- Room Type Selection -->
 
-          <div id="facilityCarousel" class="carousel slide" data-bs-ride="carousel">
+          {% comment %} <div id="facilityCarousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
               {% for facility in active_facilities %}
                 <div class="carousel-item {% if forloop.first %}active{% endif %}" data-facility-id="{{ facility.id }}">
@@ -314,6 +324,18 @@
               {{ form.num_rooms.errors }}
               {{ form.room.errors }}
             </div>
+          </div> {% endcomment %}
+
+
+          <div class="row">
+            <div class="col-25">
+              <label for="{{ form.withRoom.id_for_label }}">Number of Rooms:</label>
+            </div>
+            <div class="col-75">
+              {{ form.withRoom }}
+              {{ form.withRoom.errors }}
+              {{ form.room.errors }}
+            </div>
           </div>
 
           <div class="row">
@@ -345,8 +367,15 @@
       </form>
     </div>
     <script>
-      var unavailableDates = [{% for date in unavailable_dates %}"{{ date }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
-      document.getElementById('id_room_type').addEventListener('change', function() {
+      var unavailableDates = [{% for date in unavailable_dates %}
+    {
+      date: "{{ date.dates|date:'M d, Y' }}",
+      pool1: {{ date.pool1|yesno:'true,false' }},
+      pool2: {{ date.pool2|yesno:'true,false' }}
+    }{% if not forloop.last %}, {% endif %}
+  {% endfor %}];
+  console.log(unavailableDates)
+      {% comment %} document.getElementById('id_room_type').addEventListener('change', function() {
         var selectedFacilityId = this.value;
         var carouselItems = document.querySelectorAll('.carousel-item');
         
@@ -377,7 +406,7 @@
         });
   
      
-      });
+      }); {% endcomment %}
 
       // Add an event listener to the form
       document.getElementById('multi-step-form').addEventListener('submit', function (event) {

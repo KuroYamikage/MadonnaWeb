@@ -61,7 +61,7 @@
                   <div class="form-outline">
                     {{form.email.label_tag}}
                     {{form.email.errors}}
-                    {{form.email}}
+                    <input type="email" name="{{ form.email.name }}" class="form-control form-control-lg" value="{{ form.email.value }}" id="{{ form.email.id_for_label }}">  
                     {{form.email.help_text}}
                   </div>
                 </div>
@@ -113,7 +113,7 @@
 
               <div class="mt-4 pt-2">
                 <input class="btn btn-primary" type="submit" value="Submit" />
-                <a href="{%url 'user.view'%}" class="btn btn-primary my-3">Cancel</a>
+                <a href="{%url 'user.view'%}" class="btn btn-danger my-3">Cancel</a>
               </div>
 
             </form>

@@ -1,0 +1,196 @@
+{%extends "master2.php"%}
+
+{% block title %}Edit Price {% endblock title %}
+
+{% block content%}
+
+<h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Edit Price</h3>
+<form method="POST">
+  {%csrf_token%}
+  
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+
+      <div class="form-outline">
+        {{form.type.label_tag}}
+        {{form.type.errors}}
+        {{form.type}}
+        <p>{{form.type.help_text}}</p>
+        {% comment %} <input type="text" id="firstName" class="form-control form-control-lg" />
+        <label class="form-label" for="firstName">First Name</label> {% endcomment %}
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        {{form.time.label_tag}}
+        {{form.time.errors}}
+        {{form.time}}
+        {{form.time.help_text}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-4">
+      <div class="form-outline">
+        {{form.price.label_tag}}
+        {{form.price.errors}}
+        {{form.price}}
+        {{form.price.help_text}}
+      </div>
+    </div>
+    <div class="col-md-6 mb-4 maxPax" id="maxPaxDiv">
+      <div class="form-outline">
+        {{form.maxPax.label_tag}}
+        {{form.maxPax.errors}}
+        {{form.maxPax}}
+        {{form.maxPax.help_text}}
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-4" id="guestDiv">
+        <div class="form-outline">
+          {{form.guest.label_tag}}
+          {{form.guest.errors}}
+          {{form.guest}}
+          {{form.guest.help_text}}
+        </div>
+      </div>
+  </div>
+  <div class"row" id="withRoomRow">
+    <div class="col">
+        <div class="form-outline">
+          {{form.withRoom.label_tag}}
+          {{form.withRoom.errors}}
+          {{form.withRoom}}
+          {{form.withRoom.help_text}}
+        </div>
+      </div>
+  </div>
+
+  <div class"row" id="dateRow">
+    <div class="col">
+        <div class="form-outline">
+          {{form.date.label_tag}}
+          {{form.date.errors}}
+          {{form.date}}
+          {{form.date.help_text}}
+        </div>
+      </div>
+  </div>
+
+
+  <div class="text-center mt-4 pt-2">
+    <input class="btn btn-primary" type="submit" value="Submit" />
+    <a href="{%url 'user.view'%}" class="btn btn-danger my-3">Cancel</a>
+  </div>
+
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+    function checkValuesAndShowHide() {
+        // Check the initial value of the 'type' field
+        var typeValue = $("#id_type").val();
+
+        // Check the initial values and show/hide based on conditions
+        if (typeValue === "Private") {
+            $("#maxPaxDiv").show();
+            $("#withRoomRow").show();
+            $("#guestDiv").hide();
+            $("#dateRow").hide();
+        } else if (typeValue === "Public") {
+            $("#guestDiv").show();
+            $("#dateRow").show();
+            $("#maxPaxDiv").hide();
+            $("#withRoomRow").hide();
+        }
+    }
+    checkValuesAndShowHide();
+
+
+        // Initialize Nice Select
+        $("#id_time").niceSelect();
+        $("#id_maxPax").niceSelect();
+        $("#id_guest").niceSelect();
+        $("#id_withRoom").niceSelect();
+        $("#id_date").niceSelect();
+
+        // Function to reset Nice Select dropdowns
+        function resetNiceSelect() {
+            $("#id_time").niceSelect('destroy');
+            $("#id_maxPax").niceSelect('destroy');
+            $("#id_guest").niceSelect('destroy');
+            $("#id_withRoom").niceSelect('destroy');
+            $("#id_date").niceSelect('destroy');
+
+            $("#id_time").niceSelect();
+            $("#id_maxPax").niceSelect();
+            $("#id_guest").niceSelect();
+            $("#id_withRoom").niceSelect();
+            $("#id_date").niceSelect();
+        }
+
+        // Listen for changes to the 'type' field
+        $("#id_type").change(function () {
+            // Hide both divs
+            $("#maxPaxDiv").hide().find('select').val('0');
+            $("#guestDiv").hide().find('select').val('');
+            $("#withRoomRow").hide().find('select').val('');
+            $("#dateRow").hide().find('select').val('');
+
+            // Clear the selection in the 'time' field
+            $("#id_time").val('');
+            $("#id_maxPax").val('0');
+            $("#id_guest").val('');
+            $("#id_withRoom").val('');
+            $("#id_date").val('');
+
+            // Check the selected value and show the relevant div
+            if ($(this).val() === "Private") {
+                $("#maxPaxDiv").show();
+                $("#withRoomRow").show();
+            } else if ($(this).val() === "Public") {
+                $("#guestDiv").show();
+                $("#dateRow").show();
+            }
+
+            // Reset Nice Select dropdowns
+            resetNiceSelect();
+        });
+
+        // Function to update Nice Select options based on 'type'
+        function updateNiceSelect() {
+            if ($("#id_type").val() === "Public") {
+                // Hide '22 Hours' option
+                $("#id_time option[value='22 Hours']").prop('disabled', true);
+            } else {
+                // Show '22 Hours' option
+                $("#id_time option[value='22 Hours']").prop('disabled', false);
+            }
+
+            // Update Nice Select after modifying options
+            $("#id_time").niceSelect('update');
+        }
+
+        // Call the function initially
+        updateNiceSelect();
+    });
+</script>
+
+
+
+
+
+
+
+
+    
+
+
+{%endblock%}

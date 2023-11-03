@@ -1,5 +1,5 @@
 from django import forms
-from .models import Room, Reservation
+from .models import Room, Reservation, UnavailableDate, Prices
 from Reservation.models import Discount, Facility
 import requests
 from django.urls import reverse
@@ -22,27 +22,6 @@ class CustomTimeField(forms.TimeField):
 
 class ReservationForm(forms.ModelForm):
     captcha  =ReCaptchaField()
-    cottage_type = forms.ModelChoiceField(
-        queryset=Facility.objects.filter(facilityCategory ='cottages'),
-        required=True,
-        empty_label=None, 
-        label="Cottages" # To force users to select a room type
-    )
-
-    room_type = forms.ModelChoiceField(
-        queryset=Facility.objects.filter(facilityCategory ='rooms'),
-        required=False,
-        empty_label="No Thanks", 
-        label="Additional Rooms" # To force users to select a room type
-    )
-
-    
-    num_cottage = forms.IntegerField(
-        required=False
-    )
-    num_rooms = forms.IntegerField(
-        required=False
-    )
     num_guests = forms.IntegerField(
         required=False
     )
@@ -50,13 +29,13 @@ class ReservationForm(forms.ModelForm):
         max_length=50, required=False, label="Discount Code"
     )
     check_in_time = forms.TimeField(
-        required=True,
+        required=False,
         widget=forms.TimeInput(
             attrs={"placeholder": "HH:MM AM/PM", "readonly": "True"}
         ),
     )
     check_out_time = forms.TimeField(
-        required=True,
+        required=False,
         widget=forms.TimeInput(
             attrs={"placeholder": "HH:MM AM/PM", "readonly": "True"}
         ),
@@ -77,12 +56,17 @@ class ReservationForm(forms.ModelForm):
         label='Reservation Time',
     )
     
+    pool= forms.ChoiceField(
+        choices=Reservation.POOL_CHOICES,
+        required=False,
+        label= "Pool"
+    )
 
-    active_facilities = Facility.objects.filter(facilityActive=True, facilityCategory ='cottages')
-    # Create the choice tuple from the active facilities
-    facility_choices = [(facility.pk, facility.facilityName) for facility in active_facilities]
-    facility_choices.insert(0,(None, 'No Thanks'))
-    cottage_type = forms.ChoiceField(choices= facility_choices)
+    # active_facilities = Facility.objects.filter(facilityActive=True, facilityCategory ='cottages')
+    # # Create the choice tuple from the active facilities
+    # facility_choices = [(facility.pk, facility.facilityName) for facility in active_facilities]
+    # facility_choices.insert(0,(None, 'No Thanks'))
+    # cottage_type = forms.ChoiceField(choices= facility_choices)
 
     class Meta:
         model = Reservation
@@ -93,11 +77,9 @@ class ReservationForm(forms.ModelForm):
             "guest_name",
             "guest_email",
             "guest_phone",
-            "num_guests",
-            "cottage_type",
-            "num_cottage",
             "check_in_time",
             "check_out_time",
+            "pool"
         ]
 
         widgets = {
@@ -174,13 +156,70 @@ class ReservationForm(forms.ModelForm):
 
 
 class ExtendedForm(ReservationForm):
-        num_guests_select = forms.ChoiceField(
+    num_guests_select = forms.ChoiceField(
         label='Number of Guests (Dropdown)',
         required=False,  # Make it optional since you have a text field
-        choices=[(30,"30"),(50,"50"),(100,"100"),(150,"150")],  # You can adjust the range as needed
+        choices=[(25,"25"),(50,"50")],  # You can adjust the range as needed
         widget=forms.Select(),
     )
+    withRoom = forms.ChoiceField(
+        label='With Room?',
+        required=False,  # Make it optional since you have a text field
+        choices=[(True,"Yes"),(False,"No")],  # You can adjust the range as needed
+        widget=forms.Select(),
+    )
+
+    RESERVATION_TIME_CHOICES = [
+        ('--Select Reservation Time--', 
+      ( 
+        ("Morning", "Morning"),
+        ("Night", "Night"),
+        ("22 Hours", "22 Hours")
+      )
+   ),
+
+    ]
+
+    reservation_time = forms.ChoiceField(
+        choices=BLANK_CHOICE_DASH + RESERVATION_TIME_CHOICES,
+        required=False,
+        label='Reservation Time',
+    )
         
+class PublicExtendedForm(ReservationForm):
+
+    cottage_type = forms.ModelChoiceField(
+        queryset=Facility.objects.filter(facilityCategory ='cottages'),
+        required=True,
+        empty_label=None, 
+        label="Cottages" # To force users to select a room type
+    )
+
+    room_type = forms.ModelChoiceField(
+        queryset=Facility.objects.filter(facilityCategory ='rooms'),
+        required=False,
+        empty_label="No Thanks", 
+        label="Additional Rooms" # To force users to select a room type
+    )
+    
+    num_cottage = forms.IntegerField(
+        required=False
+    )
+    num_rooms = forms.IntegerField(
+        required=False
+    )
+    num_child = forms.IntegerField(
+        required=False,
+        widget=forms.NumberInput(),
+        label= 'Number of Children'
+    )
+
+    # active_facilities = Facility.objects.filter(facilityActive=True, facilityCategory ='cottages')
+    # # Create the choice tuple from the active facilities
+    # facility_choices = [(facility.pk, facility.facilityName) for facility in active_facilities]
+    # facility_choices.insert(0,(None, 'No Thanks'))
+    # cottage_type = forms.ChoiceField(choices= facility_choices)
+
 
 
 
@@ -357,3 +396,26 @@ class ReservationEditForm(forms.ModelForm):
         
         # Rest of your validation code
         return check_out_time
+
+
+class PriceForm(forms.ModelForm):
+    
+    class Meta:
+        model = Prices
+        fields = ("time","type","price","guest","maxPax","withRoom","date",)
+        widgets = {
+            'maxPax': forms.Select(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
+            'time': forms.Select(attrs={'class': 'form-control form-control-lg'}),
+            'type': forms.Select(attrs={'class': 'form-control form-control-lg'}),
+            'guest': forms.Select(attrs={'class': 'form-control form-control-lg'}),
+            'date': forms.Select(attrs={'class': 'form-control form-control-lg'}),
+            
+        }
+
+    maxPax = forms.ChoiceField(choices=Prices.maxPaxChoices,required=False)
+    guest = forms.ChoiceField(choices=Prices.guestTypeChoices, required=False)
+    withRoom = forms.ChoiceField(choices=(('', '---------'),("False","No"),("True","Yes")), required=False)
+    date = forms.ChoiceField(choices=Prices.dateChoices,required=False,)
+
+    

@@ -61,7 +61,7 @@
                   <div class="form-outline">
                     {{form.email.label_tag}}
                     {{form.email.errors}}
-                    {{form.email}}
+                    <input type="email" name="{{ form.email.name }}" class="form-control form-control-lg" value="{{ form.email.value }}" id="{{ form.email.id_for_label }}">
                     {{form.email.help_text}}
                   </div>
                 </div>

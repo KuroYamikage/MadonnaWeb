@@ -14,7 +14,7 @@ from Reservation.reservation_function.availability import (
     check_availability,
     check_availability3,
 )
-
+from test.models import Reservation
 
 class CustomCheckboxSelectMultiple(forms.CheckboxSelectMultiple):
     template_name = "custom_checkbox_select.html"
@@ -502,7 +502,7 @@ class ReferenceChecker(forms.Form):
     def clean_reference(self):
         print("checking")
         data = self.cleaned_data["reference"]
-        referenceList = Reservations.objects.filter(referenceNum=data)
+        referenceList = Reservation.objects.filter(reference_number=data)
         if not referenceList:
             print("not found")
             raise forms.ValidationError("Reference Code Not Found")
