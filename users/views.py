@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from .forms import UserRegistrationForm, UserUpdateForm, ResetPasswordForm
 from django.views.generic import CreateView, TemplateView,ListView, DetailView, UpdateView
@@ -200,7 +200,9 @@ class editGallery(LoginRequiredMixin, UpdateView):
   context_object_name = 'gallery'
   template_name = 'users/gallery_edit.php'
   login_url = 'login'
-  success_url = '../'
+  def get_success_url(self):
+      # Use reverse to dynamically generate the URL for the success_url
+      return reverse('gallery.staff')
 
   
 
