@@ -20,3 +20,5 @@ def generate_monthly_report():
             total_earnings=total_earnings,
             total_reservations=total_reservations,
         )
+
+        monthly_report.save()
