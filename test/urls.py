@@ -9,7 +9,11 @@ urlpatterns = [
     path('reservation-success/', views.ReservationSuccessView.as_view(), name='reservation_success'),
     path('validate_discount_code/', views.validate_discount_code, name='validate_discount_code'),
     path('reservation/summary/<str:reference_number>/', views.ReservationSummaryView.as_view(), name='reservation_summary'),
-    path('reservation/edit/<int:pk>/', views.ReservationUpdateView.as_view(), name='edit_reservation'),
-
-     
+    path('create-price/', views.priceCreate.as_view(), name='create_price'),
+    path('price/', views.priceList.as_view(), name='price'),
+    path('price-update/<int:pk>', views.priceUpdate.as_view(), name='price_update'),
+    path ('payment/',views.process_payment,name='pay'),
+    path('reservation-edit/<int:pk>', views.ReservationUpdateView.as_view(), name='reservation_edit'),
+    path('room_availability/', views.room_availability, name='room_availability'),
+    path('pay/', views.pay_test, name='pay_test'), # type: ignore
 ]

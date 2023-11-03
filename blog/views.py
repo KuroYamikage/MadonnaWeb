@@ -24,13 +24,12 @@ class blogCustomer(ListView):
   context_object_name = 'blog'
   template_name = 'blog_Customer.php'
 
-class newBlog(LoginRequiredMixin, CreateView, PermissionRequiredMixin):
+class newBlog(LoginRequiredMixin, CreateView):
   model = Blog
   form_class = BlogForms
   success_url ='/blog/staff/'
   template_name = 'new_Blog.php'
   login_url = "login"
-  permission_required = ('blog.can_view')
 
   def form_valid(self, form):
     self.object=form.save(commit=False)
@@ -38,8 +37,7 @@ class newBlog(LoginRequiredMixin, CreateView, PermissionRequiredMixin):
     self.object.save()
     return redirect(self.get_success_url())
 
-class viewBlogs(PermissionRequiredMixin, LoginRequiredMixin, ListView):
-  permission_required = 'Home.view_Blog' 
+class viewBlogs( LoginRequiredMixin, ListView):
   model = Blog
   context_object_name = 'blog'
   template_name = 'blog.php'

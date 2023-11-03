@@ -32,7 +32,7 @@ class StaffLoginView(LoginView):
   redirect_authenticated_user= True
   def form_valid(self, form):
     response = super().form_valid(form)  
-    if self.request.user.groups.filter(name='Social Media Manager').exists():
+    if self.request.user.groups.filter(name='Social Media Manager').exists(): # type: ignore
       return redirect('/staff/gallery')
     else:
       #redirect_authenticated_user= True
@@ -121,10 +121,8 @@ class newBlog(LoginRequiredMixin, CreateView, PermissionRequiredMixin):
   success_url ='/blog'
   template_name = 'new_Blog.php'
   login_url = "login"
-  permission_required = ('blog.can_view')
 
-class viewBlogs(PermissionRequiredMixin, LoginRequiredMixin, ListView):
-  permission_required = 'Home.view_Blog' 
+class viewBlogs(LoginRequiredMixin, ListView):
   model = Blog
   context_object_name = 'blog'
   template_name = 'blog.php'
@@ -136,6 +134,7 @@ class deleteBlogs(LoginRequiredMixin, DeleteView):
   success_url = 'blog'
   template_name = 'delete_blog.php'
   login_url = "login"
+
 class updateBlogs(LoginRequiredMixin, UpdateView, SuccessMessageMixin):
   model = Blog
   form_class = BlogForms

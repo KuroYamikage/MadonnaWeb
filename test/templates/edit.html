@@ -293,7 +293,7 @@
 
           <div class="row mt-3">
             <div class="col-25">
-              <label for="{{ form.room.id_for_label }}">Room:</label>
+              <label for="{{ form.room.id_for_label }}">Facilities and Rooms:</label>
             </div>
             <div class="col-75">
               {{ form.room }}
@@ -366,7 +366,15 @@
 
 
 
-      var unavailableDates = [{% for date in unavailable_dates %}"{{ date }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
+    var unavailableDates = [{% for date in unavailable_dates %}
+    {
+      date: "{{ date.dates|date:'M d, Y' }}",
+      pool1: {{ date.pool1|yesno:'true,false' }},
+      pool2: {{ date.pool2|yesno:'true,false' }}
+    }{% if not forloop.last %}, {% endif %}
+  {% endfor %}];
+  console.log(unavailableDates);
+
       document.getElementById('id_room_type').addEventListener('change', function() {
         var selectedFacilityId = this.value+2;
         var carouselItems = document.querySelectorAll('.carousel-item');

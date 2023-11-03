@@ -192,6 +192,8 @@
             </div>
           </div>
 
+
+           
           
           <div id="num_guests_text_div">
             <div class="row">
@@ -201,6 +203,18 @@
               <div class="col-75">
                 {{ form.num_guests }}
                 {{ form.num_guests.errors }}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="row">
+              <div class="col-25">
+                <label for="{{ form.num_child.id_for_label }}">Number of Children:</label>
+              </div>
+              <div class="col-75">
+                {{ form.num_child }}
+                {{ form.num_child.errors }}
               </div>
             </div>
           </div>

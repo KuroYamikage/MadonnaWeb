@@ -11,7 +11,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="viewport" content="initial-scale=1, maximum-scale=1">
       <!-- site metas -->
-      <title>Customer Receipt</title>
+      <title>Customer Reservation Checker: {{reserve.referenceNum}} </title>
       <meta name="keywords" content="Resort">
       <meta name="description" content="">
       <meta name="author" content="YouNIX">
@@ -40,7 +40,7 @@
       <div class="container mb-5 mt-3">
         <div class="row d-flex align-items-baseline">
           <div class="col-xl-9">
-            <p style="color: #7e8d9f;font-size: 20px;">Invoice >> <strong>ID:{{reserve.referenceNum}}</strong></p>
+            <p style="color: #7e8d9f;font-size: 20px;">Reservation Checker >> <strong>ID:{{reserve.referenceNum}}</strong></p>
           </div>
           <div class="col-xl-3 float-end">
             <a  onClick="printDiv('receipt')"  class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i
@@ -98,24 +98,46 @@
               </thead>
                <tbody>
                 <tr>
+                  {% if reserve.type == 'public'%}
                   <th scope="row">1</th>
                   <td>{{reserve.type}} Reservation ({{reserve.time}}) </td>
-                  <td>{{reserve.num_guest}} pax</td>
-                  <td>₱{{reserve.total_pax}}</td>
+                  <td>{{reserve.pool}} pax</td>
+                  <td></td>
                 </tr>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>{{reserve.type}} Reservation ({{reserve.time}}) </td>
+                  <td>Child: {{reserve.num_child}} / Adult:{{reserve.num_guest}} pax</td>
+                  <td>₱{{reserve.total_pax}}</td>
+
+                  {% elif reserve.type == 'private' %}
+                  <th scope="row">1</th>
+                  <td>{{reserve.type}} Reservation ({{reserve.time}}) </td>
+                  <td>{{reserve.pool}}/{{reserve.num_guest}} pax</td>
+                  <td>₱{{reserve.total_pax|intcomma}}</td>
+                </tr>
+                <tr>
+                  <th scope="row">1.1</th>
+                  <td>With Room? </td>
+                  <td>{{reserve.withRoom|yesno}}</td>
+                  <td></td>
+                
+                {% endif %}
+                </tr>
+                
                 <tr>
                   {% for rooms in reserve.room  %}
                   <th scope="col">{{forloop.counter|add:1}}
                   <th scope="col">{{rooms.room_type}}
                   <th scope="col">{{rooms.room_number}}
-                  <th scope="col">₱{{rooms.price}}
+                  <th scope="col">₱{{rooms.price|intcomma}}
                   </tr>
                   {% if reserve.type == 'public' %}
                   <tr>
                     <th scope="col">
                     <th scope="col">Free Guests for {{rooms.room_type}}
                     <th scope="col">{{rooms.free}}
-                    <th scope="col">- ₱{{rooms.free_price}}
+                    <th scope="col">- ₱{{rooms.free_price|intcomma}}
                   </tr>
                   {% endif %}
                   {% endfor %}
@@ -138,6 +160,21 @@
                   style="font-size: 25px;"></br> ₱ {{reserve.total| intcomma }}</span></p>
                 
             </div>
+            <div class="col-xl-3">
+              <p class="text-black float-start"><span class="text-black me-3"> Payment Received:</span><span
+                style="font-size: 25px;"></br> ₱ {{reserve.payments| intcomma }}</span>
+              
+              </p>
+           </div>
+
+           <div class="col-xl-3">
+            <p class="text-black float-start"><span class="text-black me-3"> Downpayment Required:</span><span
+              style="font-size: 25px;"></br> ₱ 1,200.00</br>
+              <a  href="{% url "pay_test" %}"  class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i
+                class="fas fa-print text-primary"></i> Pay</a>
+            </span>
+            </p>
+         </div>
           </div>
           <hr>
           

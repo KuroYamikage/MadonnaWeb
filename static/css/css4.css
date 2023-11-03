@@ -1234,7 +1234,7 @@ textarea#comment::placeholder {
 }
 
 .reserve_section {
-  height: auto;
+  height: 120vh;
   padding-bottom: 50px;
   background-size: 100%;
   background-color: antiquewhite;

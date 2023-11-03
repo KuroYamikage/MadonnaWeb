@@ -89,7 +89,7 @@ def reserveView(request):
     obj = Prices.objects.all().values()
     form = ReservationChecker(None)
     form2 = ReferenceChecker(None)
-    unavailable_dates = UnavailableDate.objects.values_list("date", flat=True)
+    unavailable_dates = UnavailableDate.objects.all
     if request.method == "POST" and "new" in request.POST:
         form = ReservationChecker(request.POST)
         if form.is_valid():
@@ -99,7 +99,7 @@ def reserveView(request):
         form2 = ReferenceChecker(request.POST)
         if form2.is_valid():
             pk = form2.cleaned_data["reference"]
-            return redirect("reserve.receipt", referenceNum=pk)
+            return redirect("reservation_summary", reference_number=pk)
     context = {
         "form": form,
         "form_2": form2,

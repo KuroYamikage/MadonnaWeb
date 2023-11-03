@@ -28,6 +28,15 @@ class UserRegistrationForm(UserCreationForm):
             'groups': "Assign as",
         }
 
+    def __init__(self, *args, **kwargs):
+        super(UserRegistrationForm, self).__init__(*args, **kwargs)
+
+        # Set widget attributes for password fields
+        for field_name in ['password1', 'password2']:
+            self.fields[field_name].widget.attrs.update({
+                'class': 'form-control form-control-lg',
+                'autocomplete': 'off',
+            })
     def clean_group(self):
         group = self.cleaned_data['groups']
         return group
@@ -58,8 +67,7 @@ class UserUpdateForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email',
-                  'password', 'is_active', 'groups']
+        fields = ['username', 'first_name', 'last_name', 'email','is_active', 'groups']
         widgets = {
             'username' : forms.TextInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
             'password' : forms.PasswordInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),

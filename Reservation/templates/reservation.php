@@ -209,7 +209,13 @@
 </div>
 	
 <script>
-	var unavailableDates = [{% for date in unavailable_dates %}"{{ date }}"{% if not forloop.last %}, {% endif %}{% endfor %}];
+	var unavailableDates = [{% for date in unavailable_dates %}
+    {
+      date: "{{ date.dates|date:'M d, Y' }}",
+      pool1: {{ date.pool1|yesno:'true,false' }},
+      pool2: {{ date.pool2|yesno:'true,false' }}
+    }{% if not forloop.last %}, {% endif %}
+  {% endfor %}];
 </script>
 <script>
 
@@ -239,17 +245,27 @@
 		}
 	
 		// Convert and create unavailableEvents
-		unavailableDates.forEach(function (dateStr) {
-			const isoDate = convertToDateISO(dateStr);
-			if (isoDate) {
-				unavailableEvents.push({
-					title: 'Unavailable',
-					start: isoDate,
-					rendering: 'background',
-					color: 'red'
-				});
-			}
-		});
+		unavailableDates.forEach(function (dateInfo) {
+            const isoDate = convertToDateISO(dateInfo.date);
+            if (isoDate) {
+                if (dateInfo.pool1) {
+                    unavailableEvents.push({
+                        title: 'Pool 1 Unavailable',
+                        start: isoDate,
+                        rendering: 'background',
+                        color: 'red'
+                    });
+                }
+                if (dateInfo.pool2) {
+                    unavailableEvents.push({
+                        title: 'Pool 2 Unavailable',
+                        start: isoDate,
+                        rendering: 'background',
+                        color: 'yellow'
+                    });
+                }
+            }
+        });
 	
 		const stepContainer = document.querySelector('.container')
 		const steps = document.querySelectorAll('.step')
@@ -265,6 +281,7 @@
 	   
 	
 		console.log(unavailableEvents)
+		console.log(unavailableDates)
 
 	
 	

@@ -1,5 +1,6 @@
 {% extends 'sidebar.php' %}
 {%load static%}
+{% load humanize %}
 
 {%block title%} Discount Management {%endblock%}
 
@@ -25,7 +26,7 @@
                         <tr>
                             <td>{{info.id}}</td>
                             <td>{{info.discountCode}}</td>
-                            <td>{{info.discountPrice}}</td>
+                            <td>₱{{info.discountPrice|intcomma}}</td>
                             <td>{{info.discountActive |yesno:"Yes,No" }}</td>
                             <td><a class="btn btn-sm btn-primary" href="{% url 'discount.edit' pk=info.id %}">Edit</a></td>
                             
