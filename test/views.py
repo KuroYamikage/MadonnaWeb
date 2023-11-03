@@ -17,6 +17,7 @@ from .forms import (
     PublicExtendedForm,
 )
 import random
+from datetime import date, timedelta
 import requests
 from django.http import JsonResponse, HttpResponseRedirect
 from Reservation.models import Discount, Facility
@@ -574,7 +575,7 @@ class ReservationSummaryView(View):
             withRoom,
         )
         rooms = reservation.room.all()
-        print(total_pax)
+        print(rooms)
         # Create a list to store room details
         room_details = []
         price = 0
@@ -588,8 +589,11 @@ class ReservationSummaryView(View):
                 facilityName=reservation_type + " " + reservation_time
             )
         # Loop through associated rooms and get price and type
+        downpayment = 0
         for room in rooms:
-            room_details.append(
+            if reservation_type == 'public':
+                downpayment = downpayment + room.price_per_night
+                room_details.append(
                 {
                     "room_number": room.room_number,
                     "room_type": room.room_type.facilityName,
@@ -597,9 +601,20 @@ class ReservationSummaryView(View):
                     "free": computeFreeGuest(num_guests, room.free_guests),
                     "free_price": computeFree(num_guests, room.free_guests, price),
                 }
-            )
+                )
+            elif reservation_type == 'private':
+                room_details.append(
+                {
+                    "room_number": room.room_number,
+                    "room_type": room.room_type.facilityName,
+                    "price": room.price_per_night,
+                }
+                )
 
+        if reservation_type == 'private':
+            downpayment=reservation.total / 2
         discount = 0
+        print("downpayment:", downpayment)
         if reservation.discount_code != None:
             discount = reservation.discount_code.discountPrice
         else:
@@ -628,7 +643,8 @@ class ReservationSummaryView(View):
                 "pool": reservation.pool,
                 "num_child":reservation.num_child,
                 "withRoom" : reservation.withRoom,
-                "payments":reservation.payments
+                "payments":reservation.payments,
+                "downpayment":downpayment
             }
         }
         return render(request, self.template_name, context)
@@ -1029,66 +1045,132 @@ def process_payment(request):
 
 
 def room_availability(request):
-    # Get the list of rooms
+    # Retrieve all rooms
     rooms = Room.objects.all()
 
-    # Calculate the end date of the week (assuming today is the start of the week)
+    # Define the start and end dates of the week
     today = date.today()
-    end_of_week = today + timedelta(days=(6 - today.weekday()))
+    start_date = today - timedelta(days=today.weekday())  # Monday of the current week
+    end_date = start_date + timedelta(days=6)  # Sunday of the current week
 
-    # Get reservations within the week
-    reservations_within_week = Reservation.objects.filter(
-        check_in_date__lte=end_of_week,
-        check_out_date__gte=today
-    )
+    # Generate a list of dates for the week
+    week_days = [start_date + timedelta(days=i) for i in range(7)]
 
     # Create a dictionary to store room availability status
     room_availability_status = {}
 
-    # Initialize availability status for each room
     for room in rooms:
-        room_availability_status[room] = True  # Assume the room is available
+        availability_list = []
 
-    # Update availability status based on reservations within the week
-    for reservation in reservations_within_week:
-        for room in reservation.room.all():
-            # Mark the room as reserved
-            room_availability_status[room] = False
+        # Check the availability status for each day in the week
+        for day in week_days:
+            # Assume availability checking logic here
+            # You need to implement the logic based on your reservation model
+            is_available = check_room_availability(room, day)
 
-    return render(request, 'room_availability_weekly.html', {
+            availability_list.append(is_available)
+
+        # Add the room and its availability status to the dictionary
+        room_availability_status[room] = availability_list
+
+    context = {
         'room_availability_status': room_availability_status,
-        'start_of_week': today,
-        'end_of_week': end_of_week,
-    })
+        'week_days': week_days,
+    }
+
+    return render(request, 'availability.html', context)
+
+def check_room_availability(room, day):
+    # Implement your availability checking logic here based on the Reservation model
+    # For demonstration purposes, assume the room is available on even-numbered days
+    return day.day % 2 == 0
 
 
+def payment_success(request):
+    reference = request.GET.get('reference', 'DefaultStringValue')
+    reservation = get_object_or_404(Reservation, reference_number=reference)
+    downpayment = request.GET.get('downpayment', 'DefaultStringValue')
+    reservation.payments = downpayment
+    reservation.status = 'Approved'
+    print(reservation.status)
+    print(reservation.payments)
+    reservation.save()
+    print(reference)
+    return render(request, 'payments/payment_success.html', {'refNum': reference})
+
+import json
 
 def pay_test(request):
     url = "https://api.paymongo.com/v1/checkout_sessions"
+    param1_value = request.GET.get('param1', 'default_value1')
+    print("Raw param1_value:", param1_value)
+    param2_value = request.GET.get('param2', 'default_value2')
+    rooms=[]
+    reservation = get_object_or_404(Reservation, reference_number=param1_value)
+    rooms = reservation.room.all()
+    room_details = []
+    print(rooms)
+    num_guests = reservation.num_guests
+    reservation_type = reservation.reservation_type
+    reservation_time = reservation.reservation_time
+    total=0
+    price=0
+    if reservation_type == "private":
+        price = Facility.objects.get(
+            facilityName=reservation_type + " " + reservation_time,
+            facilitymax=num_guests,
+        )
+    elif reservation_type == "public":
+        price = Facility.objects.get(
+            facilityName=reservation_type + " " + reservation_time
+        )
+    for room in rooms:
+            room_details.append(
+                {
+                    "room_number": room.room_number,
+                    "room_type": room.room_type.facilityName,
+                    "price": room.price_per_night,
+                }
+            )
+    line_items = []
 
+    included = []
+    if reservation_type == "public":
+        for x in room_details: 
+            print("this is x ",x)
+            total = total+x['price']
+            line_items.append({
+                "currency": "PHP",
+                "amount": int(x['price']*100),
+                "description": x["room_number"],
+                "quantity": 1,
+                "name": x['room_type'] # Assuming 'room_type' is a key in your dictionary
+            })
+    elif reservation_type == 'private':
+        
+        total = reservation.total/2
+        line_items.append({
+                "currency": "PHP",
+                "amount": int(total*100),
+                "description": 'Half of the Reservation Total',
+                "quantity": 1,
+                "name": 'Downpayment' # Assuming 'room_type' is a key in your dictionary
+            })
+        
+
+    print(line_items)
+
+    print("Line Items", line_items)
     payload = {
         "data": {
             "attributes": {
                 "send_email_receipt": False,
                 "show_description": True,
                 "show_line_items": True,
-                "line_items": [
-                    {
-                        "currency": "PHP",
-                        "amount": 200000,
-                        "description": "Check",
-                        "quantity": 1,
-                        "name": "Cottage 2"
-                    },
-                    {
-                        "currency": "PHP",
-                        "amount": 100000,
-                        "name": "Cottage 1",
-                        "quantity": 1
-                    }
-                ],
+                "line_items": line_items,
                 "description": "Reservation",
-                "payment_method_types": ["gcash"]
+                "payment_method_types": ["gcash"],
+                "success_url": request.build_absolute_uri(reverse('payment_success')) + f'?reference={param1_value}&downpayment={total}', 
             }
         }
     }
@@ -1103,7 +1185,6 @@ def pay_test(request):
         response.raise_for_status()
 
         data = response.json()
-        print("API Response:", data)
 
         
         
@@ -1118,3 +1199,8 @@ def pay_test(request):
 
     except requests.RequestException as e:
         return JsonResponse({"error": str(e)}, status=500)
+
+
+ 
+    
+

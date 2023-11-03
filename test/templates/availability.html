@@ -1,16 +1,33 @@
-<!-- templates/room_availability.html -->
+<!-- templates/room_availability_weekly.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Room Availability</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Room Availability</title>
 </head>
 <body>
-    <h1>Room Availability</h1>
-    <ul>
-        {% for room, is_available in room_availability_status.items %}
-            <li>{{ room.room_number }} - {% if is_available %}Available{% else %}Reserved{% endif %}</li>
-        {% endfor %}
-    </ul>
+    <h2>Weekly Room Availability</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                {% for day in week_days %}
+                    <th>{{ day|date:"D" }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for room, availability_list in room_availability_status.items %}
+                <tr>
+                    <td>{{ room.room_number }}</td>
+                    {% for availability in availability_list %}
+                        <td>{% if availability %}Available{% else %}Reserved{% endif %}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 </html>

@@ -15,5 +15,6 @@ urlpatterns = [
     path ('payment/',views.process_payment,name='pay'),
     path('reservation-edit/<int:pk>', views.ReservationUpdateView.as_view(), name='reservation_edit'),
     path('room_availability/', views.room_availability, name='room_availability'),
-    path('pay/', views.pay_test, name='pay_test'), # type: ignore
-]
+    path('pay/', views.pay_test, name='pay_test'), 
+    path('payment/success/', views.payment_success, name='payment_success'),
+]  

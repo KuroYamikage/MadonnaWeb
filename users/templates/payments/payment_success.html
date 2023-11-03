@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Payment Success</title>
+   <style>
+      body {
+         font-family: Arial, sans-serif;
+         text-align: center;
+         margin: 50px;
+      }
+      #loading-bar {
+         width: 50%;
+         margin: 50px auto;
+         padding: 20px;
+         background-color: #f0f0f0;
+         border-radius: 5px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      #loading-message {
+         font-size: 18px;
+         margin-top: 20px;
+      }
+   </style>
+</head>
+<body>
+   <div id="loading-bar">
+      <div id="loading-message">Redirecting...</div>
+      <div id="loading-progress"></div>
+   </div>
+
+   <script>
+      // Simulate loading progress
+      let progress = 0;
+      const progressBar = document.getElementById('loading-progress');
+      const loadingMessage = document.getElementById('loading-message');
+
+      function simulateLoading() {
+         progress += 1;
+         progressBar.style.width = progress + '%';
+
+         if (progress < 100) {
+            // Continue loading
+            setTimeout(simulateLoading, 50);
+         } else {
+            // Redirect when loading is complete
+            loadingMessage.innerHTML = 'Redirecting...';
+            setTimeout(() => {
+               window.location.href = '{% url "reservation_summary" reference_number="{{refNum}}" %}'; // Replace with your actual success page URL
+            }, 1000);
+         }
+      }
+
+      // Start loading simulation
+      simulateLoading();
+   </script>
+</body>
+</html>
