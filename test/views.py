@@ -57,6 +57,9 @@ class ReservationCreateView(FormView):
         reservation_type = "public"
         num_guests = form.cleaned_data["num_guests"]
         reservation_time = form.cleaned_data["reservation_time"]
+        event_hall = form.cleaned_data['event_hall']
+        print('Event Hall',type(event_hall))
+
 
         total = getTotal(
             reservation_type,
@@ -129,7 +132,7 @@ class ReservationCreateView(FormView):
             ).values_list("room", flat=True)
 
             # Exclude reserved rooms from available rooms
-            available_rooms = available_rooms.exclude(id__in=reserved_cottage)
+            available_cottage = available_cottage.exclude(id__in=reserved_cottage)
             print(cottage_type)
             print(int(num_cottage or 0))
             selected_cottages = None
@@ -149,6 +152,42 @@ class ReservationCreateView(FormView):
                 )
                 print("not valid")
                 return self.form_invalid(form)
+        print(event_hall == 'False')
+        if event_hall == 'True':
+            print('here')
+            available_cottage = Room.objects.filter(id=0)
+            if event_hall == 'True':
+                # Find available rooms of the selected room type
+                available_cottage = Room.objects.filter(room_type=7)
+
+                # Filter available rooms by checking reservations
+                reserved_cottage = Reservation.objects.filter(
+                    room__in=available_cottage,
+                    check_in_date__lte=check_out_date,
+                    check_out_date__gte=check_in_date,
+                ).values_list("room", flat=True)
+
+                # Exclude reserved rooms from available rooms
+                available_cottage = available_cottage.exclude(id__in=reserved_cottage)
+                print(available_cottage, "eh")
+                selected_cottages = None
+                print(available_cottage.count(), "eh")
+            if event_hall == 'True' and available_cottage.count() >= 1:
+                # Randomly select available rooms up to the requested number
+                selected_cottages = random.sample(list(available_cottage), num_cottage)
+
+                selected_rooms.extend(selected_cottages)
+                print(selected_cottages)
+                print(selected_rooms)
+            else:
+                # Handle the case where there are not enough available rooms
+                if cottage_type != None:
+                    form.add_error(
+                        None,
+                        f"Event Hall not Available for the selected dates.",
+                    )
+                    print("not valid")
+                    return self.form_invalid(form)
 
             # Create a single reservation for the selected rooms
         reservation = Reservation.objects.create(
@@ -302,6 +341,7 @@ class ReservationCreateViewPrivate(FormView):
         # cottage_type = form.cleaned_data["cottage_type"]
         # num_cottage = form.cleaned_data["num_cottage"]
         withRoom = form.cleaned_data["withRoom"]
+        event_hall = form.cleaned_data["event_hall"]
         print("With Room? ",withRoom)
         total = getTotal(
             reservation_type, reservation_time, num_guests, 0, check_in_date, withRoom
@@ -324,7 +364,41 @@ class ReservationCreateViewPrivate(FormView):
         else:
             discount = None  # No discount code provided, set discount to None
 
-        available_rooms = Room.objects.filter(id=0)
+        if event_hall == 'True':
+            print('here')
+            available_cottage = Room.objects.filter(id=0)
+            if event_hall == 'True':
+                # Find available rooms of the selected room type
+                available_cottage = Room.objects.filter(room_type=7)
+
+                # Filter available rooms by checking reservations
+                reserved_cottage = Reservation.objects.filter(
+                    room__in=available_cottage,
+                    check_in_date__lte=check_out_date,
+                    check_out_date__gte=check_in_date,
+                ).values_list("room", flat=True)
+
+                # Exclude reserved rooms from available rooms
+                available_cottage = available_cottage.exclude(id__in=reserved_cottage)
+                print(available_cottage, "eh")
+                selected_cottages = None
+                print(available_cottage.count(), "eh")
+            if event_hall == 'True' and available_cottage.count() >= 1:
+                # Randomly select available rooms up to the requested number
+                selected_cottages = random.sample(list(available_cottage),1)
+
+                selected_rooms = random.sample(list(available_cottage), 1)
+                print(selected_cottages)
+                print(selected_rooms)
+            else:
+                # Handle the case where there are not enough available rooms
+                if event_hall == True:
+                    form.add_error(
+                        None,
+                        f"Event Hall not Available for the selected dates.",
+                    )
+                    print("not valid")
+                    return self.form_invalid(form)
         # if room_type != None:
         #     # Find available rooms of the selected room type
         #     available_rooms = Room.objects.filter(room_type=room_type)

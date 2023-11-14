@@ -28,7 +28,7 @@
 <body>
    <div id="loading-bar">
       <div id="loading-message">Redirecting...</div>
-      <div id="loading-progress"></div>
+      <div id="loading-progress">{{refNum}}</div>
    </div>
 
    <script>
@@ -48,7 +48,7 @@
             // Redirect when loading is complete
             loadingMessage.innerHTML = 'Redirecting...';
             setTimeout(() => {
-               window.location.href = '{% url "reservation_summary" reference_number="{{refNum}}" %}'; // Replace with your actual success page URL
+               window.location.href = '{% url "reservation_summary" reference_number=refNum %}'; // Replace with your actual success page URL
             }, 1000);
          }
       }
