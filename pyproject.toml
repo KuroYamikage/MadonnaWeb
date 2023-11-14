@@ -16,6 +16,7 @@ django-session-timeout = "^0.1.0"
 django-recaptcha = "^3.0.0"
 requests = "^2.31.0"
 celery = {extras = ["redis"], version = "^5.3.4"}
+workalendar = "^17.0.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.9.1"

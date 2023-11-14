@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const checkInTimeField = document.getElementById('id_check_in_time')
     const checkOutTimeField = document.getElementById('id_check_out_time')
     const reservationTypeSelect = document.getElementById("id_reservation_type");
-   
+
 
     console.log(unavailableEvents)
     // Add an event listener to the reservation_time dropdown
@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const name = document.getElementById('id_guest_name').value
             const checkIn = document.getElementById('id_check_in_date').value
             const checkOut = document.getElementById('id_check_out_date').value
-            return name !== '' && checkIn !=='' && checkOut !==''
+            return name !== '' && checkIn !== '' && checkOut !== ''
         } else if (currentStep === 1) {
             // Check if fields in Step 2 are filled
             const email = document.getElementById('id_guest_email').value
