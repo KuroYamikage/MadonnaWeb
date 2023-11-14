@@ -11,30 +11,41 @@ document.addEventListener('DOMContentLoaded', function () {
     const unavailableEvents = [];
 
     // Function to convert date string to ISO format
-    function convertToDateISO(dateStr) {
-        const dateParts = dateStr.split(' ');
-        if (dateParts.length === 3) {
-            const month = dateParts[0];
-            const day = dateParts[1].replace(',', '');
-            const year = dateParts[2];
-            const isoDate = new Date(`${month} ${day}, ${year} 00:00:00 UTC`);
-            return isoDate.toISOString().split('T')[0];
-        }
-        return null; // Handle invalid date format
-    }
-
-    // Convert and create unavailableEvents
-    unavailableDates.forEach(function (dateStr) {
-        const isoDate = convertToDateISO(dateStr);
-        if (isoDate) {
-            unavailableEvents.push({
-                title: 'Unavailable',
-                start: isoDate,
-                rendering: 'background',
-                color: 'red'
-            });
-        }
-    });
+   // Function to convert date string to ISO format
+		function convertToDateISO(dateStr) {
+			const dateParts = dateStr.split(' ');
+			if (dateParts.length === 3) {
+				const month = dateParts[0];
+				const day = dateParts[1].replace(',', '');
+				const year = dateParts[2];
+				const isoDate = new Date(`${month} ${day}, ${year} 00:00:00 UTC`);
+				return isoDate.toISOString().split('T')[0];
+			}
+			return null; // Handle invalid date format
+		}
+	
+		// Convert and create unavailableEvents
+		unavailableDates.forEach(function (dateInfo) {
+            const isoDate = convertToDateISO(dateInfo.date);
+            if (isoDate) {
+                if (dateInfo.pool1) {
+                    unavailableEvents.push({
+                        title: 'Pool 1 Unavailable',
+                        start: isoDate,
+                        rendering: 'background',
+                        color: 'red'
+                    });
+                }
+                if (dateInfo.pool2) {
+                    unavailableEvents.push({
+                        title: 'Pool 2 Unavailable',
+                        start: isoDate,
+                        rendering: 'background',
+                        color: 'yellow'
+                    });
+                }
+            }
+        });
 
     const stepContainer = document.querySelector('.container')
     const steps = document.querySelectorAll('.step')
@@ -64,14 +75,21 @@ document.addEventListener('DOMContentLoaded', function () {
             checkInDateField.value = formatDate(today) // Format today's date
             checkOutDateField.value = formatDate(today) // Format today's date
             checkInTimeField.value = '07:00 AM'
-            checkOutTimeField.value = '07:00 PM'
+            checkOutTimeField.value = '05:00 PM'
         } else if (selectedReservationTime === 'Night') {
             // For Night reservation, set check-in at 7:00 PM and check-out at 7:00 AM (next day)
             checkInDateField.value = formatDate(today) // Format today's date
             checkOutDateField.value = formatDate(tomorrow) // Format tomorrow's date
-            checkInTimeField.value = '07:00 PM'
+            checkInTimeField.value = '05:00 PM'
             checkOutTimeField.value = '07:00 AM'
+        }else if (selectedReservationTime === '22 Hours'){
+            // For Night reservation, set check-in at 7:00 PM and check-out at 7:00 AM (next day)
+            checkInDateField.value = formatDate(today) // Format today's date
+            checkOutDateField.value = formatDate(tomorrow) // Format tomorrow's date
+            checkInTimeField.value = '07:00 AM'
+            checkOutTimeField.value = '05:00 PM'
         }
+        
     })
 
 
@@ -168,24 +186,24 @@ document.addEventListener('DOMContentLoaded', function () {
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth', // Change the view as needed
         selectable: true, // Enable date selection
-
+    
         select: function (info) {
             var selectedDate = new Date(info.startStr)
-
+    
             // Check if the selected date is in the past
             if (selectedDate < new Date() && !isToday(info.startStr)) {
                 alert("You can't select past dates.")
                 calendar.unselect()
                 return
             }
-
+    
             // Check if the selected check-in date is after the check-out date
             if (selectedCheckOutDate && selectedDate > new Date(selectedCheckOutDate)) {
                 alert('Check-in date cannot be after the check-out date.')
                 calendar.unselect()
                 return
             }
-
+    
             // Handle date selection
             if (!selectedCheckInDate) {
                 // Handle the click event for the "Clear" button
@@ -194,104 +212,72 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Clear the check-in date
                     selectedCheckInDate = null
                     document.getElementById('id_check_in_date').value = ''
-
+    
                     // Remove the "Check-in" event from the calendar
                     const checkInEvent = calendar.getEventById('checkInEvent')
                     if (checkInEvent) {
                         checkInEvent.remove()
                     }
                 })
-
+    
                 // Set the check-in date if it's not already set
                 selectedCheckInDate = info.startStr
-
+    
                 document.getElementById('id_check_in_date').value = selectedCheckInDate
-
+    
                 // Add a "Check-in" event on the selected date
                 calendar.addEvent({
                     title: 'Check-in',
                     start: selectedCheckInDate,
                     color: 'blue' // Customize the color for check-in date
                 })
-
+    
                 // Show the "Clear" button when setting the check-in date
                 document.getElementById('clearCheckIn').style.display = 'inline-block'
                 $('#id_reservation_time').prop('disabled', false);
-            } 
-            // else if (!selectedCheckOutDate) {
-            //     // Check if the selected check-out date is before the check-in date
-            //     if (selectedDate < new Date(selectedCheckInDate)) {
-            //         alert('Check-out date cannot be before or on the same day as the check-in date.')
-            //         calendar.unselect()
-            //         return
-            //     }
-
-            //     //
-
-            //     // Check for unavailable dates between check-in and check-out
-            //     var currentDate = new Date(selectedCheckInDate)
-            //     var endDate = new Date(info.startStr)
-            //     var hasUnavailableDate = false
-
-            //     // Iterate through the calendar events to check for unavailable dates
-            //     var events = calendar.getEvents()
-            //     while (currentDate <= endDate) {
-            //         var formattedDate = currentDate.toISOString().split('T')[0]
-
-            //         // Check if the current date is an unavailable date (exists in events)
-            //         var isUnavailable = events.some(function (event) {
-            //             return event.start && event.end && new Date(event.start).getTime() <= currentDate.getTime() && new Date(event.end).getTime() >= currentDate.getTime()
-            //         })
-
-            //         if (isUnavailable) {
-            //             hasUnavailableDate = true
-            //             break
-            //         }
-
-            //         // Move to the next day
-            //         currentDate.setDate(currentDate.getDate() + 1)
-            //     }
-
-            //     if (hasUnavailableDate) {
-            //         alert('There are unavailable dates between check-in and check-out.')
-            //         calendar.unselect()
-            //         return
-            //     }
-
-            //     // Set the check-out date
-            //     selectedCheckOutDate = info.startStr
-
-            //     document.getElementById('id_check_out_date').value = selectedCheckOutDate
-
-            //     // You can now use selectedCheckInDate and selectedCheckOutDate as needed.
-            //     console.log('Check-in Date: ' + selectedCheckInDate)
-            //     console.log('Check-out Date: ' + selectedCheckOutDate)
-            // }
+            }
             renderSelection()
         },
+    
         selectAllow: function (selectInfo) {
-            // Allow selection only if both check-in and check-out dates are not set
-            return !(selectedCheckInDate && selectedCheckOutDate)
+            const selectedDate = selectInfo.start.toISOString().split('T')[0];
+            
+            // Get all events on the selected date
+            const eventsOnSelectedDate = calendar.getEvents().filter(event => {
+                const eventDate = event.start.toISOString().split('T')[0];
+                return eventDate === selectedDate;
+            });
+        
+            const isPool1Unavailable = eventsOnSelectedDate.some(event => event.backgroundColor && event.backgroundColor.includes('red'));
+            const isPool2Unavailable = eventsOnSelectedDate.some(event => event.backgroundColor && event.backgroundColor.includes('yellow'));
+        
+            // Allow selection if either pool 1 or pool 2 is available
+            return !isPool1Unavailable || !isPool2Unavailable;
         },
-
+        
+    
         events: unavailableEvents,
-
+    
         selectOverlap: function (event) {
-            // Prevent selection overlap with unavailable dates
-            return !event.backgroundColor || event.backgroundColor !== 'red'
+            // Check if both pool 1 (red) and pool 2 (yellow) are present in the background color
+            const isPool1Unavailable = event.backgroundColor && event.backgroundColor.includes('red');
+            const isPool2Unavailable = event.backgroundColor && event.backgroundColor.includes('yellow');
+    
+            // Prevent selection overlap only when both pool 1 and pool 2 are present
+            return !event.backgroundColor || !(isPool1Unavailable && isPool2Unavailable);
         }
-    })
-
+    });
+    
     function renderSelection() {
         // Clear existing selections
         calendar.removeAllEventSources()
-
+    
         // Add unavailable dates as events
         calendar.addEventSource({
             events: unavailableEvents,
             rendering: 'background'
         })
-
+    
         // Add selected check-in and check-out dates as events
         if (selectedCheckInDate && selectedCheckOutDate) {
             calendar.addEvent({
@@ -302,9 +288,9 @@ document.addEventListener('DOMContentLoaded', function () {
             var currentDate = new Date(selectedCheckInDate)
         }
     }
-
-    calendar.render()
-
+    
+    calendar.render();
+    
     // Your JavaScript code here to control form navigation and validation
     let currentStep = 0
 

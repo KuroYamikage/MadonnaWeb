@@ -246,7 +246,17 @@ class ReservationEditForm(forms.ModelForm):
         choices=RESERVATION_STATUS_CHOICES,
         label="Status",
     )
-    
+    num_child = forms.IntegerField(
+        required=False,
+        widget=forms.NumberInput(),
+        label= 'Number of Children'
+    )
+    pool= forms.ChoiceField(
+        choices=Reservation.POOL_CHOICES,
+        required=False,
+        label= "Pool"
+    )
+
     discount_code = forms.CharField(
         max_length=50, required=False, label="Discount Code"
     )
@@ -264,15 +274,22 @@ class ReservationEditForm(forms.ModelForm):
             format='%I:%M %p'
         ),
     )
-    RESERVATION_TIME_CHOICES = (
+    withRoom = forms.ChoiceField(
+        label='With Room?',
+        required=False,  # Make it optional since you have a text field
+        choices=[(True,"Yes"),(False,"No")],  # You can adjust the range as needed
+        widget=forms.Select(),
+    )
+    RESERVATION_TIME_CHOICES = [
         ('--Select Reservation Time--', 
-      (
+      ( 
         ("Morning", "Morning"),
         ("Night", "Night"),
+        ("22 Hours", "22 Hours")
       )
    ),
 
-    )
+    ]
 
     reservation_time = forms.ChoiceField(
         choices=RESERVATION_TIME_CHOICES,
@@ -283,7 +300,7 @@ class ReservationEditForm(forms.ModelForm):
     num_guests_select = forms.ChoiceField(
         label='Number of Guests (Dropdown)',
         required=False,  # Make it optional since you have a text field
-        choices=[(30,"30"),(50,"50"),(100,"100"),(150,"150")],  # You can adjust the range as needed
+        choices=[(25,"30"),(25,"50")],  # You can adjust the range as needed
         widget=forms.Select(),
     )
 

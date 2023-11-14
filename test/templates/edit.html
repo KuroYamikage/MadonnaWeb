@@ -194,6 +194,17 @@
             </div>
           </div>
 
+          <div class="row">
+            <div class="col-25">
+              <label for="{{ form.pool.id_for_label }}">Choice of Pool</label>
+            </div>
+            <div class="col-75">
+              {{ form.pool }}
+              {{ form.pool.errors }}
+            </div>
+          </div>
+
+
           
           <div class="row">
             <div class="col-25">
@@ -219,8 +230,41 @@
             </div>
           </div>
 
+            
+          <div id="num_guests_select_div">
+            <div class="row">
+              <div class="col-25">
+                <label for="{{ form.num_guests_select.id_for_label }}">Number of Guests:</label>
+              </div>
+              <div class="col-75">
+                {{ form.num_guests_select }}
+                {{ form.num_guests_select.errors }}
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div class="row">
+              <div class="col-25">
+                <label for="{{ form.num_child.id_for_label }}">Number of Children:</label>
+              </div>
+              <div class="col-75">
+                {{ form.num_child }}
+                {{ form.num_child.errors }}
+              </div>
+            </div>
+          </div>
           
-         
+          <div class="row">
+            <div class="col-25">
+              <label for="{{ form.withRoom.id_for_label }}">Number of Rooms:</label>
+            </div>
+            <div class="col-75">
+              {{ form.withRoom }}
+              {{ form.withRoom.errors }}
+              {{ form.room.errors }}
+            </div>
+          </div>
 
           <div class="row">
             <div class="col-25">

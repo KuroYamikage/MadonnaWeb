@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Availability Weekly</title>
+</head>
+<body>
+
+    <h1>Room Availability Weekly</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Day</th>
+                {% for room in rooms %}
+                    <th>{{ room.room_number }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for day_availability in room_availability_status %}
+                <tr>
+                    <td>{{ day_availability.day }}</td>
+                    {% for room, is_available in day_availability.availability.items %}
+                    <td style="background-color: {% if room_availability == 'available' %}green{% else %}red{% endif %}">{{ room_availability }}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    
+</body>
+</html>

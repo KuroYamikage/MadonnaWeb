@@ -164,7 +164,7 @@ else {
 				"</p><p>Number of Guest: "+events[i]["invited_count"]+
 					"</p><p class='right'>Reservation Type: "+events[i]["occasion"]+
 					"</p><p class='right'>Status: "+events[i]["status"]+
-					"</p><a href="+"reservation/edit/"+events[i]["id"]+"/"+
+					"</p><a href="+"reservation-edit/"+events[i]["id"]+
 					" class="+"btn btn-secondary my-3"+
 					">Add more Details</a></div>");
 		if(events[i]["status"]==="Cancelled") {

@@ -268,9 +268,8 @@ class ReservationCreateView(FormView):
 
         context["active_facilities"] = Facility.objects.filter(facilityActive=True)
 
-        unavailable_dates = UnavailableDate.objects.values_list("dates", flat=True)
+        unavailable_dates = UnavailableDate.objects.all
         context["unavailable_dates"] = unavailable_dates
-        print(unavailable_dates)
         print(context["active_facilities"])
         return context
 
@@ -580,9 +579,12 @@ class ReservationSummaryView(View):
         room_details = []
         price = 0
         if reservation_type == "private":
-            price = Facility.objects.get(
-                facilityName=reservation_type + " " + reservation_time,
-                facilitymax=num_guests,
+            reservation_type1 ="Private"
+            price = Prices.objects.get(
+                type=reservation_type1,
+                time = reservation_time,
+                maxPax=num_guests,
+                withRoom = withRoom
             )
         elif reservation_type == "public":
             price = Facility.objects.get(
@@ -774,11 +776,20 @@ class ReservationUpdateView(UpdateView):
         discount_code = form.cleaned_data[
             "discount_code"
         ]  # Get the discount_code value
-        reservation_type = "public"
+        reservation_type = form.cleaned_data['reservation_type']
         num_guests = form.cleaned_data["num_guests"]
         reservation_time = form.cleaned_data["reservation_time"]
         num_child = form.cleaned_data["num_child"]
-        withRoom = form.cleaned_data["withRoom"]
+        withRoom = False
+
+        if reservation_type== 'public':
+            num_child = form.cleaned_data["num_child"]
+            num_guests = form.cleaned_data["num_guests"]
+            withRoom = False
+        elif reservation_type =='private':
+            num_child = 0
+            num_guests = form.cleaned_data["num_guests_select"]
+            withRoom = form.cleaned_data["withRoom"]
 
         total = getTotal(
             reservation_type,
@@ -789,7 +800,7 @@ class ReservationUpdateView(UpdateView):
             withRoom,
         )
         decTotal = Decimal(total)
-
+        selected_rooms = []
         print(decTotal)
 
         if discount_code:
@@ -825,42 +836,45 @@ class ReservationUpdateView(UpdateView):
             # Randomly select available rooms up to the requested number
             selected_rooms = random.sample(list(available_rooms), num_rooms)
 
-            # Create a single reservation for the selected rooms
-            reservation = Reservation.objects.create(
-                check_in_date=check_in_date,
-                check_out_date=check_out_date,
-                guest_name=form.cleaned_data["guest_name"],
-                guest_email=form.cleaned_data["guest_email"],
-                guest_phone=form.cleaned_data["guest_phone"],
-                num_guests=num_guests,
-                reservation_time=form.cleaned_data["reservation_time"],
-                check_in_time=check_in_time,
-                check_out_time=check_out_time,
-                total=total,
-                reservation_type=reservation_type,
-                room=room_type,
-            )
-            if room_type != None:
-                # Set the selected rooms for the reservation
-                reservation.room.set(selected_rooms)
-                for room in selected_rooms:
-                    total = Decimal(total) + room.price_per_night
-                    print("total: ", total)
-                    price = Facility.objects.get(
-                        facilityName=reservation_type + " " + reservation_time
-                    )
-                    print(room.free_guests)
-                    print(num_guests)
-                    print("check:", room.free_guests < num_guests)
-                    if room.free_guests > num_guests:
-                        print("true")
-                        free = num_guests * price.facilityPrice
-                    else:
-                        free = room.free_guests * price.facilityPrice
-                    print("free: ", free)
-                    decTotal = total - free
-                    print("Total: ", decTotal)
-                    reservation.total = decTotal
+            
+        # Create a single reservation for the selected rooms
+        reservation = Reservation.objects.create(
+        check_in_date=check_in_date,
+        check_out_date=check_out_date,
+        guest_name=form.cleaned_data["guest_name"],
+        guest_email=form.cleaned_data["guest_email"],
+        guest_phone=form.cleaned_data["guest_phone"],
+        num_guests=num_guests,
+        reservation_time=form.cleaned_data["reservation_time"],
+        check_in_time=check_in_time,
+        check_out_time=check_out_time,
+        total=total,
+        reservation_type=reservation_type,
+        room=room_type,
+        num_child = num_child,
+        withRoom = withRoom,
+        )
+        if room_type != None:
+            # Set the selected rooms for the reservation
+            reservation.room.set(selected_rooms)
+            for room in selected_rooms:
+                total = Decimal(total) + room.price_per_night
+                print("total: ", total)
+                price = Facility.objects.get(
+                    facilityName=reservation_type + " " + reservation_time
+                )
+                print(room.free_guests)
+                print(num_guests)
+                print("check:", room.free_guests < num_guests)
+                if room.free_guests > num_guests:
+                    print("true")
+                    free = num_guests * price.facilityPrice
+                else:
+                    free = room.free_guests * price.facilityPrice
+                print("free: ", free)
+                decTotal = total - free
+                print("Total: ", decTotal)
+                reservation.total = decTotal
 
             # You can add more calculations here based on your business logic
 
@@ -936,7 +950,6 @@ class ReservationUpdateView(UpdateView):
             summary_url = reverse("reservation_summary", args=[reference_number])
             return redirect(summary_url)
 
-            return redirect("index")
         else:
             # Handle the case where there are not enough available rooms
             form.add_error(
@@ -1045,6 +1058,26 @@ def process_payment(request):
 
 
 def room_availability(request):
+    # Get all rooms
+    rooms = Room.objects.all()
+
+    # Get reservations for the current day
+    reservations_today = Reservation.objects.filter(
+        check_in_date__lte=timezone.now().date(),
+        check_out_date__gte=timezone.now().date()
+    )
+
+    # Create a dictionary to store room availability status
+    room_availability_status = {}
+
+    # Populate the dictionary with room availability status
+    for room in rooms:
+        is_available = not reservations_today.filter(room=room).exists()
+        room_availability_status[room] = is_available
+
+    return render(request, 'availability.html', {'room_availability_status': room_availability_status})
+
+def room_availability_weekly(request):
     # Retrieve all rooms
     rooms = Room.objects.all()
 
@@ -1056,34 +1089,41 @@ def room_availability(request):
     # Generate a list of dates for the week
     week_days = [start_date + timedelta(days=i) for i in range(7)]
 
-    # Create a dictionary to store room availability status
-    room_availability_status = {}
+    # Create a list to store room availability status
+    room_availability_status = []
 
-    for room in rooms:
-        availability_list = []
+    for day in week_days:
+        availability_dict = {'day': day, 'availability': {}}
 
-        # Check the availability status for each day in the week
-        for day in week_days:
+        # Check the availability status for each room
+        for room in rooms:
             # Assume availability checking logic here
-            # You need to implement the logic based on your reservation model
             is_available = check_room_availability(room, day)
+            availability_dict['availability'][room] = is_available
 
-            availability_list.append(is_available)
+            # Debug prints
 
-        # Add the room and its availability status to the dictionary
-        room_availability_status[room] = availability_list
+        room_availability_status.append(availability_dict)
 
+    print(f"Room Availability Status: {room_availability_status}")
     context = {
         'room_availability_status': room_availability_status,
+        'rooms': rooms,
         'week_days': week_days,
     }
 
-    return render(request, 'availability.html', context)
+    return render(request, 'room_availability_weekly.html', context)
 
-def check_room_availability(room, day):
-    # Implement your availability checking logic here based on the Reservation model
-    # For demonstration purposes, assume the room is available on even-numbered days
-    return day.day % 2 == 0
+def check_room_availability(room, date):
+    # Get reservations for the specified room on the given date
+    reservations = Reservation.objects.filter(room=room, check_in_date__lte=date, check_out_date__gt=date)
+
+    # Check if any of the reservations have the room associated
+    for reservation in reservations:
+        if room in reservation.room.all():
+            return False  # Room is reserved for this date
+
+    return True  # Room is available for this date
 
 
 def payment_success(request):
@@ -1113,17 +1153,21 @@ def pay_test(request):
     num_guests = reservation.num_guests
     reservation_type = reservation.reservation_type
     reservation_time = reservation.reservation_time
+    withRoom = reservation.withRoom
     total=0
     price=0
     if reservation_type == "private":
-        price = Facility.objects.get(
-            facilityName=reservation_type + " " + reservation_time,
-            facilitymax=num_guests,
-        )
+            reservation_type1 ="Private"
+            price = Prices.objects.get(
+                type=reservation_type1,
+                time = reservation_time,
+                maxPax=num_guests,
+                withRoom = withRoom
+            )
     elif reservation_type == "public":
-        price = Facility.objects.get(
-            facilityName=reservation_type + " " + reservation_time
-        )
+            price = Facility.objects.get(
+                facilityName=reservation_type + " " + reservation_time
+            )
     for room in rooms:
             room_details.append(
                 {
