@@ -234,7 +234,7 @@
           <div id="num_guests_select_div">
             <div class="row">
               <div class="col-25">
-                <label for="{{ form.num_guests_select.id_for_label }}">Number of Guests:</label>
+                {% comment %} <label for="{{ form.num_guests_select.id_for_label }}">Number of Guests:</label> {% endcomment %}
               </div>
               <div class="col-75">
                 {{ form.num_guests_select }}
@@ -244,7 +244,7 @@
           </div>
 
           <div>
-            <div class="row">
+            <div class="row hidden" id="divNumChild" style="display: none;">
               <div class="col-25">
                 <label for="{{ form.num_child.id_for_label }}">Number of Children:</label>
               </div>
@@ -255,9 +255,9 @@
             </div>
           </div>
           
-          <div class="row">
+          <div class="row" id="divWithRoom" style="display: none;">
             <div class="col-25">
-              <label for="{{ form.withRoom.id_for_label }}">Number of Rooms:</label>
+              <label for="{{ form.withRoom.id_for_label }}">With Rooms:</label>
             </div>
             <div class="col-75">
               {{ form.withRoom }}
@@ -339,7 +339,7 @@
             <div class="col-25">
               <label for="{{ form.room.id_for_label }}">Facilities and Rooms:</label>
             </div>
-            <div class="col-75">
+            <div class="col-75">  
               {{ form.room }}
             </div>
           </div>
@@ -354,6 +354,16 @@
               <div id="discount-code-validation-message"></div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-25">
+              <label for="{{ form.payments.id_for_label}}"> Payments:</label>
+            </div>
+            <div class="col-75">
+              {{ form.payments }}
+              {{ form.payments.errors }}
+            </div>
+          </div>
+
           <div class="row">
             <div class="col-25">
               <label for="{{ form.status.id_for_label}}"> Status:</label>
@@ -382,29 +392,71 @@
       document.addEventListener('DOMContentLoaded', function () {
         // Initial visibility based on the selected option
         toggleFields();
-
+    
         // Show or hide fields based on the selected option
         document.getElementById("id_reservation_type").addEventListener("change", function () {
             toggleFields();
         });
-
+    
         function toggleFields() {
-            var selectedOption = document.getElementById("id_reservation_type").value;
-
-            // Hide all conditional fields
-            var conditionalFields = document.getElementsByClassName("conditional-field");
-            for (var i = 0; i < conditionalFields.length; i++) {
-                conditionalFields[i].style.display = 'none';
-            }
-
-            // Show the appropriate conditional field based on the selected option
-            if (selectedOption === "public") {
-                document.getElementById("id_num_guests").style.display = '';
-            } else if (selectedOption === "private") {
-                document.getElementById("id_num_guests_select").style.display = '';
-            }
-        }
+          var selectedOption = document.getElementById("id_reservation_type").value;
+      
+          // Hide all conditional fields
+          var conditionalFields = document.getElementsByClassName("conditional-field");
+          for (var i = 0; i < conditionalFields.length; i++) {
+              conditionalFields[i].style.display = 'none';
+          }
+      
+          // Show the appropriate conditional field based on the selected option
+          if (selectedOption === "public") {
+              console.log("Public option selected");
+              document.getElementById("id_num_guests").style.display = '';
+              var divNumChild = document.getElementById("divNumChild");
+              if (divNumChild) {
+                  console.log("divNumChild found");
+                  divNumChild.style.display = '';
+                  console.log("divNumChild display:", divNumChild.style.display);
+              } else {
+                  console.log("divNumChild not found");
+              }
+      
+              var divWithRoom = document.getElementById("divWithRoom");
+              if (divWithRoom) {
+                  console.log("divWithRoom found");
+                  divWithRoom.style.display = 'none';  // Correct way to show the element
+                  console.log("divWithRoom display:", divWithRoom.style.display);
+              } else {
+                  console.log("divWithRoom not found");
+              }
+          } else if (selectedOption === "private") {
+              console.log("Private option selected");
+              document.getElementById("id_num_guests_select").style.display = '';
+              var divNumChild = document.getElementById("divNumChild");
+              if (divNumChild) {
+                  console.log("divNumChild found");
+                  divNumChild.style.display = 'none';  // Correct way to hide the element
+                  console.log("divNumChild display:", divNumChild.style.display);
+              } else {
+                  console.log("divNumChild not found");
+              }
+      
+              var divWithRoom = document.getElementById("divWithRoom");
+              if (divWithRoom) {
+                  console.log("divWithRoom found");
+                  divWithRoom.style.display = '';  // Correct way to hide the element
+                  console.log("divWithRoom display:", divWithRoom.style.display);
+              } else {
+                  console.log("divWithRoom not found");
+              }
+          }
+      }
+      
+      
     });
+    
+    
+    
+    
 
 
 
@@ -419,7 +471,7 @@
   {% endfor %}];
   console.log(unavailableDates);
 
-      document.getElementById('id_room_type').addEventListener('change', function() {
+      {% comment %} document.getElementById('id_room_type').addEventListener('change', function() {
         var selectedFacilityId = this.value+2;
         var carouselItems = document.querySelectorAll('.carousel-item');
         
@@ -434,7 +486,7 @@
         // Manually trigger the carousel slide to update the display
         //var facilityCarousel = new bootstrap.Carousel(document.getElementById('facilityCarousel'));
         //facilityCarousel.to(0); // Go to the first slide
-      });
+      }); {% endcomment %}
 
         // Add an event listener to the form
       document.getElementById('multi-step-form').addEventListener('submit', function (event) {

@@ -61,6 +61,14 @@ class facilitiesView(ListView):
   template_name = 'facilities.php'
   context_object_name = 'facility'
 
+def facility_detail(request, facility_id):
+    facility = Facility.objects.get(pk=facility_id)
+    return render(request, 'facility_detail.html', {'facility': facility})
+
+
+
+
+
 
 def reservations(request):
   reserve = Reservations.objects.all().order_by('reservationID')

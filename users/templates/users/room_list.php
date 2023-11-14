@@ -28,7 +28,7 @@
                             <td>{{rooms.room_number}}</td>
                             <td>{{rooms.room_type.facilityName}}</td>
                             <td>{{rooms.price_per_night}}</td>
-                            <td><a class="btn btn-sm btn-primary" href="{% url 'user.edit' pk=user.id %}">Edit</a></td>
+                            {% comment %} <td><a class="btn btn-sm btn-primary" href="{% url 'room.edit' pk=user.id %}">Edit</a></td> {% endcomment %}
                         </tr>
                         {%endfor%}
                     </tbody>

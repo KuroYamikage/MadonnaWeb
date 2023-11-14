@@ -23,6 +23,7 @@ from django.contrib.auth.models import Group
 from django.utils.decorators import method_decorator
 from .decorators import groups_required
 from test.models import Reservation, Room
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 
@@ -55,6 +56,11 @@ class RoomsList(LoginRequiredMixin, ListView):
   model= Room
   context_object_name = 'room'
   template_name = 'users/room_list.php'
+  paginate_by = 10
+  def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['additional_data'] = AdditionalModel.objects.all()
+        return context
 
 
 @method_decorator(groups_required(['Admin']), name='dispatch')

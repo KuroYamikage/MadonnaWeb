@@ -14,7 +14,7 @@
             overflow: hidden;
             transition: box-shadow 0.3s ease;
         }
-        
+
         .facility-card:hover {
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
@@ -98,7 +98,7 @@
                   </h3>
                   <div class="facility-price">₱ {{x.facilityPrice|intcomma}}</div>
                   <p class="card-text">{{x.facilityDescription}}</p>
-                  <a href="#" class="btn btn-primary mt-auto">More Info</a>
+                  <a href="{% url 'facility_detail' facility_id=x.id %}" class="btn btn-primary mt-auto">More Info</a>
               </div>
           </div>
       </article>

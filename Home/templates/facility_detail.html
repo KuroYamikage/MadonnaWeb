@@ -1,0 +1,27 @@
+<!-- facility_detail.html -->
+{% extends "master.php" %}
+{% load humanize %}
+
+{% block title %}{{ facility.facilityName }} Details{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="../../{{ facility.facilityPic }}" class="img-fluid rounded" alt="{{ facility.facilityName }}">
+        </div>
+        <div class="col-md-6 d-flex flex-column">
+            <h1 class="display-4">{{ facility.facilityName }}</h1>
+            <div class="facility-price lead">₱ {{ facility.facilityPrice|intcomma }}</div>
+            <p class="lead">{{ facility.facilityDescription }}</p>
+            <div class="d-flex mt-auto">
+                <a href="{% url "reserve" %}"><button class="btn btn-primary mr-2">Book Now</button></a>
+                <a href="{% url "facility.view" %}"><button class="btn btn-secondary">Return</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

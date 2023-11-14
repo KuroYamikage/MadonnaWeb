@@ -17,6 +17,7 @@ body {
     font-size: 19px;
     line-height: 2em;
     overflow-x: hidden;
+    margin-bottom: 100px
 }
 
 p,
@@ -848,7 +849,7 @@ a:hover figcaption {
 
 .tm-post-content {
     font-size: 16px;
-    line-height: 1.8;
+    line-height: 1.8;   
     color: #444;
     text-align: justify;
     margin: 0 auto;
@@ -864,4 +865,8 @@ a:hover figcaption {
 .back-button {
     text-align: center; /* Center the button */
     margin-top: 20px; /* Add margin to separate from content */
+}
+
+.container-fluid {
+    margin-bottom: 50px; /* Adjust the value based on your footer's height */
 }

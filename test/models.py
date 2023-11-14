@@ -15,7 +15,20 @@ class Room(models.Model):
     def __str__(self):
         return self.room_number  # You can change this to display room type and number
 
+class AdditionalItem(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __str__(self):
+        return self.name
+
+class RoomAdditionalItem(models.Model):
+    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    additional_item = models.ForeignKey(AdditionalItem, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def total_price(self):
+        return self.additional_item.price * self.quantity
     
 class Reservation(models.Model):
     room = models.ManyToManyField(Room,  default=1, blank=True, null=True)

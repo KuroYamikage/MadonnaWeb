@@ -61,6 +61,9 @@ class ReservationForm(forms.ModelForm):
         required=False,
         label= "Pool"
     )
+    event_hall = forms.ChoiceField(
+        choices=[(False, 'No'),(True, 'Yes')]
+    )
 
     # active_facilities = Facility.objects.filter(facilityActive=True, facilityCategory ='cottages')
     # # Create the choice tuple from the active facilities
@@ -85,7 +88,8 @@ class ReservationForm(forms.ModelForm):
         widgets = {
             "check_in_date": forms.TextInput(attrs={"readonly": "True"}),
             "check_out_date": forms.TextInput(attrs={"readonly": "True"}),
-            "room_type": forms.Select(attrs={"id":"facilitySelector"})
+            "room_type": forms.Select(attrs={"id":"facilitySelector"}),
+            'event_hall':forms.Select(attrs={"id":"facilitySelector"}),
         }
 
         input_formats = {
@@ -300,7 +304,7 @@ class ReservationEditForm(forms.ModelForm):
     num_guests_select = forms.ChoiceField(
         label='Number of Guests (Dropdown)',
         required=False,  # Make it optional since you have a text field
-        choices=[(25,"30"),(25,"50")],  # You can adjust the range as needed
+        choices=[(25,"25"),(50,"50")],  # You can adjust the range as needed
         widget=forms.Select(),
     )
 
@@ -323,13 +327,18 @@ class ReservationEditForm(forms.ModelForm):
             "check_in_time",
             "check_out_time",
             "status",
-            'reservation_type'
+            'reservation_type',
+            'payments',
+            'num_child',
+            'discount_code'
+
         ]
 
         widgets = {
             "check_in_date": forms.TextInput(attrs={"readonly": "True"}),
             "check_out_date": forms.TextInput(attrs={"readonly": "True"}),
-            "room":CustomCheckboxSelectMultiple()
+            "room":CustomCheckboxSelectMultiple(),
+            "payments":forms.NumberInput()
         }
 
         input_formats = {
