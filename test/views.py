@@ -17,9 +17,11 @@ from .forms import (
     PublicExtendedForm,
 )
 import random
+import json
+
 from datetime import date, timedelta
 import requests
-from django.http import JsonResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect, HttpResponse
 from Reservation.models import Discount, Facility
 from datetime import datetime, timedelta
 from decimal import Decimal
@@ -363,7 +365,8 @@ class ReservationCreateViewPrivate(FormView):
                 return None
         else:
             discount = None  # No discount code provided, set discount to None
-
+        selected_rooms=[]
+        print(event_hall)
         if event_hall == 'True':
             print('here')
             available_cottage = Room.objects.filter(id=0)
@@ -392,7 +395,7 @@ class ReservationCreateViewPrivate(FormView):
                 print(selected_rooms)
             else:
                 # Handle the case where there are not enough available rooms
-                if event_hall == True:
+                if event_hall == 'True':
                     form.add_error(
                         None,
                         f"Event Hall not Available for the selected dates.",
@@ -479,14 +482,14 @@ class ReservationCreateViewPrivate(FormView):
             reservation_type=reservation_type,
             withRoom = withRoom,
         )
-        # if room_type != None or cottage_type != None:
-        #     # Set the selected rooms for the reservation
-        #     reservation.room.set(selected_rooms)
-        #     for room in selected_rooms:
-        #         total = Decimal(total) + room.price_per_night
-        #         decTotal = total
-        #         print("Total: ", decTotal)
-        #         reservation.total = decTotal
+        if event_hall == 'True':
+            # Set the selected rooms for the reservation
+            reservation.room.set(selected_rooms)
+            for room in selected_rooms:
+                total = Decimal(total) + room.price_per_night
+                decTotal = total
+                print("Total: ", decTotal)
+                reservation.total = decTotal
         # You can add more calculations here based on your business logic
 
         # Associate the discount code with the reservation
@@ -522,16 +525,16 @@ class ReservationCreateViewPrivate(FormView):
                         pool2 = True,
                     )
                     
-        # if room_type != None or cottage_type != None:
-        #     room_details = []
-        #     for room in selected_rooms:
-        #         room_details.append(
-        #             {
-        #                 "room_number": room.room_number,
-        #                 "room_type": room.room_type.facilityName,
-        #                 "price": room.price_per_night,
-        #             }
-        #         )
+        if event_hall == 'True':
+            room_details = []
+            for room in selected_rooms:
+                room_details.append(
+                    {
+                        "room_number": room.room_number,
+                        "room_type": room.room_type.facilityName,
+                        "price": room.price_per_night,
+                    }
+                )
 
         reference_number = reservation.reference_number
         #   # Send an email notification
@@ -1212,7 +1215,15 @@ def payment_success(request):
     print(reference)
     return render(request, 'payments/payment_success.html', {'refNum': reference})
 
-import json
+def payment_failure(request):
+    reference_number = request.GET.get('reference')
+    if reference_number:
+        # Redirect to reservation_summary view with the reference number
+        return redirect(reverse('reservation_summary', args=[reference_number]))
+    else:
+        # Handle the case where there's no reference number in the query string
+        return HttpResponse("Payment failed without a reference number.")
+
 
 def pay_test(request):
     url = "https://api.paymongo.com/v1/checkout_sessions"
@@ -1220,6 +1231,7 @@ def pay_test(request):
     print("Raw param1_value:", param1_value)
     param2_value = request.GET.get('param2', 'default_value2')
     rooms=[]
+    failure_url = request.build_absolute_uri(reverse('payment_failure')) + f'?reference={param1_value}'
     reservation = get_object_or_404(Reservation, reference_number=param1_value)
     rooms = reservation.room.all()
     room_details = []
@@ -1288,7 +1300,8 @@ def pay_test(request):
                 "line_items": line_items,
                 "description": "Reservation",
                 "payment_method_types": ["gcash"],
-                "success_url": request.build_absolute_uri(reverse('payment_success')) + f'?reference={param1_value}&downpayment={total}', 
+                "success_url": request.build_absolute_uri(reverse('payment_success')) + f'?reference={param1_value}&downpayment={total}',
+                "failure_url": failure_url,
             }
         }
     }
