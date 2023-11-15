@@ -1,11 +1,40 @@
 {% extends "master.php" %}
 {% load static %}
-      {% block title %}Welcome to Madonna's {% endblock %}
 
-      {% block content %}
-      <iframe frameborder="0" src="https://itch.io/embed-upload/9100753?color=333333" allowfullscreen="" width="1280" height="788"><a href="https://xuryukens.itch.io/madonnamodule-resorteventarrangement">Play MadonnaModule_ResortEventArrangement on itch.io</a></iframe>
-      
-      <br>
+{% block title %}Welcome to Madonna's {% endblock %}
 
-      <iframe frameborder="0" src="https://itch.io/embed/2299964?bg_color=434547&amp;fg_color=ffffff&amp;link_color=63c64d&amp;border_color=3f2832" width="552" height="167"><a href="https://xuryukens.itch.io/madonnamodule-resorteventarrangement">MadonnaModule_ResortEventArrangement by Xuryukens</a></iframe>
-      {% endblock %}
+{% block content %}
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .content-container {
+        text-align: center;
+    }
+
+    .dynamic-iframe {
+        width: 50vw;
+        height: 50vh;
+    }
+</style>
+
+<div class="content-container">
+      <div>
+            <br>
+      </div>
+    <div>
+        <iframe class="dynamic-iframe" frameborder="0" src="https://itch.io/embed-upload/9100753?color=333333" allowfullscreen=""></iframe>
+    </div>
+
+    <br>
+
+    <div>
+        <iframe frameborder="0" src="https://itch.io/embed/2299964?bg_color=434547&amp;fg_color=ffffff&amp;link_color=63c64d&amp;border_color=3f2832" width="552" height="167"><a href="https://xuryukens.itch.io/madonnamodule-resorteventarrangement">MadonnaModule_ResortEventArrangement by Xuryukens</a></iframe>
+    </div>
+</div>
+{% endblock %}
