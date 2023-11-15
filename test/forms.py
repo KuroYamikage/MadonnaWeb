@@ -268,14 +268,12 @@ class ReservationEditForm(forms.ModelForm):
         required=True,
         widget=forms.TimeInput(
             attrs={"placeholder": "HH:MM AM/PM", "readonly": "True"},
-            format='%I:%M %p'
         ),
     )
     check_out_time = CustomTimeField(
         required=True,
         widget=forms.TimeInput(
             attrs={"placeholder": "HH:MM AM/PM", "readonly": "True"},
-            format='%I:%M %p'
         ),
     )
     withRoom = forms.ChoiceField(
@@ -330,7 +328,8 @@ class ReservationEditForm(forms.ModelForm):
             'reservation_type',
             'payments',
             'num_child',
-            'discount_code'
+            'discount_code',
+            'total',
 
         ]
 
@@ -338,7 +337,8 @@ class ReservationEditForm(forms.ModelForm):
             "check_in_date": forms.TextInput(attrs={"readonly": "True"}),
             "check_out_date": forms.TextInput(attrs={"readonly": "True"}),
             "room":CustomCheckboxSelectMultiple(),
-            "payments":forms.NumberInput()
+            "payments":forms.NumberInput(),
+            "total":forms.NumberInput(),
         }
 
         input_formats = {
@@ -390,18 +390,21 @@ class ReservationEditForm(forms.ModelForm):
     #             raise forms.ValidationError("Invalid discount code")
     #     return discount_code
 
+    # Inside your ReservationEditForm class
     def clean_discount_code(self):
         discount_code = self.cleaned_data.get("discount_code")
         if discount_code:
             try:
                 # Attempt to retrieve the discount object based on the code
-                discount = Discount.objects.get(
-                    discountCode=discount_code, discountActive=True
-                )
+                discount = Discount.objects.get(discountCode=discount_code, discountActive=True)
             except Discount.DoesNotExist:
                 # If the discount doesn't exist or is not active, raise a ValidationError
                 raise forms.ValidationError("Invalid or inactive discount code.")
-        return discount_code
+            return discount
+        else:
+            # If discount_code is empty, return None or handle it as needed
+            return None
+
 
     def clean_reservation_time(self):
         reservation_time = self.cleaned_data.get("reservation_time")

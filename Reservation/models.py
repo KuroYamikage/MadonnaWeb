@@ -22,7 +22,7 @@ class Reward(models.Model):
 
 
 class Discount(models.Model):
-    discountCode = models.CharField(max_length=15, unique=True)
+    discountCode = models.CharField(max_length=15, unique=True, blank=True, null=True)
     discountPrice = models.DecimalField(decimal_places=2, max_digits=10)
     discountActive = models.BooleanField(default=False)
 

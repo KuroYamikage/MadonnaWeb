@@ -356,6 +356,15 @@
           </div>
           <div class="row">
             <div class="col-25">
+              <label for="{{ form.total.id_for_label}}"> Total:</label>
+            </div>
+            <div class="col-75">
+              {{ form.total }}
+              {{ form.total.errors }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-25">
               <label for="{{ form.payments.id_for_label}}"> Payments:</label>
             </div>
             <div class="col-75">
@@ -510,10 +519,19 @@
         // Return the message to be displayed in the confirmation dialog
         return 'Are you sure you want to leave? Your changes may not be saved.';
       });
-  
+
+
+        // Your JavaScript code to fill the input field after form submission
+        // This example uses jQuery for simplicity
+        $(document).ready(function() {
+            $('form').submit(function() {
+                $('#id_discount_code').val('NoDiscount');  // Set the value as needed
+            });
+        });
 
     </script>
 
     <script src="{% static 'js/reserve.js' %}" /></script>
   </body>
 </html>
+  
