@@ -6,3 +6,5 @@ class MonthReport(models.Model):
     total_reservations = models.IntegerField()
     total_customers = models.IntegerField()
     total_earnings = models.IntegerField()
+    month_over_month = models.IntegerField()
+    month_over_month_percentage = models.DecimalField(max_digits=3, decimal_places=2)
