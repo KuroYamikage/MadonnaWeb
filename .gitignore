@@ -62,3 +62,5 @@ __pycache__/
 /bin/
 /lib/
 nohup.out
+
+.envrc
