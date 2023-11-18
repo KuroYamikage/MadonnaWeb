@@ -1,28 +1,27 @@
 #!/usr/bin/env python3
 import base64
+from datetime import datetime
 from io import BytesIO
+from test.models import Reservation
+
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 import pandas as pd
-from django.db import connection
+from django.utils import timezone
+from Reports.models import MonthReport
+from django.db.models import Sum
 
 
-def month():
-    query = "SELECT check_in_date, payments FROM test_reservation WHERE DATE(check_in_date) BETWEEN DATE('now', 'start of month') AND DATE('now')"
-    with connection.cursor() as cursor:
-        cursor.execute(query)
-        results = cursor.fetchall()
-
-    # df = pd.read_sql_query(query, db, parse_dates=["checkIn"])
-    df = pd.DataFrame(results, columns=["check_in_date", "payments"])
-    df.sort_values(by="check_in_date", inplace=True)
-
-    df_grouped = df.groupby("check_in_date")["payments"].sum().reset_index()
+def generate_plot(
+    queryset, x_field, y_field, date_format, date_locator, date_formatter
+):
+    df = pd.DataFrame(queryset.values(x_field, y_field))
+    df.sort_values(by=x_field, inplace=True)
 
     fig, ax = plt.subplots()
-    ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d/%Y"))
-    ax.xaxis.set_major_locator(mdates.DayLocator())
-    ax.plot(df_grouped["check_in_date"], df_grouped["payments"])
+    ax.xaxis.set_major_formatter(mdates.DateFormatter(date_formatter))
+    ax.xaxis.set_major_locator(date_locator)
+    ax.plot(df[x_field], df[y_field])
     fig.autofmt_xdate()
 
     buffer = BytesIO()
@@ -30,34 +29,44 @@ def month():
     buffer.seek(0)
 
     graphic = base64.b64encode(buffer.read()).decode()
-    total_earnings = df["payments"].sum()
-    total_reservations = len(df)
+
+    return graphic
+
+
+def month():
+    now = datetime.now()
+    start_of_month = now.replace(day=1, hour=0, minute=0, second=0)
+
+    queryset = Reservation.objects.filter(check_in_date__range=[start_of_month, now])
+
+    graphic = generate_plot(
+        queryset,
+        x_field="check_in_date",
+        y_field="payments",
+        date_format="%m/%d/%Y",
+        date_locator=mdates.DayLocator(),
+        date_formatter="%m/%d/%Y",
+    )
+
+    total_earnings = queryset.values("payments").aggregate(
+        total_earnings=Sum("payments")
+    )["total_earnings"]
+    total_reservations = queryset.count()
 
     return graphic, total_earnings, total_reservations
 
 
-"""
-def week():
-    db = sqlite3.connect("../../db.sqlite3")
-    query = "SELECT checkIn, totalPayment FROM Reservation_reservations WHERE strftime('%W', checkIn) = strftime('%W', 'now')"
+def year():
+    current_year = timezone.now().year
+    queryset = MonthReport.objects.filter(report_date__year=current_year)
 
-    df = pd.read_sql_query(query, db, parse_dates=["checkIn"])
-    df.sort_values(by="checkIn", inplace=True)
-    print(df.head())
+    graphic = generate_plot(
+        queryset,
+        x_field="report_date",
+        y_field="total_earnings",
+        date_format="%m",
+        date_locator=mdates.MonthLocator(),
+        date_formatter="%m",
+    )
 
-    plt.gca().xaxis.set_major_formatter(mdates.DateFormatter("%m/%d/%Y"))
-    plt.gca().xaxis.set_major_locator(mdates.DayLocator())
-    plt.plot(df["checkIn"], df["totalPayment"])
-    plt.gcf().autofmt_xdate()
-    plt.show()
-
-    buffer = BytesIO()
-    plt.savefig(buffer, format="png")
-    buffer.seek(0)
-
-    graphic = base64.b64encode(buffer.read()).decode()
-
-    context["graphic"] = graphic
-
-    return context
-"""
+    return graphic

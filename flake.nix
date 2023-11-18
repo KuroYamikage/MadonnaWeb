@@ -48,7 +48,12 @@
         defaultPackage = self.packages.${system}.myapp;
 
         devShells.default = pkgs.mkShell {
-          buildInputs = [ pkgs.poetry self.packages.${system}.myapp ];
+          buildInputs = [
+            pkgs.poetry
+            self.packages.${system}.myapp
+            pkgs.redis
+            pkgs.sqlite
+          ];
         };
       });
 }
