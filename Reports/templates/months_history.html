@@ -2,12 +2,14 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Month History</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Month History</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
-    <h2>Month History</h2>
+    <h2>Month-over-Month History</h2>
 
     {% if months_history %}
         <p>Total Records: {{ months_history|length }}</p>
@@ -39,5 +41,9 @@
     {% else %}
         <p>No data available</p>
     {% endif %}
+
+    <div id="graph">
+        {{graph_year|safe}}
+    </div>
 </body>
 </html>

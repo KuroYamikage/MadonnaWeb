@@ -11,10 +11,11 @@
 
     <div class="container" id="receipt">
     <h1>Sales Report</h1>
-    <img src="data:image/png;base64,{{ graph_month }}" alt="Sales Report">
+    <div id ="graph">
+      {{ graph_month|safe }}
+    </div>
     <p>Total Earnings: {{ total_earnings }}</p>
     <p>Total Reservations: {{ total_reservations }}</p>
-    <img src="data:image/png;base64, {{graph_year}}"" alt="Year Report">
     </div>
 
     <script>
