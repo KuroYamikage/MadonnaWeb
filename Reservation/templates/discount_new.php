@@ -3,6 +3,15 @@
 {% block title %}New Discount Code{% endblock title %}
 
 {% block content%}
+<h2 class="mb-4 pb-2 pb-md-0 mb-md-5" style="text-align: center" >
+
+{% if discount_name%}
+   Edit {{discount_name}}
+   {% {% else %} %}
+   New Discount
+{% endif %}
+    
+</h2>
 
 <form method="POST">
 

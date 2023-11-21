@@ -32,8 +32,14 @@
       <link rel="stylesheet" href="{% static 'css/nice-select.css'%}">
       <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+
+      <style>
+         
+      </style>
+
+      
    </head>
-   <body style="background-color: black;">
+   <body style="background-image: url({%static 'images/master2-bg.jpg'%});">
       <!-- Javascript files-->
       <script src="{%static 'js/jquery.min.js'%}"></script>
       <script src="{%static 'js/popper.min.js'%}"></script> 

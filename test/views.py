@@ -660,6 +660,8 @@ class ReservationSummaryView(View):
         price = 0
         if reservation_type == "private":
             reservation_type1 ="Private"
+            if reservation_time == "Morning":
+                reservation_time = "Day"
             price = Prices.objects.get(
                 type=reservation_type1,
                 time = reservation_time,
@@ -1263,6 +1265,8 @@ def pay_test(request):
     price=0
     if reservation_type == "private":
             reservation_type1 ="Private"
+            if reservation_time == "Morning":
+                reservation_time = "Day"
             price = Prices.objects.get(
                 type=reservation_type1,
                 time = reservation_time,

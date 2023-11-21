@@ -8,7 +8,7 @@ class BlogForms(forms.ModelForm):
         fields = ('blog_title', 'blog_content','blog_pic', 'blog_status')
         widgets = {
             'blog_title': forms.TextInput(attrs={'class' : 'form-control'}),
-            'blog_content':forms.Textarea(attrs={'class' : 'form-control'}),
+            'blog_content':forms.Textarea(),
             'blog_status':forms.CheckboxInput(attrs={'class' : 'form-control'}),
         }
         labels = {

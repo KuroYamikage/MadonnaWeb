@@ -298,6 +298,15 @@ class editDiscount(LoginRequiredMixin, UpdateView):
     template_name = "discount_new.php"
     success_url = "/discount"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Add additional context data here
+        context['discount_name'] = self.object.discountCode # type: ignore
+
+        return context 
+
+
 
 class deleteReservation(LoginRequiredMixin, DeleteView):
     model = Reservations

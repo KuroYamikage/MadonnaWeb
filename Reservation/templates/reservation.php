@@ -15,7 +15,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
 	<style>
+		.legend {
+			display: flex;
+			align-items: center;
+			margin-left: 5px;
+			margin-right: 5px;
+		}
+  
+		.legend span {
+			margin-left: 5px;
+		}
 		
+  
 	</style>
 {%endblock%}
  {% block content %}
@@ -84,8 +95,22 @@
 						<div class="row no-margin row-calendar">
 							<div class="col">
 								<div class="calendar" id="calendar"></div>
+								
 							</div>	
-									
+							<div class="container d-flex justify-content-center con-leg">
+								<p><h3>Legends:</h3></p>
+								<div class="legend no"> 
+								  <div class="circle" style="background-color: red; width: 20px; height: 20px; border-radius: 50%;"></div>
+								  <span>Pool 1 Unavailable</sp'an>
+							  </div>
+					
+								<div class="legend yes">
+								  <div class="circle" style="background-color: yellow; width: 20px; height: 20px; border-radius: 50%;"></div>
+								  <span>Pool 2 Unavailable</span>
+							  </div>
+						  
+							  
+							  </div>	
 								
 						</div>
 						<div class="row no-margin">

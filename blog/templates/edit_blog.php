@@ -1,15 +1,25 @@
 {%extends "master2.php"%}
-{%load static}
+{%load static%}
 
-{%block title%} edit blog: {{Blog.blog_title}}{%endblock%}
+{%block title%} Edit blog: {{Blog.blog_title}}{%endblock%}
 
 {%block content%}
 <style>
     ul.errorlist {display:none}
+    textarea {
+        width: 100%;
+        height: 150px;
+        padding: 12px 20px;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        border-radius: 4px;
+        background-color: #f8f8f8;
+        font-size: 16px;
+        resize: none;
+      }
     
 </style>
 
-<div class="m-auto container border border-dark rounded reserve-form reserve_section " style="background-color:  #ffb607">
 <h1 class=" layout-padding" style="text-align: center" >Blog Edit Form</h3>
 <form  method = "POST" enctype="multipart/form-data">
 {%csrf_token%} 

@@ -457,7 +457,9 @@ button {
   width: 100%;
   float: left;
   padding-bottom: 90px;
+  /* background-image: url(../images/bg1.jpg); */
 }
+
 
 .services_taital {
   width: 100%;
@@ -852,7 +854,7 @@ a:hover {
 .container_main1:hover .middle {
   opacity: 1;
 }
-
+/*   */
 .text {
   color: #fff;
   font-size: 16px;

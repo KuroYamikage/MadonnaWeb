@@ -57,10 +57,10 @@ class RoomsList(LoginRequiredMixin, ListView):
   context_object_name = 'room'
   template_name = 'users/room_list.php'
   paginate_by = 10
-  def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['additional_data'] = AdditionalModel.objects.all()
-        return context
+  # def get_context_data(self, **kwargs):
+  #       context = super().get_context_data(**kwargs)
+  #       context['additional_data'] = AdditionalModel.objects.all()
+  #       return context
 
 
 @method_decorator(groups_required(['Admin']), name='dispatch')
@@ -90,10 +90,19 @@ class editUser(LoginRequiredMixin,UpdateView):
   template_name='users/edit_user.php'
   success_url = '/accounts/'
 
+  def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Add additional context data here
+        context['user_name'] = self.request.user.get_full_name()
+
+        return context
+
+  
+
 def is_admin(user):
     return user.groups.filter(name='Admin').exists()
 @method_decorator(groups_required(['Admin']), name='dispatch')
-
 class resetPasswordView(UserPassesTestMixin, FormView):
    template_name = 'users/reset_password.php'
    form_class = ResetPasswordForm

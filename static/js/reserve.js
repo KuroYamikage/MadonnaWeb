@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (isoDate) {
                 if (dateInfo.pool1) {
                     unavailableEvents.push({
-                        title: 'Pool 1 Unavailable',
+                        title: '',
                         start: isoDate,
                         rendering: 'background',
                         color: 'red'
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 if (dateInfo.pool2) {
                     unavailableEvents.push({
-                        title: 'Pool 2 Unavailable',
+                        title: '',
                         start: isoDate,
                         rendering: 'background',
                         color: 'yellow'
