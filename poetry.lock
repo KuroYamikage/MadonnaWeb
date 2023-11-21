@@ -408,6 +408,16 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-admin-datta"
+version = "1.0.10"
+description = "Modern template for Django admin interface"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-admin-datta-1.0.10.tar.gz", hash = "sha256:555ee66f7e74d5a655b9752acd5a90614b6dbe461ae290040985a7ec792c3a62"},
+]
+
+[[package]]
 name = "django-debug-toolbar"
 version = "4.2.0"
 description = "A configurable set of panels that display various debug information about the current request/response."
@@ -1194,4 +1204,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10, <3.13"
-content-hash = "1c03fee325cd1bb83feedb9ee0496efb6abc7ed6a7b2cb2cefb5e910ed2b73f6"
+content-hash = "7ac516f5fc6f4e09a2b5e0273f592367a75aec436cf68cb4acdec3c9a46106cf"

@@ -30,5 +30,6 @@ urlpatterns = [
     path("", include("users.urls")),
     path("blog/", include("blog.urls")),
     path("", include("Reports.urls")),
-    path("",include("test.urls"))
+    path("", include("test.urls")),
+    path("whatttt", include("admin_datta.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

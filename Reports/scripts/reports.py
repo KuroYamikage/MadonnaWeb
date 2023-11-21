@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-import base64
 from datetime import datetime
-from io import BytesIO
 from test.models import Reservation
 
 import pandas as pd
@@ -42,13 +40,21 @@ def year():
     queryset = MonthReport.objects.filter(report_date__year=current_year)
     df = pd.DataFrame(
         queryset.values(
-            "report_date", "month_over_month", "month_over_month_percentage"
+            "report_date",
+            "total_earnings",
+            "month_over_month",
+            "month_over_month_percentage",
         )
     )
 
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(
-        go.Bar(x=df["report_date"], y=df["month_over_month"], cliponaxis=False),
+        go.Bar(
+            x=df["report_date"],
+            y=df["total_earnings"],
+            cliponaxis=False,
+            name="Total Earnings per Month",
+        ),
         secondary_y=False,
     )
     fig.add_trace(
@@ -56,6 +62,7 @@ def year():
             x=df["report_date"],
             y=df["month_over_month_percentage"],
             mode="lines",
+            name="MoM (%)",
             cliponaxis=False,
         ),
         secondary_y=True,
@@ -63,12 +70,12 @@ def year():
     tickvals = df["report_date"].tolist()
     fig.update_layout(
         xaxis=dict(tickvals=tickvals, type="date"),
-        yaxis=dict(title="Month over Month", titlefont=dict(color="blue")),
+        yaxis=dict(title="Total Earnings", titlefont=dict(color="blue")),
         yaxis2=dict(
             title="(%)", titlefont=dict(color="red"), overlaying="y", side="right"
         ),
     )
 
-    graphic = pyo.plot(fig, output_type="div", include_plotlyjs=False)
+    graphic = pyo.plot(fig, output_type="div", include_plotlyjs=True)
 
     return graphic

@@ -17,6 +17,7 @@ requests = "^2.31.0"
 celery = {extras = ["redis"], version = "^5.3.4"}
 workalendar = "^17.0.0"
 plotly = "^5.18.0"
+django-admin-datta = "^1.0.10"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.9.1"

@@ -27,6 +27,7 @@
           pyluach = [ "flit" ];
           sqlite3-0611 = [ "setuptools" ];
           workalendar = [ "setuptools" ];
+          django-admin-datta = [ "setuptools" ];
         };
         p2n-overrides = defaultPoetryOverrides.extend (self: super:
           builtins.mapAttrs (package: build-requirements:
