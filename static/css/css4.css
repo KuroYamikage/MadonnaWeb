@@ -471,7 +471,7 @@ button {
   width: 100%;
   float: left;
   font-size: 36px;
-  color: #feff31;
+  color: #ffffff;
   font-weight: 500;
   text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-align: center;
@@ -497,7 +497,7 @@ button {
   width: 100%;
   float: left;
   font-size: 18px;
-  color: #feff31;
+  color: #ffffff;
   font-weight: 600;
   text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-transform: uppercase;
@@ -509,7 +509,7 @@ button {
   width: 100%;
   float: left;
   font-size: 14px;
-  color: #feff31;
+  color: #ffffff;
   font-weight: 700;
   font-style: oblique;
   text-shadow: 2px 2px 4px rgb(0, 0, 0);
@@ -545,7 +545,7 @@ button {
 }
 
 .read_bt a:hover {
-  color: #feff31;
+  color: #ffffff;
   background-color: #000;
 }
 
@@ -667,7 +667,7 @@ button {
   width: 100%;
   float: left;
   font-size: 36px;
-  color: #feff31;
+  color: #ffffff;
   font-weight: 500;
   text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-transform: uppercase;
@@ -678,7 +678,7 @@ button {
   width: 100%;
   float: left;
   font-size: 16px;
-  color: #feff31;
+  color: #ffffff;
   font-weight: 500;
   text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-align: center;
@@ -747,7 +747,7 @@ a:hover {
   width: 100%;
   float: left;
   font-size: 18px;
-  color: #feff31;
+  color: #ffffff;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-transform: uppercase;
@@ -759,7 +759,7 @@ a:hover {
   width: 100%;
   float: left;
   font-size: 18px;
-  color: #feff31;
+  color: #ffffff;
   font-weight: 500;
   text-shadow: 2px 2px 4px rgb(0, 0, 0);
   margin-top: 10px;
@@ -834,7 +834,7 @@ a:hover {
 }
 
 .get_bt a:hover {
-  color: #feff31;
+  color: #ffffff;
   background-color: #000;
 }
 
@@ -865,7 +865,7 @@ a:hover {
   transition: 0.5s ease;
   backface-visibility: hidden;
   border-style: solid;
-  border-color: #feff31;
+  border-color: #ffffff;
 }
 
 .middle {
@@ -1191,7 +1191,7 @@ textarea#comment::placeholder {
 .content {
   flex: 1;
   background-image: url(../images/A4.png);
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   background-size: 150%;
 }
 
@@ -1271,8 +1271,12 @@ textarea#comment::placeholder {
   color: #55d42a;
 }
 
+.bg-white{
+  background-color: white;
+}
+
 .reserve_section {
-  height: 120vh;
+  /* height: 120vh; */
   padding-bottom: 50px;
   background-size: 100%;
   background-color: antiquewhite;
@@ -1326,7 +1330,7 @@ textarea#comment::placeholder {
 
 .gallery-title {
   font-size: 36px;
-  color: #feff31;
+  color: #ffffff;
   text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-align: center;
   font-weight: 500;
@@ -1355,10 +1359,10 @@ textarea#comment::placeholder {
 
 .filter-button:hover {
   font-size: 18px;
-  border: 2px solid #feff31;
+  border: 2px solid #ffffff;
   border-radius: 5px;
   text-align: center;
-  color: #feff31;
+  color: #ffffff;
   background-color: #000000;
 }
 
