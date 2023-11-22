@@ -31,5 +31,5 @@ urlpatterns = [
     path("blog/", include("blog.urls")),
     path("", include("Reports.urls")),
     path("", include("test.urls")),
-    path("dattaable", include("admin_datta.urls")),
+    # path("dattaable", include("admin_datta.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

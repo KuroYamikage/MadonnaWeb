@@ -40,7 +40,7 @@ from .mixins import GroupRequiredMixin
 # Account Management
 class StaffLoginView(LoginView):
     template_name = "accounts/auth-signin.html"
-    redirect_authenticated_user = False
+    redirect_authenticated_user = True
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -81,13 +81,13 @@ class RoomsList(LoginRequiredMixin, ListView):
 class userList(LoginRequiredMixin, ListView):
     model = User
     context_object_name = "user1"
-    template_name = "users/user_list.php"
+    template_name = "user_list.html"
 
 
 @method_decorator(groups_required(["Admin"]), name="dispatch")
 class registerUser(LoginRequiredMixin, CreateView):
     form_class = UserRegistrationForm
-    template_name = "users/register.php"
+    template_name = "register.html"
     success_url = "/accounts/"
 
 
