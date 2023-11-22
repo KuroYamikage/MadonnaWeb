@@ -60,7 +60,7 @@ class StaffLogoutView(LogoutView):
 class reserveListView(LoginRequiredMixin, ListView):
     model = Reservation
     context_object_name = "reserve"
-    template_name = "users/home.php"
+    template_name = "home.php"
     login_url = "login"
 
 
@@ -101,7 +101,7 @@ class changepassword(PasswordChangeView, LoginRequiredMixin):
 class editUser(LoginRequiredMixin, UpdateView):
     form_class = UserUpdateForm
     model = User
-    template_name = "users/edit_user.php"
+    template_name = "edit_user.html"
     success_url = "/accounts/"
 
 
@@ -177,7 +177,7 @@ class detaliBlog(DetailView):
 class viewFacility(LoginRequiredMixin, ListView):
     model = Facility
     context_object_name = "facility"
-    template_name = "users/facility_staff.php"
+    template_name = "facility_staff.html"
 
 
 class newFacility(LoginRequiredMixin, CreateView):
@@ -193,7 +193,7 @@ class editFacility(LoginRequiredMixin, UpdateView):
     context_object_name = "facility"
     form_class = FacilityForm
     success_url = "/staff/facility"
-    template_name = "users/edit_facility.php"
+    template_name = "edit_facility.html"
 
 
 class addGallery(LoginRequiredMixin, CreateView):

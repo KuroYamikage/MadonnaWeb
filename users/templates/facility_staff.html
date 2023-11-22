@@ -1,0 +1,46 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- [ Main Content ] start -->
+    <div class="row">
+      <!-- [ Hover-table ] start -->
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <h5 class= >Facilities</h5>
+            <div class="table-responsive">
+                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                    <thead>
+                        <tr class="text-light">
+                            <th scope="col">Id</th>
+                            <th scope="col">Facility</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Edit</th>
+                    </thead>
+                    <tbody>
+                        {% for x in facility%}
+                        <tr>
+                            <td>{{x.id}}</td>
+                            <td>{{x.facilityName}}</td>
+                            <td>{{x.facilityDescription}}</td>
+                            <td>{{x.facilityCategory}}</td>
+                            <td>₱{{x.facilityPrice}}</td>
+                            <td><a class="btn btn-sm btn-primary" href="{%url 'facility.edit' pk=x.id%}">Edit</a></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <a href="{%url 'facility.new'%}" class="btn btn-primary my-3">Add new Facility</a>
+          </div>
+        </div>
+      </div>
+      <!-- [ Hover-table ] end -->
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}

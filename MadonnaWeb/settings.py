@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "test",
     "captcha",
     # "admin_datta.apps.AdminDattaConfig",
+    # "customFilters",
 ]
 
 MIDDLEWARE = [
