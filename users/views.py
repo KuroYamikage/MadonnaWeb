@@ -213,7 +213,7 @@ class addGallery(LoginRequiredMixin, CreateView):
 class staffGallery(LoginRequiredMixin, ListView):
     model = Gallery
     context_object_name = "gallery"
-    template_name = "users/gallery_staff.php"
+    template_name = "gallery_staff.php"
     login_url = "login"
 
 
