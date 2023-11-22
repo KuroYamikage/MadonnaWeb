@@ -12,6 +12,11 @@ def generate_monthly_report():
     end_of_month = calendar.monthrange(current_year, current_month)[1]
     today = datetime.now().day
 
+    if current_month == 1:
+        previous_month, previous_year = 12, current_year - 1
+    else:
+        previous_month, previous_year = current_month - 1, current_year
+
     if today == end_of_month:
         _, total_earnings, total_reservations = month()
 

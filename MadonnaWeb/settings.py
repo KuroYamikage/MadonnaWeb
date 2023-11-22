@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-ks^@f@n7+(yn=n-5!k$od+3^1x+fyl41qqudvdq@q4jzjwq_a9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["139.162.7.135", '127.0.0.1']
+ALLOWED_HOSTS = ["139.162.7.135", "127.0.0.1"]
 
 
 # Application definition
@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    #"debug_toolbar",
+    "debug_toolbar",
     "Home",
     "Reservation",
     "users.apps.UsersConfig",
@@ -59,7 +59,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    #"debug_toolbar.middleware.DebugToolbarMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
 INTERNAL_IPS = [
@@ -190,4 +190,4 @@ PAYMONGO_SECRET_KEY = "sk_test_ttWkBkczoDgX6dJ2T5fJndVm"
 CELERY_BROKER_URL = "redis://localhost:6379"
 CELERY_RESULT_BACKEND = "redis://localhost:6379"
 
-TIME_INPUT_FORMATS = ('%I:%M %p',)
+TIME_INPUT_FORMATS = ("%I:%M %p",)

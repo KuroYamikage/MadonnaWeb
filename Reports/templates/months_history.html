@@ -1,0 +1,49 @@
+<!-- months_history.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Month History</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h2>Month-over-Month History</h2>
+
+    {% if months_history %}
+        <p>Total Records: {{ months_history|length }}</p>
+
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Report Date</th>
+                    <th>Total Reservations</th>
+                    <th>Total Customers</th>
+                    <th>Total Earnings</th>
+                    <th>Month Over Month</th>
+                    <th>Month Over Month (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for month in months_history %}
+                    <tr>
+                        <td>{{ month.report_date|date:"Y-m-d" }}</td>
+                        <td>{{ month.total_reservations }}</td>
+                        <td>{{ month.total_customers }}</td>
+                        <td>₱{{ month.total_earnings|floatformat:2 }}</td>
+                        <td>₱{{ month.month_over_month }}</td>
+                        <td>{{ month.month_over_month_percentage }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No data available</p>
+    {% endif %}
+
+    <div id="graph">
+        {{graph_year|safe}}
+    </div>
+</body>
+</html>
