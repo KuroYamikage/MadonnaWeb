@@ -5,11 +5,11 @@
 
 {% block content %}
 <style>
-    body {
+    .dynamic-iframe {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        height: 75vh;
         margin: 0;
     }
 
@@ -17,20 +17,16 @@
         text-align: center;
     }
 
-    .dynamic-iframe {
-        width: 50vw;
-        height: 50vh;
-    }
 </style>
 
-<div class="content-container">
+<div class="content-container m-2">
     <div>
         <iframe class="dynamic-iframe" id="myIframe" frameborder="0" src="https://itch.io/embed-upload/9100753?color=333333" allowfullscreen=""></iframe>
     </div>
 
     <br>
 
-    <button onclick="captureScreenshot()">Capture Screenshot</button>
+    {% comment %} <button onclick="captureScreenshot()">Capture Screenshot</button>
 </div>
 
 <script>
@@ -55,6 +51,6 @@
               link.click();
           };
       }
-  </script>
+  </script> {% endcomment %}
   
 {% endblock %}

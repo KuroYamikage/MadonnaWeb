@@ -1275,8 +1275,17 @@ textarea#comment::placeholder {
   background-color: white;
 }
 
-.reserve_section {
+.reserve_section2 {
   /* height: 120vh; */
+  padding-bottom: 50px;
+  background-size: 100%;
+  background-color: antiquewhite;
+  border-color: burlywood;
+  border-style: solid;
+}
+
+.reserve_section {
+  height: 120vh;
   padding-bottom: 50px;
   background-size: 100%;
   background-color: antiquewhite;

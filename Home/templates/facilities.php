@@ -69,7 +69,7 @@
     </div>
     
 {% comment %} <div class="row mb-2"> {% endcomment %}
-  <div class="row tm-row m-auto container border border-dark rounded reserve-form reserve_section">
+  <div class="row tm-row m-auto container border border-dark rounded reserve-form reserve_section2">
   {%for x in facility%}
       {% if x.facilityPic != NULL %}
         {% comment %} <article class="col-12 col-md-6 tm-post facility-article">
