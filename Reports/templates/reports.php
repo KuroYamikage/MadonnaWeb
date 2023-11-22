@@ -17,7 +17,13 @@
     <p>Total Earnings: {{ total_earnings }}</p>
     <p>Total Reservations: {{ total_reservations }}</p>
     </div>
-
+    <br>
+    <div id = "graph2">
+      {{graph_visitors|safe}}
+    </div>
+    <div>
+    <p>Total Visitors: {{ total_visitors }}</p>
+    </div>
     <script>
         function printDiv(divName) {
           console.log("test");

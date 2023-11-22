@@ -34,9 +34,32 @@ def month():
     return graphic, total_earnings, total_reservations
 
 
+def month_visitors():
+    now = datetime.now()
+    start_of_month = now.replace(day=1, hour=0, minute=0, second=0)
+    queryset = Reservation.objects.filter(check_in_date__range=[start_of_month, now])
+
+    df = pd.DataFrame(queryset.values("check_in_date", "num_guests", "num_child"))
+    df["total_visitors"] = df["num_guests"] + df["num_child"]
+    df_grouped = (
+        df.groupby("check_in_date").agg({"total_visitors": "sum"}).reset_index()
+    )
+
+    fig = make_subplots()
+    fig.add_trace(
+        go.Scatter(
+            x=df_grouped["check_in_date"], y=df_grouped["total_visitors"], mode="lines"
+        )
+    )
+
+    graphic = pyo.plot(fig, output_type="div", include_plotlyjs=True)
+    visitors = df_grouped["total_visitors"].sum()
+
+    return graphic, visitors
+
+
 def year():
     current_year = timezone.now().year
-
     queryset = MonthReport.objects.filter(report_date__year=current_year)
     df = pd.DataFrame(
         queryset.values(
@@ -46,7 +69,7 @@ def year():
             "month_over_month_percentage",
         )
     )
-
+    print(df)
     fig = make_subplots(specs=[[{"secondary_y": True}]])
     fig.add_trace(
         go.Bar(
