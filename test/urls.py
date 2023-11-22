@@ -19,5 +19,8 @@ urlpatterns = [
     path('payment/success/', views.payment_success, name='payment_success'),
     path('room_weekly_availability/', views.room_availability_weekly, name='week.availability'),
     path('payment/failure/', views.payment_failure, name='payment_failure'),
+    path('get-updated-pool-choices/', views.get_updated_pool_choices, name='get_updated_pool_choices'),
+    path('get-updated-reservation-time-choices/', views.get_updated_reservation_time_choices, name='get_updated_reservation_time_choices'),
+    path('update_payment/<int:reservation_id>/', views.UpdatePaymentView.as_view(), name='update_payment')
 
 ]  

@@ -140,7 +140,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   <body>
@@ -171,7 +170,7 @@
           </div>
 
             <div class="legend yes">
-              <div class="circle" style="background-color: yellow; width: 20px; height: 20px; border-radius: 50%;"></div>
+              <div class="circle" style="background-color: black; width: 20px; height: 20px; border-radius: 50%;"></div>
               <span>Pool 2 Unavailable</span>
           </div>
       
@@ -365,7 +364,7 @@
 
           <div class="row">
             <div class="col-25">
-              <label for="{{ form.withRoom.id_for_label }}">Number of Rooms:</label>
+              <label for="{{ form.withRoom.id_for_label }}">With Rooms:</label>
             </div>
             <div class="col-75">
               {{ form.withRoom }}
@@ -414,6 +413,85 @@
       </form>
     </div>
     <script>
+
+      $(document).ready(function () {
+        console.log('Document is ready!');
+        // Use jQuery to bind the change event
+        $('#id_check_in_date').change(function () {
+          console.log('Change event captured!');
+          var selectedDate = $(this).val();
+          console.log('Selected Date:', selectedDate);
+  
+          // ... rest of the code
+      });
+    });
+    
+
+      
+
+    $(document).ready(function () {
+      // Use jQuery to bind the change event for check-in date
+      $('#id_check_in_date').on('change', function () {
+          var selectedDate = $(this).val();
+          console.log('Selected Date:', selectedDate);
+  
+          // Your AJAX request for pool choices...
+          $.ajax({
+              url: '/get-updated-pool-choices/',
+              type: 'GET',
+              data: { 'selected_date': selectedDate },
+              dataType: 'json',
+              success: function (data) {
+                  console.log('Updated Pool Choices:', data);
+  
+                  // Clear existing options for pool field
+                  $('#id_pool').empty();
+  
+                  // Add new options based on the data received
+                  $.each(data.pool_choices, function (index, choice) {
+                      var option = $('<option></option>').attr('value', choice[0]).text(choice[1]);
+  
+                      // Check if the pool is unavailable and disable the option if true
+                      if (Array.isArray(data.unavailable_pools) && data.unavailable_pools.includes(choice[0])) {
+                          option.attr('disabled', 'disabled');
+                      }
+  
+                      $('#id_pool').append(option);
+                  });
+              },
+              error: function (error) {
+                  console.error('Error:', error);
+              },
+          });
+  
+          // Your AJAX request for reservation time choices...
+          $.ajax({
+              url: '/get-updated-reservation-time-choices/',
+              type: 'GET',
+              data: { 'check_in_date': selectedDate },
+              dataType: 'json',
+              success: function (data) {
+                  console.log('Updated Reservation Time Choices:', data);
+  
+                  // Clear existing options for reservation_time field
+                  $('#id_reservation_time').empty();
+  
+                  // Add new options based on the data received
+                  $.each(data.reservation_time_choices, function (index, choice) {
+                      var option = $('<option></option>').attr('value', choice[0]).text(choice[1]);
+                      $('#id_reservation_time').append(option);
+                  });
+              },
+              error: function (error) {
+                  console.error('Error:', error);
+              },
+          });
+      });
+  });
+  
+      
+      
+      
       var unavailableDates = [{% for date in unavailable_dates %}
     {
       date: "{{ date.dates|date:'M d, Y' }}",

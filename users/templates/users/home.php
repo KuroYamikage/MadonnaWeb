@@ -166,12 +166,16 @@ else {
 					"</p><p class='right'>Status: "+events[i]["status"]+
 					"</p><a href="+"reservation-edit/"+events[i]["id"]+
 					" class="+"btn btn-secondary my-3"+
-					">Add more Details</a></div>");
+					">See more Details</a>"+"<p><a href="+"update_payment/"+events[i]["id"]+
+					"/ class="+"btn btn-secondary my-3"+
+					">Make Remaining Payment</a>"+"</div>");
 		if(events[i]["status"]==="Cancelled") {
 			$(event_card).css({
 				"border-left": "10px solid #FF1744"
 			});
-			event_count = $("<div class='event-cancelled'>Cancelled</div>");
+			event_count = $("<div class='event-cancelled'>Cancelled</div> <a href="+"reservation-edit/"+events[i]["id"]+
+			" class="+"btn btn-secondary my-3"+
+			">See more Details</a></div>");
 		}
 		{% comment %} if (i === 0 || i % 2 === 0 ){
 			var row = $("<div class='row'>");
@@ -220,8 +224,8 @@ var event_data = {
 	ReferenceNumber: "123546",
 	Total: 123457,
 	Balance: 12345,
-	checkinTime : "7:00PM",
-	checkoutTime : "7:00AM"
+	checkinTime : "7:00 PM",
+	checkoutTime : "7:00 AM"
 
 },
 

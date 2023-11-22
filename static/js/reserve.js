@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: '',
                         start: isoDate,
                         rendering: 'background',
-                        color: 'yellow'
+                        color: 'black'
                     });
                 }
             }
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
             checkInDateField.value = formatDate(today) // Format today's date
             checkOutDateField.value = formatDate(tomorrow) // Format tomorrow's date
             checkInTimeField.value = '07:00 AM'
-            checkOutTimeField.value = '05:00 PM'
+            checkOutTimeField.value = '05:00 AM'
         }
         
     })
@@ -224,6 +224,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 selectedCheckInDate = info.startStr
     
                 document.getElementById('id_check_in_date').value = selectedCheckInDate
+
+                // Manually trigger the change event
+                var event = new Event('change');
+                document.getElementById('id_check_in_date').dispatchEvent(event);
     
                 // Add a "Check-in" event on the selected date
                 calendar.addEvent({
@@ -249,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         
             const isPool1Unavailable = eventsOnSelectedDate.some(event => event.backgroundColor && event.backgroundColor.includes('red'));
-            const isPool2Unavailable = eventsOnSelectedDate.some(event => event.backgroundColor && event.backgroundColor.includes('yellow'));
+            const isPool2Unavailable = eventsOnSelectedDate.some(event => event.backgroundColor && event.backgroundColor.includes('black'));
         
             // Allow selection if either pool 1 or pool 2 is available
             return !isPool1Unavailable || !isPool2Unavailable;
@@ -261,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
         selectOverlap: function (event) {
             // Check if both pool 1 (red) and pool 2 (yellow) are present in the background color
             const isPool1Unavailable = event.backgroundColor && event.backgroundColor.includes('red');
-            const isPool2Unavailable = event.backgroundColor && event.backgroundColor.includes('yellow');
+            const isPool2Unavailable = event.backgroundColor && event.backgroundColor.includes('black');
     
             // Prevent selection overlap only when both pool 1 and pool 2 are present
             return !event.backgroundColor || !(isPool1Unavailable && isPool2Unavailable);

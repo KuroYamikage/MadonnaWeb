@@ -21,4 +21,7 @@ urlpatterns = [
     path('accounts/edit/<int:pk>', views.editUser.as_view(), name='user.edit'),
     path('accounts/delete/<int:pk>', views.deleteGallery.as_view(), name='gallery.delete'),
     path('change_password/<int:user_id>', views.resetPasswordView.as_view(), name='reset.password'),
+    path('room-update/<int:pk>', views.RoomEdit.as_view(), name='room_update'),
+    path('room-new', views.RoomNew.as_view(), name='room_new'),
+    
 ]

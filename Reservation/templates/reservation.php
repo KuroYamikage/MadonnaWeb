@@ -98,14 +98,14 @@
 								
 							</div>	
 							<div class="container d-flex justify-content-center con-leg">
-								<p><h3>Legends:</h3></p>
+								<h3>Legends:</h3></br>
 								<div class="legend no"> 
 								  <div class="circle" style="background-color: red; width: 20px; height: 20px; border-radius: 50%;"></div>
 								  <span>Pool 1 Unavailable</sp'an>
 							  </div>
 					
 								<div class="legend yes">
-								  <div class="circle" style="background-color: yellow; width: 20px; height: 20px; border-radius: 50%;"></div>
+								  <div class="circle" style="background-color: black; width: 20px; height: 20px; border-radius: 50%;"></div>
 								  <span>Pool 2 Unavailable</span>
 							  </div>
 						  
@@ -275,7 +275,7 @@
             if (isoDate) {
                 if (dateInfo.pool1) {
                     unavailableEvents.push({
-                        title: 'Pool 1 Unavailable',
+                        title: '',
                         start: isoDate,
                         rendering: 'background',
                         color: 'red'
@@ -283,10 +283,10 @@
                 }
                 if (dateInfo.pool2) {
                     unavailableEvents.push({
-                        title: 'Pool 2 Unavailable',
+                        title: '',
                         start: isoDate,
                         rendering: 'background',
-                        color: 'yellow'
+                        color: 'black'
                     });
                 }
             }

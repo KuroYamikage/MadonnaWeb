@@ -15,6 +15,8 @@ from .forms import (
     ReservationEditForm,
     PriceForm,
     PublicExtendedForm,
+    RoomForm,
+    FullPaymentForm
 )
 import random
 import json
@@ -287,7 +289,7 @@ class ReservationCreateView(FormView):
                 "total_pax": decTotal,
             }
         }
-        html_message = render_to_string("reference.html", context)
+        html_message = render_to_string("email.html", context)
         plain_message = strip_tags(
             html_message
         )  # Create a plain text message for non-HTML email clients
@@ -297,7 +299,7 @@ class ReservationCreateView(FormView):
         )
         email.attach_alternative(html_message, "text/html")  # Attach the HTML content
 
-        # email.send()
+        email.send()
 
         # Construct the URL for the summary page, passing the reference number as a parameter
         summary_url = reverse("reservation_summary", args=[reference_number])
@@ -562,7 +564,7 @@ class ReservationCreateViewPrivate(FormView):
                 "status": reservation.status,
                 #'prices': reservation.room.price,
                 "discount": discount,
-                #'downpayment': reservation.downpayment,
+                'downpayment': reservation.total/2,
                 #'balance': reservation.balance,
                 "total": reservation.total,
                 "num_guest": reservation.num_guests,
@@ -570,10 +572,10 @@ class ReservationCreateViewPrivate(FormView):
                 "room": room_details,
                 "type": reservation_type,
                 "time": reservation_time,
-                "total_pax": decTotal,
+                #"total_pax": decTotal,
             }
         }
-        html_message = render_to_string("reference.html", context)
+        html_message = render_to_string("email2.html", context)
         plain_message = strip_tags(
             html_message
         )  # Create a plain text message for non-HTML email clients
@@ -583,7 +585,7 @@ class ReservationCreateViewPrivate(FormView):
         )
         email.attach_alternative(html_message, "text/html")  # Attach the HTML content
 
-        # email.send()
+        email.send()
 
         # Construct the URL for the summary page, passing the reference number as a parameter
         summary_url = reverse("reservation_summary", args=[reference_number])
@@ -838,7 +840,7 @@ def getTotal(
     return total
 
 
-class ReservationUpdateView(UpdateView):
+class ReservationUpdateView(UpdateView, LoginRequiredMixin):
     # model = Reservation
     # template_name = "edit.html"  # Use the same template as in your create view
     # form_class = ReservationEditForm
@@ -1070,7 +1072,7 @@ class ReservationUpdateView(UpdateView):
         return super().form_invalid(form)
 
     def get_success_url(self):
-        success_url = "/staff"
+        success_url = "main"
         return reverse(success_url)  # Replace with your actual success URL name
 
 
@@ -1355,6 +1357,62 @@ def pay_test(request):
         return JsonResponse({"error": str(e)}, status=500)
 
 
- 
-    
+def get_updated_pool_choices(request):
+    check_in_date = request.GET.get('selected_date')
+    print('check in: ',check_in_date)
+    # Query the UnavailableDate model to get the availability for the specified date
+    unavailable_date = UnavailableDate.objects.filter(dates=check_in_date).first()
+
+    # Initialize pool choices with default values
+    pool_choices = [('Pool 1', 'Pool 1'), ('Pool 2', 'Pool 2')]
+
+    # Update pool choices based on availability
+    if unavailable_date:
+        if unavailable_date.pool1:
+            print(unavailable_date.pool1)
+            pool_choices = [choice for choice in pool_choices if choice[0] != 'Pool 1']
+        if unavailable_date.pool2:
+            print(unavailable_date.pool2)
+            pool_choices = [choice for choice in pool_choices if choice[0] != 'Pool 2']
+    print(pool_choices)
+    print(unavailable_date)
+
+
+    return JsonResponse({'pool_choices': pool_choices})
+
+def get_updated_reservation_time_choices(request):
+    check_in_date = request.GET.get('check_in_date')
+
+    # Query the Reservation model to get the reserved reservation times for private reservations on the specified date
+    reserved_reservation_times = Reservation.objects.filter(
+        check_in_date=check_in_date,
+        reservation_type='private',  # Filter for private reservations
+        # status='Approved'  # Filter for approved reservations, adjust as needed
+    ).values_list('reservation_time', flat=True)
+
+    # Construct the updated reservation time choices
+    reservation_time_choices = [('Morning', 'Morning'), ('Night', 'Night'), ("22 Hours", "22 Hours")]  # Default choices
+    if reserved_reservation_times:
+        reservation_time_choices = [('Morning', 'Morning'), ('Night', 'Night')]
+    reservation_time_choices = [choice for choice in reservation_time_choices if choice[0] not in reserved_reservation_times]
+
+    return JsonResponse({'reservation_time_choices': reservation_time_choices})
+
+
+class UpdatePaymentView(UpdateView, LoginRequiredMixin):
+    model = Reservation
+    form_class = FullPaymentForm
+    template_name = 'pay_full.html'  # Replace 'your_template.html' with the actual template name
+    def get_success_url(self):
+        success_url = "main"
+        return reverse(success_url)  # Replace with your actual success URL name
+
+
+    def get_object(self, queryset=None):
+        reservation_id = self.kwargs.get('reservation_id')
+        return Reservation.objects.get(id=reservation_id)
+
+    def form_valid(self, form):
+        # Add any additional logic when the form is valid
+        return super().form_valid(form)
 

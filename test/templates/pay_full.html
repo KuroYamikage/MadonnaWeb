@@ -1,0 +1,49 @@
+{%extends "master2.php"%}
+
+{% block title %}Payment in Resort{% endblock title %}
+
+{% block content%}
+{% comment %} <!--<h3>Register here</h3>
+<hr>
+
+<form action="" method="POST">
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div>
+            <p>{{ field.label }}: <br> {{ field}}</p>
+
+            {% for error in field.errors %}
+                <small style="color: red">{{ error}}</small>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <button type="submit">Register</button>
+</form>--> {% endcomment %}
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Pay in Full</h3>
+            <form method="POST">
+              {%csrf_token%}
+              
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    {{form.payments.label_tag}}
+                    {{form.payments.errors}}
+                    {{form.payments}}
+                    <p>{{form.payments.help_text}}</p>
+                    {% comment %} <input type="text" id="firstName" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">First Name</label> {% endcomment %}
+                  </div>
+                </div>
+
+
+              <div class="container d-flex justify-content-center">
+                <input class="btn btn-primary" type="submit" value="Submit" />
+                <a href="{%url 'main'%}" class="btn btn-danger">Cancel</a>
+              </div>
+
+            </form>
+        
+
+  {%endblock%}

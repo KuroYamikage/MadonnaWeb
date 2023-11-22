@@ -159,7 +159,7 @@
           </div>
 
             <div class="legend yes">
-              <div class="circle" style="background-color: yellow; width: 20px; height: 20px; border-radius: 50%;"></div>
+              <div class="circle" style="background-color: black; width: 20px; height: 20px; border-radius: 50%;"></div>
               <span>Pool 2 Unavailable</span>
           </div>
       
@@ -408,6 +408,43 @@
       </form>
     </div>
     <script>
+
+      $(document).ready(function () {
+        // Use jQuery to bind the change event
+        $('#id_check_in_date').on('change', function () {
+            var selectedDate = $(this).val();
+            console.log('Selected Date:', selectedDate);
+            
+            $.ajax({
+                url: '/get-updated-pool-choices/',
+                type: 'GET',
+                data: { 'selected_date': selectedDate },
+                dataType: 'json',
+                success: function (data) {
+                    console.log('Updated Pool Choices:', data);
+                     // Clear existing options
+                    $('#id_pool').empty();
+
+                    // Add new options based on the data received
+                    $.each(data.pool_choices, function (index, choice) {
+                      var option = $('<option></option>').attr('value', choice[0]).text(choice[1]);
+
+                      // Check if the pool is unavailable and disable the option if true
+                      if (Array.isArray(data.unavailable_pools) && data.unavailable_pools.includes(choice[0])) {
+                        option.attr('disabled', 'disabled');
+                      }
+
+                      $('#id_pool').append(option);
+                    });
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                },
+            });
+            
+        });
+    });
+
       var unavailableDates = [{% for date in unavailable_dates %}
     {
       date: "{{ date.dates|date:'M d, Y' }}",

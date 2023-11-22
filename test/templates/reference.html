@@ -186,7 +186,7 @@
             </p>
 
             <a  href="{% url "pay_test" %}?param1={{reserve.referenceNum}}"  class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"
-             {% if  reserve.status == "Approved"%}id="myLink"{% endif %}><i
+             {% if  reserve.status == "Approved" or reserve.status == "Cancelled"%}id="myLink"{% endif %}><i
               class="fas fa-print text-primary"></i> Pay</a>
          </div>
           </div>
