@@ -24,17 +24,37 @@
 </style>
 
 <div class="content-container">
-      <div>
-            <br>
-      </div>
     <div>
-        <iframe class="dynamic-iframe" frameborder="0" src="https://itch.io/embed-upload/9100753?color=333333" allowfullscreen=""></iframe>
+        <iframe class="dynamic-iframe" id="myIframe" frameborder="0" src="https://itch.io/embed-upload/9100753?color=333333" allowfullscreen=""></iframe>
     </div>
 
     <br>
 
-    <div>
-        <iframe frameborder="0" src="https://itch.io/embed/2299964?bg_color=434547&amp;fg_color=ffffff&amp;link_color=63c64d&amp;border_color=3f2832" width="552" height="167"><a href="https://xuryukens.itch.io/madonnamodule-resorteventarrangement">MadonnaModule_ResortEventArrangement by Xuryukens</a></iframe>
-    </div>
+    <button onclick="captureScreenshot()">Capture Screenshot</button>
 </div>
+
+<script>
+      function captureScreenshot() {
+          var iframe = document.getElementById('myIframe');
+          
+          // Ensure the iframe content has fully loaded
+          iframe.onload = function() {
+              var canvas = document.createElement('canvas');
+              canvas.width = iframe.offsetWidth;
+              canvas.height = iframe.offsetHeight;
+              var context = canvas.getContext('2d');
+              context.drawImage(iframe, 0, 0, iframe.offsetWidth, iframe.offsetHeight);
+  
+              // Convert the canvas content to a data URL
+              var dataURL = canvas.toDataURL('image/png');
+  
+              // Create a link and trigger a download
+              var link = document.createElement('a');
+              link.href = dataURL;
+              link.download = 'screenshot.png';
+              link.click();
+          };
+      }
+  </script>
+  
 {% endblock %}

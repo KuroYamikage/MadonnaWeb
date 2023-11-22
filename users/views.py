@@ -24,6 +24,7 @@ from django.utils.decorators import method_decorator
 from .decorators import groups_required
 from test.models import Reservation, Room
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from test.forms import RoomForm
 
 # Create your views here.
 
@@ -57,10 +58,28 @@ class RoomsList(LoginRequiredMixin, ListView):
   context_object_name = 'room'
   template_name = 'users/room_list.php'
   paginate_by = 10
-  def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['additional_data'] = AdditionalModel.objects.all()
-        return context
+  # def get_context_data(self, **kwargs):
+  #       context = super().get_context_data(**kwargs)
+  #       context['additional_data'] = AdditionalModel.objects.all()
+  #       return context
+
+@method_decorator(groups_required(['Admin']), name='dispatch') 
+class RoomEdit(LoginRequiredMixin, UpdateView):
+    model = Room
+    form_class = RoomForm
+    success_message = "List succcesfully edited"
+    success_url = "../rooms"
+    template_name = "users/room_edit.html"
+    login_url = "login"
+
+@method_decorator(groups_required(['Admin']), name='dispatch') 
+class RoomNew(LoginRequiredMixin, CreateView):
+    model = Room
+    form_class = RoomForm
+    success_message = "List succcesfully edited"
+    success_url = "../rooms"
+    template_name = "users/room_create.html"
+    login_url = "login"
 
 
 @method_decorator(groups_required(['Admin']), name='dispatch')
@@ -90,10 +109,19 @@ class editUser(LoginRequiredMixin,UpdateView):
   template_name='users/edit_user.php'
   success_url = '/accounts/'
 
+  def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Add additional context data here
+        context['user_name'] = self.request.user.get_full_name() # type: ignore
+
+        return context
+
+  
+
 def is_admin(user):
     return user.groups.filter(name='Admin').exists()
 @method_decorator(groups_required(['Admin']), name='dispatch')
-
 class resetPasswordView(UserPassesTestMixin, FormView):
    template_name = 'users/reset_password.php'
    form_class = ResetPasswordForm

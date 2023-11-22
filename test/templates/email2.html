@@ -15,13 +15,10 @@
 
     <p>Your reservation with reference number {{ reserve.referenceNum }} has been received and is under review by our staff. To continue with the reservation,
         please send a downpayment of half or 50% of the total amount to be able to continue with the reservation
-        Please send the payment through GCash with the Information Indicated Below:
+        The payment can be accessed in the link below:
     </p>
-        <ul>
-            <li><strong><strong>GCash Name:</strong> John Paul Gnilo</strong></li>
-            <li><strong>GCash Number:</strong> 09456794080</li>
-            <li><img src="{% static 'images/gcash.png' %}"></li>
-        </ul>
+
+    <p><a href="http://127.0.0.1:8000/{% url "reservation_summary" reference_number=reserve.referenceNum %}"><i>http://127.0.0.1:8000/{% url "reservation_summary" reference_number=reserve.referenceNum %}</i></a></p>
 
     <p>Below are the details of your reservation:</p>
     <ul>
@@ -31,7 +28,9 @@
         <!-- Add any other reservation details you want to display -->
     </ul>
 
-    <p>Total Amount: ${{ reserve.total }}</p>
+    <p>Total Amount:  ₱{{ reserve.total }}</br>
+    Downpayment Required: ₱{{reserve.downpayment}}</p>
+    
     <p>If you encounter any problem, please feel free to reply to this email</p>
     <p>Thank you for choosing our service. We look forward to welcoming you!</p>
 

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Room, Reservation, UnavailableDate, Prices
+from .models import Room, Reservation, UnavailableDate, Prices, Room
 from Reservation.models import Discount, Facility
 import requests
 from django.urls import reverse
@@ -13,6 +13,7 @@ class CustomTimeField(forms.TimeField):
     def to_python(self, value):
         # Parse the input value
         value = super().to_python(value)
+        print("This is a test")
 
         # Change the time format before saving to the database
         if value:
@@ -110,6 +111,8 @@ class ReservationForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         # Set the 'required' attribute of the 'room' field to False
         self.fields["room"].required = False
+        self.fields['pool'].choices = [('Pool 1', 'Pool 1'), ('Pool 2', 'Pool 2')]  # Default choices
+
 
     # def clean_discount_code(self):
     #     discount_code = self.cleaned_data.get('discount_code')
@@ -264,13 +267,13 @@ class ReservationEditForm(forms.ModelForm):
     discount_code = forms.CharField(
         max_length=50, required=False, label="Discount Code"
     )
-    check_in_time = CustomTimeField(
+    check_in_time = forms.TimeField(
         required=True,
         widget=forms.TimeInput(
             attrs={"placeholder": "HH:MM AM/PM", "readonly": "True"},
         ),
     )
-    check_out_time = CustomTimeField(
+    check_out_time = forms.TimeField(
         required=True,
         widget=forms.TimeInput(
             attrs={"placeholder": "HH:MM AM/PM", "readonly": "True"},
@@ -447,4 +450,31 @@ class PriceForm(forms.ModelForm):
     withRoom = forms.ChoiceField(choices=(('', '---------'),("False","No"),("True","Yes")), required=False)
     date = forms.ChoiceField(choices=Prices.dateChoices,required=False,)
 
-    
+
+class RoomForm(forms.ModelForm):
+    class Meta:
+        model = Room
+        fields = ("room_number", "room_type", "price_per_night", "free_guests",)
+        widgets = {
+            'room_number': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
+            'room_type': forms.NumberInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
+            'price_per_night': forms.TextInput(attrs={'class': 'form-control form-control-lg'}),
+            'free_guests': forms.NumberInput(attrs={'class': 'form-control form-control-lg'}),
+        }
+
+
+class FullPaymentForm(forms.ModelForm):
+    class Meta:
+        model = Reservation
+        fields = ('payments',)
+        widgets = {
+            'payments': forms.NumberInput(attrs={'class': 'form-control form-control-lg'}),
+        }
+        
+    def get_initial_for_field(self, field, field_name):
+        if field_name == 'payments':
+            total_payment = self.instance.total
+            current_payments = self.instance.payments
+            remaining_payment = max(0, total_payment - current_payments)
+            return remaining_payment
+        return super().get_initial_for_field(field, field_name)

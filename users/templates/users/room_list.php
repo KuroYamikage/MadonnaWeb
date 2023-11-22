@@ -9,7 +9,7 @@
     <div class="container">
         <div class="container pt-4 px-4">
             <h1 class=>Rooms</h1>
-            <a href="{%url 'register'%}" class="btn btn-primary my-3">Add Room</a>
+            <a href="{%url 'room_new'%}" class="btn btn-primary my-3">Add Room</a>
             <div class="table-responsive">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
                     <thead>
@@ -28,7 +28,7 @@
                             <td>{{rooms.room_number}}</td>
                             <td>{{rooms.room_type.facilityName}}</td>
                             <td>{{rooms.price_per_night}}</td>
-                            {% comment %} <td><a class="btn btn-sm btn-primary" href="{% url 'room.edit' pk=user.id %}">Edit</a></td> {% endcomment %}
+                            <td><a class="btn btn-sm btn-primary" href="{% url 'room_update' pk=user.id %}">Edit</a></td>
                         </tr>
                         {%endfor%}
                     </tbody>

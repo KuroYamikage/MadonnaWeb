@@ -9,8 +9,8 @@
     
 </style>
 
-<div class="m-auto container border border-dark rounded reserve-form reserve_section " style="background-color:  #ffb607">
-<h3 class=" layout-padding" style="text-align: center" >Edit {{facility.facilityName}}</h3>
+
+<h2 class="mb-4 pb-2 pb-md-0 mb-md-5" style="text-align: center" >Edit {{facility.facilityName}}</h2>
 <form  method = "POST" enctype="multipart/form-data">
 {%csrf_token%} 
 <div class="form-row">

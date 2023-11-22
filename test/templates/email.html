@@ -2,29 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Email Subject</title>
+    <title>Reservation Confirmation</title>
+    <!-- Add any necessary CSS styles here -->
 </head>
 <body>
-    <div style="background-color: #f0f0f0; padding: 20px;">
-        <div style="background-color: #ffffff; max-width: 600px; margin: 0 auto; padding: 20px; border-radius: 5px;">
-            <h2>Hello, {{ guest_name }}!</h2>
-            <p>Thank you for your reservation.</p>
-            <p>Here are the details of your reservation:</p>
-            
-            <ul>
-                <li>Reservation Date: {{ reservation_date }}</li>
-                <li>Check-in Date: {{ check_in_date }}</li>
-                <li>Check-out Date: {{ check_out_date }}</li>
-                <li>Check-in Date: {{ check_in_time }}</li>
-                <li>Check-out Date: {{ check_out_time }}</li>
-                <!-- Add more reservation details here as needed -->
-            </ul>
-            
-            <p>If you have any questions or need further assistance, please don't hesitate to contact us.</p>
-            
-            <p>Best regards,<br>Your Name</p>
-        </div>
-    </div>
+
+    <h1>Reservation Confirmation</h1>
+
+    <p>Dear {{ reserve.customer }},</p>
+
+    <p>Your reservation with reference number {{ reserve.referenceNum }} has been received and is under review by our staff. To continue with the reservation,
+        please send a downpayment which includes the payments for room and facilities to continue with the reservation
+        The payment can be accessed in the link below:
+    </p>
+
+    <p><a href="http://127.0.0.1:8000/{% url "reservation_summary" reference_number=reserve.referenceNum %}"><i>http://127.0.0.1:8000/{% url "reservation_summary" reference_number=reserve.referenceNum %}</i></a></p>
+
+    <p>Below are the details of your reservation:</p>
+    <ul>
+        <li><strong>Check-In Date:</strong> {{ reserve.checkIn }} at {{ reserve.timeIn }}</li>
+        <li><strong>Check-Out Date:</strong> {{ reserve.checkOut }} at {{ reserve.timeOut }}</li>
+        <li><strong>Number of Guests:</strong> {{ reserve.num_guest }}</li>
+        <!-- Add any other reservation details you want to display -->
+    </ul>
+
+    <p>Total Amount:  ₱{{ reserve.total }}</br>
+    
+    <p>If you encounter any problem, please feel free to reply to this email</p>
+    <p>Thank you for choosing our service. We look forward to welcoming you!</p>
+
+    <!-- Add any other information or instructions as needed -->
+
+    <p>Best regards,<br>Your Reservation Team</p>
+
 </body>
 </html>

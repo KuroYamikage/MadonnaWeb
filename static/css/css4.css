@@ -376,6 +376,7 @@ button {
   margin: 0 auto;
   font-size: 26px;
   color: #ffd04f;
+  font-style: oblique;
   text-align: center;
   text-shadow: 0 3px #242424, 3px 0 #242424, 0 -1px #242424;
   font-weight: 900;
@@ -399,6 +400,8 @@ button {
   font-size: 18px;
   color: #ffffff;
   background-color: #55d42a;
+  border-style: solid;
+  border-color: black;
   text-align: center;
   padding: 10px 0px;
   border-radius: 5px;
@@ -407,7 +410,7 @@ button {
 }
 
 .contact_bt a:hover {
-  color: #ffffff;
+  color: #ffd04f;
   background-color: #000;
 }
 
@@ -457,13 +460,20 @@ button {
   width: 100%;
   float: left;
   padding-bottom: 90px;
+  /* background-image: url(../images/bg1.jpg); */
+  background-image: url(../images/A1.png);
+  border-style: solid;
+  border-color: green;
 }
+
 
 .services_taital {
   width: 100%;
   float: left;
   font-size: 36px;
-  color: #090808;
+  color: #feff31;
+  font-weight: 500;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-align: center;
   text-transform: uppercase;
 }
@@ -487,7 +497,9 @@ button {
   width: 100%;
   float: left;
   font-size: 18px;
-  color: #000000;
+  color: #feff31;
+  font-weight: 600;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-transform: uppercase;
   text-align: center;
   padding-top: 20px;
@@ -497,7 +509,10 @@ button {
   width: 100%;
   float: left;
   font-size: 14px;
-  color: #090808;
+  color: #feff31;
+  font-weight: 700;
+  font-style: oblique;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-align: center;
   margin-left: 0px;
   margin-top: 10px;
@@ -521,6 +536,8 @@ button {
   font-size: 18px;
   color: #ffffff;
   background-color: #55d42a;
+  border-style: solid;
+  border-color: black;
   text-align: center;
   padding: 10px 0px;
   border-radius: 5px;
@@ -528,7 +545,7 @@ button {
 }
 
 .read_bt a:hover {
-  color: #ffffff;
+  color: #feff31;
   background-color: #000;
 }
 
@@ -541,7 +558,7 @@ button {
   padding-bottom: 90px;
   opacity: 1;*/
 
-  background-image: url(../images/aboutusbg.jpg);
+  background-image: url(../images/aboutusbg.png);
   height: auto;
   background-position: center;
   background-position-y: 25%;
@@ -564,7 +581,7 @@ button {
   background-color: #242424;
   border-style: solid;
   border-width: 10px;
-  border-color: #55d42a;
+  border-color: #bddd33;
   text-align: center;
 }
 
@@ -641,13 +658,18 @@ button {
   width: 100%;
   float: left;
   padding-bottom: 90px;
+  background-image: url(../images/A2.png);
+  border-style: solid;
+  border-color: green;
 }
 
 .our_text {
   width: 100%;
   float: left;
   font-size: 36px;
-  color: #121111;
+  color: #feff31;
+  font-weight: 500;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-transform: uppercase;
   text-align: center;
 }
@@ -656,7 +678,9 @@ button {
   width: 100%;
   float: left;
   font-size: 16px;
-  color: #090808;
+  color: #feff31;
+  font-weight: 500;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-align: center;
   margin-left: 0px;
   margin-top: 10px;
@@ -723,7 +747,9 @@ a:hover {
   width: 100%;
   float: left;
   font-size: 18px;
-  color: #55d42a;
+  color: #feff31;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-transform: uppercase;
   font-weight: bold;
   padding-top: 35px;
@@ -733,7 +759,9 @@ a:hover {
   width: 100%;
   float: left;
   font-size: 18px;
-  color: #121111;
+  color: #feff31;
+  font-weight: 500;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
   margin-top: 10px;
   margin-left: 0px;
 }
@@ -797,6 +825,8 @@ a:hover {
   font-size: 18px;
   color: #ffffff;
   background-color: #55d42a;
+  border-style: solid;
+  border-color: black;
   text-align: center;
   padding: 10px 0px;
   border-radius: 5px;
@@ -804,13 +834,16 @@ a:hover {
 }
 
 .get_bt a:hover {
-  color: #ffffff;
+  color: #feff31;
   background-color: #000;
 }
 
 .projects_section {
   width: 100%;
   float: left;
+  background-image: url(../images/A3.png);
+  border-style: solid;
+  border-color: green;
 }
 
 .projects_section2 {
@@ -831,6 +864,8 @@ a:hover {
   height: auto;
   transition: 0.5s ease;
   backface-visibility: hidden;
+  border-style: solid;
+  border-color: #feff31;
 }
 
 .middle {
@@ -852,7 +887,7 @@ a:hover {
 .container_main1:hover .middle {
   opacity: 1;
 }
-
+/*   */
 .text {
   color: #fff;
   font-size: 16px;
@@ -1155,6 +1190,9 @@ textarea#comment::placeholder {
 
 .content {
   flex: 1;
+  background-image: url(../images/A4.png);
+  background-repeat: no-repeat;
+  background-size: 150%;
 }
 
 .fooer_logo {
@@ -1288,7 +1326,8 @@ textarea#comment::placeholder {
 
 .gallery-title {
   font-size: 36px;
-  color: #42B32F;
+  color: #feff31;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
   text-align: center;
   font-weight: 500;
   margin-bottom: 70px;
@@ -1305,21 +1344,22 @@ textarea#comment::placeholder {
 
 .filter-button {
   font-size: 18px;
-  border: 1px solid #42B32F;
+  border: 2px solid #000000;
   border-radius: 5px;
   text-align: center;
-  color: #42B32F;
+  background-color: #42B32F;
+  color: #ffffff;
   margin-bottom: 30px;
 
 }
 
 .filter-button:hover {
   font-size: 18px;
-  border: 1px solid #42B32F;
+  border: 2px solid #feff31;
   border-radius: 5px;
   text-align: center;
-  color: #ffffff;
-  background-color: #42B32F;
+  color: #feff31;
+  background-color: #000000;
 }
 
 /* Styles for the chat popup */
