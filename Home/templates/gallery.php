@@ -8,6 +8,8 @@
           height: 200px; /* Set your preferred height */
           object-fit: cover; /* This property ensures the image covers the entire container while maintaining its aspect ratio */
           margin: 10px;
+          border-style: solid;
+          border-color: #feff31;
         }
 
         
