@@ -1,0 +1,36 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- [ Main Content ] start -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Sales Report</h5>
+        </div>
+        <div class="card-block">
+            <div id ="graph">
+                {{ graph_month|safe }}
+            </div>
+            <p>Total Earnings: ₱{{ total_earnings }}</p>
+            <p>Total Reservations: {{ total_reservations }}</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h5>Visitors</h5>
+        </div>
+        <div class="card-block">
+            <div id ="graph2">
+                {{ graph_visitors|safe }}
+            </div>
+            <p>Total Visitors: {{ total_visitors }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [ Main Content ] end -->
+
+{% endblock content %}

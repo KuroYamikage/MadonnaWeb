@@ -1,39 +1,38 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponseRedirect
-from django.contrib.auth import login, authenticate
-from django.contrib import messages
-from django.urls import reverse, reverse_lazy
-from django.contrib.messages.views import SuccessMessageMixin
-from .forms import UserRegistrationForm, UserUpdateForm, ResetPasswordForm
-from django.views.generic import (
-    CreateView,
-    TemplateView,
-    ListView,
-    DetailView,
-    UpdateView,
-)
-from blog.models import Blog, Gallery
+from test.models import Reservation, Room
+
 from blog.forms import BlogForms
-from django.views.generic.edit import DeleteView, FormView
-from django.contrib.auth.views import LoginView, LogoutView
+from blog.models import Blog, Gallery
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     PermissionRequiredMixin,
     UserPassesTestMixin,
 )
-from django.contrib.auth.models import User
-from Reservation.models import Reservations, Facility
-from Reservation.forms import FacilityForm
-from Home.forms import GalleryForm
-from django.contrib.auth.models import User
-from .mixins import GroupRequiredMixin
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
+from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
+from django.views.generic import (
+    CreateView,
+    DetailView,
+    ListView,
+    TemplateView,
+    UpdateView,
+)
+from django.views.generic.edit import DeleteView, FormView
+from Home.forms import GalleryForm
+from Reservation.forms import FacilityForm
+from Reservation.models import Facility, Reservations
+
 from .decorators import groups_required
-from test.models import Reservation, Room
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .forms import ResetPasswordForm, UserRegistrationForm, UserUpdateForm
+from .mixins import GroupRequiredMixin
 
 # Create your views here.
 
@@ -41,7 +40,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Account Management
 class StaffLoginView(LoginView):
     template_name = "accounts/auth-signin.html"
-    redirect_authenticated_user = True
+    redirect_authenticated_user = False
 
     def form_valid(self, form):
         response = super().form_valid(form)
