@@ -8,6 +8,7 @@
 <style>
     .gallery_product {
         margin: 10px;
+        clear: both
     }
     .fixed-ratio-img {
       width: 300px;  /* Set your preferred width */
@@ -36,9 +37,6 @@
         <button class="btn btn-default filter-button" data-filter="Guests">Guests</button>
         </div>
     <br/>
-    
-
-
 
         {% for pics in gallery %}
         <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter {{pics.galleryTag}}">

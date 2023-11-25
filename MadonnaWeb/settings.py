@@ -48,8 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     "test",
     "captcha",
-    # "admin_datta.apps.AdminDattaConfig",
-    # "customFilters",
+    "admin_datta.apps.AdminDattaConfig",
 ]
 
 MIDDLEWARE = [

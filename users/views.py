@@ -185,7 +185,7 @@ class newFacility(LoginRequiredMixin, CreateView):
     form_class = FacilityForm
     success_url = "/staff/facility"
     login_url = "login"
-    template_name = "users/new_facility.php"
+    template_name = "new_facility.php"
 
 
 class editFacility(LoginRequiredMixin, UpdateView):
@@ -199,7 +199,7 @@ class editFacility(LoginRequiredMixin, UpdateView):
 class addGallery(LoginRequiredMixin, CreateView):
     model = Gallery
     form_class = GalleryForm
-    template_name = "users/gallery_add.php"
+    template_name = "gallery_add.php"
     login_url = "login"
     success_url = "/staff/gallery"
 
@@ -220,7 +220,7 @@ class staffGallery(LoginRequiredMixin, ListView):
 class detailGallery(LoginRequiredMixin, DetailView):
     model = Gallery
     context_object_name = "gallery"
-    template_name = "users/gallery_detail.php"
+    template_name = "gallery_detail.php"
     login_url = "login"
 
 
