@@ -3,11 +3,18 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView
 from Reports.scripts.reports import month, month_visitors, year
 from .models import MonthReport
+from users.decorators import groups_required
+from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    PermissionRequiredMixin,
+    UserPassesTestMixin,
+)
 
 # Create your views here.
 
-
-class SalesReport(TemplateView):
+@method_decorator(groups_required(["Admin"]), name="dispatch")
+class SalesReport(TemplateView, LoginRequiredMixin):
     template_name = "reports.html"
 
     def get_context_data(self, **kwargs):
@@ -24,7 +31,7 @@ class SalesReport(TemplateView):
 
         return context
 
-
+@method_decorator(groups_required(["Admin"]), name="dispatch")
 def reports_month_history(request):
     months_history = MonthReport.objects.all()
     graph_year = year()
