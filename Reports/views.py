@@ -10,8 +10,10 @@ from django.contrib.auth.mixins import (
     PermissionRequiredMixin,
     UserPassesTestMixin,
 )
+from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
+
 
 @method_decorator(groups_required(["Admin"]), name="dispatch")
 class SalesReport(TemplateView, LoginRequiredMixin):
@@ -31,7 +33,8 @@ class SalesReport(TemplateView, LoginRequiredMixin):
 
         return context
 
-@method_decorator(groups_required(["Admin"]), name="dispatch")
+
+@user_passes_test(lambda user: user.groups.filter(name="Admin").exists())
 def reports_month_history(request):
     months_history = MonthReport.objects.all()
     graph_year = year()

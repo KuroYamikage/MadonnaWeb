@@ -104,7 +104,7 @@ def reserveView(request):
         "form": form,
         "form_2": form2,
         "prices": obj,
-        "unavailable_dates": unavailable_dates
+        "unavailable_dates": unavailable_dates,
     }
     return render(request, "reservation.php", context)
 
@@ -282,7 +282,7 @@ class editPrice(LoginRequiredMixin, UpdateView):
 class viewDiscount(LoginRequiredMixin, ListView):
     model = Discount
     context_object_name = "discount"
-    template_name = "discount_view.php"
+    template_name = "discount_view.html"
 
 
 class newDiscount(LoginRequiredMixin, CreateView):
@@ -302,10 +302,9 @@ class editDiscount(LoginRequiredMixin, UpdateView):
         context = super().get_context_data(**kwargs)
 
         # Add additional context data here
-        context['discount_name'] = self.object.discountCode # type: ignore
+        context["discount_name"] = self.object.discountCode  # type: ignore
 
-        return context 
-
+        return context
 
 
 class deleteReservation(LoginRequiredMixin, DeleteView):

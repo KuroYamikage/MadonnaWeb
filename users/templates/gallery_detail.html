@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- [ Main Content ] start -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card text-center">
+        <div class="card-header">
+          <h5>{{gallery.galleryTitle}}</h5>
+        </div>
+            <img src="../../{{gallery.galleryPic}}" class="rounded mx-auto d-block img-thumbnail" >
+        <div class="card-block">
+                <p class="card-title">Tag:{{gallery.galleryTag}}</p>
+                <a href="{%url 'gallery.staff.edit' pk=gallery.id%}" class="btn btn-primary my-3">Edit</a>
+                <a href="{%url 'gallery.staff'%}" class="btn btn-primary my-3">Go Back to Gallery</a>
+                <a href="{%url 'gallery.delete' pk=gallery.id%}" class="btn btn-primary my-3">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- [ Main Content ] end -->
+
+{% endblock content %}

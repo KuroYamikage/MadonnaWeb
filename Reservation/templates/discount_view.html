@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- [ Main Content ] start -->
+<div class="row">
+  <!-- [ Hover-table ] start -->
+  <div class="col-xl-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class=>Discounts</h5>
+        <div class="table-responsive">
+          <table class="table text-start align-middle table-bordered table-hover mb-0">
+            <thead>
+              <tr class="text-light">
+                <th scope="col">ID</th>
+                <th scope="col">Discount Code</th>
+                <th scope="col">Discount Worth</th>
+                <th scope="col">Active</th>
+                <th scope="col">Edit</th>
+            </thead>
+            <tbody>
+              {% for info in discount %}
+              <tr>
+                <td>{{info.id}}</td>
+                <td>{{info.discountCode}}</td>
+                <td>₱{{info.discountPrice}}</td>
+                <td>{{info.discountActive |yesno:"Yes,No" }}</td>
+                <td><a class="btn btn-sm btn-primary" href="{% url 'discount.edit' pk=info.id %}">Edit</a></td>
+              </tr>
+              {%endfor%}
+            </tbody>
+          </table>
+        </div>
+        <a href="{%url 'discount.new'%}" class="btn btn-primary my-3">Add New Discount</a>
+      </div>
+    </div>
+  </div>
+  <!-- [ Hover-table ] end -->
+</div>
+<!-- [ Main Content ] end -->
+
+{% endblock content %}

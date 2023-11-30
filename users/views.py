@@ -70,7 +70,7 @@ class reserveListView(LoginRequiredMixin, ListView):
 class RoomsList(LoginRequiredMixin, ListView):
     model = Room
     context_object_name = "room"
-    template_name = "room_list.php"
+    template_name = "room_list.html"
     paginate_by = 10
 
     """
@@ -97,7 +97,7 @@ class RoomNew(LoginRequiredMixin, CreateView):
     form_class = RoomForm
     success_message = "List succcesfully edited"
     success_url = "../rooms"
-    template_name = "users/room_create.html"
+    template_name = "room_create.html"
     login_url = "login"
 
 
@@ -237,14 +237,14 @@ class addGallery(LoginRequiredMixin, CreateView):
 class staffGallery(LoginRequiredMixin, ListView):
     model = Gallery
     context_object_name = "gallery"
-    template_name = "gallery_staff.php"
+    template_name = "gallery_staff.html"
     login_url = "login"
 
 
 class detailGallery(LoginRequiredMixin, DetailView):
     model = Gallery
     context_object_name = "gallery"
-    template_name = "gallery_detail.php"
+    template_name = "gallery_detail.html"
     login_url = "login"
 
 
