@@ -7,7 +7,7 @@
 
 <style>
     .gallery_product {
-        margin: 10px;
+        {% comment %} margin: 10px; {% endcomment %}
         clear: both
     }
     .fixed-ratio-img {
