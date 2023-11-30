@@ -1,16 +1,14 @@
-from django.http import HttpResponse
 from django.shortcuts import render
+from django.http import HttpResponse
 from django.views.generic import TemplateView
-
 from Reports.scripts.reports import month, month_visitors, year
-
 from .models import MonthReport
 
 # Create your views here.
 
 
 class SalesReport(TemplateView):
-    template_name = "reports.php"
+    template_name = "reports.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

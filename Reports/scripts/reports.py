@@ -14,8 +14,8 @@ from Reports.models import MonthReport
 def month():
     now = datetime.now()
     start_of_month = now.replace(day=1, hour=0, minute=0, second=0)
-
     queryset = Reservation.objects.filter(check_in_date__range=[start_of_month, now])
+
     df = pd.DataFrame(queryset.values("check_in_date", "payments"))
     df_grouped = df.groupby("check_in_date").agg({"payments": "sum"}).reset_index()
     fig = make_subplots()

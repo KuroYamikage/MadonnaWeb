@@ -1,77 +1,59 @@
-{%extends "sidebar.php"%}
-{%load static%}
+{% load static %}
 
-{%block title %}
-    Sales Reports
-{%endblock%}
+{% block content %}
 
-{%block content%}
-<a  onClick="printDiv('receipt')"  class="btn btn-light text-capitalize border-0" data-mdb-ripple-color="dark"><i
-    class="fas fa-print text-primary"></i> Print</a>
-
-    <div class="container" id="receipt">
-    <h1>Sales Report: Month-over-Month</h1>
-    {% if months_history %}
-        <p>Total Records: {{ months_history|length }}</p>
-
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Report Date</th>
+    <!-- [ Main Content ] start -->
+    <div class="row">
+      <!-- [ stiped-table ] start -->
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>Month-over-Month History</h5>
+          </div>
+          <div class="card-block table-border-style">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Report Date<th>
                     <th>Total Reservations</th>
-                    <th>Total Customers</th>
                     <th>Total Earnings</th>
                     <th>Month Over Month</th>
                     <th>Month Over Month (%)</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for month in months_history %}
-                    <tr>
-                        <td>{{ month.report_date|date:"Y-m-d" }}</td>
-                        <td>{{ month.total_reservations }}</td>
-                        <td>{{ month.total_customers }}</td>
-                        <td>₱{{ month.total_earnings|floatformat:2 }}</td>
-                        <td>₱{{ month.month_over_month }}</td>
-                        <td>{{ month.month_over_month_percentage }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% else %}
-        <p>No data available</p>
-    {% endif %}
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for month in months_history %}
+                        <tr>
+                            <td>{{ month.report_date|date:"Y-m-d" }}</td>
+                            <td>{{ month.total_reservations }}</td>
+                            <td>{{ month.total_customers }}</td>
+                            <td>₱{{ month.total_earnings|floatformat:2 }}</td>
+                            <td>₱{{ month.month_over_month }}</td>
+                            <td>{{ month.month_over_month_percentage }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- [ stiped-table ] end -->
 
-    <div id="graph">
-        {{graph_year|safe}}
+      <div class="col-xl-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>Months</h5>
+          </div>
+          <div class="card-block">
+              <div id ="graph2">
+                  {{ graph_year|safe }}
+              </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <script>
-        function printDiv(divName) {
-          console.log("test");
-          var printContents = document.getElementById(divName).innerHTML;
-          var originalContents = document.body.innerHTML;
-          var css = '@page { size: landscape; }',
-        head = document.head || document.getElementsByTagName('head')[0],
-        style = document.createElement('style');
+    <!-- [ Main Content ] end -->
 
-    style.type = 'text/css';
-    style.media = 'print';
-
-    if (style.styleSheet){
-      style.styleSheet.cssText = css;
-    } else {
-      style.appendChild(document.createTextNode(css));
-    }
-
-    head.appendChild(style);
-
-          document.body.innerHTML = printContents;
-
-          window.print();
-
-          document.body.innerHTML = originalContents;
-     }
-
-
-      </script>
-{%endblock%}
+{% endblock content %}

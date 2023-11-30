@@ -18,6 +18,7 @@ users/migrations/__pycache__/
 __pycache__/
 
 # Database files
+db.sqlite3
 
 # Static files (usually collected with "collectstatic")
 #/staticfiles/
