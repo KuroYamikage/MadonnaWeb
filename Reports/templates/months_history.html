@@ -34,6 +34,7 @@
                             <td>{{ month.month_over_month_percentage }}</td>
                         </tr>
                     {% endfor %}
+                    <td><a class="btn btn-sm btn-primary" href="{% url 'reports' %}">Go back to current month</a></td>
                 </tbody>
               </table>
             </div>

@@ -1,0 +1,128 @@
+{%extends "master2.php"%}
+
+{% block title %}Edit User {{user_name}}{% endblock title %}
+
+{% block content%}
+{% comment %} <!--<h3>Register here</h3>
+<hr>
+
+<form action="" method="POST">
+    {% csrf_token %}
+
+    {% for field in form %}
+        <div>
+            <p>{{ field.label }}: <br> {{ field}}</p>
+
+            {% for error in field.errors %}
+                <small style="color: red">{{ error}}</small>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <button type="submit">Register</button>
+</form>--> {% endcomment %}
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">New Room</h3>
+            <form method="POST">
+              {%csrf_token%}
+              
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    {{form.room_number.label_tag}}
+                    {{form.room_number.errors}}
+                    {{form.room_number}}
+                    <p>{{form.room_number.help_text}}</p>
+                    {% comment %} <input type="text" id="firstName" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">First Name</label> {% endcomment %}
+                  </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    {{form.room_type.label_tag}}
+                    {{form.room_type.errors}}
+                    {{form.room_type}}
+                    {{form.room_type.help_text}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    {{form.price_per_night.label_tag}}
+                    {{form.price_per_night.errors}}
+                    {{form.price_per_night}}
+                    {{form.price_per_night.help_text}}
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                  <div class="form-outline">
+                    {{form.free_guests.label_tag}}
+                    {{form.free_guests.errors}}
+                    {{form.free_guests}}
+                    {{form.free_guests.help_text}}
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    {{form.password1.label_tag}}
+                    {{form.password1.errors}}
+                    {{form.password1}}
+                    {{form.password1.help_text}}
+                    {% comment %} <input type="text" id="firstName" class="form-control form-control-lg" />
+                    <label class="form-label" for="firstName">First Name</label> {% endcomment %}
+                  </div>
+
+                </div>
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    {{form.password2.label_tag}}
+                    {{form.password2.errors}}
+                    {{form.password2}}
+                    {{form.password2.help_text}}
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-4">
+
+                  <div class="form-outline">
+                    {{form.groups.label_tag}}
+                    {{form.groups.errors}}
+                    {{form.groups}}
+                    {{form.groups.help_text}}
+                  </div>
+
+                </div>
+
+                <div class="col-md-6 mb-4">
+
+                    <div class="form-outline">
+                      {{form.is_active.label_tag}}
+                      {{form.is_active.errors}}
+                      {{form.is_active}}
+                      {{form.is_active.help_text}}
+                    </div>
+  
+                  </div>
+              </div>
+              
+
+              <div class="container d-flex justify-content-center">
+                <input class="btn btn-primary" type="submit" value="Submit" />
+                <a href="{%url 'rooms.view'%}" class="btn btn-danger">Cancel</a>
+              </div>
+
+            </form>
+        
+
+  {%endblock%}

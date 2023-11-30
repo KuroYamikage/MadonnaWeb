@@ -15,27 +15,25 @@
                     <thead>
                         <tr class="text-light">
                             <th scope="col">Id</th>
-                            <th scope="col">Facility</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Category</th>
+                            <th scope="col">Room Number</th>
+                            <th scope="col">Room Type</th>
                             <th scope="col">Price</th>
                             <th scope="col">Edit</th>
                     </thead>
                     <tbody>
-                        {% for x in facility%}
+                        {% for rooms in room %}
                         <tr>
-                            <td>{{x.id}}</td>
-                            <td>{{x.facilityName}}</td>
-                            <td>{{x.facilityDescription}}</td>
-                            <td>{{x.facilityCategory}}</td>
-                            <td>₱{{x.facilityPrice}}</td>
-                            <td><a class="btn btn-sm btn-primary" href="{%url 'facility.edit' pk=x.id%}">Edit</a></td>
+                            <td>{{rooms.id}}</td>
+                            <td>{{rooms.room_number}}</td>
+                            <td>{{rooms.toom_type.facilityName}}</td>
+                            <td>{{rooms.price_per_night}}</td>
+                            <td><a class="btn btn-sm btn-primary" href="{%url 'room_update' pk=user.id%}">Edit</a></td>
                         </tr>
                         {%endfor%}
                     </tbody>
                 </table>
             </div>
-            <a href="{%url 'facility.new'%}" class="btn btn-primary my-3">Add new Facility</a>
+            <a href="{%url 'room_new'%}" class="btn btn-primary my-3">Add Room</a>
           </div>
         </div>
       </div>

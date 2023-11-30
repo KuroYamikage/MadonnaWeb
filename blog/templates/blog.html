@@ -15,27 +15,29 @@
                     <thead>
                         <tr class="text-light">
                             <th scope="col">Id</th>
-                            <th scope="col">Facility</th>
-                            <th scope="col">Description</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Price</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Content</th>
+                            <th scope="col">Created By</th>
+                            <th scope="col">Posted?</th>
                             <th scope="col">Edit</th>
+                            <th scope="col">Delete</th>
                     </thead>
                     <tbody>
-                        {% for x in facility%}
+                        {% for x in blog %}
                         <tr>
-                            <td>{{x.id}}</td>
-                            <td>{{x.facilityName}}</td>
-                            <td>{{x.facilityDescription}}</td>
-                            <td>{{x.facilityCategory}}</td>
-                            <td>₱{{x.facilityPrice}}</td>
-                            <td><a class="btn btn-sm btn-primary" href="{%url 'facility.edit' pk=x.id%}">Edit</a></td>
+                            <td>{{x.blog_id}}</td>
+                            <td>{{x.blog_title}}</td>
+                            <td>{{x.blog_content|truncatewords:5}}</td>
+                            <td>{{x.blog_owner}}</td>
+                            <td>{{ x.blog_status|yesno:"Yes,No" }}</td>
+                            <td><a href = "{%url 'blog.update' pk=x.blog_id%}"> Edit Blog</a></td>
+                            <td><a href = "{%url 'blog.delete' pk=x.blog_id%}"> Delete Blog</a></td>
                         </tr>
                         {%endfor%}
                     </tbody>
                 </table>
             </div>
-            <a href="{%url 'facility.new'%}" class="btn btn-primary my-3">Add new Facility</a>
+            <a href="{%url 'blog.add'%}" class="btn btn-primary my-3">Add new Blog</a>
           </div>
         </div>
       </div>

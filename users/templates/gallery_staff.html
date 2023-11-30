@@ -6,15 +6,20 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/css4.css' %}">
 
 <style>
+<<<<<<< HEAD:users/templates/gallery_staff.html
+=======
     .gallery_product {
         {% comment %} margin: 10px; {% endcomment %}
         clear: both
     }
+>>>>>>> 89e506558646138c3525106be02f413b010a7eb5:users/templates/gallery_staff.php
     .fixed-ratio-img {
       width: 300px;  /* Set your preferred width */
       height: 200px; /* Set your preferred height */
       object-fit: cover; /* This property ensures the image covers the entire container while maintaining its aspect ratio */
       margin: 10px;
+      border-style: solid;
+      border-color: #feff31;
     }
   </style>
   {% endblock head %}
@@ -37,6 +42,9 @@
         <button class="btn btn-default filter-button" data-filter="Guests">Guests</button>
         </div>
     <br/>
+    
+
+
 
         {% for pics in gallery %}
         <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter {{pics.galleryTag}}">
