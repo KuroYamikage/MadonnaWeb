@@ -1,28 +1,26 @@
 {% load i18n static admin_datta %}
+{% load customFilters %}
 
 <nav class="pcoded-navbar">
   <div class="navbar-wrapper">
     <div class="navbar-brand header-logo">
-        <div class="b-bg">
-        </div>
-        <span class="b-title">Madonna's Web</span>
-        <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+      <div class="b-bg"></div>
+      <span class="b-title">Madonna's Web</span>
+      <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
     </div>
     <div class="navbar-content scroll-div">
       <ul class="nav pcoded-inner-navbar">
+        
         <li class="nav-item pcoded-menu-caption">
           <label>Navigation</label>
+          {% if user|is_member_of_group:'Admin'%}
         </li>
-        <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item {% if 'index' in segment %}active{% endif %}">
-          {% if request.user.is_superuser %}
-          <a href="{% url 'admin:index' %}" class="nav-link ">
-          {% else %}
-          <a href="{% url 'index' %}" class="nav-link ">
-          {% endif %}
-            <span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Go home</span>
+         <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item {% if 'index' in segment %}active{% endif %}">
+          <a href="{% url 'reports' %}" class="nav-link ">
+            <span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Reports</span>
           </a>
         </li>
-
+        {% endif %}
         {% if not request.user.is_authenticated %}
         <li
           data-username="Authentication Sign up Sign in reset password Change password Personal information profile settings map form subscribe"
@@ -36,7 +34,7 @@
         </li>
         {% endif %}
 
-        {% admin_get_menu as app_list %}
+        {% comment %} {% admin_get_menu as app_list %}
         {% if app_list %}
           {% for app in app_list %}
             {% if app.has_perms and not app.pinned %}
@@ -67,7 +65,63 @@
         {% endif %}
 
         {% if request.user.is_authenticated and not request.user.is_superuser %}
+        {% endif %}  {% endcomment %}
+
+        {% if user|is_member_of_group:'Admin' or user|is_member_of_group:'Staff'%} 
+        <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
+        class="nav-item pcoded-hasmenu">
+          <a href="javascript:" class="nav-link ">
+            <span class="pcoded-micon"><i class=" feather icon-box "></i></span>
+            <span class="pcoded-mtext">Reservation</span>
+          </a>
+          <ul class="pcoded-submenu">
+            
+                <li class="nav-item {% if 'bootstrap-tables' in segment or model.url in request.path|urlencode %} active {% endif %}">
+                  <a class="nav-link" href="{% url 'main'%}">Reservations</a>
+                </li>
+                <li class="nav-item {% if 'bootstrap-tables' in segment or model.url in request.path|urlencode %} active {% endif %}">
+                  <a class="nav-link" href="{% url 'rooms.view'%}">Discount</a>
+                </li>
+                <li class="nav-item {% if 'bootstrap-tables' in segment or model.url in request.path|urlencode %} active {% endif %}">
+                  <a class="nav-link" href="{% url 'discount.view'%}">Rooms</a>
+                </li> 
+          </ul>
+        </li>
         {% endif %}
+
+
+        {% if user|is_member_of_group:'Admin'%}
+      </li>
+      <li data-username="dashboard Default Ecommerce CRM Analytics Crypto Project" class="nav-item {% if 'index' in segment %}active{% endif %}">
+      <a href="{% url 'user.view' %}" class="nav-link ">
+        <span class="pcoded-micon"><i class="feather icon-lock"></i></span><span class="pcoded-mtext">Users</span>
+      </a>
+    </li>
+    {% endif %}
+
+    {% if user|is_member_of_group:'Admin' or user|is_member_of_group:'Social Media Manager'%}
+      <li data-username="basic components Button Alert Badges breadcrumb Paggination progress Tooltip popovers Carousel Cards Collapse Tabs pills Modal Grid System Typography Extra Shadows Embeds"
+        class="nav-item pcoded-hasmenu">
+          <a href="javascript:" class="nav-link ">
+            <span class="pcoded-micon"><i class=" feather icon-box "></i></span>
+            <span class="pcoded-mtext">Home Page</span>
+          </a>
+          <ul class="pcoded-submenu">
+            
+                <li class="nav-item {% if 'bootstrap-tables' in segment or model.url in request.path|urlencode %} active {% endif %}">
+                  <a class="nav-link" href="{% url 'facility.staff'%}">Facility</a>
+                </li>
+                <li class="nav-item {% if 'bootstrap-tables' in segment or model.url in request.path|urlencode %} active {% endif %}">
+                  <a class="nav-link" href="{% url 'blog'%}">Blogs</a>
+                </li>
+                <li class="nav-item {% if 'bootstrap-tables' in segment or model.url in request.path|urlencode %} active {% endif %}">
+                  <a class="nav-link" href="{% url 'gallery.staff'%}">Gallery</a>
+                </li>
+          </ul>
+      </li>
+      {% endif %}
+
+
       </ul>
     </div>
   </div>

@@ -46,7 +46,7 @@
       <script src="{%static 'js/jquery.mCustomScrollbar.concat.min.js'%}"></script>
       <script src="{%static 'js/custom.js'%}"></script>
       <!-- javascript --> 
-      <script src="{%static 'js/owl.carousel.js'%}"></script
+      <script src="{%static 'js/owl.carousel.js'%}"></script>
       <script src="{%static 'js/popper.js'%}"></script>   
   {% comment %} 
 <div id="mySidenav" class="sidenav">
