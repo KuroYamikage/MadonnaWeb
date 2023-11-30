@@ -70,7 +70,7 @@ class reserveListView(LoginRequiredMixin, ListView):
 class RoomsList(LoginRequiredMixin, ListView):
     model = Room
     context_object_name = "room"
-    template_name = "users/room_list.php"
+    template_name = "room_list.php"
     paginate_by = 10
 
     """

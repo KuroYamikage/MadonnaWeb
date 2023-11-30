@@ -10,7 +10,7 @@
     </div>
     <div class="navbar-content scroll-div">
       <ul class="nav pcoded-inner-navbar">
-        
+
         <li class="nav-item pcoded-menu-caption">
           <label>Navigation</label>
           {% if user|is_member_of_group:'Admin'%}
@@ -80,10 +80,10 @@
                   <a class="nav-link" href="{% url 'main'%}">Reservations</a>
                 </li>
                 <li class="nav-item {% if 'bootstrap-tables' in segment or model.url in request.path|urlencode %} active {% endif %}">
-                  <a class="nav-link" href="{% url 'rooms.view'%}">Discount</a>
+                  <a class="nav-link" href="{% url 'discount.view'%}">Discount</a>
                 </li>
                 <li class="nav-item {% if 'bootstrap-tables' in segment or model.url in request.path|urlencode %} active {% endif %}">
-                  <a class="nav-link" href="{% url 'discount.view'%}">Rooms</a>
+                  <a class="nav-link" href="{% url 'rooms.view'%}">Rooms</a>
                 </li> 
           </ul>
         </li>
