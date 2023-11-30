@@ -9,36 +9,59 @@ class UserRegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2', 'groups']
+        fields = [
+            "username",
+            "first_name",
+            "last_name",
+            "email",
+            "password1",
+            "password2",
+            "groups",
+        ]
         widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
-            'password1': forms.PasswordInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
-            'password2': forms.PasswordInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
-            'email': forms.EmailInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
-            'first_name': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control form-control-lg', 'autocomplete': 'off'}),
-            'groups': forms.Select(attrs={'class': 'form-control form-control-lg'}),
+            "username": forms.TextInput(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
+            "password1": forms.PasswordInput(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
+            "password2": forms.PasswordInput(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
+            "email": forms.EmailInput(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
+            "first_name": forms.TextInput(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
+            "last_name": forms.TextInput(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
+            "groups": forms.Select(attrs={"class": "form-control form-control-lg"}),
         }
 
         labels = {
-            'username': "Username",
-            'email': "Email",
-            'first_name': "First Name",
-            'last_name': "Last Name",
-            'groups': "Assign as",
+            "username": "Username",
+            "email": "Email",
+            "first_name": "First Name",
+            "last_name": "Last Name",
+            "groups": "Assign as",
         }
 
     def __init__(self, *args, **kwargs):
         super(UserRegistrationForm, self).__init__(*args, **kwargs)
 
         # Set widget attributes for password fields
-        for field_name in ['password1', 'password2']:
-            self.fields[field_name].widget.attrs.update({
-                'class': 'form-control form-control-lg',
-                'autocomplete': 'off',
-            })
+        for field_name in ["password1", "password2"]:
+            self.fields[field_name].widget.attrs.update(
+                {
+                    "class": "form-control form-control-lg",
+                    "autocomplete": "off",
+                }
+            )
+
     def clean_group(self):
-        group = self.cleaned_data['groups']
+        group = self.cleaned_data["groups"]
         return group
 
     def save(self, commit=True):
@@ -49,15 +72,14 @@ class UserRegistrationForm(UserCreationForm):
             user.save()
 
         # Add user to selected group
-        group = self.cleaned_data.get('groups')
-        
+        group = self.cleaned_data.get("groups")
+
         # Save the user again with the group only if user has been saved
         if commit:
             user.save()
             user.groups.set([group])
 
         return user
-
 
 
 class UserUpdateForm(UserChangeForm):
@@ -67,28 +89,40 @@ class UserUpdateForm(UserChangeForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email','is_active', 'groups']
+        fields = ["username", "first_name", "last_name", "email", "is_active", "groups"]
         widgets = {
-            'username' : forms.TextInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
-            'password' : forms.PasswordInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
+            "username": forms.TextInput(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
+            "password": forms.PasswordInput(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
             #'password2' : forms.PasswordInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
-            'email' : forms.TextInput(attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
-            'first_name' : forms.TextInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
-            'last_name' : forms.TextInput( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
-            'is_active' : forms.RadioSelect( attrs={'class' : 'form-control form-control-lg','autocomplete':'off'}),
+            "email": forms.TextInput(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
+            "first_name": forms.TextInput(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
+            "last_name": forms.TextInput(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
+            "is_active": forms.RadioSelect(
+                attrs={"class": "form-control form-control-lg", "autocomplete": "off"}
+            ),
         }
 
         labels = {
-            'username' : "Username",
-            'email' : "Email",
-            'first_name' : "First Name",
-            'last_name' : "Last Name",
-            'groups' : "Assign as",
+            "username": "Username",
+            "email": "Email",
+            "first_name": "First Name",
+            "last_name": "Last Name",
+            "groups": "Assign as",
         }
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        group = self.cleaned_data.get('groups')
+        group = self.cleaned_data.get("groups")
 
         if group:
             user.groups.set([group])
@@ -104,17 +138,17 @@ class UserUpdateForm(UserChangeForm):
 class ResetPasswordForm(SetPasswordForm):
     new_password1 = forms.CharField(
         label="New Password",
-        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        widget=forms.PasswordInput(attrs={"class": "form-control"}),
     )
     new_password2 = forms.CharField(
         label="Confirm Password",
-        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+        widget=forms.PasswordInput(attrs={"class": "form-control"}),
     )
 
     def __init__(self, user, *args, **kwargs):
         super().__init__(user, *args, **kwargs)
-        self.fields['new_password1'].help_text = None  # Remove help text
+        self.fields["new_password1"].help_text = None  # Remove help text
 
     class Meta:
         model = User
-        fields = ['new_password1', 'new_password2']
+        fields = ["new_password1", "new_password2"]

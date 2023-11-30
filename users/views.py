@@ -34,6 +34,8 @@ from .decorators import groups_required
 from .forms import ResetPasswordForm, UserRegistrationForm, UserUpdateForm
 from .mixins import GroupRequiredMixin
 
+from test.forms import RoomForm
+
 # Create your views here.
 
 
@@ -52,7 +54,7 @@ class StaffLoginView(LoginView):
 
 
 class StaffLogoutView(LogoutView):
-    template_name = "users/logout.php"
+    template_name = "logout.php"
     login_url = "login"
 
 
@@ -71,10 +73,32 @@ class RoomsList(LoginRequiredMixin, ListView):
     template_name = "users/room_list.php"
     paginate_by = 10
 
+    """
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["additional_data"] = AdditionalModel.objects.all()
         return context
+    """
+
+
+@method_decorator(groups_required(["Admin"]), name="dispatch")
+class RoomEdit(LoginRequiredMixin, UpdateView):
+    model = Room
+    form_class = RoomForm
+    success_message = "List succcesfully edited"
+    success_url = "../rooms"
+    template_name = "users/room_edit.html"
+    login_url = "login"
+
+
+@method_decorator(groups_required(["Admin"]), name="dispatch")
+class RoomNew(LoginRequiredMixin, CreateView):
+    model = Room
+    form_class = RoomForm
+    success_message = "List succcesfully edited"
+    success_url = "../rooms"
+    template_name = "users/room_create.html"
+    login_url = "login"
 
 
 @method_decorator(groups_required(["Admin"]), name="dispatch")
