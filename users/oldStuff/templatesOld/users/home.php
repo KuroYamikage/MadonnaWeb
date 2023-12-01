@@ -340,6 +340,7 @@ const months = [
 			</div>
 		</div>
 			<div class="row">
+				<h3>Reservations</h3>
 				<div class="col">
 
 				    <div class="events-container container">
