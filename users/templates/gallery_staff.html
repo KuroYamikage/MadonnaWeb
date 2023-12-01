@@ -3,23 +3,59 @@
 {% block title %}Staff Gallery{% endblock title %}
 {% block head %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/css4.css' %}">
+{% comment %} <link rel="stylesheet" type="text/css" href="{% static 'css/css4.css' %}"> {% endcomment %}
 
 <style>
-<<<<<<< HEAD:users/templates/gallery_staff.html
-=======
     .gallery_product {
         {% comment %} margin: 10px; {% endcomment %}
         clear: both
     }
->>>>>>> 89e506558646138c3525106be02f413b010a7eb5:users/templates/gallery_staff.php
     .fixed-ratio-img {
       width: 300px;  /* Set your preferred width */
       height: 200px; /* Set your preferred height */
       object-fit: cover; /* This property ensures the image covers the entire container while maintaining its aspect ratio */
       margin: 10px;
-      border-style: solid;
-      border-color: #feff31;
+      {% comment %} border-style: solid;
+      border-color: #feff31; {% endcomment %}
+    }
+
+    
+    .gallery-title {
+        font-size: 36px;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgb(0, 0, 0);
+        text-align: center;
+        font-weight: 500;
+        margin-bottom: 70px;
+    }
+    
+    .gallery-title:after {
+        content: "";
+        position: absolute;
+        width: 7.5%;
+        left: 46.5%;
+        height: 45px;
+        border-bottom: 1px solid #5e5e5e;
+    }
+    
+    .filter-button {
+        font-size: 18px;
+        border: 2px solid #000000;
+        border-radius: 5px;
+        text-align: center;
+        background-color: #42B32F;
+        color: #ffffff;
+        margin-bottom: 30px;
+    
+    }
+    
+    .filter-button:hover {
+        font-size: 18px;
+        border: 2px solid #ffffff;
+        border-radius: 5px;
+        text-align: center;
+        color: #ffffff;
+        background-color: #000000;
     }
   </style>
   {% endblock head %}
@@ -66,13 +102,13 @@ $(document).ready(function(){
         
         if(value == "all")
         {
-            //$('.filter').removeClass('hidden');
+            $('.filter').removeClass('hidden');
             $('.filter').show('1000');
         }
         else
         {
-//            $('.filter[filter-item="'+value+'"]').removeClass('hidden');
-//            $(".filter").not('.filter[filter-item="'+value+'"]').addClass('hidden');
+            $('.filter[filter-item="'+value+'"]').removeClass('hidden');
+            $(".filter").not('.filter[filter-item="'+value+'"]').addClass('hidden');
             $(".filter").not('.'+value).hide('3000');
             $('.filter').filter('.'+value).show('3000');
             

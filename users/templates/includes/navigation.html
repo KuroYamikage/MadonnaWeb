@@ -119,7 +119,7 @@
               <div class="col-md-2">
               {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
-                <a href="{% url 'admin:logout' %}" class="dud-logout" title="Logout">
+                <a href="{% url 'logout' %}" class="dud-logout" title="Logout">
                 {% else %}
                 <a href="{% url 'logout' %}" class="dud-logout" title="Logout">
                 {% endif %}
