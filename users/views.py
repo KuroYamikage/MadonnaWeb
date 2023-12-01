@@ -87,7 +87,7 @@ class RoomEdit(LoginRequiredMixin, UpdateView):
     form_class = RoomForm
     success_message = "List succcesfully edited"
     success_url = "../rooms"
-    template_name = "users/room_edit.html"
+    template_name = "room_edit.html"
     login_url = "login"
 
 
@@ -135,7 +135,7 @@ def is_admin(user):
 
 @method_decorator(groups_required(["Admin"]), name="dispatch")
 class resetPasswordView(UserPassesTestMixin, FormView):
-    template_name = "users/reset_password.php"
+    template_name = "reset_password.php"
     form_class = ResetPasswordForm
     success_url = "/accounts/"
 
