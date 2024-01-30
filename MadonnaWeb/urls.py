@@ -25,7 +25,7 @@ from users import views as user_views
 urlpatterns = [
     path("", include("Home.urls")),
     path("admin/", admin.site.urls),
-    path("", include("Reservation.urls")),
+    # path("", include("Reservation.urls")),
     path("__debug__/", include(debug_toolbar.urls)),
     path("", include("users.urls")),
     path("blog/", include("blog.urls")),

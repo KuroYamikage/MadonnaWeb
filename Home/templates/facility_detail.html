@@ -15,7 +15,7 @@
             <div class="facility-price lead">₱ {{ facility.facilityPrice|intcomma }}</div>
             <p class="lead">{{ facility.facilityDescription }}</p>
             <div class="d-flex mt-auto">
-                <a href="{% url "reserve" %}"><button class="btn btn-primary mr-2">Book Now</button></a>
+                {% comment %} <a href="{% url "reserve" %}"><button class="btn btn-primary mr-2">Book Now</button></a> {% endcomment %}
                 <a href="{% url "facility.view" %}"><button class="btn btn-secondary">Return</button></a>
             </div>
         </div>

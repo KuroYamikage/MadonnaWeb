@@ -65,7 +65,7 @@
                         <a class="nav-link" href="{%url 'index'%}">Home</a>
                      </li>
                      <li class="nav-item">
-                        <a class="nav-link" href="{%url 'reserve' %}">Reservations</a>
+                        {% comment %} <a class="nav-link" href="{%url 'reserve' %}">Reservations</a> {% endcomment %}
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="{%url 'blog.customer'%}">Blogs</a>

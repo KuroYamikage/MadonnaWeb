@@ -71,7 +71,7 @@ class RoomsList(LoginRequiredMixin, ListView):
     model = Room
     context_object_name = "room"
     template_name = "room_list.html"
-    paginate_by = 10
+    # paginate_by = 10
 
     """
     def get_context_data(self, **kwargs):
@@ -86,7 +86,7 @@ class RoomEdit(LoginRequiredMixin, UpdateView):
     model = Room
     form_class = RoomForm
     success_message = "List succcesfully edited"
-    success_url = "../rooms"
+    success_url = "staff/rooms"
     template_name = "room_edit.html"
     login_url = "login"
 
@@ -96,7 +96,7 @@ class RoomNew(LoginRequiredMixin, CreateView):
     model = Room
     form_class = RoomForm
     success_message = "List succcesfully edited"
-    success_url = "../rooms"
+    success_url = "staff/rooms"
     template_name = "room_create.html"
     login_url = "login"
 
@@ -252,7 +252,7 @@ class editGallery(LoginRequiredMixin, UpdateView):
     model = Gallery
     form_class = GalleryForm
     context_object_name = "gallery"
-    template_name = "users/gallery_edit.php"
+    template_name = "gallery_edit.php"
     login_url = "login"
 
     def get_success_url(self):
@@ -278,5 +278,5 @@ class editGallery(LoginRequiredMixin, UpdateView):
 class deleteGallery(LoginRequiredMixin, DeleteView):
     model = Gallery
     success_url = "/staff/gallery"
-    template_name = "users/delete_gallery.php"
+    template_name = "delete_gallery.php"
     login_url = "login"
